@@ -1,5 +1,5 @@
 <template>
-  <div>{{ langStore.label.page.products }}</div>
+  <PageHeader :title="langStore.label.page.products" />
 </template>
 
 <script setup lang="ts">

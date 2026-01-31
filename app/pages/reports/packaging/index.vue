@@ -1,5 +1,5 @@
 <template>
-  <div>{{ langStore.label.page.reportByPackaging }}</div>
+  <PageHeader :title="langStore.label.page.reportByPackaging" />
 </template>
 
 <script setup lang="ts">
