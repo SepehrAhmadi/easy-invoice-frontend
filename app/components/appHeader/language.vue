@@ -1,32 +1,33 @@
 <template>
-  <v-menu class="tw:relative tw:z-9999!">
+  <v-menu class="tw:relative tw:z-9999!" dir="ltr">
     <template v-slot:activator="{ props }">
       <div
-        class="tw:w-10 tw:h-10 tw:flex tw:justify-center tw:items-center tw:bg-white tw:border-3 tw:border-white tw:rounded-full tw:overflow-hidden tw:hover:bg-gray-100 tw:transition tw:duration-200 tw:cursor-pointer"
+        class="tw:w-10 tw:h-10 tw:flex tw:justify-center tw:items-center tw:bg-white tw:dark:bg-primary-dark tw:border-3 tw:border-white tw:dark:border-gray-700 tw:rounded-full tw:overflow-hidden tw:hover:bg-gray-100 tw:dark:hover:bg-gray-700 tw:transition tw:duration-200 tw:cursor-pointer"
         v-bind="props"
       >
         <icon-language class="tw:text-[25px]" />
       </div>
     </template>
     <div
-      class="tw:bg-white tw:rounded-lg tw:min-w-30 tw:overflow-hidden tw:mt-1! tw:border tw:border-gray-200"
+      class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-lg tw:min-w-30 tw:overflow-hidden tw:mt-3! tw:border tw:border-gray-200 tw:dark:border-gray-700"
+      dir="ltr"
     >
       <div
         v-for="item in langItems"
-        class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:border-b tw:border-gray-200 tw:cursor-pointer tw:group"
+        class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:border-b tw:border-gray-200 tw:dark:border-gray-700 tw:cursor-pointer tw:group"
         @click="selectlang(item.code)"
       >
         <icon-circle
           v-if="item.active"
-          class="tw:w-2 tw:h-2 tw:text-black tw:me-1! tw:group-hover:text-black tw:transition tw:duration-100"
+          class="tw:w-2 tw:h-2 tw:me-1.5! tw:text-black tw:group-hover:text-black tw:dark:text-gray-200 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100"
         />
         <icon-circle-outline
           v-else
-          class="tw:w-2 tw:h-2 tw:text-gray-700 tw:me-1! tw:group-hover:text-black tw:transition tw:duration-100"
+          class="tw:w-2 tw:h-2 tw:me-1.5! tw:text-gray-700 tw:group-hover:text-black tw:dark:text-gray-300 tw:dark:group-hover:text-gray-200 tw:transitio tw:transition tw:duration-100"
         />
         <div
-          class="tw:text-[12px] tw:text-gray-700 tw:me-1! tw:group-hover:text-black tw:transition tw:duration-100"
-          :class="{ 'tw:text-black!': item.active }"
+          class="tw:text-[12px] tw:text-gray-700 tw:me-1! tw:group-hover:text-black tw:dark:text-gray-300 tw:dark:group-hover:text-gray-200 tw:transitio tw:transition tw:duration-100"
+          :class="{ 'tw:text-black! tw:dark:text-gray-200! ': item.active }"
         >
           {{ item.name }}
         </div>

@@ -1,15 +1,17 @@
 @import "tailwindcss" prefix(tw);
 @import "./fonts.css";
 
+
 @theme {
   /* color */
   --color-main: #000000;
   --color-primary-light: #f1f1f1;
-  --color-primary-dark: #303030;
-  --color-secondary: #ffd85f;
+  --color-primary-dark: #1D202E;
+  --color-secondary-light: #152147;
+  --color-secondary-dark: #1D202E;
   --color-mute: #9f9ffc;
   --color-background-light: #ffffff;
-  --color-background-dark: #202a33;
+  --color-background-dark: #03020A;
   --color-error: #bf092f;
 }
 

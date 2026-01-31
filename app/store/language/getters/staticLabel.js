@@ -15,19 +15,23 @@ export const label = (state) => {
         wellcomeBack: "Wellcome Back",
       },
       button: {
-        account: "account",
-        logIn: "logIn",
-        dashboard : "dashboard",
-        logOut : "logOut",
-        closeSidebar : "close sidebar",
-        openSidebar : "open sidebar"
+        account: "Account",
+        logIn: "LogIn",
+        dashboard: "Dashboard",
+        logOut: "LogOut",
+        closeSidebar: "Close sidebar",
+        openSidebar: "Ppen sidebar",
+        editProfile: "Edit profile",
       },
       form: {
-        username: "username",
-        password: "password",
+        username: "Username",
+        password: "Password",
       },
       caption: {
-        detailToLogin: "insert your detail to login to your account",
+        detailToLogin: "Insert your detail to login to your account",
+        notifMessage:
+          "Notifications will be available in this section in a future update",
+        username: "Username",
       },
     };
   } else {
@@ -48,10 +52,11 @@ export const label = (state) => {
       button: {
         account: "حساب کاربری",
         logIn: "ورود",
-        dashboard : "داشبورد",
-        logOut : "هروج",
-        closeSidebar : "بستن ساید بار",
-        openSidebar : "بازکردن ساید بار",
+        dashboard: "داشبورد",
+        logOut: "خروج",
+        closeSidebar: "بستن ساید بار",
+        openSidebar: "بازکردن ساید بار",
+        editProfile: "ویرایش پروفایل",
       },
       form: {
         username: "نام کاربری",
@@ -60,6 +65,9 @@ export const label = (state) => {
       caption: {
         detailToLogin:
           "لطفا اطلاعات خود برای وارد شدن به حساب کاربری خود را وارد کنید",
+        notifMessage:
+          "اعلان‌ها در به‌روزرسانی‌های آینده در این بخش نمایش داده خواهند شد",
+        username: "نام کاربری",
       },
     };
   }
