@@ -1,6 +1,9 @@
 import * as directives from "vuetify/directives";
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
+import { watch } from "vue";
+import { useLanguageStore } from "~/store/language";
+
 
 export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
@@ -28,9 +31,27 @@ export default defineNuxtPlugin((app) => {
     },
 
     locale: {
-      locale: "en",
+      locale: "fa",
       rtl: { fa: true, en: false },
     },
   });
   app.vueApp.use(vuetify);
+
+  if (process.client) {
+    const langStore = useLanguageStore();
+    const html = document.documentElement;
+
+    const applyDir = (code: string) => {
+      const isFa = code === "fa";
+      vuetify.locale.current.value = code;
+      html.setAttribute("dir", isFa ? "rtl" : "ltr");
+    };
+
+    applyDir(langStore.currentLang);
+    watch(
+      () => langStore.currentLang,
+      (val) => applyDir(val),
+      { immediate: false },
+    );
+  }
 });

@@ -1,11 +1,12 @@
 @import "tailwindcss" prefix(tw);
+@import "./fonts.css";
 
 @theme {
   /* color */
   --color-main: #000000;
-  --color-primary-light: #F1F1F1;
+  --color-primary-light: #f1f1f1;
   --color-primary-dark: #303030;
-  --color-secondary: #FFD85F;
+  --color-secondary: #ffd85f;
   --color-mute: #9f9ffc;
   --color-background-light: #ffffff;
   --color-background-dark: #202a33;
@@ -13,3 +14,7 @@
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+html[dir="rtl"] .v-locale--is-rtl {
+  direction: rtl !important;
+}
