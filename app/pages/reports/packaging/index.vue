@@ -1,6 +1,5 @@
 <template>
-  <div>dashboard</div>
-  <div>{{ langStore.label.page.dashboard }}</div>
+  <div>{{ langStore.label.page.reportByPackaging }}</div>
 </template>
 
 <script setup lang="ts">
