@@ -25,12 +25,17 @@ export const label = (state) => {
       },
       title: {
         wellcomeBack: "Wellcome Back",
+        signIn: "Sign In",
+      },
+      slogan: {
+        login: "Manage \n Your Invoice",
       },
       button: {
         account: "Account",
+        signUp: "SignUp",
         logIn: "LogIn",
-        dashboard: "Dashboard",
         logOut: "LogOut",
+        dashboard: "Dashboard",
         closeSidebar: "Close sidebar",
         openSidebar: "Ppen sidebar",
         editProfile: "Edit profile",
@@ -72,12 +77,17 @@ export const label = (state) => {
       },
       title: {
         wellcomeBack: "خوش آمدید",
+        signIn: "ورود به سیستم",
+      },
+      slogan: {
+        login: "مدیریت \n فاکتور های خود",
       },
       button: {
         account: "حساب کاربری",
+        signUp: "ثبت نام کنید",
         logIn: "ورود",
-        dashboard: "داشبورد",
         logOut: "خروج",
+        dashboard: "داشبورد",
         closeSidebar: "بستن ساید بار",
         openSidebar: "بازکردن ساید بار",
         editProfile: "ویرایش پروفایل",

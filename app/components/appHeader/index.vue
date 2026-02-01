@@ -105,7 +105,7 @@
                   <transition name="slide-text">
                     <div
                       v-if="!rail"
-                      class="tw:text-gray-600! tw:group-hover:text-gray-900! tw:dark:text-gray-300! tw:dark:group-hover:text-gray-200! tw:transition tw:duration-150 tw:text-[15px]"
+                      class="tw:text-gray-600! tw:group-hover:text-gray-900! tw:dark:text-gray-300! tw:dark:group-hover:text-gray-200! tw:transition tw:duration-150 tw:text-[15px] tw:text-nowrap"
                     >
                       {{ subItem.title }}
                     </div>

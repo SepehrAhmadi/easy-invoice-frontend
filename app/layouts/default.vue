@@ -16,13 +16,13 @@
 <style>
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
 }
 
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
-  transform: translateY(20px); /* از پایین بیاد */
+  transform: translateY(20px);
 }
 
 .page-enter-to,

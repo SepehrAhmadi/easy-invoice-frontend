@@ -1,8 +1,8 @@
 <template>
-  <v-menu class="tw:relative tw:z-9999!" dir="ltr">
+  <v-menu class="tw:relative tw:z-9999!" :location="prop.location" dir="ltr">
     <template v-slot:activator="{ props }">
       <div
-        class="tw:w-10 tw:h-10 tw:flex tw:justify-center tw:items-center tw:bg-white tw:dark:bg-primary-dark tw:border-3 tw:border-white tw:dark:border-gray-700 tw:rounded-full tw:overflow-hidden tw:hover:bg-gray-100 tw:dark:hover:bg-gray-700 tw:transition tw:duration-200 tw:cursor-pointer"
+        class="tw:w-10 tw:h-10 tw:flex tw:justify-center tw:items-center tw:bg-white tw:dark:bg-gray-800 tw:border-3 tw:border-white tw:dark:border-gray-800 tw:rounded-full tw:overflow-hidden tw:hover:bg-gray-50 tw:hover:border-gray-50  tw:dark:hover:border-gray-800 tw:dark:hover:bg-primary-dark tw:transition tw:duration-200 tw:cursor-pointer"
         v-bind="props"
       >
         <icon-language class="tw:text-[25px]" />
@@ -43,6 +43,13 @@ const { current } = useLocale();
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
 
+const prop = defineProps({
+  location: {
+    default: "bottom",
+    type: String,
+  },
+});
+
 const langItems = ref([
   {
     name: "English (En)",
@@ -80,9 +87,10 @@ onMounted(() => {
   const curretnLang = langStore.currentLang;
   changeLocale(curretnLang);
 
+  const savedLang = localStorage.getItem("selectedLang");
   const elems = document.getElementsByClassName("v-locale--is-rtl");
   for (let i = 0; i < elems.length; i++) {
-    elems[i].style.direction = document.dir === "rtl" ? "rtl" : "ltr";
+    elems[i].style.direction = savedLang === "fa" ? "rtl" : "ltr";
   }
 
   langItems.value.forEach((item) => {

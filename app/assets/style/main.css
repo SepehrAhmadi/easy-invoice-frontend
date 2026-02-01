@@ -1,5 +1,6 @@
 @import "tailwindcss" prefix(tw);
 @import "./fonts.css";
+@import "./utils.css";
 
 
 @theme {
