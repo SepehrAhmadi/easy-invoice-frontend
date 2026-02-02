@@ -1,18 +1,3 @@
-<!-- <template>
-  <div
-    class="tw:w-screen! tw:h-screen! tw:overflow-hidden! tw:flex"
-  >
-
-    <v-container class=""></v-container>
-    <v-row class="tw:m-0! tw:w-full! tw:h-full!" no-gutters>
-      <v-col cols="12" md="6" lg="5" class="tw:h-full! tw:bg-white tw:rounded-[60px]!"> fa </v-col>
-      <v-col cols="12" md="6" lg="7" class="tw:h-full!">
-        fa
-      </v-col>
-    </v-row>
-  </div>
-</template> -->
-
 <template>
   <div
     class="tw:relative tw:flex tw:justify-center tw:items-center tw:w-screen! tw:h-screen! tw:overflow-hidden! tw:bg-linear-to-t tw:dark:from-black tw:dark:to-gray-800 tw:from-gray-200 tw:to-white"
@@ -65,6 +50,7 @@
                     </h1>
                     <div class="tw:flex tw:flex-col tw:gap-6 tw:mb-5!">
                       <v-text-field
+                        v-model="loginForm.username"
                         variant="outlined"
                         density="compact"
                         hide-details
@@ -77,11 +63,10 @@
                         </template>
                       </v-text-field>
                       <v-text-field
+                        v-model="loginForm.password"
                         variant="outlined"
                         density="compact"
                         hide-details
-                        hide-spin-buttons
-                        type="number"
                         rounded="pill"
                       >
                         <template #label>
@@ -95,6 +80,7 @@
                       class="tw:bg-black! tw:dark:bg-gray-200!"
                       block
                       rounded="pill"
+                      @click="login"
                     >
                       <Icon-login
                         class="tw:text-white tw:dark:text-black tw:text-[20px] tw:me-2!"
@@ -143,14 +129,30 @@
 
 <script setup lang="ts">
 import Language from "~/components/appHeader/language.vue";
-
 import ThemeSwitcher from "~/components/appHeader/themeSwitcher.vue";
+
 import { useLanguageStore } from "~/store/language";
 const lagnStore = useLanguageStore();
+
+import { useConfigStore } from "~/store/config";
+const configStore = useConfigStore();
 
 definePageMeta({
   layout: "auth",
 });
+
+const loginForm = ref({
+  username: null,
+  password: null,
+});
+
+const login = () => {
+  if (loginForm.value.username && loginForm.value.password) {
+    configStore.login(loginForm.value);
+  }else {
+    console.log("required fields")
+  }
+};
 </script>
 
 <style scoped>

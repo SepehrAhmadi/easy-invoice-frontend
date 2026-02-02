@@ -2,9 +2,11 @@
 import { ref } from "vue";
 
 export function useConfigState() {
-  const configState = ref<unknown>(null);
-  
+  const loginResult = ref<unknown>(null);
+  const loading = ref<boolean>(false);
+
   return {
-    configState,
+    loginResult,
+    loading
   };
 }
