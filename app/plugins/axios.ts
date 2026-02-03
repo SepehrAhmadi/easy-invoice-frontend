@@ -24,6 +24,8 @@ export default defineNuxtPlugin(() => {
       if (
         (status == 401 || status == 403) &&
         !isRefreshing &&
+        !error.config.url.includes("/auth") &&
+        !error.config.url.includes("/logout") &&
         !error.config.url.includes("/refresh")
       ) {
         isRefreshing = true;
