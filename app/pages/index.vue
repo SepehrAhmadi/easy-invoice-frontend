@@ -1,5 +1,6 @@
 <template>
-  <PageHeader :title="langStore.label.page.dashboard"/>
+  <PageHeader :title="langStore.label.page.dashboard" />
+
 </template>
 
 <script setup lang="ts">

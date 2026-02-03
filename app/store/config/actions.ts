@@ -9,7 +9,7 @@ export function useConfigActions(state: StateType) {
     const axios = useApi();
     state.loading.value = true;
     return axios
-      .post("/auth", value, { headers: { credentials: true } })
+      .post("/auth", value, { withCredentials: true })
       .then((res) => {
         state.loginResult.value = res.data;
         if (res.data.accessToken) {
@@ -29,13 +29,12 @@ export function useConfigActions(state: StateType) {
   const logout = () => {
     const axios = useApi();
     state.loading.value = true;
-    console.log("click logout 1");
     return axios
-      .get("/logout")
+      .get("/logout", { withCredentials: true })
       .then(() => {
         if (useCookie("token").value) {
-          let token = useCookie("token").value;
-          token = null;
+          useCookie("token").value = null;
+          console.log("logout token :" , useCookie("token").value)
         }
         navigateTo("/auth");
       })
