@@ -6,7 +6,7 @@
           <button
             icon
             variant="text"
-            @click="rail = !rail"
+            @click="handleSidebar"
             class="tw:bg-black! tw:hover:bg-black/80! tw:dark:bg-primary-dark! tw:dark:hover:bg-primary-dark/80! tw:group tw:p-2! tw:rounded-full"
           >
             <icon-more-vertical
@@ -27,9 +27,10 @@
     <v-navigation-drawer
       v-model="drawer"
       :rail="rail"
-      permanent
       width="250"
       rail-width="70"
+      app
+      :temporary="$vuetify.display.smAndDown"
     >
       <div
         class="tw:flex tw:flex-col tw:justify-start tw:items-start tw:gap-3 tw:m-4! tw:mt-1!"
@@ -132,6 +133,7 @@ import { useLanguageStore } from "~/store/language";
 import ThemeSwitcher from "./themeSwitcher.vue";
 const langStore = useLanguageStore();
 
+const isDesktop = ref(false);
 const drawer = ref(true);
 const rail = ref(false);
 
@@ -213,6 +215,27 @@ const menuItems = computed(() => [
   },
 ]);
 
+function updateIsDesktop() {
+  isDesktop.value = window.innerWidth >= 1024;
+  if (isDesktop.value) {
+    drawer.value = true;
+    rail.value = false;
+  } else {
+    drawer.value = false;
+    rail.value = false;
+  }
+}
+
+function handleSidebar() {
+  if (isDesktop.value) {
+    rail.value = !rail.value;
+    console.log("rail:", rail.value);
+  } else {
+    drawer.value = !drawer.value;
+    console.log("drawer:", drawer.value);
+  }
+}
+
 function onMainItemClick(item: any) {
   if (!item.subItems) {
     activeItem.value = item.id;
@@ -258,6 +281,15 @@ watch(
   },
   { immediate: true },
 );
+
+onMounted(() => {
+  window.addEventListener("resize", updateIsDesktop);
+  updateIsDesktop();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", updateIsDesktop);
+});
 </script>
 
 <style>
