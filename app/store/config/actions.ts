@@ -20,7 +20,6 @@ export function useConfigActions(state: StateType) {
           useCookie("token").value = token;
           navigateTo("/");
         }
-        handlerStore.successPOSTHandlerSilent(res);
       })
       .catch((err) => {
         console.log(err);
