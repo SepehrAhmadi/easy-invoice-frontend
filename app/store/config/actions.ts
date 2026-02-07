@@ -18,7 +18,7 @@ export function useConfigActions(state: StateType) {
         if (res.data.accessToken) {
           const token = res.data.accessToken;
           useCookie("token").value = token;
-          // navigateTo("/");
+          navigateTo("/");
           handlerStore.setSuccess(res.data.message);
         }
       })
