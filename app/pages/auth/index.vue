@@ -161,14 +161,17 @@
 </template>
 
 <script setup lang="ts">
-import Language from "~/components/appHeader/language.vue";
-import ThemeSwitcher from "~/components/appHeader/themeSwitcher.vue";
+import Language from "~/components/appHeader/Language.vue";
+import ThemeSwitcher from "~/components/appHeader/ThemeSwitcher.vue";
 
 import { useLanguageStore } from "~/store/language";
 const lagnStore = useLanguageStore();
 
 import { useConfigStore } from "~/store/config";
 const configStore = useConfigStore();
+
+import { useHandlerStore } from "~/store/handler";
+const handlerStore = useHandlerStore();
 
 definePageMeta({
   layout: "auth",
@@ -186,6 +189,7 @@ const login = () => {
     configStore.login(loginForm.value);
   } else {
     console.log("required fields");
+    handlerStore.setError(lagnStore.alert.error.accessDenied);
   }
 };
 </script>

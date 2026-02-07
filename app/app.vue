@@ -2,6 +2,7 @@
   <v-app>
     <NuxtLayout>
       <NuxtPage />
+      <alert />
     </NuxtLayout>
   </v-app>
 </template>

@@ -130,7 +130,7 @@ import operationsIcon from "~/components/icon/layer.vue";
 import reportsIcon from "~/components/icon/documents.vue";
 
 import { useLanguageStore } from "~/store/language";
-import ThemeSwitcher from "./themeSwitcher.vue";
+import ThemeSwitcher from "./ThemeSwitcher.vue";
 const langStore = useLanguageStore();
 
 const isDesktop = ref(false);

@@ -1,10 +1,13 @@
 // actions.ts
 import { useApi } from "~/composables/useApi";
 import type { useConfigState } from "./state";
+import { useHandlerStore } from "../handler";
 
 type StateType = ReturnType<typeof useConfigState>;
 
 export function useConfigActions(state: StateType) {
+  const handlerStore = useHandlerStore();
+
   const login = (value: unknown) => {
     const axios = useApi();
     state.loading.value = true;
@@ -17,6 +20,7 @@ export function useConfigActions(state: StateType) {
           useCookie("token").value = token;
           navigateTo("/");
         }
+        handlerStore.successPOSTHandlerSilent(res);
       })
       .catch((err) => {
         console.log(err);
@@ -34,7 +38,6 @@ export function useConfigActions(state: StateType) {
       .then(() => {
         if (useCookie("token").value) {
           useCookie("token").value = null;
-          console.log("logout token :" , useCookie("token").value)
         }
         navigateTo("/auth");
       })
