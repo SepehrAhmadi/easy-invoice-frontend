@@ -3,11 +3,22 @@
     v-model="toast"
     :timeout="config.timeout"
     :color="config.color"
-    :location="langStore.currentLang === 'en' ? 'bottom end' : 'bottom start'"
+    location="bottom end"
     variant="tonal"
+    class="tw:-translate-y-1.25"
+    :class="
+      langStore.currentLang === 'en'
+        ? 'tw:-translate-x-1.25'
+        : 'tw:translate-x-1.25'
+    "
   >
     <div
       class="tw:flex tw:translate-y-2 tw:justify-end tw:items-center tw:w-full"
+      :class="
+        langStore.currentLang === 'en'
+          ? 'tw:translate-x-2'
+          : 'tw:-translate-x-2'
+      "
     >
       <button
         @click="toast = false"

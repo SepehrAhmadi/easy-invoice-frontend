@@ -1,9 +1,15 @@
 import axios from "axios";
 import { useHandlerStore } from "~/store/handler";
-const handlerStore = useHandlerStore();
+import { useLanguageStore } from "~/store/language";
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
+  const langStore = useLanguageStore();
+  const handlerStore = useHandlerStore();
+
+  if (process.client) {
+    langStore.initLang?.();
+  }
 
   const api = axios.create({
     baseURL: config.public.API_URL,
@@ -13,10 +19,13 @@ export default defineNuxtPlugin(() => {
     },
   });
 
-  api.interceptors.request.use((request) => {
-    return request;
+  // change Accept-Language value depend site language
+  api.interceptors.request.use((config) => {
+    config.headers["Accept-Language"] = langStore.currentLang;
+    return config;
   });
 
+  // get access token and handle redirects , difrrent status codes
   let isRefreshing = false;
   api.interceptors.response.use(
     (res) => res,
@@ -60,11 +69,6 @@ export default defineNuxtPlugin(() => {
 
       return Promise.reject(error);
     },
-  );
-
-  api.interceptors.response.use(
-    (res) => res,
-    (err) => Promise.reject(err),
   );
 
   return {

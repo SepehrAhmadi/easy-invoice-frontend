@@ -5,8 +5,8 @@
     <div
       class="tw:fixed tw:bottom-30 tw:rounded-full tw:z-999!"
       :class="{
-        'tw:right-5': lagnStore.currentLang == 'fa',
-        'tw:left-5': lagnStore.currentLang == 'en',
+        'tw:right-5': langStore.currentLang == 'fa',
+        'tw:left-5': langStore.currentLang == 'en',
       }"
     >
       <Language location="top" />
@@ -31,13 +31,14 @@
                     <h1 class="tw-main-text-color tw:text-[20px]">
                       EASY INVOCIE
                     </h1>
+                    {{ langStore.currentLang }}
                   </div>
                   <div
                     class="tw:flex tw:justify-start tw:items-center tw:gap-2 tw:cursor-pointer tw:group"
                   >
                     <Icon-user-circle class="tw-text-button" />
                     <div class="tw-text-button">
-                      {{ lagnStore.label.button.signUp }}
+                      {{ langStore.label.button.signUp }}
                     </div>
                   </div>
                 </div>
@@ -46,7 +47,7 @@
                 >
                   <div class="tw:w-full!">
                     <h1 class="tw:text-[40px] tw-main-text-color tw:mb-5!">
-                      {{ lagnStore.label.title.signIn }}
+                      {{ langStore.label.title.signIn }}
                     </h1>
                     <div class="tw:flex tw:flex-col tw:gap-6 tw:mb-5!">
                       <v-text-field
@@ -59,7 +60,7 @@
                       >
                         <template #label>
                           <span class="tw:text-[14px]">
-                            {{ lagnStore.label.form.username }}
+                            {{ langStore.label.form.username }}
                           </span>
                         </template>
 
@@ -84,7 +85,7 @@
                       >
                         <template #label>
                           <span class="tw:text-[14px]">{{
-                            lagnStore.label.form.password
+                            langStore.label.form.password
                           }}</span>
                         </template>
 
@@ -115,7 +116,7 @@
                         class="tw:text-white tw:dark:text-black tw:text-[20px] tw:me-2!"
                       />
                       <span class="tw:text-white tw:dark:text-black">{{
-                        lagnStore.label.button.logIn
+                        langStore.label.button.logIn
                       }}</span>
                     </v-btn>
                   </div>
@@ -148,7 +149,7 @@
                   <h1
                     class="tw:text-gray-100 tw:dark:text-gray-800 tw:text-[60px]/14"
                   >
-                    {{ lagnStore.label.slogan.login }}
+                    {{ langStore.label.slogan.login }}
                   </h1>
                 </div>
               </div>
@@ -165,7 +166,7 @@ import Language from "~/components/appHeader/Language.vue";
 import ThemeSwitcher from "~/components/appHeader/ThemeSwitcher.vue";
 
 import { useLanguageStore } from "~/store/language";
-const lagnStore = useLanguageStore();
+const langStore = useLanguageStore();
 
 import { useConfigStore } from "~/store/config";
 const configStore = useConfigStore();
@@ -189,7 +190,7 @@ const login = () => {
     configStore.login(loginForm.value);
   } else {
     console.log("required fields");
-    handlerStore.setError(lagnStore.alert.error.accessDenied);
+    handlerStore.setError(langStore.alert.error.accessDenied);
   }
 };
 </script>
