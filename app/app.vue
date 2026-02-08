@@ -1,8 +1,8 @@
 <template>
   <v-app>
+    <alert />
     <NuxtLayout>
       <NuxtPage />
-      <alert />
     </NuxtLayout>
   </v-app>
 </template>

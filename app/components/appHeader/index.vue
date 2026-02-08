@@ -169,23 +169,7 @@ const menuItems = computed(() => [
     title: langStore.label.menu.baseInfo,
     icon: baseInfoIcon,
     routeName: "base",
-    subItems: [
-      {
-        id: "companies",
-        title: langStore.label.menu.companies,
-        routeName: "base-company",
-      },
-      {
-        id: "brands",
-        title: langStore.label.menu.brands,
-        routeName: "base-brand",
-      },
-      {
-        id: "products",
-        title: langStore.label.menu.products,
-        routeName: "base-product",
-      },
-    ],
+    subItems: null,
   },
   {
     id: "operations",

@@ -1,10 +1,22 @@
 @layer utilities {
   /* when you wanna this class make sure the parent have tw:group class*/
-  .tw-text-button {
+  .tw-text-color {
+    @apply tw:text-gray-600 tw:dark:text-gray-200;
+  }
+
+  .tw-text-color-lighter {
+    @apply tw:text-gray-500 tw:dark:text-gray-300;
+  }
+
+  .tw-text-color-hover {
     @apply tw:text-gray-700 tw:dark:text-gray-200 tw:group-hover:text-black tw:dark:group-hover:text-white;
   }
 
-  .tw-main-text-color {
+  .tw-text-color-reverse {
+    @apply tw:text-gray-200 tw:dark:text-gray-300;
+  }
+
+  .tw-text-color-reverse-hover {
     @apply tw:text-gray-700 tw:dark:text-gray-200 tw:group-hover:text-black tw:dark:group-hover:text-white;
   }
 }

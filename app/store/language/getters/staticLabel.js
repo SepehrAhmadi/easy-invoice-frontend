@@ -26,6 +26,7 @@ export const label = (state) => {
       title: {
         wellcomeBack: "Wellcome Back",
         signIn: "Sign In",
+        manageCompanies: "Manage companies",
       },
       slogan: {
         login: "Manage \n Your Invoice",
@@ -39,10 +40,22 @@ export const label = (state) => {
         closeSidebar: "Close sidebar",
         openSidebar: "Ppen sidebar",
         editProfile: "Edit profile",
+        createCompany: "Create company",
+        edit: "Edit",
+        delete: "Delete",
       },
       form: {
         username: "Username",
         password: "Password",
+      },
+      table: {
+        individual: "Individual",
+        legalEntity: "Legal entity",
+        address: "Address",
+        phone: "Phone",
+      },
+      description: {
+        manageCompanies: "Manage the companies you use when creating invoices",
       },
       caption: {
         detailToLogin: "Insert your detail to login to your account",
@@ -78,6 +91,7 @@ export const label = (state) => {
       title: {
         wellcomeBack: "خوش آمدید",
         signIn: "ورود به سیستم",
+        manageCompanies: "مدیریت شرکت ها",
       },
       slogan: {
         login: "مدیریت \n فاکتور های خود",
@@ -91,10 +105,23 @@ export const label = (state) => {
         closeSidebar: "بستن ساید بار",
         openSidebar: "بازکردن ساید بار",
         editProfile: "ویرایش پروفایل",
+        createCompany: "ایجاد شرکت",
+        edit: "ویرایش",
+        delete: "حذف",
       },
       form: {
         username: "نام کاربری",
         password: "رمز عبور",
+      },
+      table: {
+        individual: "حقیقی",
+        legalEntity: "حقوقی",
+        address: "نشانی",
+        phone: "شماره تماس",
+      },
+      description: {
+        manageCompanies:
+          "شرکت‌هایی را که هنگام ایجاد فاکتورها استفاده می‌کنید، مدیریت کنید",
       },
       caption: {
         detailToLogin:
