@@ -22,6 +22,7 @@ export default defineNuxtPlugin(() => {
   // change Accept-Language value depend site language
   api.interceptors.request.use((config) => {
     config.headers["Accept-Language"] = langStore.currentLang;
+    config.headers["Authorization"] = "Bearer " + useCookie("token").value;
     return config;
   });
 

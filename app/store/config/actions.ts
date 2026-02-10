@@ -2,11 +2,13 @@
 import { useApi } from "~/composables/useApi";
 import type { useConfigState } from "./state";
 import { useHandlerStore } from "../handler";
+import { useLanguageStore } from "../language";
 
 type StateType = ReturnType<typeof useConfigState>;
 
 export function useConfigActions(state: StateType) {
   const handlerStore = useHandlerStore();
+  const langStore = useLanguageStore();
 
   const login = (value: unknown) => {
     const axios = useApi();
@@ -24,6 +26,10 @@ export function useConfigActions(state: StateType) {
       })
       .catch((err) => {
         console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
       })
       .finally(() => {
         state.loading.value = false;
@@ -43,6 +49,10 @@ export function useConfigActions(state: StateType) {
       })
       .catch((err) => {
         console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
       })
       .finally(() => {
         state.loading.value = false;

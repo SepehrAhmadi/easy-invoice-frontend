@@ -258,7 +258,7 @@
               @click="close"
               variant="plain"
               rounded="lg"
-              class="tw-text-color  py-0"
+              class="tw-text-color py-0"
             >
               <div class="tw:text-[12px]">
                 {{ langStore.label.button.cancel }}
@@ -293,13 +293,15 @@
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
 
+import { useBaseStore } from "~/store/base";
+const baseStore = useBaseStore();
+
 // swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { label } from "~/store/language/getters/staticLabel";
 
 // ======= TS types and interface =======
 // interface
@@ -354,4 +356,9 @@ watch(
     companiesSliderKey.value += 1;
   },
 );
+
+// ======= Lifecycle =======
+onMounted(() => {
+  baseStore.getCompanies();
+});
 </script>

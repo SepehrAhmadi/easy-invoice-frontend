@@ -189,8 +189,7 @@ const login = () => {
   if (loginForm.value.username && loginForm.value.password) {
     configStore.login(loginForm.value);
   } else {
-    console.log("required fields");
-    handlerStore.setError(langStore.alert.error.accessDenied);
+    handlerStore.setError(langStore.alert.error.requiredFields);
   }
 };
 </script>
