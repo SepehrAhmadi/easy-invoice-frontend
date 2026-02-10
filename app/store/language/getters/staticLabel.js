@@ -28,6 +28,10 @@ export const label = (state) => {
         signIn: "Sign In",
         manageCompanies: "Manage companies",
       },
+      header: {
+        addCompany: "Add company",
+        editCompany: "Edit Company",
+      },
       slogan: {
         login: "Manage \n Your Invoice",
       },
@@ -43,10 +47,18 @@ export const label = (state) => {
         createCompany: "Create company",
         edit: "Edit",
         delete: "Delete",
+        colseWindow: "Close Window",
+        save: "Save",
+        cancel: "Cancel",
       },
       form: {
         username: "Username",
         password: "Password",
+        name: "Name",
+        address: "Address",
+        phone: "Phone",
+        individual: "Individual",
+        legalEntity: "Legal entity",
       },
       table: {
         individual: "Individual",
@@ -62,6 +74,7 @@ export const label = (state) => {
         notifMessage:
           "Notifications will be available in this section in a future update",
         username: "Username",
+        required: "required",
       },
     };
   } else {
@@ -93,6 +106,10 @@ export const label = (state) => {
         signIn: "ورود به سیستم",
         manageCompanies: "مدیریت شرکت ها",
       },
+      header: {
+        addCompany: "ایجاد شرکت",
+        editCompany: "ویرایش شرکت",
+      },
       slogan: {
         login: "مدیریت \n فاکتور های خود",
       },
@@ -108,10 +125,18 @@ export const label = (state) => {
         createCompany: "ایجاد شرکت",
         edit: "ویرایش",
         delete: "حذف",
+        colseWindow: "بستن پنجره",
+        save: "ذخیره اطلاعات",
+        cancel: "انصراف",
       },
       form: {
         username: "نام کاربری",
         password: "رمز عبور",
+        name: "نام",
+        address: "نشانی",
+        phone: "شماره تماس",
+        individual: "حقیقی",
+        legalEntity: "حقوقی",
       },
       table: {
         individual: "حقیقی",
@@ -129,6 +154,7 @@ export const label = (state) => {
         notifMessage:
           "اعلان‌ها در به‌روزرسانی‌های آینده در این بخش نمایش داده خواهند شد",
         username: "نام کاربری",
+        required: "الزامی",
       },
     };
   }

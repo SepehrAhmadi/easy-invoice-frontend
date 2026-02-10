@@ -2,18 +2,20 @@
 @import "./fonts.css";
 @import "./utils.css";
 
-
 @theme {
   /* color */
   --color-main: #000000;
   --color-primary-light: #f1f1f1;
-  --color-primary-dark: #1D202E;
+  --color-primary-dark: #1d202e;
   --color-secondary-light: #152147;
-  --color-secondary-dark: #1D202E;
+  --color-secondary-dark: #1d202e;
   --color-mute: #9f9ffc;
   --color-background-light: #ffffff;
-  --color-background-dark: #03020A;
+  --color-background-dark: #03020a;
+  --color-success: #059212;
   --color-error: #bf092f;
+  --color-warning: #ff7f11;
+  --color-info: #1581bf;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -21,6 +23,4 @@
 html[dir="rtl"] .v-locale--is-rtl {
   direction: rtl !important;
 }
-
-
 
