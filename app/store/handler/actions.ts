@@ -28,7 +28,6 @@ export function useHandlerActions(state: StateType) {
   };
 
   const setSuccess = (message: string) => {
-    console.log("success action run");
     state.checkAlert.value = 1;
     state.successMessage.value = message;
     state.errorMessage.value = null;
@@ -38,7 +37,6 @@ export function useHandlerActions(state: StateType) {
   };
 
   const setError = (message: string) => {
-    console.log("error action run");
     state.checkAlert.value = 2;
     state.errorMessage.value = message;
     state.successMessage.value = null;

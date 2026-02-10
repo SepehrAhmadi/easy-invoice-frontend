@@ -65,7 +65,7 @@
             }"
             :key="companiesSliderKey"
           >
-            <SwiperSlide v-for="(item, index) in 3">
+            <SwiperSlide v-for="item in companies">
               <div
                 class="tw:h-full! tw:flex tw:flex-col tw:justify-between tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:p-3! tw:md:p-6!"
               >
@@ -74,16 +74,26 @@
                   <div
                     class="tw:inline-flex tw:items-center tw:gap-2 tw:py-0.75! tw:px-3! tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-full"
                   >
-                    <icon-bank class="tw-text-color-lighter tw:text-[17px]" />
+                    <icon-bank
+                      v-if="item.type == 1"
+                      class="tw-text-color-lighter tw:text-[17px]"
+                    />
+                    <icon-user
+                      v-if="item.type == 2"
+                      class="tw-text-color-lighter tw:text-[17px]"
+                    />
                     <div class="tw-text-color-lighter tw:text-[13px]">
-                      {{ langStore.label.table.legalEntity }}
+                      {{
+                        item.type == 1
+                          ? langStore.label.table.legalEntity
+                          : langStore.label.table.individual
+                      }}
                     </div>
                   </div>
                   <div
                     class="tw-text-color tw:text-[20px]! tw:font-semibold tw:mt-2!"
                   >
-                    <!-- ZARAFSHAN FERTILIZER -->
-                    تولیدات سم و کود زرافشان
+                    {{ item.name }}
                   </div>
                   <div
                     class="tw:flex tw:justify-start tw:items-center tw:gap-1 tw:mt-2!"
@@ -95,7 +105,7 @@
                       {{ langStore.label.table.address }} :
                     </div>
                     <div class="tw-text-color-lighter tw:text-[13px]">
-                      تهران ، خیابان شریعتی ، خیبان خقوقی ، پلاک 73 ، واحد 2
+                      {{ item.address }}
                     </div>
                   </div>
                   <div
@@ -106,7 +116,7 @@
                       {{ langStore.label.table.phone }} :
                     </div>
                     <div class="tw-text-color-lighter tw:text-[13px]">
-                      021-77517395
+                      {{ item.phone }}
                     </div>
                   </div>
                 </div>
@@ -114,6 +124,7 @@
                 <!-- actions -->
                 <div class="tw:flex tw:justify-end tw:items-center tw:gap-2">
                   <v-btn
+                    @click="openCompanyModal('edit', item.id)"
                     size=" x-small"
                     variant="outlined"
                     rounded="pill"
@@ -265,6 +276,7 @@
               </div>
             </v-btn>
             <v-btn
+              @click="submitCompany"
               size=""
               rounded="lg"
               class="tw:border! tw:px-0! tw:py-1! tw:w-30"
@@ -290,11 +302,16 @@
 <script setup lang="ts">
 // ======= Imports =======
 // stores
+import { useHandlerStore } from "~/store/handler";
+const handlerStore = useHandlerStore();
+
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
 
 import { useBaseStore } from "~/store/base";
 const baseStore = useBaseStore();
+const { companiesResult: companies, companyResult: company } =
+  storeToRefs(baseStore);
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -312,7 +329,6 @@ enum CompanyType {
   individual = 2,
 }
 interface CompanyForm {
-  id: string | null;
   name: string | null;
   type: CompanyType;
   address: string | null;
@@ -325,9 +341,10 @@ const companiesSliderKey = ref<number>(1);
 // modal
 const modalMode = ref<ModalMode | null>(null);
 const campanyModal = ref<boolean>(false);
+const deleteConfirmModal = ref<boolean>(false);
 // form
+const companyId = ref<string>("");
 const companyForm = ref<CompanyForm>({
-  id: null,
   type: CompanyType.legalEntity,
   name: null,
   address: null,
@@ -335,21 +352,81 @@ const companyForm = ref<CompanyForm>({
 });
 
 // ======= Functions =======
-const openCompanyModal = (mode: ModalMode) => {
+const openCompanyModal = (mode: ModalMode, id?: string) => {
+  modalMode.value = mode;
+
   if (mode === "add") {
-    modalMode.value = mode;
     campanyModal.value = true;
-  } else if (mode === "edit") {
-    modalMode.value = mode;
+    return;
+  }
+
+  if (mode === "edit" && id) {
+    companyId.value = id;
+    baseStore.getCompany(id);
     campanyModal.value = true;
   }
 };
-
+const submitCompany = () => {
+  if (modalMode.value === "add") {
+    if (
+      companyForm.value.type &&
+      companyForm.value.name &&
+      companyForm.value.address &&
+      companyForm.value.phone
+    ) {
+      baseStore.addCompany(companyForm.value);
+    } else {
+      handlerStore.setError(langStore.alert.error.requiredFields);
+    }
+  } else if (modalMode.value === "edit") {
+    if (
+      companyForm.value.type &&
+      companyForm.value.name &&
+      companyForm.value.address &&
+      companyForm.value.phone
+    ) {
+      baseStore.editCompany(companyId.value, companyForm.value);
+    } else {
+      handlerStore.setError(langStore.alert.error.requiredFields);
+    }
+  }
+};
+const reloadData = async () => {
+  await baseStore.getCompanies();
+};
+const resetFields = () => {
+  companyForm.value = {
+    type: CompanyType.legalEntity,
+    name: null,
+    address: null,
+    phone: null,
+  };
+};
 const close = () => {
   campanyModal.value = false;
+  resetFields();
 };
 
 // ======= Watchers =======
+watch(
+  () => handlerStore.postCheck,
+  (val, oldVal) => {
+    if (oldVal === true && val === false) {
+      reloadData();
+      close();
+    }
+  },
+);
+watch(company, (val) => {
+  if (!val) return;
+
+  console.log("company watcher", val);
+
+  companyForm.value.type = val.type;
+  companyForm.value.name = val.name;
+  companyForm.value.address = val.address;
+  companyForm.value.phone = val.phone;
+});
 watch(
   () => langStore.currentLang,
   () => {
@@ -359,6 +436,6 @@ watch(
 
 // ======= Lifecycle =======
 onMounted(() => {
-  baseStore.getCompanies();
+  reloadData();
 });
 </script>

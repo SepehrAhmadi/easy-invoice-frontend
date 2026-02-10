@@ -17,7 +17,7 @@ export function useBaseActions(state: StateType) {
     return axios
       .get("/company")
       .then((res) => {
-        state.companiesResult.value = res.data;
+        state.companiesResult.value = res.data.data.companies;
         handlerStore.setSuccess(res.data.message);
       })
       .catch((err) => {
@@ -39,7 +39,7 @@ export function useBaseActions(state: StateType) {
     return axios
       .get("/company/" + id)
       .then((res) => {
-        state.companyResult.value = res.data;
+        state.companyResult.value = res.data.data;
         handlerStore.setSuccess(res.data.message);
       })
       .catch((err) => {
@@ -57,6 +57,8 @@ export function useBaseActions(state: StateType) {
   const addCompany = (value: any) => {
     const axios = useApi();
     handlerStore.postCheck = true;
+
+    console.log("value", value)
 
     return axios
       .post("/company", value)
