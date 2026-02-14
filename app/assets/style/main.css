@@ -24,10 +24,22 @@ html[dir="rtl"] .v-locale--is-rtl {
   direction: rtl !important;
 }
 
+/* vuetify overwrite */
 .v-field__input {
   font-size: 14px !important;
 }
 
+.v-selection-control__input i {
+  font-size: 20px !important;
+}
+
+.v-input input[type="radio"],
+.v-input input[type="checkbox"] {
+  appearance: auto !important;
+  -webkit-appearance: auto !important;
+}
+
+/* swiper styles */
 .swiper-pagination-bullet {
   width: 8px !important;
   height: 8px !important;
@@ -39,7 +51,3 @@ html[dir="rtl"] .v-locale--is-rtl {
 .dark .swiper-pagination-bullet {
   background-color: white !important;
 }
-
-/* .swiper-pagination-bullet-active {
-  width: 35px !important;
-} */

@@ -163,7 +163,7 @@
     </v-container>
 
     <!-- company modal -->
-    <v-dialog v-model="campanyModal" max-width="800" class="blur-dialog">
+    <v-dialog v-model="campanyModal" max-width="700" class="blur-dialog">
       <v-card class="tw:rounded-2xl!">
         <v-card-title
           class="tw:border-b-2 pa-0"
@@ -199,7 +199,51 @@
         </v-card-title>
         <v-card-text class="tw:p-3! tw:mt-2!">
           <v-row class="tw:p-1!">
-            <v-col cols="12" md="6" lg="4"> </v-col>
+            <v-col
+              cols="12"
+              md="6"
+              lg="4"
+              class="tw:flex tw:justify-center tw:items-center tw:w-full!"
+            >
+              <v-radio-group
+                v-model="companyForm.type"
+                inline
+                density="compact"
+                hide-details
+                class="tw:flex! tw:justify-center! tw:items-center! tw:gap-3! tw:w-full!"
+              >
+                <v-radio
+                  :value="CompanyType.legalEntity"
+                  class="tw-text-color-lighter tw:ms-5!"
+                >
+                  <template #label>
+                    <div
+                      class="tw:flex tw:justify-center tw:items-center tw:gap-1"
+                    >
+                      <!-- <icon-bank class="tw-text-color-lighter tw:text-[17px]" /> -->
+                      <div class="tw-text-color-lighter tw:text-[12px]">
+                        {{ langStore.label.form.legalEntity }}
+                      </div>
+                    </div>
+                  </template>
+                </v-radio>
+                <v-radio
+                  :value="CompanyType.individual"
+                  class="tw-text-color-lighter tw:ms-5!"
+                >
+                  <template #label>
+                    <div
+                      class="tw:flex tw:justify-center tw:items-center tw:gap-1"
+                    >
+                      <!-- <icon-user class="tw-text-color-lighter tw:text-[17px]" /> -->
+                      <div class="tw-text-color-lighter tw:text-[12px]">
+                        {{ langStore.label.form.individual }}
+                      </div>
+                    </div>
+                  </template>
+                </v-radio>
+              </v-radio-group>
+            </v-col>
             <v-col cols="12" md="6" lg="4">
               <v-text-field
                 v-model="companyForm.name"
@@ -242,16 +286,14 @@
               </v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-textarea
+              <v-text-field
                 v-model="companyForm.address"
-                type="number"
                 variant="outlined"
                 density="compact"
                 hide-details
                 hide-spin-buttons
                 class="tw:text-[14px]!"
                 rounded="lg"
-                rows="1"
               >
                 <template #label>
                   <span class="tw:text-[12px]">
@@ -261,7 +303,7 @@
                     ({{ langStore.label.caption.required }})
                   </span>
                 </template>
-              </v-textarea>
+              </v-text-field>
             </v-col>
           </v-row>
         </v-card-text>
