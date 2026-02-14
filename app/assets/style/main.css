@@ -14,7 +14,7 @@
   --color-background-dark: #03020a;
   --color-success: #059212;
   --color-error: #bf092f;
-  --color-warning: #ff7f11;
+  --color-warning: #ff6500;
   --color-info: #1581bf;
 }
 
@@ -24,3 +24,22 @@ html[dir="rtl"] .v-locale--is-rtl {
   direction: rtl !important;
 }
 
+.v-field__input {
+  font-size: 14px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 999px !important;
+  margin-inline: 3px !important;
+  background-color: #1d202e !important;
+}
+
+.dark .swiper-pagination-bullet {
+  background-color: white !important;
+}
+
+/* .swiper-pagination-bullet-active {
+  width: 35px !important;
+} */

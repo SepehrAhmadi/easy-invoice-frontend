@@ -138,6 +138,7 @@
                     </div>
                   </v-btn>
                   <v-btn
+                    @click="openDeleteModal(item.id)"
                     size=" x-small"
                     variant="outlined"
                     rounded="pill"
@@ -154,22 +155,25 @@
               </div>
             </SwiperSlide>
           </Swiper>
+          <div
+            class="companies-pagination-swiper tw:translate-y-3 tw:flex tw:justify-center tw:items-center"
+          ></div>
         </v-col>
       </v-row>
     </v-container>
 
     <!-- company modal -->
-    <v-dialog v-model="campanyModal" max-width="800">
+    <v-dialog v-model="campanyModal" max-width="800" class="blur-dialog">
       <v-card class="tw:rounded-2xl!">
         <v-card-title
           class="tw:border-b-2 pa-0"
           :class="{
             'tw:border-success': modalMode === 'add',
-            'tw:border-error': modalMode === 'edit',
+            'tw:border-warning': modalMode === 'edit',
           }"
         >
           <div class="tw:relative pa-2 px-4">
-            <div class="text-center tw-text-color tw:text-[16px] tw:mt-2">
+            <div class="text-center tw-text-color tw:text-[15px] tw:mt-2">
               <span v-if="modalMode === 'add'">{{
                 langStore.label.header.addCompany
               }}</span>
@@ -207,10 +211,10 @@
                 rounded="lg"
               >
                 <template #label>
-                  <span class="tw:text-[13px]">
+                  <span class="tw:text-[12px]">
                     {{ langStore.label.form.name }}
                   </span>
-                  <span class="tw-text-require tw:text-[11px]">
+                  <span class="tw-text-require tw:text-[10px]">
                     ({{ langStore.label.caption.required }})
                   </span>
                 </template>
@@ -228,10 +232,10 @@
                 rounded="lg"
               >
                 <template #label>
-                  <span class="tw:text-[13px]">
+                  <span class="tw:text-[12px]">
                     {{ langStore.label.form.phone }}
                   </span>
-                  <span class="tw-text-require tw:text-[11px]">
+                  <span class="tw-text-require tw:text-[10px]">
                     ({{ langStore.label.caption.required }})
                   </span>
                 </template>
@@ -250,10 +254,10 @@
                 rows="1"
               >
                 <template #label>
-                  <span class="tw:text-[13px]">
+                  <span class="tw:text-[12px]">
                     {{ langStore.label.form.address }}
                   </span>
-                  <span class="tw-text-require tw:text-[11px]">
+                  <span class="tw-text-require tw:text-[10px]">
                     ({{ langStore.label.caption.required }})
                   </span>
                 </template>
@@ -287,9 +291,59 @@
                   modalMode === 'edit',
               }"
             >
-              <icon-check-double class="tw:text-[20px] tw:me-2!" />
+              <icon-button-loader
+                v-if="loading"
+                class="tw:text-[23px]! tw:me-2!"
+              />
+              <icon-check-double v-else class="tw:text-[23px] tw:me-2!" />
               <div class="tw:text-[12px]">
                 {{ langStore.label.button.save }}
+              </div>
+            </v-btn>
+          </div>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <!-- delete modal -->
+    <v-dialog v-model="deleteModal" max-width="400" class="blur-dialog">
+      <v-card class="tw:rounded-2xl!">
+        <v-card-text class="tw:p-3! tw:mt-4!">
+          <v-row>
+            <v-col cols="12">
+              <div class="tw:text-center tw:text-[15px]">
+                {{ langStore.label.description.deleteConfirm }}
+              </div>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions class="tw:px-4!">
+          <div
+            class="tw:w-full tw:flex tw:justify-end tw:items-center tw:gap-1"
+          >
+            <v-btn
+              @click="close"
+              variant="plain"
+              rounded="lg"
+              class="tw-text-color py-0"
+            >
+              <div class="tw:text-[12px]">
+                {{ langStore.label.button.cancel }}
+              </div>
+            </v-btn>
+            <v-btn
+              @click="confirmDelete"
+              size=""
+              rounded="lg"
+              class="tw:border! tw:bg-error/15! tw:text-error! tw:border-error! tw:px-0! tw:py-1! tw:w-20"
+            >
+              <icon-button-loader
+                v-if="loading"
+                class="tw:text-[20px]! tw:me-2!"
+              />
+              <icon-check-double v-else class="tw:text-[20px] tw:me-2!" />
+              <div class="tw:text-[12px]">
+                {{ langStore.label.button.delete }}
               </div>
             </v-btn>
           </div>
@@ -304,6 +358,7 @@
 // stores
 import { useHandlerStore } from "~/store/handler";
 const handlerStore = useHandlerStore();
+const { loadingBtn: loading } = storeToRefs(handlerStore);
 
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
@@ -319,6 +374,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { label } from "~/store/language/getters/staticLabel";
 
 // ======= TS types and interface =======
 // interface
@@ -341,7 +397,7 @@ const companiesSliderKey = ref<number>(1);
 // modal
 const modalMode = ref<ModalMode | null>(null);
 const campanyModal = ref<boolean>(false);
-const deleteConfirmModal = ref<boolean>(false);
+const deleteModal = ref<boolean>(false);
 // form
 const companyId = ref<string>("");
 const companyForm = ref<CompanyForm>({
@@ -391,10 +447,19 @@ const submitCompany = () => {
     }
   }
 };
+const openDeleteModal = (id: string) => {
+  companyId.value = id;
+  deleteModal.value = true;
+  console.log("delete");
+};
+const confirmDelete = () => {
+  baseStore.deleteCompany(companyId.value);
+};
 const reloadData = async () => {
   await baseStore.getCompanies();
 };
 const resetFields = () => {
+  companyId.value = "";
   companyForm.value = {
     type: CompanyType.legalEntity,
     name: null,
@@ -404,6 +469,7 @@ const resetFields = () => {
 };
 const close = () => {
   campanyModal.value = false;
+  deleteModal.value = false;
   resetFields();
 };
 

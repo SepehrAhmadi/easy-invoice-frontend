@@ -68,6 +68,7 @@ export const label = (state) => {
       },
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
+        deleteConfirm: "Are you sure you want to delete this item?",
       },
       caption: {
         detailToLogin: "Insert your detail to login to your account",
@@ -147,6 +148,7 @@ export const label = (state) => {
       description: {
         manageCompanies:
           "شرکت‌هایی را که هنگام ایجاد فاکتورها استفاده می‌کنید، مدیریت کنید",
+        deleteConfirm: "آیا از حذف این مورد اطمینان دارید؟",
       },
       caption: {
         detailToLogin:

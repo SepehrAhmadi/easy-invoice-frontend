@@ -1,5 +1,4 @@
 @layer utilities {
-  /* when you wanna this class make sure the parent have tw:group class*/
   .tw-text-color {
     @apply tw:text-gray-600! tw:dark:text-gray-300!;
   }
@@ -22,5 +21,9 @@
 
   .tw-text-require {
     @apply tw:text-red-900! tw:dark:text-red-400!;
+  }
+
+  .blur-dialog {
+    @apply tw:backdrop-blur-[1px]!
   }
 }

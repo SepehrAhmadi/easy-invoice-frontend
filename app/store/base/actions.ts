@@ -18,7 +18,6 @@ export function useBaseActions(state: StateType) {
       .get("/company")
       .then((res) => {
         state.companiesResult.value = res.data.data.companies;
-        handlerStore.setSuccess(res.data.message);
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +39,6 @@ export function useBaseActions(state: StateType) {
       .get("/company/" + id)
       .then((res) => {
         state.companyResult.value = res.data.data;
-        handlerStore.setSuccess(res.data.message);
       })
       .catch((err) => {
         console.log(err);
@@ -56,9 +54,10 @@ export function useBaseActions(state: StateType) {
 
   const addCompany = (value: any) => {
     const axios = useApi();
+    handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;
 
-    console.log("value", value)
+    console.log("value", value);
 
     return axios
       .post("/company", value)
@@ -75,12 +74,14 @@ export function useBaseActions(state: StateType) {
       .finally(() => {
         setTimeout(() => {
           handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
         }, 500);
       });
   };
 
   const editCompany = (id: string, value: any) => {
     const axios = useApi();
+    handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;
 
     return axios
@@ -98,12 +99,14 @@ export function useBaseActions(state: StateType) {
       .finally(() => {
         setTimeout(() => {
           handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
         }, 500);
       });
   };
 
   const deleteCompany = (id: string) => {
     const axios = useApi();
+    handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;
 
     return axios
@@ -121,6 +124,7 @@ export function useBaseActions(state: StateType) {
       .finally(() => {
         setTimeout(() => {
           handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
         }, 500);
       });
   };
