@@ -135,7 +135,7 @@ export function useBaseActions(state: StateType) {
     return axios
       .get("/brand")
       .then((res) => {
-        state.brandsResult.value = res.data.data.companies;
+        state.brandsResult.value = res.data.data.brands;
       })
       .catch((err) => {
         console.log(err);

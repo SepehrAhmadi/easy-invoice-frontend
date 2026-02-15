@@ -172,13 +172,14 @@
       </v-row>
     </v-container>
 
+    <!-- brands -->
     <v-container class="tw:md:pe-0! tw:my-10!">
       <v-row>
         <v-col
           cols="12"
           lg="6"
           xl="5"
-          class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden"
+          class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden tw:w-full!"
         >
           <div
             class="tw:p-4! tw:px-2! tw:mb-4! tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark"
@@ -259,6 +260,22 @@
                   </v-btn>
                 </div>
               </transition>
+            </div>
+          </div>
+          <div
+            class="tw:w-full! tw:flex tw:flex-col tw:justify-between tw:items-start tw:gap-8  tw:py-3!"
+          >
+            <div v-for="(item, index) in brands" :key="item.id" class="tw:w-full! tw:flex tw:justify-between tw:items-start">
+              <div class="tw:flex tw:items-center tw:gap-3">
+                <div
+                  class="tw:bg-primary-dark tw:dark:bg-primary-light tw-text-color-reverse tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
+                >
+                  {{ index + 1 }}
+                </div>
+                <div class="tw-text-color tw:text-[18px]">{{ item.name }}</div>
+              </div>
+              <div>
+              </div>
             </div>
           </div>
         </v-col>
