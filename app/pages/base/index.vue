@@ -3,23 +3,25 @@
     <PageHeader :title="langStore.label.page.baseInfo" />
 
     <!-- companies -->
-    <v-container class="tw:md:pe-0!">
+    <v-container class="tw:md:pe-0! tw:md:py-0!">
       <v-row class="tw:flex tw:justify-center tw:itesm-center">
         <v-col
           cols="12"
           sm="4"
           md="3"
-          class="tw:flex! tw:flex-col tw:justify-between tw:bg-primary-dark tw:dark:bg-primary-dark tw:p-6! tw:rounded-4xl"
+          class="tw:mb-3! tw:2xl:mb-2 tw:flex! tw:flex-col tw:justify-between tw:bg-primary-dark tw:dark:bg-primary-dark tw:p-6! tw:rounded-4xl"
         >
           <div class="tw:flex-1">
             <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
               <icon-building class="tw-text-color-reverse tw:text-[32px]" />
-              <div class="tw-text-color-reverse tw:text-[25px]">
+              <div
+                class="tw-text-color-reverse tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px]"
+              >
                 {{ langStore.label.title.manageCompanies }}
               </div>
             </div>
             <div
-              class="tw:text-gray-400 tw:dark:text-gray-400 tw:text-[15px]/5 tw:mt-3!"
+              class="tw:text-gray-400 tw:dark:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-3!"
             >
               {{ langStore.label.description.manageCompanies }}
             </div>
@@ -30,14 +32,14 @@
             class="tw:rounded-full! tw:mt-3!"
           >
             <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
-              <icon-plus-circle class="tw:text-[20px]" />
-              <div class="tw:text-[15px]">
+              <icon-plus-circle class="tw:text-[18px] tw:2xl:text-[20px]" />
+              <div class="tw:text-[14px] tw:2xl:text-[15px]">
                 {{ langStore.label.button.createCompany }}
               </div>
             </div>
           </v-btn>
         </v-col>
-        <v-col cols="12" sm="8" md="9" class="tw:py-0! tw:lg:ps-5!">
+        <v-col cols="12" sm="8" md="9" class="tw:px-0! tw:py-0! tw:lg:ps-5!">
           <Swiper
             :modules="[Navigation, Pagination]"
             :slides-per-view="'auto'"
@@ -64,106 +66,114 @@
               },
             }"
             :key="companiesSliderKey"
+            class="tw:items-stretch!"
           >
-            <SwiperSlide v-for="item in companies">
-              <div
-                class="tw:h-full! tw:flex tw:flex-col tw:justify-between tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:p-3! tw:md:p-6!"
-              >
-                <!-- information -->
-                <div>
-                  <div
-                    class="tw:inline-flex tw:items-center tw:gap-2 tw:py-0.75! tw:px-3! tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-full"
-                  >
-                    <icon-bank
-                      v-if="item.type == 1"
-                      class="tw-text-color-lighter tw:text-[17px]"
-                    />
-                    <icon-user
-                      v-if="item.type == 2"
-                      class="tw-text-color-lighter tw:text-[17px]"
-                    />
-                    <div class="tw-text-color-lighter tw:text-[13px]">
-                      {{
-                        item.type == 1
-                          ? langStore.label.table.legalEntity
-                          : langStore.label.table.individual
-                      }}
+            <SwiperSlide v-for="item in companies" class="tw:h-auto!">
+              <div class="tw:h-auto tw:flex">
+                <div
+                  class="tw:h-full! tw:flex tw:flex-col tw:flex-1 tw:justify-between tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:p-6! tw:md:p-6! tw:min-h-45 tw:2xl:min-h-40 tw:max-h-full"
+                >
+                  <!-- information -->
+                  <div>
+                    <div
+                      class="tw:inline-flex tw:items-center tw:gap-2 tw:py-0.75! tw:px-3! tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-full"
+                    >
+                      <icon-bank
+                        v-if="item.type == 1"
+                        class="tw-text-color-lighter tw:text-[17px]"
+                      />
+                      <icon-user
+                        v-if="item.type == 2"
+                        class="tw-text-color-lighter tw:text-[17px]"
+                      />
+                      <div class="tw-text-color-lighter tw:text-[13px]">
+                        {{
+                          item.type == 1
+                            ? langStore.label.table.legalEntity
+                            : langStore.label.table.individual
+                        }}
+                      </div>
+                    </div>
+                    <div
+                      class="tw-text-color tw:text-[20px]! tw:font-semibold tw:mt-1! tw:2xl:mt-2!"
+                    >
+                      {{ item.name }}
+                    </div>
+                    <div
+                      class="tw:flex tw:justify-start tw:items-start tw:gap-1 tw:mt-2!"
+                    >
+                      <span>
+                        <icon-location
+                          class="tw-text-color-lighter tw:text-[20px]"
+                        />
+                      </span>
+                      <span
+                        class="tw:flex tw-text-color-lighter tw:text-[13px]/5"
+                      >
+                        {{ langStore.label.table.address }} : {{ item.address }}
+                      </span>
+                    </div>
+                    <div
+                      class="tw:flex tw:justify-start tw:items-center tw:gap-1 tw:mt-2! tw:2xl:mt-2!"
+                    >
+                      <icon-phone
+                        class="tw-text-color-lighter tw:text-[20px]"
+                      />
+                      <div class="tw-text-color-lighter tw:text-[13px]">
+                        {{ langStore.label.table.phone }} :
+                      </div>
+                      <div class="tw-text-color-lighter tw:text-[13px]">
+                        {{ item.phone }}
+                      </div>
                     </div>
                   </div>
-                  <div
-                    class="tw-text-color tw:text-[20px]! tw:font-semibold tw:mt-2!"
-                  >
-                    {{ item.name }}
-                  </div>
-                  <div
-                    class="tw:flex tw:justify-start tw:items-center tw:gap-1 tw:mt-2!"
-                  >
-                    <icon-location
-                      class="tw-text-color-lighter tw:text-[20px]"
-                    />
-                    <div class="tw-text-color-lighter tw:text-[13px]">
-                      {{ langStore.label.table.address }} :
-                    </div>
-                    <div class="tw-text-color-lighter tw:text-[13px]">
-                      {{ item.address }}
-                    </div>
-                  </div>
-                  <div
-                    class="tw:flex tw:justify-start tw:items-center tw:gap-1 tw:mt-2!"
-                  >
-                    <icon-phone class="tw-text-color-lighter tw:text-[20px]" />
-                    <div class="tw-text-color-lighter tw:text-[13px]">
-                      {{ langStore.label.table.phone }} :
-                    </div>
-                    <div class="tw-text-color-lighter tw:text-[13px]">
-                      {{ item.phone }}
-                    </div>
-                  </div>
-                </div>
 
-                <!-- actions -->
-                <div class="tw:flex tw:justify-end tw:items-center tw:gap-2">
-                  <v-btn
-                    @click="openCompanyModal('edit', item.id)"
-                    size=" x-small"
-                    variant="outlined"
-                    rounded="pill"
-                    class="tw:px-0! tw:py-1! tw:w-23"
+                  <!-- actions -->
+                  <div
+                    class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:mt-4!"
                   >
-                    <icon-edit
-                      class="tw-text-color-lighter tw:text-[15px] tw:me-2!"
-                    />
-                    <div class="tw-text-color-lighter tw:text-[12px]">
-                      {{ langStore.label.button.edit }}
-                    </div>
-                  </v-btn>
-                  <v-btn
-                    @click="openDeleteModal(item.id)"
-                    size=" x-small"
-                    variant="outlined"
-                    rounded="pill"
-                    class="tw:px-0! tw:py-1! tw:w-23"
-                  >
-                    <icon-trash
-                      class="tw-text-color-lighter tw:text-[17px] tw:me-2!"
-                    />
-                    <div class="tw-text-color-lighter tw:text-[12px]">
-                      {{ langStore.label.button.delete }}
-                    </div>
-                  </v-btn>
+                    <v-btn
+                      @click="openCompanyModal('edit', item.id)"
+                      size=" x-small"
+                      variant="outlined"
+                      rounded="pill"
+                      class="tw:px-0! tw:py-0.75! tw:2xl:py-0.75! tw:w-23"
+                    >
+                      <icon-edit
+                        class="tw-text-color-lighter tw:text-[15px] tw:me-2!"
+                      />
+                      <div class="tw-text-color-lighter tw:text-[12px]">
+                        {{ langStore.label.button.edit }}
+                      </div>
+                    </v-btn>
+                    <v-btn
+                      @click="openDeleteModal(item.id)"
+                      size=" x-small"
+                      variant="outlined"
+                      rounded="pill"
+                      class="tw:px-0! tw:py-0.75! tw:2xl:py-0.75! tw:w-23"
+                    >
+                      <icon-trash
+                        class="tw-text-color-lighter tw:text-[17px] tw:me-2!"
+                      />
+                      <div class="tw-text-color-lighter tw:text-[12px]">
+                        {{ langStore.label.button.delete }}
+                      </div>
+                    </v-btn>
+                  </div>
                 </div>
               </div>
             </SwiperSlide>
           </Swiper>
           <div
-            class="companies-pagination-swiper tw:translate-y-3 tw:flex tw:justify-center tw:items-center"
+            class="companies-pagination-swiper tw:flex tw:justify-center tw:translate-y-3 tw:items-center"
           ></div>
         </v-col>
       </v-row>
     </v-container>
 
     <!-- company modal -->
-    <v-dialog v-model="campanyModal" max-width="700" class="blur-dialog">
+    <v-dialog v-model="campanyModal" max-width="750" class="blur-dialog">
       <v-card class="tw:rounded-2xl!">
         <v-card-title
           class="tw:border-b-2 pa-0"

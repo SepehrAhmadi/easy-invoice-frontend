@@ -3,7 +3,7 @@
     <app-header />
 
     <v-main class="tw:h-full!">
-      <div class="tw:m-2! tw:mt-0.5! tw:me-6! tw:relative">
+      <div class="tw:m-2! tw:mt-0.5! tw:md:me-8! tw:relative">
         <!-- <transition name="page" mode="out-in"> -->
           <slot />
         <!-- </transition> -->

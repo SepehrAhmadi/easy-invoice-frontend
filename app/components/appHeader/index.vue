@@ -282,6 +282,10 @@ onBeforeUnmount(() => {
   box-shadow: none !important;
 }
 
+.v-navigation-drawer--temporary.v-navigation-drawer--active{
+  box-shadow : none !important;
+}
+
 .v-navigation-drawer--left,
 .v-navigation-drawer--right {
   border: none !important;
