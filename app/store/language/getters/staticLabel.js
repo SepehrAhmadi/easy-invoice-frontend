@@ -27,6 +27,7 @@ export const label = (state) => {
         wellcomeBack: "Wellcome Back",
         signIn: "Sign In",
         manageCompanies: "Manage companies",
+        manageBrands: "Manage Brands",
       },
       header: {
         addCompany: "Add company",
@@ -45,6 +46,7 @@ export const label = (state) => {
         openSidebar: "Ppen sidebar",
         editProfile: "Edit profile",
         createCompany: "Create company",
+        createBrand: "Create Brand",
         edit: "Edit",
         delete: "Delete",
         colseWindow: "Close Window",
@@ -68,6 +70,7 @@ export const label = (state) => {
       },
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
+        manageBrands: "Manage your brands in this section",
         deleteConfirm: "Are you sure you want to delete this item?",
       },
       caption: {
@@ -76,6 +79,7 @@ export const label = (state) => {
           "Notifications will be available in this section in a future update",
         username: "Username",
         required: "required",
+        loading: "Loading...",
       },
     };
   } else {
@@ -106,6 +110,7 @@ export const label = (state) => {
         wellcomeBack: "خوش آمدید",
         signIn: "ورود به سیستم",
         manageCompanies: "مدیریت شرکت ها",
+        manageBrands: "مدیرت برند ها",
       },
       header: {
         addCompany: "ایجاد شرکت",
@@ -124,6 +129,7 @@ export const label = (state) => {
         openSidebar: "بازکردن ساید بار",
         editProfile: "ویرایش پروفایل",
         createCompany: "ایجاد شرکت",
+        createBrand: "ایجاد برند",
         edit: "ویرایش",
         delete: "حذف",
         colseWindow: "بستن پنجره",
@@ -148,6 +154,7 @@ export const label = (state) => {
       description: {
         manageCompanies:
           "شرکت‌هایی را که هنگام ایجاد فاکتورها استفاده می‌کنید، مدیریت کنید",
+        manageBrands: "برند های خود را در این قسمت مدیریت کنید",
         deleteConfirm: "آیا از حذف این مورد اطمینان دارید؟",
       },
       caption: {
@@ -157,6 +164,7 @@ export const label = (state) => {
           "اعلان‌ها در به‌روزرسانی‌های آینده در این بخش نمایش داده خواهند شد",
         username: "نام کاربری",
         required: "الزامی",
+        loading: "در حال بارگذاری اطلاعات",
       },
     };
   }

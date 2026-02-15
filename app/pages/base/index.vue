@@ -172,6 +172,99 @@
       </v-row>
     </v-container>
 
+    <v-container class="tw:md:pe-0! tw:my-10!">
+      <v-row>
+        <v-col
+          cols="12"
+          lg="6"
+          xl="5"
+          class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden"
+        >
+          <div
+            class="tw:p-4! tw:px-2! tw:mb-4! tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark"
+          >
+            <div class="tw:flex tw:justify-between tw:items-center tw:gap-3">
+              <div>
+                <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
+                  <icon-building class="tw-text-color tw:text-[32px]" />
+                  <div
+                    class="tw-text-color tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px] tw:text-nowrap"
+                  >
+                    {{ langStore.label.title.manageBrands }}
+                  </div>
+                </div>
+                <div
+                  class="tw:text-gray-400 tw:dark:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-2! tw:text-nowrap"
+                >
+                  {{ langStore.label.description.manageBrands }}
+                </div>
+              </div>
+              <transition name="fade">
+                <v-btn
+                  v-if="!isCreatingBrand"
+                  @click="toggleBrand"
+                  class="tw:rounded-full!"
+                  color="primary"
+                >
+                  <div
+                    class="tw:flex tw:justify-center tw:items-center tw:gap-2"
+                  >
+                    <icon-plus-circle
+                      class="tw:text-[18px] tw:2xl:text-[18px]"
+                    />
+                    <div class="tw:text-[14px] tw:2xl:text-[15px]">
+                      {{ langStore.label.button.createBrand }}
+                    </div>
+                  </div>
+                </v-btn>
+              </transition>
+              <transition name="expand-btn">
+                <div
+                  v-if="isCreatingBrand"
+                  class="tw:flex tw:justify-start tw:items-center tw:gap-3"
+                >
+                  <v-text-field
+                    v-model="companyForm.name"
+                    type="text"
+                    variant="outlined"
+                    density="compact"
+                    hide-details
+                    class="tw:text-[14px]! tw:w-50!"
+                    rounded="pill"
+                  >
+                    <template #label>
+                      <span class="tw:text-[12px]">
+                        {{ langStore.label.form.name }}
+                      </span>
+                      <span class="tw-text-require tw:text-[10px]">
+                        ({{ langStore.label.caption.required }})
+                      </span>
+                    </template>
+                  </v-text-field>
+                  <v-btn
+                    @click="openCompanyModal('add')"
+                    color="primary"
+                    class="tw:rounded-full! tw:w-10! tw:h-10! tw:min-w-0! tw:p-0!"
+                    icon
+                  >
+                    <icon-check class="tw:text-[25px]" />
+                  </v-btn>
+                  <v-btn
+                    @click="toggleBrand"
+                    color="primary"
+                    class="tw:rounded-full! tw:w-10! tw:h-10! tw:min-w-0! tw:p-0!"
+                    icon
+                  >
+                    <icon-close class="tw:text-[25px]" />
+                  </v-btn>
+                </div>
+              </transition>
+            </div>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+
     <!-- company modal -->
     <v-dialog v-model="campanyModal" max-width="750" class="blur-dialog">
       <v-card class="tw:rounded-2xl!">
@@ -446,10 +539,11 @@ interface CompanyForm {
 // ======= Data =======
 // slider keys
 const companiesSliderKey = ref<number>(1);
-// modal
+// modal & toggle
 const modalMode = ref<ModalMode | null>(null);
 const campanyModal = ref<boolean>(false);
 const deleteModal = ref<boolean>(false);
+const isCreatingBrand = ref<boolean>(false);
 // form
 const companyId = ref<string>("");
 const companyForm = ref<CompanyForm>({
@@ -460,6 +554,7 @@ const companyForm = ref<CompanyForm>({
 });
 
 // ======= Functions =======
+// company
 const openCompanyModal = (mode: ModalMode, id?: string) => {
   modalMode.value = mode;
 
@@ -506,6 +601,11 @@ const openDeleteModal = (id: string) => {
 };
 const confirmDelete = () => {
   baseStore.deleteCompany(companyId.value);
+};
+
+// brand
+const toggleBrand = () => {
+  isCreatingBrand.value = !isCreatingBrand.value;
 };
 const reloadData = async () => {
   await baseStore.getCompanies();
@@ -557,3 +657,51 @@ onMounted(() => {
   reloadData();
 });
 </script>
+
+<style scoped>
+/* fade button */
+.fade-enter-active {
+  transition: opacity 100ms ease;
+  transition-delay: 350ms;
+}
+.fade-leave-active {
+  transition: opacity 100ms ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* expand from button (LEFT side) */
+html[dir="rtl"] .expand-btn-enter-from {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+html[dir="ltr"] .expand-btn-enter-from {
+  opacity: 0;
+  transform: translateX(50px);
+}
+.expand-btn-enter-active {
+  transition: all 250ms;
+  transition-delay: 150ms;
+}
+.expand-btn-enter-to {
+  opacity: 1;
+  transform: translateX(0px);
+}
+.expand-btn-leave-from {
+  opacity: 1;
+  transform: translateX(0px);
+}
+.expand-btn-leave-active {
+  transition: all 350ms;
+}
+html[dir="rtl"] .expand-btn-leave-to {
+  opacity: 0;
+  transform: translateX(-90%);
+}
+html[dir="ltr"] .expand-btn-leave-to {
+  opacity: 0;
+  transform: translateX(90%);
+}
+</style>

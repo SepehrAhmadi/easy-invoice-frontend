@@ -1,6 +1,9 @@
 <template>
   <v-app>
-    <alert />
+    <Loader />
+
+    <Alert />
+
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
