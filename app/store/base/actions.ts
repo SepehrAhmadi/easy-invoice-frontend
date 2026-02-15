@@ -133,9 +133,9 @@ export function useBaseActions(state: StateType) {
     handlerStore.loading = true;
 
     return axios
-      .get("/company")
+      .get("/brand")
       .then((res) => {
-        state.companiesResult.value = res.data.data.companies;
+        state.brandsResult.value = res.data.data.companies;
       })
       .catch((err) => {
         console.log(err);
@@ -155,9 +155,9 @@ export function useBaseActions(state: StateType) {
     const axios = useApi();
 
     return axios
-      .get("/company/" + id)
+      .get("/brand/" + id)
       .then((res) => {
-        state.companyResult.value = res.data.data;
+        state.brandResult.value = res.data.data;
       })
       .catch((err) => {
         console.log(err);
@@ -173,10 +173,8 @@ export function useBaseActions(state: StateType) {
     handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;
 
-    console.log("value", value);
-
     return axios
-      .post("/company", value)
+      .post("/brand", value)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -201,7 +199,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .put("/company/" + id, value)
+      .put("/brand/" + id, value)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -226,7 +224,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .delete("/company/" + id)
+      .delete("/brand/" + id)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })

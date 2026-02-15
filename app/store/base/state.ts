@@ -4,8 +4,13 @@ export function useBaseState() {
   const companiesResult = ref<any[]>([]);
   const companyResult = ref<any>({});
 
+  const brandsResult = ref<any[]>([]);
+  const brandResult = ref<any>({});
+
   return {
     companiesResult,
     companyResult,
+    brandsResult,
+    brandResult,
   };
 }

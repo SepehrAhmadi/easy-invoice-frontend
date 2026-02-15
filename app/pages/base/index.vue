@@ -199,9 +199,9 @@
                   {{ langStore.label.description.manageBrands }}
                 </div>
               </div>
-              <transition name="fade">
+              <transition name="fade" @after-leave="onFadeLeave">
                 <v-btn
-                  v-if="!isCreatingBrand"
+                  v-if="!showExpand && !isAnimating"
                   @click="toggleBrand"
                   class="tw:rounded-full!"
                   color="primary"
@@ -218,9 +218,9 @@
                   </div>
                 </v-btn>
               </transition>
-              <transition name="expand-btn">
+              <transition name="expand-btn" @after-leave="onExpandLeave">
                 <div
-                  v-if="isCreatingBrand"
+                  v-if="showExpand"
                   class="tw:flex tw:justify-start tw:items-center tw:gap-3"
                 >
                   <v-text-field
@@ -510,8 +510,12 @@ const langStore = useLanguageStore();
 
 import { useBaseStore } from "~/store/base";
 const baseStore = useBaseStore();
-const { companiesResult: companies, companyResult: company } =
-  storeToRefs(baseStore);
+const {
+  companiesResult: companies,
+  companyResult: company,
+  companiesResult: companies,
+  companyResult: company,
+} = storeToRefs(baseStore);
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -543,7 +547,9 @@ const companiesSliderKey = ref<number>(1);
 const modalMode = ref<ModalMode | null>(null);
 const campanyModal = ref<boolean>(false);
 const deleteModal = ref<boolean>(false);
-const isCreatingBrand = ref<boolean>(false);
+// brand animation
+const showExpand = ref(false);
+const isAnimating = ref(false);
 // form
 const companyId = ref<string>("");
 const companyForm = ref<CompanyForm>({
@@ -554,7 +560,10 @@ const companyForm = ref<CompanyForm>({
 });
 
 // ======= Functions =======
-// company
+// company actions
+const loadCompanies = async () => {
+  await baseStore.getCompanies();
+};
 const openCompanyModal = (mode: ModalMode, id?: string) => {
   modalMode.value = mode;
 
@@ -603,12 +612,28 @@ const confirmDelete = () => {
   baseStore.deleteCompany(companyId.value);
 };
 
-// brand
+// brand form animation
 const toggleBrand = () => {
-  isCreatingBrand.value = !isCreatingBrand.value;
+  isAnimating.value = true;
+  showExpand.value = false;
 };
+const onFadeLeave = () => {
+  showExpand.value = true;
+  isAnimating.value = false;
+};
+const onExpandLeave = () => {
+  isAnimating.value = false;
+};
+
+// brand actions
+const loadBrands = async () => {
+  await baseStore.getBrands();
+};
+
+// universal
 const reloadData = async () => {
-  await baseStore.getCompanies();
+  loadCompanies();
+  loadBrands();
 };
 const resetFields = () => {
   companyId.value = "";
@@ -661,11 +686,10 @@ onMounted(() => {
 <style scoped>
 /* fade button */
 .fade-enter-active {
-  transition: opacity 100ms ease;
-  transition-delay: 350ms;
+  transition: opacity 250ms ease;
 }
 .fade-leave-active {
-  transition: opacity 100ms ease;
+  transition: opacity 250ms ease;
 }
 .fade-enter-from,
 .fade-leave-to {
@@ -673,35 +697,38 @@ onMounted(() => {
 }
 
 /* expand from button (LEFT side) */
+/* expand button */
+/* expand enter */
 html[dir="rtl"] .expand-btn-enter-from {
   opacity: 0;
-  transform: translateX(-50px);
+  transform: translateX(-100%);
 }
 html[dir="ltr"] .expand-btn-enter-from {
   opacity: 0;
-  transform: translateX(50px);
+  transform: translateX(100%);
 }
 .expand-btn-enter-active {
-  transition: all 250ms;
-  transition-delay: 150ms;
+  transition: all 300ms ease;
 }
 .expand-btn-enter-to {
   opacity: 1;
-  transform: translateX(0px);
+  transform: translateX(0);
 }
+
+/* expand leave */
 .expand-btn-leave-from {
   opacity: 1;
-  transform: translateX(0px);
+  transform: translateX(0);
 }
 .expand-btn-leave-active {
-  transition: all 350ms;
+  transition: all 550ms ease;
 }
 html[dir="rtl"] .expand-btn-leave-to {
   opacity: 0;
-  transform: translateX(-90%);
+  transform: translateX(-100%);
 }
 html[dir="ltr"] .expand-btn-leave-to {
   opacity: 0;
-  transform: translateX(90%);
+  transform: translateX(100%);
 }
 </style>
