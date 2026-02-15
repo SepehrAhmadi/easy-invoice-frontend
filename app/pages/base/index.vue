@@ -513,8 +513,8 @@ const baseStore = useBaseStore();
 const {
   companiesResult: companies,
   companyResult: company,
-  companiesResult: companies,
-  companyResult: company,
+  brandsResult: brands,
+  brandResult: brand,
 } = storeToRefs(baseStore);
 
 // swiper
