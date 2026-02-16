@@ -679,7 +679,9 @@
             <v-col cols="12">
               <v-autocomplete
                 v-model="productForm.packagingId"
-                type="text"
+                :items="dropdownStore.packagingsOptions"
+                item-title="text"
+                item-value="value"
                 variant="outlined"
                 density="compact"
                 hide-details
@@ -699,6 +701,9 @@
             <v-col cols="12">
               <v-autocomplete
                 v-model="productForm.unitId"
+                :items="dropdownStore.unitsOptions"
+                item-title="text"
+                item-value="value"
                 type="text"
                 variant="outlined"
                 density="compact"
@@ -815,6 +820,9 @@ const { loadingBtn: loading } = storeToRefs(handlerStore);
 
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
+
+import { useDeopdownStore } from "~/store/dropdown";
+const dropdownStore = useDeopdownStore();
 
 import { useBaseStore } from "~/store/base";
 const baseStore = useBaseStore();
@@ -1114,6 +1122,8 @@ watch(
 
 // ======= Lifecycle =======
 onMounted(() => {
+  dropdownStore.getUnits();
+  dropdownStore.getPackagings();
   reloadData();
 });
 </script>

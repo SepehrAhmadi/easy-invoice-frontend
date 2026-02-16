@@ -1,0 +1,26 @@
+import type { useDropdownState } from "./state";
+import { computed } from "vue";
+
+type Item = { id: any; name: string };
+
+export function useDropdownGetters(state: ReturnType<typeof useDropdownState>) {
+  // units
+  const unitsOptions = computed(() =>
+    state.unitsResult.value.map((item: Item) => ({
+      value: item.id,
+      text: item.name,
+    })),
+  );
+  // packagings
+  const packagingsOptions = computed(() =>
+    state.packagingsResult.value.map((item: Item) => ({
+      value: item.id,
+      text: item.name,
+    })),
+  );
+
+  return {
+    unitsOptions,
+    packagingsOptions,
+  };
+}
