@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar color="transparetn" class="tw:px-4.5!">
+    <v-app-bar app color="transparetn" class="tw:px-4.5!">
       <div class="tw:flex tw:justify-between tw:items-center tw:w-full">
         <div>
           <button
@@ -16,7 +16,7 @@
             <icon-menu v-else class="tw:text-[25px] tw:text-white" />
           </button>
         </div>
-        <div class="tw:flex tw:justify-start tw:items-center tw:gap-4">
+        <div class="tw:flex tw:justify-start tw:items-center tw:gap-4 ">
           <app-header-language />
           <app-header-notification />
           <app-header-account-center />

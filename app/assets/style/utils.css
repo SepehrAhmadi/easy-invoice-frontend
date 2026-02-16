@@ -20,7 +20,7 @@
   }
 
   .tw-text-require {
-    @apply tw:text-red-900! tw:dark:text-red-400!;
+    @apply tw:text-red-900! tw:dark:text-red-300!;
   }
 
   .blur-dialog {

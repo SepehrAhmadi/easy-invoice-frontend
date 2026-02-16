@@ -243,6 +243,122 @@ export function useBaseActions(state: StateType) {
       });
   };
 
+  // ====== Brand ======
+  const getProducts = () => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get("/product")
+      .then((res) => {
+        state.productsResult.value = res.data.data.products;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 2000);
+      });
+  };
+
+  const getProduct = (id: string) => {
+    const axios = useApi();
+
+    return axios
+      .get("/product/" + id)
+      .then((res) => {
+        state.productResult.value = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      });
+  };
+
+  const addProduct = (value: any) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    return axios
+      .post("/product", value)
+      .then((res) => {
+        handlerStore.setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
+  const editProduct = (id: string, value: any) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    return axios
+      .put("/product/" + id, value)
+      .then((res) => {
+        handlerStore.setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
+  const deleteProduct = (id: string) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    return axios
+      .delete("/product/" + id)
+      .then((res) => {
+        handlerStore.setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
   return {
     getCompanies,
     getCompany,
@@ -255,5 +371,11 @@ export function useBaseActions(state: StateType) {
     addBrand,
     editBrand,
     deleteBrand,
+
+    getProducts,
+    getProduct,
+    addProduct,
+    editProduct,
+    deleteProduct,
   };
 }

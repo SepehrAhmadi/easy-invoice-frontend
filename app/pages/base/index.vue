@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tw:flex tw:flex-col tw:min-h-full">
     <PageHeader :title="langStore.label.page.baseInfo" />
 
     <!-- companies -->
@@ -29,7 +29,7 @@
           <v-btn
             @click="openCompanyModal('add')"
             color="white"
-            class="tw:rounded-full! tw:mt-3!"
+            class="tw:rounded-full! tw:mt-3! tw:h-10!"
           >
             <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
               <icon-plus-circle class="tw:text-[18px] tw:2xl:text-[20px]" />
@@ -147,7 +147,7 @@
                       </div>
                     </v-btn>
                     <v-btn
-                      @click="openDeleteModal(item.id)"
+                      @click="openDeleteModal('comapny', item.id)"
                       size=" x-small"
                       variant="outlined"
                       rounded="pill"
@@ -172,111 +172,243 @@
       </v-row>
     </v-container>
 
-    <!-- brands -->
-    <v-container class="tw:md:pe-0! tw:my-10!">
-      <v-row>
-        <v-col
-          cols="12"
-          lg="6"
-          xl="5"
-          class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden tw:w-full!"
-        >
+    <!-- brands and products -->
+    <v-container class="tw:md:pe-0! tw:my-6!">
+      <v-row class="tw:h-full!">
+        <v-col cols="12" xl="5" class="tw:w-full! tw:px-2.5! tw:2xl:ps-0!">
           <div
-            class="tw:p-4! tw:px-2! tw:mb-4! tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark"
+            class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden"
           >
-            <div class="tw:flex tw:justify-between tw:items-center tw:gap-3">
-              <div>
-                <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
-                  <icon-building class="tw-text-color tw:text-[32px]" />
+            <!-- section header -->
+            <div
+              class="tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6! tw:mb-4!"
+            >
+              <div
+                class="tw:flex tw:flex-col tw:md:flex-row tw:justify-between tw:items-start tw:md:items-center tw:gap-5 tw:sm:gap-3"
+              >
+                <div>
                   <div
-                    class="tw-text-color tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px] tw:text-nowrap"
+                    class="tw:flex tw:justify-start tw:items-center tw:gap-2"
                   >
-                    {{ langStore.label.title.manageBrands }}
-                  </div>
-                </div>
-                <div
-                  class="tw:text-gray-400 tw:dark:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-2! tw:text-nowrap"
-                >
-                  {{ langStore.label.description.manageBrands }}
-                </div>
-              </div>
-              <transition name="fade" @after-leave="onFadeLeave">
-                <v-btn
-                  v-if="!showExpand && !isAnimating"
-                  @click="toggleBrand"
-                  class="tw:rounded-full!"
-                  color="primary"
-                >
-                  <div
-                    class="tw:flex tw:justify-center tw:items-center tw:gap-2"
-                  >
-                    <icon-plus-circle
-                      class="tw:text-[18px] tw:2xl:text-[18px]"
+                    <icon-checkmark
+                      class="tw-text-color-reverse tw:text-[32px]"
                     />
-                    <div class="tw:text-[14px] tw:2xl:text-[15px]">
-                      {{ langStore.label.button.createBrand }}
+                    <div
+                      class="tw-text-color-reverse tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px] tw:text-nowrap"
+                    >
+                      {{ langStore.label.title.manageBrands }}
                     </div>
                   </div>
-                </v-btn>
-              </transition>
-              <transition name="expand-btn" @after-leave="onExpandLeave">
-                <div
-                  v-if="showExpand"
-                  class="tw:flex tw:justify-start tw:items-center tw:gap-3"
-                >
-                  <v-text-field
-                    v-model="companyForm.name"
-                    type="text"
-                    variant="outlined"
-                    density="compact"
-                    hide-details
-                    class="tw:text-[14px]! tw:w-50!"
-                    rounded="pill"
+                  <div
+                    class="tw:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-2! tw:text-nowrap"
                   >
-                    <template #label>
-                      <span class="tw:text-[12px]">
-                        {{ langStore.label.form.name }}
-                      </span>
-                      <span class="tw-text-require tw:text-[10px]">
-                        ({{ langStore.label.caption.required }})
-                      </span>
-                    </template>
-                  </v-text-field>
-                  <v-btn
-                    @click="openCompanyModal('add')"
-                    color="primary"
-                    class="tw:rounded-full! tw:w-10! tw:h-10! tw:min-w-0! tw:p-0!"
-                    icon
-                  >
-                    <icon-check class="tw:text-[25px]" />
-                  </v-btn>
-                  <v-btn
-                    @click="toggleBrand"
-                    color="primary"
-                    class="tw:rounded-full! tw:w-10! tw:h-10! tw:min-w-0! tw:p-0!"
-                    icon
-                  >
-                    <icon-close class="tw:text-[25px]" />
-                  </v-btn>
+                    {{ langStore.label.description.manageBrands }}
+                  </div>
                 </div>
-              </transition>
+                <div>
+                  <transition name="fade" @after-leave="onFadeLeave">
+                    <v-btn
+                      v-if="!showBrandFormExpand && !isAnimating"
+                      @click="openBrandForm('add')"
+                      color="white"
+                      rounded="pill"
+                      class="tw:h-10!"
+                    >
+                      <div
+                        class="tw:flex tw:justify-center tw:items-center tw:gap-2"
+                      >
+                        <icon-plus-circle
+                          class="tw:text-[18px] tw:2xl:text-[18px]"
+                        />
+                        <div class="tw:text-[14px] tw:2xl:text-[15px]">
+                          {{ langStore.label.button.createBrand }}
+                        </div>
+                      </div>
+                    </v-btn>
+                  </transition>
+                  <transition name="expand-btn" @after-leave="onExpandLeave">
+                    <div
+                      v-if="showBrandFormExpand"
+                      class="tw:flex tw:justify-start tw:items-center tw:gap-3"
+                    >
+                      <v-text-field
+                        v-model="brandForm.name"
+                        type="text"
+                        variant="outlined"
+                        density="compact"
+                        hide-details
+                        class="tw:text-[14px]! tw:w-50! tw:text-white!"
+                        rounded="pill"
+                      >
+                        <template #label>
+                          <span class="tw:text-[12px]">
+                            {{ langStore.label.form.name }}
+                          </span>
+                          <span class="tw:text-red-300 tw:text-[10px]">
+                            ({{ langStore.label.caption.required }})
+                          </span>
+                        </template>
+                      </v-text-field>
+                      <v-btn
+                        @click="submitBrand"
+                        color="white"
+                        class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
+                        icon
+                      >
+                        <icon-check class="tw:text-[25px]" />
+                      </v-btn>
+                      <v-btn
+                        @click="toggleBrand('close')"
+                        color="white"
+                        class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
+                        icon
+                      >
+                        <icon-close class="tw:text-[25px]" />
+                      </v-btn>
+                    </div>
+                  </transition>
+                </div>
+              </div>
+            </div>
+            <!-- list -->
+            <div
+              class="tw:flex-1! tw:w-full! tw:flex tw:flex-col tw:justify-between tw:items-start tw:gap-8 tw:py-3! tw:px-4! tw:2xl:px-6!"
+            >
+              <div
+                v-for="(item, index) in brands"
+                :key="item.id"
+                class="tw:w-full! tw:flex tw:justify-between tw:items-start"
+              >
+                <div class="tw:flex tw:items-center tw:gap-3">
+                  <div
+                    class="tw:bg-primary-dark tw:dark:bg-primary-light tw-text-color-reverse tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
+                  >
+                    {{ index + 1 }}
+                  </div>
+                  <div class="tw-text-color tw:text-[17px]">
+                    {{ item.name }}
+                  </div>
+                </div>
+                <div class="tw:flex tw:justify-start tw:items-center tw:gap-1">
+                  <v-tooltip location="top">
+                    <template #activator="{ props }">
+                      <v-btn
+                        @click="openBrandForm('edit', item.id)"
+                        v-bind="props"
+                        size="x-small"
+                        variant="text"
+                        rounded="pill"
+                        class="tw:w-8! tw:h-8! tw:px-0!"
+                      >
+                        <icon-edit
+                          class="tw-text-color-lighter tw:text-[20px]"
+                        />
+                      </v-btn>
+                    </template>
+                    <span class="tw:text-xs tw:p-2">{{
+                      langStore.label.button.edit
+                    }}</span>
+                  </v-tooltip>
+                  <v-tooltip location="top">
+                    <template #activator="{ props }">
+                      <v-btn
+                        @click="openDeleteModal('brand', item.id)"
+                        v-bind="props"
+                        size="x-small"
+                        variant="text"
+                        rounded="pill"
+                        class="tw:w-8! tw:h-8! tw:px-0!"
+                      >
+                        <icon-trash
+                          class="tw-text-color-lighter tw:text-[23px]"
+                        />
+                      </v-btn>
+                    </template>
+                    <span class="tw:text-xs tw:p-2">{{
+                      langStore.label.button.delete
+                    }}</span>
+                  </v-tooltip>
+                </div>
+              </div>
             </div>
           </div>
-          <div
-            class="tw:w-full! tw:flex tw:flex-col tw:justify-between tw:items-start tw:gap-8  tw:py-3!"
-          >
-            <div v-for="(item, index) in brands" :key="item.id" class="tw:w-full! tw:flex tw:justify-between tw:items-start">
-              <div class="tw:flex tw:items-center tw:gap-3">
-                <div
-                  class="tw:bg-primary-dark tw:dark:bg-primary-light tw-text-color-reverse tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
-                >
-                  {{ index + 1 }}
+        </v-col>
+        <v-col cols="12" xl="7" class="tw:w-full! tw:px-2.5! tw:2xl:pe-0!">
+          <div class="tw:overflow-hidden">
+            <!-- sections header -->
+            <div
+              class="tw:bg-primary-dark tw:rounded-4xl tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6! tw:mb-4!"
+            >
+              <div
+                class="tw:flex tw:flex-col tw:md:flex-row tw:justify-between tw:items-start tw:md:items-center tw:gap-5 tw:sm:gap-3"
+              >
+                <div>
+                  <div
+                    class="tw:flex tw:justify-start tw:items-center tw:gap-2"
+                  >
+                    <icon-box class="tw-text-color-reverse tw:text-[32px]" />
+                    <div
+                      class="tw-text-color-reverse tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px] tw:text-nowrap"
+                    >
+                      {{ langStore.label.title.manageProducts }}
+                    </div>
+                  </div>
+                  <div
+                    class="tw:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-2! tw:text-nowrap"
+                  >
+                    {{ langStore.label.description.manageProducts }}
+                  </div>
                 </div>
-                <div class="tw-text-color tw:text-[18px]">{{ item.name }}</div>
-              </div>
-              <div>
+                <div class="tw:flex tw:justify-start tw:items-center tw:gap-4">
+                  <v-btn
+                    @click="openProductModal('add')"
+                    color="white"
+                    rounded="pill"
+                    class="tw:h-10!"
+                  >
+                    <div
+                      class="tw:flex tw:justify-center tw:items-center tw:gap-2"
+                    >
+                      <icon-plus-circle
+                        class="tw:text-[18px] tw:2xl:text-[18px]"
+                      />
+                      <div class="tw:text-[14px] tw:2xl:text-[15px]">
+                        {{ langStore.label.button.createProduct }}
+                      </div>
+                    </div>
+                  </v-btn>
+                  <v-text-field
+                    v-model="brandForm.name"
+                    type="text"
+                    variant="solo"
+                    density="compact"
+                    hide-details
+                    class="tw:text-[14px]! tw:w-90! tw:text-white!"
+                    rounded="pill"
+                    :placeholder="langStore.label.form.searchByName"
+                  >
+                    <template #append-inner>
+                      <v-btn
+                        color="primary"
+                        class="tw:rounded-full! tw:min-w-0! tw:p-0! tw:px-2!"
+                        size="small"
+                      >
+                        <icon-magnify
+                          class="tw-text-color-reverse tw:text-[22px] tw:me-1!"
+                        />
+                        <div
+                          class="tw-text-color-reverse tw:text-[13px] tw:2xl:text-[13px]"
+                        >
+                          {{ langStore.label.button.search }}
+                        </div>
+                      </v-btn>
+                    </template>
+                  </v-text-field>
+                </div>
               </div>
             </div>
+            <!-- list -->
+            <div></div>
           </div>
         </v-col>
       </v-row>
@@ -467,6 +599,165 @@
       </v-card>
     </v-dialog>
 
+    <!-- product modal -->
+    <v-dialog v-model="productModal" max-width="350" class="blur-dialog">
+      <v-card class="tw:rounded-2xl!">
+        <v-card-title
+          class="tw:border-b-2 pa-0"
+          :class="{
+            'tw:border-success': modalMode === 'add',
+            'tw:border-warning': modalMode === 'edit',
+          }"
+        >
+          <div class="tw:relative pa-2 px-4">
+            <div class="text-center tw-text-color tw:text-[15px] tw:mt-2">
+              <span v-if="modalMode === 'add'">{{
+                langStore.label.header.addProduct
+              }}</span>
+              <span v-else-if="modalMode === 'edit'">{{
+                langStore.label.header.editProduct
+              }}</span>
+            </div>
+          </div>
+          <div class="tw:absolute tw:top-3 tw:end-3">
+            <v-tooltip location="top">
+              <template #activator="{ props }">
+                <icon-close
+                  @click="close"
+                  class="tw-text-color-lighter tw:text-[17px] tw:cursor-pointer"
+                  v-bind="props"
+                />
+              </template>
+              <span class="tw:text-xs tw:p-2">{{
+                langStore.label.button.colseWindow
+              }}</span>
+            </v-tooltip>
+          </div>
+        </v-card-title>
+        <v-card-text class="tw:p-3! tw:mt-2!">
+          <v-row class="">
+            <v-col cols="12">
+              <v-text-field
+                v-model="productForm.name"
+                type="text"
+                variant="outlined"
+                density="compact"
+                hide-details
+                class="tw:text-[14px]"
+                rounded="lg"
+              >
+                <template #label>
+                  <span class="tw:text-[12px]">
+                    {{ langStore.label.form.name }}
+                  </span>
+                  <span class="tw-text-require tw:text-[10px]">
+                    ({{ langStore.label.caption.required }})
+                  </span>
+                </template>
+              </v-text-field>
+            </v-col>
+            <v-col cols="12">
+              <v-text-field
+                v-model="productForm.amount"
+                type="text"
+                variant="outlined"
+                density="compact"
+                hide-details
+                class="tw:text-[14px]"
+                rounded="lg"
+              >
+                <template #label>
+                  <span class="tw:text-[12px]">
+                    {{ langStore.label.form.amount }}
+                  </span>
+                  <span class="tw-text-require 300 tw:text-[10px]">
+                    ({{ langStore.label.caption.required }})
+                  </span>
+                </template>
+              </v-text-field>
+            </v-col>
+            <v-col cols="12">
+              <v-autocomplete
+                v-model="productForm.packagingId"
+                type="text"
+                variant="outlined"
+                density="compact"
+                hide-details
+                class="tw:text-[14px]"
+                rounded="lg"
+              >
+                <template #label>
+                  <span class="tw:text-[12px]">
+                    {{ langStore.label.form.packaging }}
+                  </span>
+                  <span class="tw-text-require tw:text-[10px]">
+                    ({{ langStore.label.caption.required }})
+                  </span>
+                </template>
+              </v-autocomplete>
+            </v-col>
+            <v-col cols="12">
+              <v-autocomplete
+                v-model="productForm.unitId"
+                type="text"
+                variant="outlined"
+                density="compact"
+                hide-details
+                class="tw:text-[14px]"
+                rounded="lg"
+              >
+                <template #label>
+                  <span class="tw:text-[12px]">
+                    {{ langStore.label.form.unit }}
+                  </span>
+                  <span class="tw-text-require tw:text-[10px]">
+                    ({{ langStore.label.caption.required }})
+                  </span>
+                </template>
+              </v-autocomplete>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions class="tw:px-4!">
+          <div
+            class="tw:w-full tw:flex tw:justify-end tw:items-center tw:gap-1"
+          >
+            <v-btn
+              @click="close"
+              variant="plain"
+              rounded="lg"
+              class="tw-text-color py-0"
+            >
+              <div class="tw:text-[12px]">
+                {{ langStore.label.button.cancel }}
+              </div>
+            </v-btn>
+            <v-btn
+              @click="submitProduct"
+              size=""
+              rounded="lg"
+              class="tw:border! tw:px-0! tw:py-1! tw:w-30"
+              :class="{
+                'tw:bg-success/15! tw:text-success!  tw:border-success!':
+                  modalMode === 'add',
+                'tw:bg-warning/15! tw:text-warning! tw:border-warning!':
+                  modalMode === 'edit',
+              }"
+            >
+              <icon-button-loader
+                v-if="loading"
+                class="tw:text-[23px]! tw:me-2!"
+              />
+              <icon-check-double v-else class="tw:text-[23px] tw:me-2!" />
+              <div class="tw:text-[12px]">
+                {{ langStore.label.button.save }}
+              </div>
+            </v-btn>
+          </div>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <!-- delete modal -->
     <v-dialog v-model="deleteModal" max-width="400" class="blur-dialog">
       <v-card class="tw:rounded-2xl!">
@@ -532,6 +823,8 @@ const {
   companyResult: company,
   brandsResult: brands,
   brandResult: brand,
+  productsResult: products,
+  productResult: product,
 } = storeToRefs(baseStore);
 
 // swiper
@@ -540,11 +833,11 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { label } from "~/store/language/getters/staticLabel";
 
 // ======= TS types and interface =======
 // interface
 type ModalMode = "add" | "edit";
+type DeleteType = "comapny" | "brand";
 
 enum CompanyType {
   legalEntity = 1,
@@ -556,24 +849,47 @@ interface CompanyForm {
   address: string | null;
   phone: number | null;
 }
+interface BrandForm {
+  name: string | null;
+}
+interface ProductForm {
+  name: string | null;
+  amount: number | null;
+  packagingId: string | null;
+  unitId: number | null;
+}
 
 // ======= Data =======
 // slider keys
 const companiesSliderKey = ref<number>(1);
 // modal & toggle
 const modalMode = ref<ModalMode | null>(null);
+const deleteType = ref<DeleteType | null>(null);
 const campanyModal = ref<boolean>(false);
+const productModal = ref<boolean>(false);
 const deleteModal = ref<boolean>(false);
 // brand animation
-const showExpand = ref(false);
+const showBrandFormExpand = ref(false);
+const showProductFormExpand = ref(false);
 const isAnimating = ref(false);
-// form
+// forms
 const companyId = ref<string>("");
 const companyForm = ref<CompanyForm>({
   type: CompanyType.legalEntity,
   name: null,
   address: null,
   phone: null,
+});
+const brandId = ref<string>("");
+const brandForm = ref<BrandForm>({
+  name: null,
+});
+const productId = ref<string>("");
+const productForm = ref<ProductForm>({
+  name: null,
+  amount: null,
+  packagingId: null,
+  unitId: null,
 });
 
 // ======= Functions =======
@@ -620,22 +936,20 @@ const submitCompany = () => {
     }
   }
 };
-const openDeleteModal = (id: string) => {
-  companyId.value = id;
-  deleteModal.value = true;
-  console.log("delete");
-};
-const confirmDelete = () => {
-  baseStore.deleteCompany(companyId.value);
-};
 
 // brand form animation
-const toggleBrand = () => {
-  isAnimating.value = true;
-  showExpand.value = false;
+const toggleBrand = (type: "open" | "close") => {
+  if (type === "open") {
+    isAnimating.value = true;
+    showBrandFormExpand.value = false;
+  } else if (type === "close") {
+    isAnimating.value = true;
+    showBrandFormExpand.value = false;
+    resetFields();
+  }
 };
 const onFadeLeave = () => {
-  showExpand.value = true;
+  showBrandFormExpand.value = true;
   isAnimating.value = false;
 };
 const onExpandLeave = () => {
@@ -646,11 +960,106 @@ const onExpandLeave = () => {
 const loadBrands = async () => {
   await baseStore.getBrands();
 };
+const openBrandForm = (mode: ModalMode, id?: string) => {
+  modalMode.value = mode;
+  if (mode === "add") {
+    toggleBrand("open");
+    return;
+  }
+  if (mode === "edit" && id) {
+    brandId.value = id;
+    baseStore.getBrand(id);
+
+    if (!showBrandFormExpand.value) {
+      toggleBrand("open");
+    }
+  }
+};
+const submitBrand = () => {
+  if (modalMode.value === "add") {
+    if (brandForm.value.name) {
+      baseStore.addBrand(brandForm.value);
+    } else {
+      handlerStore.setError(langStore.alert.error.requiredFields);
+    }
+  } else if (modalMode.value === "edit") {
+    if (brandForm.value.name) {
+      console.log("brand id", brandId.value);
+      baseStore.editBrand(brandId.value, brandForm.value);
+    } else {
+      handlerStore.setError(langStore.alert.error.requiredFields);
+    }
+  }
+
+  // toggleBrand("close");
+};
+
+// product actions
+const loadProducts = async () => {
+  await baseStore.getCompanies();
+};
+const openProductModal = (mode: ModalMode, id?: string) => {
+  modalMode.value = mode;
+
+  if (mode === "add") {
+    productModal.value = true;
+    return;
+  }
+
+  if (mode === "edit" && id) {
+    productId.value = id;
+    baseStore.getProduct(id);
+    productModal.value = true;
+  }
+};
+const submitProduct = () => {
+  if (modalMode.value === "add") {
+    if (
+      productForm.value.name &&
+      productForm.value.amount &&
+      productForm.value.packagingId &&
+      productForm.value.unitId
+    ) {
+      baseStore.addProduct(productForm.value);
+    } else {
+      handlerStore.setError(langStore.alert.error.requiredFields);
+    }
+  } else if (modalMode.value === "edit") {
+    if (
+      productForm.value.name &&
+      productForm.value.amount &&
+      productForm.value.packagingId &&
+      productForm.value.unitId
+    ) {
+      baseStore.editProduct(productId.value, productForm.value);
+    } else {
+      handlerStore.setError(langStore.alert.error.requiredFields);
+    }
+  }
+};
 
 // universal
+const openDeleteModal = (type: DeleteType, id: string) => {
+  deleteType.value = type;
+  if (type === "comapny") {
+    companyId.value = id;
+    deleteModal.value = true;
+  } else if (type === "brand") {
+    brandId.value = id;
+    deleteModal.value = true;
+  }
+};
+const confirmDelete = () => {
+  if (deleteType.value === "comapny") {
+    baseStore.deleteCompany(companyId.value);
+  } else if (deleteType.value === "brand") {
+    baseStore.deleteBrand(brandId.value);
+  }
+};
 const reloadData = async () => {
   loadCompanies();
   loadBrands();
+  loadProducts();
 };
 const resetFields = () => {
   companyId.value = "";
@@ -660,9 +1069,14 @@ const resetFields = () => {
     address: null,
     phone: null,
   };
+  brandId.value = "";
+  brandForm.value = {
+    name: null,
+  };
 };
 const close = () => {
   campanyModal.value = false;
+  productModal.value = false;
   deleteModal.value = false;
   resetFields();
 };
@@ -673,19 +1087,23 @@ watch(
   (val, oldVal) => {
     if (oldVal === true && val === false) {
       reloadData();
+      if (showBrandFormExpand.value) {
+        toggleBrand("close");
+      }
       close();
     }
   },
 );
 watch(company, (val) => {
   if (!val) return;
-
-  console.log("company watcher", val);
-
   companyForm.value.type = val.type;
   companyForm.value.name = val.name;
   companyForm.value.address = val.address;
   companyForm.value.phone = val.phone;
+});
+watch(brand, (val) => {
+  if (!val) return;
+  brandForm.value.name = val.name;
 });
 watch(
   () => langStore.currentLang,
@@ -703,10 +1121,10 @@ onMounted(() => {
 <style scoped>
 /* fade button */
 .fade-enter-active {
-  transition: opacity 250ms ease;
+  transition: opacity 150ms ease;
 }
 .fade-leave-active {
-  transition: opacity 250ms ease;
+  transition: opacity 150ms ease;
 }
 .fade-enter-from,
 .fade-leave-to {
@@ -725,7 +1143,7 @@ html[dir="ltr"] .expand-btn-enter-from {
   transform: translateX(100%);
 }
 .expand-btn-enter-active {
-  transition: all 300ms ease;
+  transition: all 250ms ease;
 }
 .expand-btn-enter-to {
   opacity: 1;
@@ -738,7 +1156,7 @@ html[dir="ltr"] .expand-btn-enter-from {
   transform: translateX(0);
 }
 .expand-btn-leave-active {
-  transition: all 550ms ease;
+  transition: all 350ms ease;
 }
 html[dir="rtl"] .expand-btn-leave-to {
   opacity: 0;

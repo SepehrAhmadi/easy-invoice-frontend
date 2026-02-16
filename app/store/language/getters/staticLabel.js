@@ -28,10 +28,13 @@ export const label = (state) => {
         signIn: "Sign In",
         manageCompanies: "Manage companies",
         manageBrands: "Manage Brands",
+        manageProducts: "Manage Products",
       },
       header: {
         addCompany: "Add company",
         editCompany: "Edit Company",
+        addProduct: "Add Product",
+        editProduct: "Edit Product",
       },
       slogan: {
         login: "Manage \n Your Invoice",
@@ -47,11 +50,13 @@ export const label = (state) => {
         editProfile: "Edit profile",
         createCompany: "Create company",
         createBrand: "Create Brand",
+        createProduct: "Create Product",
         edit: "Edit",
         delete: "Delete",
         colseWindow: "Close Window",
         save: "Save",
         cancel: "Cancel",
+        search: "Search",
       },
       form: {
         username: "Username",
@@ -61,6 +66,10 @@ export const label = (state) => {
         phone: "Phone",
         individual: "Individual",
         legalEntity: "Legal entity",
+        searchByName: "Search by name",
+        amount: "Amount",
+        packaging: "Packaging",
+        unit: "Unit",
       },
       table: {
         individual: "Individual",
@@ -71,6 +80,7 @@ export const label = (state) => {
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
         manageBrands: "Manage your brands in this section",
+        manageProducts: "Manage your products in this section",
         deleteConfirm: "Are you sure you want to delete this item?",
       },
       caption: {
@@ -111,10 +121,13 @@ export const label = (state) => {
         signIn: "ورود به سیستم",
         manageCompanies: "مدیریت شرکت ها",
         manageBrands: "مدیرت برند ها",
+        manageProducts: "مدیریت محصولات",
       },
       header: {
         addCompany: "ایجاد شرکت",
         editCompany: "ویرایش شرکت",
+        addProduct: "ایجاد محصول",
+        editProduct: "ویرایش محصولّ",
       },
       slogan: {
         login: "مدیریت \n فاکتور های خود",
@@ -130,11 +143,13 @@ export const label = (state) => {
         editProfile: "ویرایش پروفایل",
         createCompany: "ایجاد شرکت",
         createBrand: "ایجاد برند",
+        createProduct: "ایجاد محصول",
         edit: "ویرایش",
         delete: "حذف",
         colseWindow: "بستن پنجره",
         save: "ذخیره اطلاعات",
         cancel: "انصراف",
+        search: "جستجو",
       },
       form: {
         username: "نام کاربری",
@@ -144,6 +159,10 @@ export const label = (state) => {
         phone: "شماره تماس",
         individual: "حقیقی",
         legalEntity: "حقوقی",
+        searchByName: "جستجو بر اساس نام",
+        amount: "مقدار",
+        packaging: "بسته بندی",
+        unit: "واحد اندازه گیری",
       },
       table: {
         individual: "حقیقی",
@@ -155,6 +174,7 @@ export const label = (state) => {
         manageCompanies:
           "شرکت‌هایی را که هنگام ایجاد فاکتورها استفاده می‌کنید، مدیریت کنید",
         manageBrands: "برند های خود را در این قسمت مدیریت کنید",
+        manageProducts: "محصولات خود را در این قسمت مدییت کنید",
         deleteConfirm: "آیا از حذف این مورد اطمینان دارید؟",
       },
       caption: {
