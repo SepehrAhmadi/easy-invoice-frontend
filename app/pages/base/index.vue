@@ -173,15 +173,19 @@
     </v-container>
 
     <!-- brands and products -->
-    <v-container class="tw:md:pe-0! tw:my-6!">
+    <v-container class="tw:md:pe-0! tw:my-5!">
       <v-row class="tw:h-full!">
-        <v-col cols="12" xl="5" class="tw:w-full! tw:px-2.5! tw:2xl:ps-0! tw:flex">
+        <v-col
+          cols="12"
+          xl="5"
+          class="tw:w-full! tw:px-2.5! tw:2xl:ps-0! tw:flex"
+        >
           <div
             class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden tw:grow!"
           >
             <!-- section header -->
             <div
-              class="tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6! tw:mb-6!"
+              class="tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6!"
             >
               <div
                 class="tw:flex tw:flex-col tw:md:flex-row tw:justify-between tw:items-start tw:md:items-center tw:gap-5 tw:sm:gap-3"
@@ -272,12 +276,12 @@
             </div>
             <!-- list -->
             <div
-              class="tw:w-full! tw:flex tw:flex-col tw:justify-between tw:items-start tw:gap-10 tw:px-4! tw:2xl:px-6! tw:mb-6!"
+              class="tw:w-full! tw:flex tw:flex-col tw:justify-start tw:items-start tw:py-2! tw:px-4! tw:2xl:px-6! tw:2xl:h-105 tw:overflow-auto"
             >
               <div
                 v-for="(item, index) in brands"
                 :key="item.id"
-                class="tw:w-full! tw:flex tw:justify-between tw:items-start"
+                class="tw:w-full! tw:flex tw:justify-between tw:items-start tw:my-4!"
               >
                 <div class="tw:flex tw:items-center tw:gap-3">
                   <div
@@ -333,13 +337,17 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="12" xl="7" class="tw:w-full! tw:px-2.5! tw:2xl:pe-0! tw:flex">
+        <v-col
+          cols="12"
+          xl="7"
+          class="tw:w-full! tw:px-2.5! tw:2xl:pe-0! tw:flex"
+        >
           <div
             class="w:overflow-hidden tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:grow!"
           >
             <!-- sections header -->
             <div
-              class="tw:bg-primary-dark tw:rounded-t-4xl tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6! tw:mb-6!"
+              class="tw:bg-primary-dark tw:rounded-t-4xl tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6!"
             >
               <div
                 class="tw:flex tw:flex-col tw:md:flex-row tw:justify-between tw:items-start tw:md:items-center tw:gap-5 tw:sm:gap-3"
@@ -361,7 +369,7 @@
                     {{ langStore.label.description.manageProducts }}
                   </div>
                 </div>
-                <div class="tw:flex tw:justify-start tw:items-center tw:gap-4">
+                <div class="tw:flex tw:justify-start tw:items-center tw:gap-4 tw:w-full tw:lg:w-auto">
                   <v-btn
                     @click="openProductModal('add')"
                     color="white"
@@ -385,7 +393,7 @@
                     variant="solo"
                     density="compact"
                     hide-details
-                    class="tw:text-[14px]! tw:w-90!"
+                    class="tw:text-[14px]! tw:lg:w-90! tw:flex-1"
                     rounded="pill"
                     :placeholder="langStore.label.form.searchByName"
                   >
@@ -400,12 +408,12 @@
             </div>
             <!-- list -->
             <div
-              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-6 tw:px-6! tw:mb-6!"
+              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:content-start tw:p-2! tw:my-0! tw:h-105 tw:overflow-auto"
             >
               <div
                 v-for="item in filteredProducts"
                 :key="item.id"
-                class="tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-4xl tw:p-6! tw:md:px-6!"
+                class="tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-4xl tw:p-4! tw:h-33.75 tw:m-2!"
               >
                 <div
                   class="tw:w-full! tw:flex tw:justify-start tw:items-center tw:gap-2"
