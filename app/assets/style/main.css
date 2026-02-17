@@ -28,7 +28,7 @@ html {
   overflow: hidden !important;
 }
 
-/* scroll */
+/* scrollbar */
 .custom-scroll {
   scrollbar-width: thin;
   scrollbar-color: #ffffff #f1f1f1;
