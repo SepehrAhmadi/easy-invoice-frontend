@@ -1,7 +1,7 @@
 import type { useDropdownState } from "./state";
 import { computed } from "vue";
 
-type Item = { id: any; name: string };
+type Item = { id: any; name: string; type?: string };
 
 export function useDropdownGetters(state: ReturnType<typeof useDropdownState>) {
   // units
@@ -16,6 +16,7 @@ export function useDropdownGetters(state: ReturnType<typeof useDropdownState>) {
     state.packagingsResult.value.map((item: Item) => ({
       value: item.id,
       text: item.name,
+      type: item.type,
     })),
   );
 

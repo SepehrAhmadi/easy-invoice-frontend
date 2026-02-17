@@ -175,13 +175,13 @@
     <!-- brands and products -->
     <v-container class="tw:md:pe-0! tw:my-6!">
       <v-row class="tw:h-full!">
-        <v-col cols="12" xl="5" class="tw:w-full! tw:px-2.5! tw:2xl:ps-0!">
+        <v-col cols="12" xl="5" class="tw:w-full! tw:px-2.5! tw:2xl:ps-0! tw:flex">
           <div
-            class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden"
+            class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden tw:grow!"
           >
             <!-- section header -->
             <div
-              class="tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6! tw:mb-4!"
+              class="tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6! tw:mb-6!"
             >
               <div
                 class="tw:flex tw:flex-col tw:md:flex-row tw:justify-between tw:items-start tw:md:items-center tw:gap-5 tw:sm:gap-3"
@@ -272,7 +272,7 @@
             </div>
             <!-- list -->
             <div
-              class="tw:flex-1! tw:w-full! tw:flex tw:flex-col tw:justify-between tw:items-start tw:gap-8 tw:py-3! tw:px-4! tw:2xl:px-6!"
+              class="tw:w-full! tw:flex tw:flex-col tw:justify-between tw:items-start tw:gap-10 tw:px-4! tw:2xl:px-6! tw:mb-6!"
             >
               <div
                 v-for="(item, index) in brands"
@@ -333,11 +333,13 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="12" xl="7" class="tw:w-full! tw:px-2.5! tw:2xl:pe-0!">
-          <div class="tw:overflow-hidden">
+        <v-col cols="12" xl="7" class="tw:w-full! tw:px-2.5! tw:2xl:pe-0! tw:flex">
+          <div
+            class="w:overflow-hidden tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:grow!"
+          >
             <!-- sections header -->
             <div
-              class="tw:bg-primary-dark tw:rounded-4xl tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6! tw:mb-4!"
+              class="tw:bg-primary-dark tw:rounded-t-4xl tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6! tw:mb-6!"
             >
               <div
                 class="tw:flex tw:flex-col tw:md:flex-row tw:justify-between tw:items-start tw:md:items-center tw:gap-5 tw:sm:gap-3"
@@ -378,37 +380,120 @@
                     </div>
                   </v-btn>
                   <v-text-field
-                    v-model="brandForm.name"
+                    v-model="searchProduct"
                     type="text"
                     variant="solo"
                     density="compact"
                     hide-details
-                    class="tw:text-[14px]! tw:w-90! tw:text-white!"
+                    class="tw:text-[14px]! tw:w-90!"
                     rounded="pill"
                     :placeholder="langStore.label.form.searchByName"
                   >
                     <template #append-inner>
-                      <v-btn
-                        color="primary"
-                        class="tw:rounded-full! tw:min-w-0! tw:p-0! tw:px-2!"
-                        size="small"
-                      >
-                        <icon-magnify
-                          class="tw-text-color-reverse tw:text-[22px] tw:me-1!"
-                        />
-                        <div
-                          class="tw-text-color-reverse tw:text-[13px] tw:2xl:text-[13px]"
-                        >
-                          {{ langStore.label.button.search }}
-                        </div>
-                      </v-btn>
+                      <icon-magnify
+                        class="tw-text-color tw:text-[25px] tw:me-1!"
+                      />
                     </template>
                   </v-text-field>
                 </div>
               </div>
             </div>
             <!-- list -->
-            <div></div>
+            <div
+              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-6 tw:px-6! tw:mb-6!"
+            >
+              <div
+                v-for="item in filteredProducts"
+                :key="item.id"
+                class="tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-4xl tw:p-6! tw:md:px-6!"
+              >
+                <div
+                  class="tw:w-full! tw:flex tw:justify-start tw:items-center tw:gap-2"
+                >
+                  <!-- icon type -->
+                  <div
+                    class="tw:bg-primary-dark tw:rounded-full tw:w-20 tw:h-16 tw:flex tw:items-center tw:justify-center"
+                  >
+                    <img
+                      :src="getPackagingIcon(item.packagingType)"
+                      class="tw:w-12 tw:h-12"
+                    />
+                  </div>
+
+                  <div class="tw:w-full! tw:flex tw:flex-col tw:gap-1">
+                    <!-- name -->
+                    <div class="tw-text-color tw:font-semibold tw:text-[18px]">
+                      {{ item.name }}
+                    </div>
+                    <!-- detail -->
+                    <div
+                      class="tw:w-full! tw:flex tw:flex-col tw:md:flex-row tw:justify-start tw:md:justify-start tw:items-start tw:md:items-center tw:gap-3"
+                    >
+                      <div
+                        class="tw:flex tw:justify-start tw:items-center tw:gap-1"
+                      >
+                        <icon-box
+                          class="tw-text-color-lighter tw:text-[18px]"
+                        />
+                        <span
+                          class="tw:flex tw-text-color-lighter tw:text-[13px]/5"
+                        >
+                          {{ langStore.label.table.packaging }} :
+                          {{ item.packagingName }}
+                        </span>
+                      </div>
+                      <div
+                        class="tw:flex tw:justify-start tw:items-center tw:gap-1"
+                      >
+                        <icon-pie-chart
+                          class="tw-text-color-lighter tw:text-[18px]"
+                        />
+                        <span
+                          class="tw:flex tw-text-color-lighter tw:text-[13px]/5"
+                        >
+                          {{ langStore.label.table.amount }} :
+                          {{ item.amount }}
+                          {{ item.unitName }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- actiosn -->
+                <div
+                  class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:mt-3!"
+                >
+                  <v-btn
+                    @click="openProductModal('edit', item.id)"
+                    size=" x-small"
+                    variant="outlined"
+                    rounded="pill"
+                    class="tw:px-0! tw:py-0.75! tw:2xl:py-0.75! tw:w-23"
+                  >
+                    <icon-edit
+                      class="tw-text-color-lighter tw:text-[15px] tw:me-2!"
+                    />
+                    <div class="tw-text-color-lighter tw:text-[12px]">
+                      {{ langStore.label.button.edit }}
+                    </div>
+                  </v-btn>
+                  <v-btn
+                    @click="openDeleteModal('product', item.id)"
+                    size=" x-small"
+                    variant="outlined"
+                    rounded="pill"
+                    class="tw:px-0! tw:py-0.75! tw:2xl:py-0.75! tw:w-23"
+                  >
+                    <icon-trash
+                      class="tw-text-color-lighter tw:text-[17px] tw:me-2!"
+                    />
+                    <div class="tw-text-color-lighter tw:text-[12px]">
+                      {{ langStore.label.button.delete }}
+                    </div>
+                  </v-btn>
+                </div>
+              </div>
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -813,6 +898,12 @@
 
 <script setup lang="ts">
 // ======= Imports =======
+// packaging icon type
+import bottleIcon from "~/assets/image/icon/bottle.png";
+import bagIcon from "~/assets/image/icon/bag.png";
+import boxIcon from "~/assets/image/icon/box.png";
+import sprayIcon from "~/assets/image/icon/spray.png";
+
 // stores
 import { useHandlerStore } from "~/store/handler";
 const handlerStore = useHandlerStore();
@@ -845,7 +936,7 @@ import "swiper/css/pagination";
 // ======= TS types and interface =======
 // interface
 type ModalMode = "add" | "edit";
-type DeleteType = "comapny" | "brand";
+type DeleteType = "comapny" | "brand" | "product";
 
 enum CompanyType {
   legalEntity = 1,
@@ -899,8 +990,34 @@ const productForm = ref<ProductForm>({
   packagingId: null,
   unitId: null,
 });
+const searchProduct = ref<string>("");
+
+// ======= Computed =======
+const filteredProducts = computed(() => {
+  if (!products.value) return [];
+  if (!searchProduct.value) return products.value;
+  return products.value.filter((p) =>
+    p.name.toLowerCase().includes(searchProduct.value.toLowerCase()),
+  );
+});
 
 // ======= Functions =======
+// ui fuctions
+const getPackagingIcon = (type: string) => {
+  switch (type) {
+    case "bottle":
+      return bottleIcon;
+    case "bag":
+      return bagIcon;
+    case "box":
+      return boxIcon;
+    case "spray":
+      return sprayIcon;
+    default:
+      return bottleIcon;
+  }
+};
+
 // company actions
 const loadCompanies = async () => {
   await baseStore.getCompanies();
@@ -1004,7 +1121,7 @@ const submitBrand = () => {
 
 // product actions
 const loadProducts = async () => {
-  await baseStore.getCompanies();
+  await baseStore.getProducts();
 };
 const openProductModal = (mode: ModalMode, id?: string) => {
   modalMode.value = mode;
@@ -1055,6 +1172,9 @@ const openDeleteModal = (type: DeleteType, id: string) => {
   } else if (type === "brand") {
     brandId.value = id;
     deleteModal.value = true;
+  } else if (type === "product") {
+    productId.value = id;
+    deleteModal.value = true;
   }
 };
 const confirmDelete = () => {
@@ -1062,6 +1182,8 @@ const confirmDelete = () => {
     baseStore.deleteCompany(companyId.value);
   } else if (deleteType.value === "brand") {
     baseStore.deleteBrand(brandId.value);
+  } else if (deleteType.value === "product") {
+    baseStore.deleteProduct(productId.value);
   }
 };
 const reloadData = async () => {
@@ -1080,6 +1202,13 @@ const resetFields = () => {
   brandId.value = "";
   brandForm.value = {
     name: null,
+  };
+  productId.value = "";
+  productForm.value = {
+    name: null,
+    amount: null,
+    packagingId: null,
+    unitId: null,
   };
 };
 const close = () => {
@@ -1112,6 +1241,13 @@ watch(company, (val) => {
 watch(brand, (val) => {
   if (!val) return;
   brandForm.value.name = val.name;
+});
+watch(product, (val) => {
+  if (!val) return;
+  productForm.value.name = val.name;
+  productForm.value.amount = val.amount;
+  productForm.value.packagingId = val.packagingId;
+  productForm.value.unitId = val.unitId;
 });
 watch(
   () => langStore.currentLang,

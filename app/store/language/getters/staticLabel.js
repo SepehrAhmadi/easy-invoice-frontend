@@ -76,6 +76,8 @@ export const label = (state) => {
         legalEntity: "Legal entity",
         address: "Address",
         phone: "Phone",
+        packaging: "Packaging",
+        amount: "Amount",
       },
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
@@ -169,6 +171,8 @@ export const label = (state) => {
         legalEntity: "حقوقی",
         address: "نشانی",
         phone: "شماره تماس",
+        packaging: "بسته بندی",
+        amount: "مقدار",
       },
       description: {
         manageCompanies:
