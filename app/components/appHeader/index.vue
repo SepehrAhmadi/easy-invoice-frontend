@@ -16,7 +16,7 @@
             <icon-menu v-else class="tw:text-[25px] tw:text-white" />
           </button>
         </div>
-        <div class="tw:flex tw:justify-start tw:items-center tw:gap-4 ">
+        <div class="tw:flex tw:justify-start tw:items-center tw:gap-4">
           <app-header-language />
           <app-header-notification />
           <app-header-account-center />
@@ -282,8 +282,8 @@ onBeforeUnmount(() => {
   box-shadow: none !important;
 }
 
-.v-navigation-drawer--temporary.v-navigation-drawer--active{
-  box-shadow : none !important;
+.v-navigation-drawer--temporary.v-navigation-drawer--active {
+  box-shadow: none !important;
 }
 
 .v-navigation-drawer--left,

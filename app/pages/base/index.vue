@@ -1,7 +1,5 @@
 <template>
   <div class="tw:flex tw:flex-col tw:min-h-full">
-    <PageHeader :title="langStore.label.page.baseInfo" />
-
     <!-- companies -->
     <v-container class="tw:md:pe-0! tw:md:py-0!">
       <v-row class="tw:flex tw:justify-center tw:itesm-center">
@@ -369,7 +367,9 @@
                     {{ langStore.label.description.manageProducts }}
                   </div>
                 </div>
-                <div class="tw:flex tw:justify-start tw:items-center tw:gap-4 tw:w-full tw:lg:w-auto">
+                <div
+                  class="tw:flex tw:justify-start tw:items-center tw:gap-4 tw:w-full tw:lg:w-auto"
+                >
                   <v-btn
                     @click="openProductModal('add')"
                     color="white"
@@ -941,6 +941,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+// ======= TS types and interface =======
+definePageMeta({
+  title: langStore.label.page.baseInfo,
+});
 // ======= TS types and interface =======
 // interface
 type ModalMode = "add" | "edit";
