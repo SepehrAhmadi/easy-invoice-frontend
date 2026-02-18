@@ -31,7 +31,6 @@
                     <h1 class="tw-main-text-color tw:text-[20px]">
                       EASY INVOCIE
                     </h1>
-                    {{ langStore.currentLang }}
                   </div>
                   <div
                     class="tw:flex tw:justify-start tw:items-center tw:gap-2 tw:cursor-pointer tw:group"

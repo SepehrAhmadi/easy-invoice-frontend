@@ -1,12 +1,11 @@
-<template>
-</template>
+<template></template>
 
 <script setup lang="ts">
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
+const { setPageTitle } = usePageTitle();
 
-// ======= TS types and interface =======
-definePageMeta({
-  title: langStore.label.page.dashboard,
+watchEffect(() => {
+  setPageTitle(langStore.label.page.dashboard);
 });
 </script>

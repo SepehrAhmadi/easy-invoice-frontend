@@ -20,7 +20,7 @@
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(50px);
 }
 
 /* layout transition */

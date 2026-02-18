@@ -4,7 +4,7 @@
 
     <v-main class="tw:h-full">
       <div class="tw:relative!">
-        <page-header :title="pageTitle" />
+        <page-header />
       </div>
 
       <div
@@ -18,8 +18,3 @@
     </v-main>
   </v-layout>
 </template>
-
-<script setup lang="ts">
-const route = useRoute();
-const pageTitle = computed(() => route.meta.title as string);
-</script>

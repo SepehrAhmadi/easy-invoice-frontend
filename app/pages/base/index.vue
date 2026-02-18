@@ -912,6 +912,13 @@ import bagIcon from "~/assets/image/icon/bag.png";
 import boxIcon from "~/assets/image/icon/box.png";
 import sprayIcon from "~/assets/image/icon/spray.png";
 
+// swiper
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 // stores
 import { useHandlerStore } from "~/store/handler";
 const handlerStore = useHandlerStore();
@@ -934,17 +941,12 @@ const {
   productResult: product,
 } = storeToRefs(baseStore);
 
-// swiper
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
-// ======= TS types and interface =======
-definePageMeta({
-  title: langStore.label.page.baseInfo,
+// ======= Composables =======
+const { setPageTitle } = usePageTitle();
+watchEffect(() => {
+  setPageTitle(langStore.label.page.baseInfo);
 });
+
 // ======= TS types and interface =======
 // interface
 type ModalMode = "add" | "edit";
