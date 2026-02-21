@@ -29,6 +29,7 @@ export const label = (state) => {
         manageCompanies: "Manage companies",
         manageBrands: "Manage Brands",
         manageProducts: "Manage Products",
+        manageInvocies: "Manage Invoices",
       },
       header: {
         addCompany: "Add company",
@@ -57,6 +58,8 @@ export const label = (state) => {
         save: "Save",
         cancel: "Cancel",
         search: "Search",
+        changeStatus: "Change Status",
+        filter: "Filter",
       },
       form: {
         username: "Username",
@@ -66,10 +69,16 @@ export const label = (state) => {
         phone: "Phone",
         individual: "Individual",
         legalEntity: "Legal entity",
+        search: "Search",
         searchByName: "Search by name",
         amount: "Amount",
         packaging: "Packaging",
         unit: "Unit",
+        fromDate: "From date",
+        toDate: "to Date",
+        status: "Status",
+        companyType: "Company type",
+        row : "Row",
       },
       table: {
         individual: "Individual",
@@ -78,12 +87,22 @@ export const label = (state) => {
         phone: "Phone",
         packaging: "Packaging",
         amount: "Amount",
+        invoiceNumber: "Invoice number",
+        company: "Company",
+        companyType: "Company type",
+        date: "Date",
+        actions: "Actions",
+        status: "Status",
+        paid: "Paid",
+        awaitingPayment: "Awaiting payment",
+        row : "Row",
       },
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
         manageBrands: "Manage your brands in this section",
         manageProducts: "Manage your products in this section",
         deleteConfirm: "Are you sure you want to delete this item?",
+        manageInvocies: "Manage your invoices in this section",
       },
       caption: {
         detailToLogin: "Insert your detail to login to your account",
@@ -92,6 +111,7 @@ export const label = (state) => {
         username: "Username",
         required: "required",
         loading: "Loading...",
+        noDataFound : "No data found",
       },
     };
   } else {
@@ -124,6 +144,7 @@ export const label = (state) => {
         manageCompanies: "مدیریت شرکت ها",
         manageBrands: "مدیرت برند ها",
         manageProducts: "مدیریت محصولات",
+        manageInvocies: "مدیریت فاکتور ها",
       },
       header: {
         addCompany: "ایجاد شرکت",
@@ -152,6 +173,8 @@ export const label = (state) => {
         save: "ذخیره اطلاعات",
         cancel: "انصراف",
         search: "جستجو",
+        changeStatus: "تغییر وضعیت",
+        filter: "فیلتر",
       },
       form: {
         username: "نام کاربری",
@@ -161,10 +184,16 @@ export const label = (state) => {
         phone: "شماره تماس",
         individual: "حقیقی",
         legalEntity: "حقوقی",
+        search: "جستجو",
         searchByName: "جستجو بر اساس نام",
         amount: "مقدار",
         packaging: "بسته بندی",
         unit: "واحد اندازه گیری",
+        fromDate: "از تاریخ",
+        toDate: "تا تاریخ",
+        status: "وضعیت",
+        companyType: "نوع شرکت",
+        row : "ردیف",
       },
       table: {
         individual: "حقیقی",
@@ -173,6 +202,15 @@ export const label = (state) => {
         phone: "شماره تماس",
         packaging: "بسته بندی",
         amount: "مقدار",
+        invoiceNumber: "شماره فاکتور",
+        company: "شرکت",
+        companyType: "نوع شرکت",
+        date: "تاریخ",
+        actions: "عملیات",
+        status: "وضعیت",
+        paid: "پرداخت شده",
+        awaitingPayment: "در انتظار پرداخت",
+        row : "ردیف",
       },
       description: {
         manageCompanies:
@@ -180,6 +218,7 @@ export const label = (state) => {
         manageBrands: "برند های خود را در این قسمت مدیریت کنید",
         manageProducts: "محصولات خود را در این قسمت مدییت کنید",
         deleteConfirm: "آیا از حذف این مورد اطمینان دارید؟",
+        manageInvocies: "فاکتور های خود را در این قسمت مدیریت کنید",
       },
       caption: {
         detailToLogin:
@@ -189,6 +228,7 @@ export const label = (state) => {
         username: "نام کاربری",
         required: "الزامی",
         loading: "در حال بارگذاری اطلاعات",
+        noDataFound : "داده ای یافت نشد",
       },
     };
   }

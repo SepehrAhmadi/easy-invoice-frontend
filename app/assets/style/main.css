@@ -28,7 +28,7 @@ html {
   overflow: hidden !important;
 }
 
-/* scrollbar */
+/* ======= scrollbar ======= */
 .custom-scroll {
   scrollbar-width: thin;
   scrollbar-color: #ffffff #f1f1f1;
@@ -60,7 +60,8 @@ html {
   height: 0;
 } */
 
-/* vuetify overwrite */
+/* ======= vuetify overwrite ======= */
+/* form input */
 .v-field__input {
   font-size: 14px !important;
 }
@@ -75,7 +76,9 @@ html {
   -webkit-appearance: auto !important;
 }
 
-/* swiper styles */
+/* table */
+
+/* ======= swiper styles ======= */
 .swiper-pagination-bullet {
   width: 8px !important;
   height: 8px !important;

@@ -77,16 +77,16 @@
                       class="tw:inline-flex tw:items-center tw:gap-2 tw:py-0.75! tw:px-3! tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-full"
                     >
                       <icon-bank
-                        v-if="item.type == 1"
+                        v-if="item.type == CompanyType.legalEntity"
                         class="tw-text-color-lighter tw:text-[17px]"
                       />
                       <icon-user
-                        v-if="item.type == 2"
+                        v-if="item.type == CompanyType.individual"
                         class="tw-text-color-lighter tw:text-[17px]"
                       />
                       <div class="tw-text-color-lighter tw:text-[13px]">
                         {{
-                          item.type == 1
+                          item.type == CompanyType.legalEntity
                             ? langStore.label.table.legalEntity
                             : langStore.label.table.individual
                         }}
@@ -283,7 +283,7 @@
               >
                 <div class="tw:flex tw:items-center tw:gap-3">
                   <div
-                    class="tw:bg-primary-dark tw:dark:bg-primary-light tw-text-color-reverse tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
+                    class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
                   >
                     {{ index + 1 }}
                   </div>
@@ -394,6 +394,7 @@
                     density="compact"
                     hide-details
                     class="tw:text-[14px]! tw:lg:w-90! tw:flex-1"
+                    bg-color="white"
                     rounded="pill"
                     :placeholder="langStore.label.form.searchByName"
                   >
@@ -948,7 +949,6 @@ watchEffect(() => {
 });
 
 // ======= TS types and interface =======
-// interface
 type ModalMode = "add" | "edit";
 type DeleteType = "comapny" | "brand" | "product";
 

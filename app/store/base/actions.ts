@@ -15,7 +15,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.loading = true;
 
     return axios
-      .get("/company")
+      .get("/base/company")
       .then((res) => {
         state.companiesResult.value = res.data.data.companies;
       })
@@ -37,7 +37,7 @@ export function useBaseActions(state: StateType) {
     const axios = useApi();
 
     return axios
-      .get("/company/" + id)
+      .get("/base/company/" + id)
       .then((res) => {
         state.companyResult.value = res.data.data;
       })
@@ -58,7 +58,7 @@ export function useBaseActions(state: StateType) {
     console.log("value", value);
 
     return axios
-      .post("/company", value)
+      .post("/base/company", value)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -83,7 +83,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .put("/company/" + id, value)
+      .put("/base/company/" + id, value)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -108,7 +108,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .delete("/company/" + id)
+      .delete("/base/company/" + id)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -133,7 +133,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.loading = true;
 
     return axios
-      .get("/brand")
+      .get("/base/brand")
       .then((res) => {
         state.brandsResult.value = res.data.data.brands;
       })
@@ -155,7 +155,7 @@ export function useBaseActions(state: StateType) {
     const axios = useApi();
 
     return axios
-      .get("/brand/" + id)
+      .get("/base/brand/" + id)
       .then((res) => {
         state.brandResult.value = res.data.data;
       })
@@ -174,7 +174,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .post("/brand", value)
+      .post("/base/brand", value)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -199,7 +199,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .put("/brand/" + id, value)
+      .put("/base/brand/" + id, value)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -224,7 +224,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .delete("/brand/" + id)
+      .delete("/base/brand/" + id)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -249,7 +249,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.loading = true;
 
     return axios
-      .get("/product")
+      .get("/base/product")
       .then((res) => {
         state.productsResult.value = res.data.data.products;
       })
@@ -271,7 +271,7 @@ export function useBaseActions(state: StateType) {
     const axios = useApi();
 
     return axios
-      .get("/product/" + id)
+      .get("/base/product/" + id)
       .then((res) => {
         state.productResult.value = res.data.data;
       })
@@ -290,7 +290,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .post("/product", value)
+      .post("/base/product", value)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -315,7 +315,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .put("/product/" + id, value)
+      .put("/base/product/" + id, value)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -340,7 +340,7 @@ export function useBaseActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .delete("/product/" + id)
+      .delete("/base/product/" + id)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
