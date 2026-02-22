@@ -28,7 +28,12 @@
               md="6"
               class="tw:flex tw:md:justify-end tw:items-center tw:gap-4"
             >
-              <v-btn color="white" rounded="pill" class="tw:h-10!">
+              <v-btn
+                @click="toggleSubmitForm"
+                color="white"
+                rounded="pill"
+                class="tw:h-10!"
+              >
                 <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
                   <icon-plus-circle class="tw:text-[18px] tw:2xl:text-[18px]" />
                   <div class="tw:text-[14px] tw:2xl:text-[15px]">
@@ -37,7 +42,7 @@
                 </div>
               </v-btn>
               <v-btn
-                @click="showFilter = !showFilter"
+                @click="toggleFilter"
                 color="white"
                 rounded="pill"
                 class="tw:h-10!"
@@ -68,6 +73,7 @@
             </v-col>
           </v-row>
         </v-col>
+        <!-- filter -->
         <transition name="toggle-slide">
           <v-col cols="12" v-show="showFilter">
             <div
@@ -144,7 +150,138 @@
             </div>
           </v-col>
         </transition>
+        <transition name="toggle-slide">
+          <v-col cols="12" v-show="showSubmitForm">
+            <v-row class="tw:flex tw:items-center!">
+              <v-col cols="12" lg="2">
+                <div class="tw:relative!">
+                  <label
+                    v-if="invoiceForm.localDate"
+                    for="date"
+                    class="tw:text-[11px] tw:absolute! tw:bg-primary-dark! tw:start-10 tw:-top-1.75 tw:z-10! tw-text-color-reverse"
+                  >
+                    {{ langStore.label.form.date }}
+                    <span class="tw:text-red-400 tw:text-[10px]">
+                      ({{ langStore.label.caption.required }})
+                    </span>
+                  </label>
+                  <date-picker
+                    v-model="invoiceForm.localDate"
+                    id="date"
+                    simple
+                    :placeholder="`${langStore.label.form.date} (${langStore.label.caption.required})`"
+                    format="jYYYY/jMM/jDD"
+                    display-format="jYYYY/jMM/jDD"
+                    class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!"
+                    clearable
+                    color="#1d202e"
+                  />
+                </div>
+              </v-col>
+              <v-col cols="12" lg="9">
+                <v-row class="tw:flex tw:items-center!">
+                  <v-col cols="12" lg="2">
+                    <div
+                      class="tw:flex tw:justify-end tw:items-center tw:gap-2"
+                    >
+                      <icon-building
+                        class="tw-text-color-reverse tw:text-[30px]"
+                      />
+                      <div
+                        class="tw-text-color-reverse tw:text-[16px] tw:lg:text-[18px] tw:2xl:text-[20px]"
+                      >
+                        {{ langStore.label.form.company }}
+                        <span class="tw:text-red-400 tw:text-[13px]">
+                          ({{ langStore.label.caption.required }})
+                        </span>
+                      </div>
+                    </div>
+                  </v-col>
+                  <v-col cols="12" lg="10">
+                    <Swiper
+                      class="tw:w-full!"
+                      :modules="[Navigation, Pagination]"
+                      :slides-per-view="'auto'"
+                      :pagination="{
+                        el: '.company-pagination-swiper',
+                        clickable: false,
+                      }"
+                      :breakpoints="{
+                        320: {
+                          slidesPerView: 1,
+                          spaceBetween: 10,
+                        },
+                        640: {
+                          slidesPerView: 1,
+                          spaceBetween: 15,
+                        },
+                        768: {
+                          slidesPerView: 2,
+                          spaceBetween: 20,
+                        },
+                        1024: {
+                          slidesPerView: 4,
+                          spaceBetween: 20,
+                        },
+                      }"
+                      :key="invoicesSliderKey"
+                    >
+                      <SwiperSlide v-for="item in companies">
+                        <div
+                          @click="selectCompany(item.id)"
+                          class="tw:cursor-pointer tw:flex tw:justify-center tw:itemd-center tw:gap-2 tw:text-[15px]! tw:text-gray-300! tw:py-1.75! tw:px-1! tw:border tw:border-gray-400 tw:rounded-full! tw:group tw:transiton tw:duration-200 tw:ease"
+                          :class="{
+                            'tw:bg-white tw:text-primary-dark!':
+                              item.id === companyId,
+                            'tw:hover:bg-gray-800!': item.id !== companyId,
+                          }"
+                        >
+                          <icon-bank
+                            v-if="item.type == CompanyType.legalEntity"
+                            class="tw:text-gray-300! tw:text-[20px] tw:transiton tw:duration-200 tw:ease"
+                            :class="{
+                              'tw:text-primary-dark!': item.id === companyId,
+                            }"
+                          />
+                          <icon-user
+                            v-if="item.type == CompanyType.individual"
+                            class="tw:text-gray-300! tw:text-[20px] tw:transiton tw:duration-200 tw:ease"
+                            :class="{
+                              'tw:text-primary-dark!': item.id === companyId,
+                            }"
+                          />
+                          {{ item.name }}
+                        </div>
+                      </SwiperSlide>
+                    </Swiper>
+                  </v-col>
+                </v-row>
+              </v-col>
+              <v-col cols="12" lg="1">
+                <div class="tw:flex tw:justify-end tw:items-center tw:gap-4">
+                  <v-btn
+                    @click="submitInvoice"
+                    color="white"
+                    class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
+                    icon
+                  >
+                    <icon-check class="tw:text-[25px]" />
+                  </v-btn>
+                  <v-btn
+                    @click="showSubmitForm = false"
+                    color="white"
+                    class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
+                    icon
+                  >
+                    <icon-close class="tw:text-[25px]" />
+                  </v-btn>
+                </div>
+              </v-col>
+            </v-row>
+          </v-col>
+        </transition>
       </v-row>
+      <!-- table -->
       <v-row class="tw:rounded-b-4xl! tw:p-0!">
         <v-col cols="12" class="tw:p-0!">
           <v-card class="tw:rounded-b-4xl! tw:shadow-none!">
@@ -265,6 +402,7 @@
                       <v-tooltip location="top">
                         <template #activator="{ props }">
                           <v-btn
+                            @click="openDeleteModal(item.id)"
                             v-bind="props"
                             size="x-small"
                             variant="text"
@@ -302,11 +440,63 @@
         </v-col>
       </v-row>
     </v-container>
+
+        <!-- delete modal -->
+    <v-dialog v-model="deleteModal" max-width="400" class="blur-dialog">
+      <v-card class="tw:rounded-2xl!">
+        <v-card-text class="tw:p-3! tw:mt-4!">
+          <v-row>
+            <v-col cols="12">
+              <div class="tw:text-center tw:text-[15px]">
+                {{ langStore.label.description.deleteConfirm }}
+              </div>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions class="tw:px-4!">
+          <div
+            class="tw:w-full tw:flex tw:justify-end tw:items-center tw:gap-1"
+          >
+            <v-btn
+              @click="close"
+              variant="plain"
+              rounded="lg"
+              class="tw-text-color py-0"
+            >
+              <div class="tw:text-[12px]">
+                {{ langStore.label.button.cancel }}
+              </div>
+            </v-btn>
+            <v-btn
+              @click="confirmDelete"
+              size=""
+              rounded="lg"
+              class="tw:border! tw:bg-error/15! tw:text-error! tw:border-error! tw:px-0! tw:py-1! tw:w-20"
+            >
+              <icon-button-loader
+                v-if="loading"
+                class="tw:text-[20px]! tw:me-2!"
+              />
+              <icon-check-double v-else class="tw:text-[20px] tw:me-2!" />
+              <div class="tw:text-[12px]">
+                {{ langStore.label.button.delete }}
+              </div>
+            </v-btn>
+          </div>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 // ======= Imports =======
+// swiper
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+
 // stores
 import { useHandlerStore } from "~/store/handler";
 const handlerStore = useHandlerStore();
@@ -317,13 +507,14 @@ const langStore = useLanguageStore();
 
 import { useDeopdownStore } from "~/store/dropdown";
 const dropdownStore = useDeopdownStore();
+const { companiesResult: companies } = storeToRefs(dropdownStore);
 
 import { useOperationStore } from "~/store/operation";
 const operationStore = useOperationStore();
 const { invoicesResult: invoices, invoiceResult: invoice } =
   storeToRefs(operationStore);
 
-// ======= TS types and interface =======
+// ======= enum & TS types and interface =======
 enum CompanyType {
   legalEntity = 1,
   individual = 2,
@@ -339,6 +530,10 @@ interface Filter {
   status: Status | null;
   companyType: CompanyType | null;
 }
+interface InvoiceForm {
+  localDate: string | null;
+  companyId: string | null;
+}
 
 // ======= Composables =======
 const { setPageTitle } = usePageTitle();
@@ -347,6 +542,8 @@ watchEffect(() => {
 });
 
 // ======= Data =======
+// slider keys
+const invoicesSliderKey = ref<number>(1);
 // table
 const tableHeader = ref<any>([
   {
@@ -397,17 +594,84 @@ const filter = ref<Filter>({
   status: null,
   companyType: null,
 });
+// form
+const showSubmitForm = ref<boolean>(false);
+const companyId = ref<string>("");
+const invocieId = ref<string>("");
+const invoiceForm = ref<InvoiceForm>({
+  localDate: null,
+  companyId: null,
+});
+// modal 
+const deleteModal = ref<boolean>(false)
 
 // ======= Functions =======
+// filter
+const toggleFilter = () => {
+  showFilter.value = !showFilter.value;
+  showSubmitForm.value = false;
+};
 // invoices
+const toggleSubmitForm = () => {
+  showSubmitForm.value = !showSubmitForm.value;
+  showFilter.value = false;
+};
 const loadInvoices = async () => {
   await operationStore.getInvoices();
 };
+const selectCompany = (id: string) => {
+  companyId.value = id;
+};
+const submitInvoice = () => {
+  invoiceForm.value.companyId = companyId.value
 
+  if(invoiceForm.value.companyId && invoiceForm.value.localDate){
+    operationStore.addInvoice(invoiceForm.value)
+  }else {
+    handlerStore.setError(langStore.alert.error.requiredFields);
+  }
+}
+const openDeleteModal = (id: string) => {
+    invocieId.value = id;
+    deleteModal.value = true;
+};
+const confirmDelete = () => {
+    operationStore.deleteInvoice(invocieId.value);
+  
+};
 // universal
 const reloadData = () => {
+  dropdownStore.getCompanies();
   loadInvoices();
 };
+const resetFields = () => {
+  companyId.value = "";
+  invocieId.value = "";
+  invoiceForm.value = {
+    localDate : null,
+    companyId : null,
+  }
+}
+const close = () => {
+  deleteModal.value = false;
+};
+// ======= Watchers =======
+watch(
+  () => handlerStore.postCheck,
+  (val, oldVal) => {
+    if (oldVal === true && val === false) {
+      reloadData();
+      close();
+      resetFields();
+    }
+  },
+);
+watch(
+  () => langStore.currentLang,
+  () => {
+    invoicesSliderKey.value += 1;
+  },
+);
 
 // ======= Lifecycle =======
 onMounted(() => {
@@ -434,5 +698,18 @@ onMounted(() => {
   max-height: 500px;
   opacity: 1;
   transform: translateY(0);
+}
+
+/* swiper */
+:deep(.swiper-pagination-bullet) {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 999px !important;
+  margin-inline: 3px !important;
+  background-color: #ff0000 !important;
+}
+
+:deep(.dark .swiper-pagination-bullet) {
+  background-color: rgb(255, 0, 0) !important;
 }
 </style>

@@ -20,8 +20,18 @@ export function useDropdownGetters(state: ReturnType<typeof useDropdownState>) {
     })),
   );
 
+  // companies
+  const companiesOptions = computed(() =>
+    state.companiesResult.value.map((item: Item) => ({
+      value: item.id,
+      text: item.name,
+      type: item.type,
+    })),
+  );
+
   return {
     unitsOptions,
     packagingsOptions,
+    companiesOptions,
   };
 }

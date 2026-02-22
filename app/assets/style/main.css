@@ -126,21 +126,6 @@ html {
   min-height: 41px !important;
 }
 
-/* table */
-
-/* ======= swiper styles ======= */
-.swiper-pagination-bullet {
-  width: 8px !important;
-  height: 8px !important;
-  border-radius: 999px !important;
-  margin-inline: 3px !important;
-  background-color: #1d202e !important;
-}
-
-.dark .swiper-pagination-bullet {
-  background-color: white !important;
-}
-
 /* ======= date picker ======= */
 .vpd-input-group {
   border: 1px solid #72747d !important;

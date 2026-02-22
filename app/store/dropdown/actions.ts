@@ -9,7 +9,6 @@ export function useDropdownActions(state: StateType) {
   const handlerStore = useHandlerStore();
   const langStore = useLanguageStore();
 
-  // ====== Company ======
   const getUnits = () => {
     const axios = useApi();
     handlerStore.loading = true;
@@ -56,8 +55,32 @@ export function useDropdownActions(state: StateType) {
       });
   };
 
+  const getCompanies= () => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get("/dropdown/companies")
+      .then((res) => {
+        state.companiesResult.value = res.data.data.companies;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
+
   return {
     getUnits,
     getPackagings,
+    getCompanies
   };
 }

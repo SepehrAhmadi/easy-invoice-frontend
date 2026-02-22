@@ -78,7 +78,9 @@ export const label = (state) => {
         toDate: "to Date",
         status: "Status",
         companyType: "Company type",
-        row : "Row",
+        row: "Row",
+        date: "Date",
+        company: "Company",
       },
       table: {
         individual: "Individual",
@@ -95,7 +97,7 @@ export const label = (state) => {
         status: "Status",
         paid: "Paid",
         awaitingPayment: "Awaiting payment",
-        row : "Row",
+        row: "Row",
       },
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
@@ -111,7 +113,7 @@ export const label = (state) => {
         username: "Username",
         required: "required",
         loading: "Loading...",
-        noDataFound : "No data found",
+        noDataFound: "No data found",
       },
     };
   } else {
@@ -193,7 +195,9 @@ export const label = (state) => {
         toDate: "تا تاریخ",
         status: "وضعیت",
         companyType: "نوع شرکت",
-        row : "ردیف",
+        row: "ردیف",
+        date: "تاریخ",
+        company: "شرکت",
       },
       table: {
         individual: "حقیقی",
@@ -210,7 +214,7 @@ export const label = (state) => {
         status: "وضعیت",
         paid: "پرداخت شده",
         awaitingPayment: "در انتظار پرداخت",
-        row : "ردیف",
+        row: "ردیف",
       },
       description: {
         manageCompanies:
@@ -228,7 +232,7 @@ export const label = (state) => {
         username: "نام کاربری",
         required: "الزامی",
         loading: "در حال بارگذاری اطلاعات",
-        noDataFound : "داده ای یافت نشد",
+        noDataFound: "داده ای یافت نشد",
       },
     };
   }

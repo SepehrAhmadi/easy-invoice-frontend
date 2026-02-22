@@ -1279,6 +1279,19 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* swiper */
+:deep(.swiper-pagination-bullet) {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 999px !important;
+  margin-inline: 3px !important;
+  background-color: #1d202e !important;
+}
+
+:deep(.dark .swiper-pagination-bullet) {
+  background-color: white !important;
+}
+
 /* fade button */
 .fade-enter-active {
   transition: opacity 150ms ease;
