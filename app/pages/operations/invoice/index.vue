@@ -441,7 +441,7 @@
       </v-row>
     </v-container>
 
-        <!-- delete modal -->
+    <!-- delete modal -->
     <v-dialog v-model="deleteModal" max-width="400" class="blur-dialog">
       <v-card class="tw:rounded-2xl!">
         <v-card-text class="tw:p-3! tw:mt-4!">
@@ -513,6 +513,10 @@ import { useOperationStore } from "~/store/operation";
 const operationStore = useOperationStore();
 const { invoicesResult: invoices, invoiceResult: invoice } =
   storeToRefs(operationStore);
+
+// date
+import moment from "jalali-moment";
+const NowDate = moment().locale("fa").format("jYYYY/jMM/jDD");
 
 // ======= enum & TS types and interface =======
 enum CompanyType {
@@ -599,11 +603,11 @@ const showSubmitForm = ref<boolean>(false);
 const companyId = ref<string>("");
 const invocieId = ref<string>("");
 const invoiceForm = ref<InvoiceForm>({
-  localDate: null,
+  localDate: NowDate,
   companyId: null,
 });
-// modal 
-const deleteModal = ref<boolean>(false)
+// modal
+const deleteModal = ref<boolean>(false);
 
 // ======= Functions =======
 // filter
@@ -623,21 +627,20 @@ const selectCompany = (id: string) => {
   companyId.value = id;
 };
 const submitInvoice = () => {
-  invoiceForm.value.companyId = companyId.value
+  invoiceForm.value.companyId = companyId.value;
 
-  if(invoiceForm.value.companyId && invoiceForm.value.localDate){
-    operationStore.addInvoice(invoiceForm.value)
-  }else {
+  if (invoiceForm.value.companyId && invoiceForm.value.localDate) {
+    operationStore.addInvoice(invoiceForm.value);
+  } else {
     handlerStore.setError(langStore.alert.error.requiredFields);
   }
-}
+};
 const openDeleteModal = (id: string) => {
-    invocieId.value = id;
-    deleteModal.value = true;
+  invocieId.value = id;
+  deleteModal.value = true;
 };
 const confirmDelete = () => {
-    operationStore.deleteInvoice(invocieId.value);
-  
+  operationStore.deleteInvoice(invocieId.value);
 };
 // universal
 const reloadData = () => {
@@ -648,10 +651,10 @@ const resetFields = () => {
   companyId.value = "";
   invocieId.value = "";
   invoiceForm.value = {
-    localDate : null,
-    companyId : null,
-  }
-}
+    localDate: NowDate,
+    companyId: null,
+  };
+};
 const close = () => {
   deleteModal.value = false;
 };
