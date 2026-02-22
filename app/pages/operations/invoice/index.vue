@@ -71,36 +71,46 @@
         <transition name="toggle-slide">
           <v-col cols="12" v-show="showFilter">
             <div
-              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:lg:grid-cols-4 tw:gap-6"
+              class="default-scroll tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:lg:grid-cols-4 tw:gap-6"
             >
-              <v-text-field
-                type="text"
-                variant="outlined"
-                density="compact"
-                hide-details
-                class="tw:text-[14px]! tw:text-white!"
-                rounded="pill"
-              >
-                <template #label>
-                  <span class="tw:text-[12px]">
-                    {{ langStore.label.form.fromDate }}
-                  </span>
-                </template>
-              </v-text-field>
-              <v-text-field
-                type="text"
-                variant="outlined"
-                density="compact"
-                hide-details
-                class="tw:text-[14px]! tw:text-white!"
-                rounded="pill"
-              >
-                <template #label>
-                  <span class="tw:text-[12px]">
-                    {{ langStore.label.form.toDate }}
-                  </span>
-                </template>
-              </v-text-field>
+              <div class="tw:relative!">
+                <label
+                  v-if="filter.fromDate"
+                  for="formDate"
+                  class="tw:text-[11px] tw:absolute! tw:bg-primary-dark! tw:start-10 tw:-top-1.75 tw:z-10! tw-text-color-reverse"
+                  >{{ langStore.label.form.fromDate }}</label
+                >
+                <date-picker
+                  v-model="filter.fromDate"
+                  id="formDate"
+                  simple
+                  :placeholder="langStore.label.form.fromDate"
+                  format="jYYYY/jMM/jDD"
+                  display-format="jYYYY/jMM/jDD"
+                  class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!"
+                  clearable
+                  color="#1d202e"
+                />
+              </div>
+              <div class="tw:relative!">
+                <label
+                  v-if="filter.toDate"
+                  for="toDate"
+                  class="tw:text-[11px] tw:absolute! tw:bg-primary-dark! tw:start-10 tw:-top-1.75 tw:z-10! tw-text-color-reverse"
+                  >{{ langStore.label.form.toDate }}</label
+                >
+                <date-picker
+                  v-model="filter.toDate"
+                  id="toDate"
+                  simple
+                  :placeholder="langStore.label.form.toDate"
+                  format="jYYYY/jMM/jDD"
+                  display-format="jYYYY/jMM/jDD"
+                  class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!"
+                  clearable
+                  color="#1d202e"
+                />
+              </div>
               <v-autocomplete
                 item-title="text"
                 item-value="value"
@@ -277,7 +287,9 @@
 
               <template #no-data>
                 <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
-                  <icon-row-chart class="tw-text-color-lighter tw:text-[35px]" />
+                  <icon-row-chart
+                    class="tw-text-color-lighter tw:text-[35px]"
+                  />
                   <div
                     class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap"
                   >
@@ -319,6 +331,13 @@ enum CompanyType {
 enum Status {
   paid = 1,
   awaitingPayment = 2,
+}
+
+interface Filter {
+  fromDate: string | null;
+  toDate: string | null;
+  status: Status | null;
+  companyType: CompanyType | null;
 }
 
 // ======= Composables =======
@@ -372,6 +391,12 @@ const tableHeader = ref<any>([
 ]);
 // filter
 const showFilter = ref<boolean>(false);
+const filter = ref<Filter>({
+  fromDate: null,
+  toDate: null,
+  status: null,
+  companyType: null,
+});
 
 // ======= Functions =======
 // invoices
