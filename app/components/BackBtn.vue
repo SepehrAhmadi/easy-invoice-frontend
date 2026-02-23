@@ -2,9 +2,8 @@
   <v-btn
     @click="handleClick"
     :color="props.color"
-    variant="outlined"
     rounded="pill"
-    class="tw:px-4! tw:group"
+    class="tw:px-4! tw:text-primary-dark! tw:group"
   >
     <div class="tw:text-[14px]!">
       {{ langStore.label.button.back }}
@@ -23,7 +22,7 @@ const langStore = useLanguageStore();
 const props = defineProps({
   color: {
     type: String,
-    default: "gray",
+    default: "white",
   },
 });
 

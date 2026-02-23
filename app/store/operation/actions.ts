@@ -132,11 +132,140 @@ export function useOperationActions(state: StateType) {
       });
   };
 
+    // ====== Invoice ======
+  const getInvoicesItems = (invoiceId : string) => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get(`/operation/invoice/${invoiceId}/items`)
+      .then((res) => {
+        state.invoiceItemsResult.value = res.data.data.invoiceItemsData;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
+
+  const getInvoiceItem = (invoiceId : string , itemId : string) => {
+    const axios = useApi();
+
+    return axios
+      .get(`/operation/invoice/${invoiceId}/items/${itemId}`)
+      .then((res) => {
+        state.invoiceItemResult.value = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      });
+  };
+
+  const addInvoiceItem = (invoiceId : string , value: any) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    console.log("value", value);
+
+    return axios
+      .post(`/operation/invoice/${invoiceId}/items`, value)
+      .then((res) => {
+        state.invoiceMode.value = "add";
+        navigateTo({
+          name: "operations-invoice-id",
+          params: { id: res.data.id },
+        });
+        handlerStore.setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
+  const editInvoiceItem = (invoiceId : string , itemId : string, value: any) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    return axios
+      .put(`/operation/invoice/${invoiceId}/items/${itemId}`, value)
+      .then((res) => {
+        handlerStore.setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
+  const deleteInvoiceItem = (invoiceId : string , itemId : string) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    return axios
+      .delete(`/operation/invoice/${invoiceId}/items/${itemId}`)
+      .then((res) => {
+        handlerStore.setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
   return {
     getInvoices,
     getInvoice,
     addInvoice,
     editInvoice,
     deleteInvoice,
+
+    getInvoicesItems,
+    getInvoiceItem,
+    addInvoiceItem,
+    editInvoiceItem,
+    deleteInvoiceItem,
   };
 }

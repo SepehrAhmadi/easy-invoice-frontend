@@ -78,9 +78,57 @@ export function useDropdownActions(state: StateType) {
       });
   };
 
+  const getBrands= () => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get("/dropdown/brands")
+      .then((res) => {
+        state.brandsResult.value = res.data.data.brands;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
+
+  const getProducts= () => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get("/dropdown/products")
+      .then((res) => {
+        state.productsResult.value = res.data.data.products;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
+
   return {
     getUnits,
     getPackagings,
-    getCompanies
+    getCompanies,
+    getBrands,
+    getProducts,
   };
 }

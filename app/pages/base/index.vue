@@ -751,9 +751,11 @@
               </v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-text-field
-                v-model="productForm.amount"
-                type="text"
+              <v-autocomplete
+                v-model="productForm.brandId"
+                :items="dropdownStore.brandsOptions"
+                item-title="text"
+                item-value="value"
                 variant="outlined"
                 density="compact"
                 hide-details
@@ -762,13 +764,13 @@
               >
                 <template #label>
                   <span class="tw:text-[12px]">
-                    {{ langStore.label.form.amount }}
+                    {{ langStore.label.form.brand }}
                   </span>
-                  <span class="tw-text-require 300 tw:text-[10px]">
+                  <span class="tw-text-require tw:text-[10px]">
                     ({{ langStore.label.caption.required }})
                   </span>
                 </template>
-              </v-text-field>
+              </v-autocomplete>
             </v-col>
             <v-col cols="12">
               <v-autocomplete
@@ -814,6 +816,26 @@
                   </span>
                 </template>
               </v-autocomplete>
+            </v-col>
+            <v-col cols="12">
+              <v-text-field
+                v-model="productForm.amount"
+                type="text"
+                variant="outlined"
+                density="compact"
+                hide-details
+                class="tw:text-[14px]"
+                rounded="lg"
+              >
+                <template #label>
+                  <span class="tw:text-[12px]">
+                    {{ langStore.label.form.amount }}
+                  </span>
+                  <span class="tw-text-require 300 tw:text-[10px]">
+                    ({{ langStore.label.caption.required }})
+                  </span>
+                </template>
+              </v-text-field>
             </v-col>
           </v-row>
         </v-card-text>
@@ -967,9 +989,10 @@ interface BrandForm {
 }
 interface ProductForm {
   name: string | null;
-  amount: number | null;
+  brandId: string | null;
   packagingId: string | null;
   unitId: number | null;
+  amount: number | null;
 }
 
 // ======= Data =======
@@ -1000,9 +1023,10 @@ const brandForm = ref<BrandForm>({
 const productId = ref<string>("");
 const productForm = ref<ProductForm>({
   name: null,
-  amount: null,
+  brandId: null,
   packagingId: null,
   unitId: null,
+  amount: null,
 });
 const searchProduct = ref<string>("");
 
@@ -1220,9 +1244,10 @@ const resetFields = () => {
   productId.value = "";
   productForm.value = {
     name: null,
-    amount: null,
+    brandId: null,
     packagingId: null,
     unitId: null,
+    amount: null,
   };
 };
 const close = () => {
@@ -1274,6 +1299,7 @@ watch(
 onMounted(() => {
   dropdownStore.getUnits();
   dropdownStore.getPackagings();
+  dropdownStore.getBrands();
   reloadData();
 });
 </script>
