@@ -11,6 +11,8 @@ export const label = (state) => {
         products: "Products",
         invoices: "Invoices",
         reportByPackaging: "Report by packaging",
+        addInvoice: "Add invoice",
+        editInvoice: "Edit invoice",
       },
       menu: {
         dashboard: "Dashboard",
@@ -41,6 +43,7 @@ export const label = (state) => {
         login: "Manage \n Your Invoice",
       },
       button: {
+        back : "Back",
         account: "Account",
         signUp: "SignUp",
         logIn: "LogIn",
@@ -64,6 +67,7 @@ export const label = (state) => {
       form: {
         username: "Username",
         password: "Password",
+        fullName : "Full name",
         name: "Name",
         address: "Address",
         phone: "Phone",
@@ -128,6 +132,8 @@ export const label = (state) => {
         products: "محصولات",
         invoices: "فاکتور ها",
         reportByPackaging: "گزارش بر اساس بسته بندی",
+        addInvoice: "ثبت فاکتور",
+        editInvoice: "ویرایش فاکتور",
       },
       menu: {
         dashboard: "داشبورد",
@@ -158,6 +164,7 @@ export const label = (state) => {
         login: "مدیریت \n فاکتور های خود",
       },
       button: {
+        back : "بازگشت",
         account: "حساب کاربری",
         signUp: "ثبت نام کنید",
         logIn: "ورود",
@@ -181,6 +188,7 @@ export const label = (state) => {
       form: {
         username: "نام کاربری",
         password: "رمز عبور",
+        fullName : "نام و نام خانوادگی",
         name: "نام",
         address: "نشانی",
         phone: "شماره تماس",

@@ -366,6 +366,7 @@
                       <v-tooltip location="top">
                         <template #activator="{ props }">
                           <v-btn
+                            @click="navigateToEdit(item.id)"
                             v-bind="props"
                             size="x-small"
                             variant="text"
@@ -601,7 +602,7 @@ const filter = ref<Filter>({
 // form
 const showSubmitForm = ref<boolean>(false);
 const companyId = ref<string>("");
-const invocieId = ref<string>("");
+const invoiceId = ref<string>("");
 const invoiceForm = ref<InvoiceForm>({
   localDate: NowDate,
   companyId: null,
@@ -635,21 +636,24 @@ const submitInvoice = () => {
     handlerStore.setError(langStore.alert.error.requiredFields);
   }
 };
+const navigateToEdit = (id: string) => {
+  navigateTo({ name: "operations-invoice-id", params: { id: id } });
+  operationStore.invoiceMode = "edit";
+};
 const openDeleteModal = (id: string) => {
-  invocieId.value = id;
+  invoiceId.value = id;
   deleteModal.value = true;
 };
 const confirmDelete = () => {
-  operationStore.deleteInvoice(invocieId.value);
+  operationStore.deleteInvoice(invoiceId.value);
 };
 // universal
 const reloadData = () => {
-  dropdownStore.getCompanies();
   loadInvoices();
 };
 const resetFields = () => {
   companyId.value = "";
-  invocieId.value = "";
+  invoiceId.value = "";
   invoiceForm.value = {
     localDate: NowDate,
     companyId: null,
@@ -678,6 +682,7 @@ watch(
 
 // ======= Lifecycle =======
 onMounted(() => {
+  dropdownStore.getCompanies();
   reloadData();
 });
 </script>

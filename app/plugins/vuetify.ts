@@ -20,6 +20,7 @@ export default defineNuxtPlugin((app) => {
             background: "#F1F1F1",
             surface: "#F1F1F1",
             primary : "#1d202e",
+            gray : "#D1D5DC",
           },
         },
         dark: {
@@ -28,6 +29,7 @@ export default defineNuxtPlugin((app) => {
             background: "#03020A",
             surface: "#03020A",
             primary : "#f1f1f1",
+            gray : "#D1D5DC",
           },
         },
       },

@@ -12,7 +12,7 @@
   }
 
   .tw-text-color-reverse {
-    @apply tw:text-gray-200! tw:dark:text-gray-300!;
+    @apply tw:text-gray-300! tw:dark:text-gray-300!;
   }
 
   .tw-text-color-reverse-hover {

@@ -60,6 +60,11 @@ export function useOperationActions(state: StateType) {
     return axios
       .post("/operation/invoice", value)
       .then((res) => {
+        state.invoiceMode.value = "add";
+        navigateTo({
+          name: "operations-invoice-id",
+          params: { id: res.data.id },
+        });
         handlerStore.setSuccess(res.data.message);
       })
       .catch((err) => {
