@@ -348,9 +348,9 @@
                           item.status == Status.awaitingPayment,
                       }"
                     >
-                      <icon-check
+                      <icon-check-double
                         v-if="item.status == Status.paid"
-                        class="tw:text-[17px]"
+                        class="tw:text-[20px]"
                       />
                       <icon-hourglass
                         v-if="item.status == Status.awaitingPayment"
@@ -610,6 +610,7 @@ const tableHeader = ref<any>([
     title: langStore.label.table.row,
     key: "row",
     align: "start",
+    sortable : "false",
   },
   {
     title: langStore.label.table.invoiceNumber,

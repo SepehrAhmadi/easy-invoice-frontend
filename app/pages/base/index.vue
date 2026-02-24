@@ -1298,9 +1298,10 @@ watch(brand, (val) => {
 watch(product, (val) => {
   if (!val) return;
   productForm.value.name = val.name;
-  productForm.value.amount = val.amount;
   productForm.value.packagingId = val.packagingId;
+  productForm.value.brandId = val.brandId;
   productForm.value.unitId = val.unitId;
+  productForm.value.amount = val.amount;
 });
 watch(
   () => langStore.currentLang,

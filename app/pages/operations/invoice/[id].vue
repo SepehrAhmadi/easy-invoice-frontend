@@ -411,6 +411,11 @@
                     ({{ langStore.label.caption.required }})
                   </span>
                 </template>
+                <template #append-inner>
+                  <div class="tw:text-[13px] tw:text-gray-400">
+                    {{ langStore.label.caption.rial }}
+                  </div>
+                </template>
               </v-text-field>
             </v-col>
             <v-col cols="12" md="6" lg="2">
@@ -429,6 +434,11 @@
                   <span class="tw:text-[12px]">
                     {{ langStore.label.form.totalPrice }}
                   </span>
+                </template>
+                <template #append-inner>
+                  <div class="tw:text-[13px] tw:text-gray-400">
+                    {{ langStore.label.caption.rial }}
+                  </div>
                 </template>
               </v-text-field>
             </v-col>
@@ -518,10 +528,10 @@
                     {{ item.pageCount }}
                   </td>
                   <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ item.singlePrice }}
+                    {{ separateNumber(item.singlePrice) }}
                   </td>
                   <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ item.totalPrice }}
+                    {{ separateNumber(item.totalPrice) }}
                   </td>
                   <td>
                     <div
@@ -695,6 +705,7 @@ watchEffect(() => {
       : langStore.label.page.editInvoice,
   );
 });
+const { separateNumber } = useSeparator();
 
 // ======= Rotue and Router =======
 const route = useRoute();

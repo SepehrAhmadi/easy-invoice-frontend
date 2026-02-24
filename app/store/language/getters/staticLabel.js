@@ -141,6 +141,7 @@ export const label = (state) => {
         required: "required",
         loading: "Loading...",
         noDataFound: "No data found",
+        rial : "Rial",
       },
     };
   } else {
@@ -287,6 +288,7 @@ export const label = (state) => {
         required: "الزامی",
         loading: "در حال بارگذاری اطلاعات",
         noDataFound: "داده ای یافت نشد",
+        rial : "ریال",
       },
     };
   }

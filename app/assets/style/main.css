@@ -130,6 +130,13 @@ html {
   font-size: 14px !important;
 }
 
+.v-data-table__td.v-data-table__th {
+  background-color: var(--color-white) !important;
+}
+.dark .v-data-table__td.v-data-table__th {
+  background-color: var(--color-primary-dark) !important;
+}
+
 .v-data-table__td.v-data-table__th--sortable.v-data-table__th
   > .v-data-table-header__content
   > i {
