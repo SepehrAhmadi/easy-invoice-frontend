@@ -414,7 +414,7 @@
               <div
                 v-for="item in filteredProducts"
                 :key="item.id"
-                class="tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-4xl tw:p-4! tw:h-33.75 tw:m-2!"
+                class="tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-4xl tw:p-4! tw:h-36.75 tw:m-2!"
               >
                 <div
                   class="tw:w-full! tw:flex tw:justify-start tw:items-center tw:gap-2"
@@ -433,6 +433,20 @@
                     <!-- name -->
                     <div class="tw-text-color tw:font-semibold tw:text-[18px]">
                       {{ item.name }}
+                    </div>
+                    <!-- brand -->
+                    <div
+                      class="tw:flex tw:justify-start tw:items-center tw:gap-1"
+                    >
+                      <icon-checkmark
+                        class="tw-text-color-lighter tw:text-[18px]"
+                      />
+                      <span
+                        class="tw:flex tw-text-color-lighter tw:text-[13px]/5"
+                      >
+                        {{ langStore.label.table.brand }} :
+                        {{ item.brandName }}
+                      </span>
                     </div>
                     <!-- detail -->
                     <div
@@ -618,7 +632,7 @@
                 density="compact"
                 hide-details
                 hide-spin-buttons
-                class="tw:text-[14px]!"
+                class="tw:text-[14px]! centred-input"
                 rounded="lg"
               >
                 <template #label>
@@ -824,7 +838,7 @@
                 variant="outlined"
                 density="compact"
                 hide-details
-                class="tw:text-[14px]"
+                class="tw:text-[14px]! centred-input"
                 rounded="lg"
               >
                 <template #label>

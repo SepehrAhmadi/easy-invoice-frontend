@@ -132,8 +132,35 @@ export function useOperationActions(state: StateType) {
       });
   };
 
-    // ====== Invoice ======
-  const getInvoiceItems = (invoiceId : string) => {
+  const changeInvoiceStatus = (id : string ,value: any) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    console.log("value", value);
+
+    return axios
+      .post(`/operation/invoice/${id}/status`, value)
+      .then((res) => {
+        handlerStore.setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
+  // ====== Invoice ======
+  const getInvoiceItems = (invoiceId: string) => {
     const axios = useApi();
     handlerStore.loading = true;
 
@@ -156,7 +183,7 @@ export function useOperationActions(state: StateType) {
       });
   };
 
-  const getInvoiceItem = (invoiceId : string , itemId : string) => {
+  const getInvoiceItem = (invoiceId: string, itemId: string) => {
     const axios = useApi();
 
     return axios
@@ -173,7 +200,7 @@ export function useOperationActions(state: StateType) {
       });
   };
 
-  const addInvoiceItem = (invoiceId : string , value: any) => {
+  const addInvoiceItem = (invoiceId: string, value: any) => {
     const axios = useApi();
     handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;
@@ -205,7 +232,7 @@ export function useOperationActions(state: StateType) {
       });
   };
 
-  const editInvoiceItem = (invoiceId : string , itemId : string, value: any) => {
+  const editInvoiceItem = (invoiceId: string, itemId: string, value: any) => {
     const axios = useApi();
     handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;
@@ -230,7 +257,7 @@ export function useOperationActions(state: StateType) {
       });
   };
 
-  const deleteInvoiceItem = (invoiceId : string , itemId : string) => {
+  const deleteInvoiceItem = (invoiceId: string, itemId: string) => {
     const axios = useApi();
     handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;
@@ -261,6 +288,7 @@ export function useOperationActions(state: StateType) {
     addInvoice,
     editInvoice,
     deleteInvoice,
+    changeInvoiceStatus,
 
     getInvoiceItems,
     getInvoiceItem,

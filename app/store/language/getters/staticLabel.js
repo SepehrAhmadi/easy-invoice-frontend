@@ -63,6 +63,8 @@ export const label = (state) => {
         search: "Search",
         changeStatus: "Change Status",
         filter: "Filter",
+        paid : "Paid",
+        awaitingPayment :"Awaiting payment",
       },
       form: {
         username: "Username",
@@ -205,6 +207,8 @@ export const label = (state) => {
         search: "جستجو",
         changeStatus: "تغییر وضعیت",
         filter: "فیلتر",
+        paid : "پرداخت شده",
+        awaitingPayment :"در انتظار پرداخت",
       },
       form: {
         username: "نام کاربری",

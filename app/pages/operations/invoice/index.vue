@@ -219,7 +219,11 @@
                           slidesPerView: 2,
                           spaceBetween: 20,
                         },
-                        1024: {
+                        1280: {
+                          slidesPerView: 3,
+                          spaceBetween: 20,
+                        },
+                        2160: {
                           slidesPerView: 4,
                           spaceBetween: 20,
                         },
@@ -285,11 +289,13 @@
       <v-row class="tw:rounded-b-4xl! tw:p-0!">
         <v-col cols="12" class="tw:p-0!">
           <v-card class="tw:rounded-b-4xl! tw:shadow-none!">
-            <v-data-table
+            <v-data-table-virtual
               :headers="tableHeader"
               :items="invoices"
               hide-default-footer
-              class="tw:bg-white! tw:dark:bg-primary-dark! tw:h-full"
+              fixed-header
+              height="680"
+              class="tw:bg-white! tw:dark:bg-primary-dark!"
             >
               <template #item="{ item, index }">
                 <tr class="tw:my-2!">
@@ -382,24 +388,67 @@
                           langStore.label.button.edit
                         }}</span>
                       </v-tooltip>
-                      <v-tooltip location="top">
-                        <template #activator="{ props }">
-                          <v-btn
-                            v-bind="props"
-                            size="x-small"
-                            variant="text"
-                            rounded="pill"
-                            class="tw:w-8! tw:h-8! tw:px-0!"
-                          >
-                            <icon-sync
-                              class="tw-text-color-lighter tw:text-[23px]"
-                            />
-                          </v-btn>
+                      <v-menu>
+                        <template #activator="{ props: menuProps }">
+                          <v-tooltip location="top">
+                            <template #activator="{ props: tooltipProps }">
+                              <v-btn
+                                v-bind="{ ...menuProps, ...tooltipProps }"
+                                size="x-small"
+                                variant="text"
+                                rounded="pill"
+                                class="tw:w-8! tw:h-8! tw:px-0!"
+                              >
+                                <icon-sync
+                                  class="tw-text-color-lighter tw:text-[23px]"
+                                />
+                              </v-btn>
+                            </template>
+                            <span class="tw:text-xs tw:p-2">
+                              {{ langStore.label.button.changeStatus }}
+                            </span>
+                          </v-tooltip>
                         </template>
-                        <span class="tw:text-xs tw:p-2">{{
-                          langStore.label.button.changeStatus
-                        }}</span>
-                      </v-tooltip>
+                        <div
+                          class="tw:bg-primary-dark! tw:dark:bg-background-dark tw:rounded-lg tw:min-w-37 tw:overflow-hidden tw:py-1!"
+                        >
+                          <div
+                            @click="changeStatus('paid', item.id)"
+                            class="tw:cursor-pointer tw:border tw:border-gray-600 tw:dark:border-gray-700"
+                          >
+                            <div
+                              class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group"
+                            >
+                              <icon-check-double
+                                class="tw:w-5 tw:h-5 tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!"
+                              />
+                              <div
+                                class="tw:text-[12px] tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!"
+                              >
+                                {{ langStore.label.button.paid }}
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            @click="changeStatus('awaitingPayment', item.id)"
+                            class="tw:cursor-pointer tw:border tw:border-gray-600 tw:dark:border-gray-700"
+                          >
+                            <div
+                              class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group"
+                            >
+                              <icon-hourglass
+                                class="tw:w-4.5 tw:h-4.5 tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!"
+                              />
+                              <div
+                                class="tw:text-[12px] tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!"
+                              >
+                                {{ langStore.label.button.awaitingPayment }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </v-menu>
+
                       <v-tooltip location="top">
                         <template #activator="{ props }">
                           <v-btn
@@ -425,7 +474,9 @@
               </template>
 
               <template #no-data>
-                <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
+                <div
+                  class="tw:h-full! tw:flex tw:justify-center tw:items-center tw:gap-2"
+                >
                   <icon-row-chart
                     class="tw-text-color-lighter tw:text-[35px]"
                   />
@@ -436,7 +487,7 @@
                   </div>
                 </div>
               </template>
-            </v-data-table>
+            </v-data-table-virtual>
           </v-card>
         </v-col>
       </v-row>
@@ -528,6 +579,7 @@ enum Status {
   paid = 1,
   awaitingPayment = 2,
 }
+type StatusMode = "paid" | "awaitingPayment";
 
 interface Filter {
   fromDate: string | null;
@@ -538,6 +590,9 @@ interface Filter {
 interface InvoiceForm {
   localDate: string | null;
   companyId: string | null;
+}
+interface StatusForm {
+  status: Status | null;
 }
 
 // ======= Composables =======
@@ -609,6 +664,9 @@ const invoiceForm = ref<InvoiceForm>({
   localDate: NowDate,
   companyId: null,
 });
+const statusForm = ref<StatusForm>({
+  status: null,
+});
 // modal
 const deleteModal = ref<boolean>(false);
 
@@ -641,6 +699,15 @@ const submitInvoice = () => {
 const navigateToEdit = (id: string) => {
   navigateTo({ name: "operations-invoice-id", params: { id: id } });
   operationStore.invoiceMode = "edit";
+};
+const changeStatus = (mode: StatusMode, id: string) => {
+  if (mode == "paid") {
+    statusForm.value.status = Status.paid;
+    operationStore.changeInvoiceStatus(id, statusForm.value);
+  } else if (mode == "awaitingPayment") {
+    statusForm.value.status = Status.awaitingPayment;
+    operationStore.changeInvoiceStatus(id, statusForm.value);
+  }
 };
 const openDeleteModal = (id: string) => {
   invoiceId.value = id;

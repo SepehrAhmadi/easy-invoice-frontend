@@ -141,6 +141,10 @@ html {
   display: block !important;
 }
 
+.centred-input input {
+  text-align: center !important;
+}
+
 /* ======= date picker ======= */
 .vpd-input-group {
   border: 1px solid #72747d !important;

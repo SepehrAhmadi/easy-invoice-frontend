@@ -335,7 +335,7 @@
                 density="compact"
                 hide-details
                 hide-spin-buttons
-                class="tw:text-[14px]! tw:text-white!"
+                class="tw:text-[14px]! tw:text-white! centred-input"
                 rounded="pill"
               >
                 <template #label>
@@ -356,7 +356,7 @@
                 density="compact"
                 hide-details
                 hide-spin-buttons
-                class="tw:text-[14px]! tw:text-white!"
+                class="tw:text-[14px]! tw:text-white! centred-input"
                 rounded="pill"
               >
                 <template #label>
@@ -377,7 +377,7 @@
                 density="compact"
                 hide-details
                 hide-spin-buttons
-                class="tw:text-[14px]! tw:text-white!"
+                class="tw:text-[14px]! tw:text-white! centred-input"
                 rounded="pill"
                 @update:modelValue="calTotalPrice"
               >
@@ -399,7 +399,7 @@
                 density="compact"
                 hide-details
                 hide-spin-buttons
-                class="tw:text-[14px]! tw:text-white!"
+                class="tw:text-[14px]! tw:text-white! centred-input"
                 rounded="pill"
                 @update:modelValue="calTotalPrice"
               >
@@ -421,7 +421,7 @@
                 density="compact"
                 hide-details
                 hide-spin-buttons
-                class="tw:text-[14px]! tw:text-white!"
+                class="tw:text-[14px]! tw:text-white! centred-input"
                 rounded="pill"
                 readonly
               >
@@ -469,11 +469,13 @@
       <v-row class="tw:rounded-b-4xl! tw:p-0!">
         <v-col cols="12" class="tw:p-0!">
           <v-card class="tw:rounded-b-4xl! tw:shadow-none!">
-            <v-data-table
+            <v-data-table-virtual
               :headers="tableHeader"
               :items="invoiceItems"
               hide-default-footer
-              class="tw:bg-white! tw:dark:bg-primary-dark! tw:h-full"
+              fixed-header
+              class="tw:bg-white! tw:dark:bg-primary-dark!"
+              height="600"
             >
               <template #item="{ item, index }">
                 <tr class="tw:my-2!">
@@ -580,7 +582,7 @@
                   </div>
                 </div>
               </template>
-            </v-data-table>
+            </v-data-table-virtual>
           </v-card>
         </v-col>
       </v-row>
@@ -1036,12 +1038,12 @@ onMounted(() => {
 /* expand enter */
 html[dir="rtl"] .expand-btn-enter-from {
   opacity: 0;
-  transform: translateX(-100%);
+  transform: translateX(-20px);
 }
 
 html[dir="ltr"] .expand-btn-enter-from {
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(20px);
 }
 
 .expand-btn-enter-active {
@@ -1065,11 +1067,11 @@ html[dir="ltr"] .expand-btn-enter-from {
 
 html[dir="rtl"] .expand-btn-leave-to {
   opacity: 0;
-  transform: translateX(-100%);
+  transform: translateX(-20px);
 }
 
 html[dir="ltr"] .expand-btn-leave-to {
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(20px);
 }
 </style>
