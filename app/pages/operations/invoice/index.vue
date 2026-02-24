@@ -300,13 +300,13 @@
                       {{ index + 1 }}
                     </div>
                   </td>
-                  <td class="tw-text-color tw:text-nowrap">
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
                     {{ item.invoiceNumber }}
                   </td>
-                  <td class="tw-text-color tw:text-nowrap">
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
                     {{ item.localDate }}
                   </td>
-                  <td class="tw-text-color tw:text-nowrap">
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
                     {{ item.companyName }}
                   </td>
                   <td class="tw:w-auto!">
@@ -559,17 +559,19 @@ const tableHeader = ref<any>([
   {
     title: langStore.label.table.invoiceNumber,
     key: "invoiceNumber",
-    align: "start",
+    align: "center",
   },
   {
     title: langStore.label.table.date,
     key: "localDate",
-    align: "start",
+    align: "center",
+    sortable: false,
   },
   {
     title: langStore.label.table.company,
     key: "companyName",
-    align: "start",
+    align: "center",
+    sortable: false,
   },
   {
     title: langStore.label.table.companyType,

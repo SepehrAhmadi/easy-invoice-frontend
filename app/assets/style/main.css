@@ -110,13 +110,13 @@ html {
   border-radius: 10px !important;
 }
 
-.v-list-item__content>.v-list-item-title {
+.v-list-item__content > .v-list-item-title {
   font-size: 14px !important;
   font-weight: 400 !important;
   color: #52525c !important;
 }
 
-.dark .v-list-item__content>.v-list-item-title {
+.dark .v-list-item__content > .v-list-item-title {
   font-size: 14px !important;
   font-weight: 400 !important;
   color: #d1d5dc !important;
@@ -124,6 +124,21 @@ html {
 
 .v-list-item--density-default.v-list-item--one-line {
   min-height: 41px !important;
+}
+
+.v-data-table-header__content i {
+  font-size: 14px !important;
+}
+
+.v-data-table__td.v-data-table__th--sortable.v-data-table__th
+  > .v-data-table-header__content
+  > i {
+  display: none !important;
+}
+.v-data-table__td.v-data-table__th--sortable.v-data-table__th--sorted.v-data-table__th
+  > .v-data-table-header__content
+  > i {
+  display: block !important;
 }
 
 /* ======= date picker ======= */
@@ -146,7 +161,7 @@ html[dir="rtl"] .vpd-input-group input {
 
 .vpd-input-group input::placeholder {
   font-size: 12px !important;
-  color: #A4A5AB !important;
+  color: #a4a5ab !important;
   text-align: start !important;
   transform: translateY(-2px) !important;
 }
@@ -157,7 +172,7 @@ html[dir="rtl"] .vpd-input-group input {
 }
 
 .vpd-icon-btn svg {
-  fill: #A4A5AB !important;
+  fill: #a4a5ab !important;
 }
 
 .vpd-clear-btn {

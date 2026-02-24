@@ -133,14 +133,14 @@ export function useOperationActions(state: StateType) {
   };
 
     // ====== Invoice ======
-  const getInvoicesItems = (invoiceId : string) => {
+  const getInvoiceItems = (invoiceId : string) => {
     const axios = useApi();
     handlerStore.loading = true;
 
     return axios
       .get(`/operation/invoice/${invoiceId}/items`)
       .then((res) => {
-        state.invoiceItemsResult.value = res.data.data.invoiceItemsData;
+        state.invoiceItemsResult.value = res.data.data.invoiceItems;
       })
       .catch((err) => {
         console.log(err);
@@ -262,7 +262,7 @@ export function useOperationActions(state: StateType) {
     editInvoice,
     deleteInvoice,
 
-    getInvoicesItems,
+    getInvoiceItems,
     getInvoiceItem,
     addInvoiceItem,
     editInvoiceItem,

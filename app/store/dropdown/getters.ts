@@ -38,7 +38,7 @@ export function useDropdownGetters(state: ReturnType<typeof useDropdownState>) {
       value: item.id,
       text: item.name,
       brandId: item.brandId,
-      packagingId: item.name,
+      packagingId: item.packagingId,
       unitId: item.unitId,
       unitAmount: item.unitAmount,
     })),

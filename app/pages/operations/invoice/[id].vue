@@ -379,6 +379,7 @@
                 hide-spin-buttons
                 class="tw:text-[14px]! tw:text-white!"
                 rounded="pill"
+                @update:modelValue="calTotalPrice"
               >
                 <template #label>
                   <span class="tw:text-[12px]">
@@ -400,6 +401,7 @@
                 hide-spin-buttons
                 class="tw:text-[14px]! tw:text-white!"
                 rounded="pill"
+                @update:modelValue="calTotalPrice"
               >
                 <template #label>
                   <span class="tw:text-[12px]">
@@ -437,6 +439,7 @@
               class="tw:flex tw:justify-end tw:items-center tw:gap-3"
             >
               <v-btn
+                @click="resetFields('invoiceItemForm')"
                 color="gray"
                 class="tw:rounded-full! tw:w-9! tw:h-9! tw:min-w-0! tw:p-0!"
                 variant="outlined"
@@ -445,6 +448,7 @@
                 <icon-refresh class="tw:text-[20px]" />
               </v-btn>
               <v-btn
+                @click="submitInvoiceItem('add')"
                 rounded="pill"
                 color="white"
                 class="tw:px-0! tw:py-1! tw:w-30"
@@ -462,7 +466,171 @@
           </v-row>
         </v-col>
       </v-row>
+      <v-row class="tw:rounded-b-4xl! tw:p-0!">
+        <v-col cols="12" class="tw:p-0!">
+          <v-card class="tw:rounded-b-4xl! tw:shadow-none!">
+            <v-data-table
+              :headers="tableHeader"
+              :items="invoiceItems"
+              hide-default-footer
+              class="tw:bg-white! tw:dark:bg-primary-dark! tw:h-full"
+            >
+              <template #item="{ item, index }">
+                <tr class="tw:my-2!">
+                  <td>
+                    <div
+                      class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
+                    >
+                      {{ index + 1 }}
+                    </div>
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.localDate }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{
+                      item.isEdit
+                        ? langStore.label.table.edit
+                        : langStore.label.table.design
+                    }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.productName }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.brandName }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.packagingName }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.unitName }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.amount }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.unitCount }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.pageCount }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.singlePrice }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.totalPrice }}
+                  </td>
+                  <td>
+                    <div
+                      class="tw:flex tw:justify-center tw:items-center tw:gap-1"
+                    >
+                      <v-tooltip location="top">
+                        <template #activator="{ props }">
+                          <v-btn
+                            @click="getInvoiceItem(item.id)"
+                            v-bind="props"
+                            size="x-small"
+                            variant="text"
+                            rounded="pill"
+                            class="tw:w-8! tw:h-8! tw:px-0!"
+                          >
+                            <icon-edit-box
+                              class="tw-text-color-lighter tw:text-[23px]"
+                            />
+                          </v-btn>
+                        </template>
+                        <span class="tw:text-xs tw:p-2">{{
+                          langStore.label.button.edit
+                        }}</span>
+                      </v-tooltip>
+                      <v-tooltip location="top">
+                        <template #activator="{ props }">
+                          <v-btn
+                            @click="openDeleteModal(item.id)"
+                            v-bind="props"
+                            size="x-small"
+                            variant="text"
+                            rounded="pill"
+                            class="tw:w-8! tw:h-8! tw:px-0!"
+                          >
+                            <icon-trash
+                              class="tw-text-color-lighter tw:text-[23px]"
+                            />
+                          </v-btn>
+                        </template>
+                        <span class="tw:text-xs tw:p-2">{{
+                          langStore.label.button.delete
+                        }}</span>
+                      </v-tooltip>
+                    </div>
+                  </td>
+                </tr>
+              </template>
+
+              <template #no-data>
+                <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
+                  <icon-row-chart
+                    class="tw-text-color-lighter tw:text-[35px]"
+                  />
+                  <div
+                    class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap"
+                  >
+                    {{ langStore.label.caption.noDataFound }}
+                  </div>
+                </div>
+              </template>
+            </v-data-table>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
+
+    <!-- delete modal -->
+    <v-dialog v-model="deleteModal" max-width="400" class="blur-dialog">
+      <v-card class="tw:rounded-2xl!">
+        <v-card-text class="tw:p-3! tw:mt-4!">
+          <v-row>
+            <v-col cols="12">
+              <div class="tw:text-center tw:text-[15px]">
+                {{ langStore.label.description.deleteConfirm }}
+              </div>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions class="tw:px-4!">
+          <div
+            class="tw:w-full tw:flex tw:justify-end tw:items-center tw:gap-1"
+          >
+            <v-btn
+              @click="close"
+              variant="plain"
+              rounded="lg"
+              class="tw-text-color py-0"
+            >
+              <div class="tw:text-[12px]">
+                {{ langStore.label.button.cancel }}
+              </div>
+            </v-btn>
+            <v-btn
+              @click="confirmDelete"
+              size=""
+              rounded="lg"
+              class="tw:border! tw:bg-error/15! tw:text-error! tw:border-error! tw:px-0! tw:py-1! tw:w-20"
+            >
+              <icon-button-loader
+                v-if="loading"
+                class="tw:text-[20px]! tw:me-2!"
+              />
+              <icon-check-double v-else class="tw:text-[20px] tw:me-2!" />
+              <div class="tw:text-[12px]">
+                {{ langStore.label.button.delete }}
+              </div>
+            </v-btn>
+          </div>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -481,14 +649,18 @@ const dropdownStore = useDeopdownStore();
 
 import { useOperationStore } from "~/store/operation";
 const operationStore = useOperationStore();
-const { invoiceResult: invoice } = storeToRefs(operationStore);
+const {
+  invoiceResult: invoice,
+  invoiceItemsResult: invoiceItems,
+  invoiceItemResult: invoiceItem,
+} = storeToRefs(operationStore);
 
 // date
 import moment from "jalali-moment";
 const NowDate = moment().locale("fa").format("jYYYY/jMM/jDD");
 
 // ======= enum & TS types and interface =======
-type submitMode = "add" | "edit";
+type SubmitMode = "add" | "edit";
 
 enum CompanyType {
   legalEntity = 1,
@@ -529,13 +701,15 @@ const route = useRoute();
 // invoice animation
 const showInvoiceFormExpand = ref(false);
 const isAnimating = ref(false);
+// modal
+const deleteModal = ref<boolean>(false);
 // form
 const product = ref<any>(null);
 const invoiceForm = ref<InvoiceForm>({
   localDate: null,
   companyId: null,
 });
-const invoiceItemId = ref<string | null>(null);
+const invoiceItemId = ref<string>("");
 const invoiceItemForm = ref<InvoiceItemForm>({
   isEdit: false,
   localDate: NowDate,
@@ -549,6 +723,82 @@ const invoiceItemForm = ref<InvoiceItemForm>({
   singlePrice: null,
   totalPrice: null,
 });
+// table
+const tableHeader = ref<any>([
+  {
+    title: langStore.label.table.row,
+    key: "row",
+    align: "start",
+    sortable: false,
+  },
+  {
+    title: langStore.label.table.date,
+    key: "localDate",
+    align: "center",
+    sortable: false,
+  },
+  {
+    title: langStore.label.table.type,
+    key: "type",
+    align: "center",
+    sortable: false,
+  },
+  {
+    title: langStore.label.table.product,
+    key: "productName",
+    align: "center",
+    sortable: false,
+  },
+  {
+    title: langStore.label.table.brand,
+    key: "brandName",
+    align: "center",
+    sortable: false,
+  },
+  {
+    title: langStore.label.table.packaging,
+    key: "packagingName",
+    align: "center",
+    sortable: false,
+  },
+  {
+    title: langStore.label.table.unit,
+    key: "unitName",
+    align: "center",
+    sortable: false,
+  },
+  {
+    title: langStore.label.table.amount,
+    key: "amount",
+    align: "center",
+  },
+  {
+    title: langStore.label.table.unitCount,
+    key: "unitCount",
+    align: "center",
+  },
+  {
+    title: langStore.label.table.pageCount,
+    key: "pageCount",
+    align: "center",
+  },
+  {
+    title: langStore.label.table.singlePrice,
+    key: "singlePrice",
+    align: "center",
+  },
+  {
+    title: langStore.label.table.totalPrice,
+    key: "totalPrice",
+    align: "center",
+  },
+  {
+    title: langStore.label.table.actions,
+    key: "actions",
+    align: "center",
+    sortable: false,
+  },
+]);
 
 // ======= Functions =======
 // invocie form animation
@@ -559,7 +809,7 @@ const toggleInvoice = (type: "open" | "close") => {
   } else if (type === "close") {
     isAnimating.value = true;
     showInvoiceFormExpand.value = false;
-    resetFields();
+    resetFields("invoiceForm");
   }
 };
 const onFadeLeave = () => {
@@ -577,6 +827,12 @@ const loadInvoice = () => {
     operationStore.getInvoice(id);
   }
 };
+const loadInvoiceItems = () => {
+  const id = route.params.id as string;
+  if (id) {
+    operationStore.getInvoiceItems(id);
+  }
+};
 const openInvoiceForm = () => {
   if (!showInvoiceFormExpand.value) {
     toggleInvoice("open");
@@ -589,35 +845,120 @@ const submitInvoice = () => {
     handlerStore.setError(langStore.alert.error.requiredFields);
   }
 };
-const submitInvoiceItem = () => {
-  if(
-    invoiceItemForm.value.localDate &&
-    invoiceItemForm.value.productId &&
-    invoiceItemForm.value.brandId &&
-    invoiceItemForm.value.packagingId &&
-    invoiceItemForm.value.unitId &&
-    invoiceItemForm.value.amount &&
-    invoiceItemForm.value.unitCount &&
-    invoiceItemForm.value.pageCount &&
-    invoiceItemForm.value.singlePrice
-  ){
+const getInvoiceItem = (id: string) => {
+  invoiceItemId.value = id;
 
-  }else { 
-    handlerStore.setError(langStore.alert.error.requiredFields);
+  operationStore.getInvoiceItem(invoice.value.id, id);
+};
+const submitInvoiceItem = (mode?: SubmitMode) => {
+  if (mode && mode === "add") {
+    if (
+      invoiceItemForm.value.localDate &&
+      invoiceItemForm.value.productId &&
+      invoiceItemForm.value.brandId &&
+      invoiceItemForm.value.packagingId &&
+      invoiceItemForm.value.unitId &&
+      invoiceItemForm.value.amount &&
+      invoiceItemForm.value.unitCount &&
+      invoiceItemForm.value.pageCount &&
+      invoiceItemForm.value.singlePrice
+    ) {
+      operationStore.addInvoiceItem(invoice.value.id, invoiceItemForm.value);
+    } else {
+      handlerStore.setError(langStore.alert.error.requiredFields);
+    }
+  } else if (!mode || mode === "edit") {
+    if (
+      invoiceItemForm.value.localDate &&
+      invoiceItemForm.value.productId &&
+      invoiceItemForm.value.brandId &&
+      invoiceItemForm.value.packagingId &&
+      invoiceItemForm.value.unitId &&
+      invoiceItemForm.value.amount &&
+      invoiceItemForm.value.unitCount &&
+      invoiceItemForm.value.pageCount &&
+      invoiceItemForm.value.singlePrice
+    ) {
+      operationStore.editInvoiceItem(
+        invoice.value.id,
+        invoiceItemId.value,
+        invoiceItemForm.value,
+      );
+    } else {
+      handlerStore.setError(langStore.alert.error.requiredFields);
+    }
   }
-}
+};
+const openDeleteModal = (id: string) => {
+  invoiceItemId.value = id;
+  deleteModal.value = true;
+};
+const confirmDelete = () => {
+  operationStore.deleteInvoiceItem(invoice.value.id, invoiceItemId.value);
+};
+const calTotalPrice = () => {
+  const price = invoiceItemForm.value.singlePrice ?? 0;
+  const count = invoiceItemForm.value.pageCount ?? 1;
 
-// product
+  invoiceItemForm.value.totalPrice = price * count;
+};
 
 // universal
 const reloadData = async () => {
   loadInvoice();
+  loadInvoiceItems();
+  close();
 };
-const resetFields = () => {
+const resetFields = (mode?: "invoiceItemForm" | "invoiceForm") => {
+  if (mode === "invoiceItemForm") {
+    product.value = null;
+    invoiceItemId.value = "";
+    invoiceItemForm.value = {
+      isEdit: false,
+      localDate: NowDate,
+      productId: null,
+      brandId: null,
+      packagingId: null,
+      unitId: null,
+      amount: null,
+      unitCount: 1,
+      pageCount: 1,
+      singlePrice: null,
+      totalPrice: null,
+    };
+
+    return;
+  }
+  if (mode === "invoiceForm") {
+    invoiceForm.value = {
+      localDate: null,
+      companyId: null,
+    };
+    return;
+  }
+
+  product.value = null;
+  invoiceItemId.value = "";
+  invoiceItemForm.value = {
+    isEdit: false,
+    localDate: NowDate,
+    productId: null,
+    brandId: null,
+    packagingId: null,
+    unitId: null,
+    amount: null,
+    unitCount: 1,
+    pageCount: 1,
+    singlePrice: null,
+    totalPrice: null,
+  };
   invoiceForm.value = {
     localDate: null,
     companyId: null,
   };
+};
+const close = () => {
+  deleteModal.value = false;
 };
 
 // ======= Watchers =======
@@ -647,6 +988,22 @@ watch(product, (val) => {
     invoiceItemForm.value.amount = product.value.unitAmount;
   }
 });
+watch(invoiceItem, (val) => {
+  if (val) {
+    invoiceItemForm.value.isEdit = !!val.isEdit;
+    invoiceItemForm.value.localDate = val.localDate;
+    invoiceItemForm.value.productId = val.productId;
+    invoiceItemForm.value.brandId = val.brandId;
+    invoiceItemForm.value.packagingId = val.packagingId;
+    invoiceItemForm.value.unitId = val.unitId;
+    invoiceItemForm.value.amount = val.amount;
+    invoiceItemForm.value.unitCount = val.unitCount;
+    invoiceItemForm.value.pageCount = val.pageCount;
+    invoiceItemForm.value.singlePrice = val.singlePrice;
+
+    invoiceItemForm.value.totalPrice = val.singlePrice * val.pageCount;
+  }
+});
 
 // ======= Lifecycle =======
 onMounted(() => {
@@ -664,9 +1021,11 @@ onMounted(() => {
 .fade-enter-active {
   transition: opacity 150ms ease;
 }
+
 .fade-leave-active {
   transition: opacity 150ms ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
@@ -679,13 +1038,16 @@ html[dir="rtl"] .expand-btn-enter-from {
   opacity: 0;
   transform: translateX(-100%);
 }
+
 html[dir="ltr"] .expand-btn-enter-from {
   opacity: 0;
   transform: translateX(100%);
 }
+
 .expand-btn-enter-active {
   transition: all 250ms ease;
 }
+
 .expand-btn-enter-to {
   opacity: 1;
   transform: translateX(0);
@@ -696,13 +1058,16 @@ html[dir="ltr"] .expand-btn-enter-from {
   opacity: 1;
   transform: translateX(0);
 }
+
 .expand-btn-leave-active {
   transition: all 350ms ease;
 }
+
 html[dir="rtl"] .expand-btn-leave-to {
   opacity: 0;
   transform: translateX(-100%);
 }
+
 html[dir="ltr"] .expand-btn-leave-to {
   opacity: 0;
   transform: translateX(100%);
