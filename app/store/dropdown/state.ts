@@ -6,12 +6,14 @@ export function useDropdownState() {
   const companiesResult = ref<any[]>([]);
   const brandsResult = ref<any[]>([]);
   const productsResult = ref<any[]>([]);
+  const categoriesResult = ref<any[]>([]);
 
   return {
     unitsResult,
     packagingsResult,
     companiesResult,
     brandsResult,
-    productsResult
+    productsResult,
+    categoriesResult,
   };
 }

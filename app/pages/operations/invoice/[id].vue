@@ -263,6 +263,28 @@
             </v-col>
             <v-col cols="12" md="6" lg="2">
               <v-autocomplete
+                v-model="invoiceItemForm.categoryId"
+                :items="dropdownStore.categoriesOptions"
+                item-title="text"
+                item-value="value"
+                variant="outlined"
+                density="compact"
+                hide-details
+                class="tw:text-[14px]! tw:text-white!"
+                rounded="pill"
+              >
+                <template #label>
+                  <span class="tw:text-[12px]">
+                    {{ langStore.label.form.category }}
+                  </span>
+                  <span class="tw:text-red-300! tw:text-[10px]">
+                    ({{ langStore.label.caption.required }})
+                  </span>
+                </template>
+              </v-autocomplete>
+            </v-col>
+            <v-col cols="12" md="6" lg="2">
+              <v-autocomplete
                 v-model="invoiceItemForm.brandId"
                 :items="dropdownStore.brandsOptions"
                 item-title="text"
@@ -686,6 +708,7 @@ interface InvoiceItemForm {
   isEdit: boolean;
   localDate: string | null;
   productId: string | null;
+  categoryId: string | null;
   brandId: string | null;
   packagingId: string | null;
   unitId: string | null;
@@ -727,6 +750,7 @@ const invoiceItemForm = ref<InvoiceItemForm>({
   isEdit: false,
   localDate: NowDate,
   productId: null,
+  categoryId: null,
   brandId: null,
   packagingId: null,
   unitId: null,
@@ -868,6 +892,7 @@ const submitInvoiceItem = (mode?: SubmitMode) => {
     if (
       invoiceItemForm.value.localDate &&
       invoiceItemForm.value.productId &&
+      invoiceItemForm.value.categoryId &&
       invoiceItemForm.value.brandId &&
       invoiceItemForm.value.packagingId &&
       invoiceItemForm.value.unitId &&
@@ -884,6 +909,7 @@ const submitInvoiceItem = (mode?: SubmitMode) => {
     if (
       invoiceItemForm.value.localDate &&
       invoiceItemForm.value.productId &&
+      invoiceItemForm.value.categoryId &&
       invoiceItemForm.value.brandId &&
       invoiceItemForm.value.packagingId &&
       invoiceItemForm.value.unitId &&
@@ -930,6 +956,7 @@ const resetFields = (mode?: "invoiceItemForm" | "invoiceForm") => {
       isEdit: false,
       localDate: NowDate,
       productId: null,
+      categoryId: null,
       brandId: null,
       packagingId: null,
       unitId: null,
@@ -956,6 +983,7 @@ const resetFields = (mode?: "invoiceItemForm" | "invoiceForm") => {
     isEdit: false,
     localDate: NowDate,
     productId: null,
+    categoryId: null,
     brandId: null,
     packagingId: null,
     unitId: null,
@@ -1006,6 +1034,7 @@ watch(invoiceItem, (val) => {
     invoiceItemForm.value.isEdit = !!val.isEdit;
     invoiceItemForm.value.localDate = val.localDate;
     invoiceItemForm.value.productId = val.productId;
+    invoiceItemForm.value.categoryId = val.categoryId;
     invoiceItemForm.value.brandId = val.brandId;
     invoiceItemForm.value.packagingId = val.packagingId;
     invoiceItemForm.value.unitId = val.unitId;
@@ -1025,6 +1054,7 @@ onMounted(() => {
   dropdownStore.getCompanies();
   dropdownStore.getBrands();
   dropdownStore.getProducts();
+  dropdownStore.getCategories();
   loadInvoice();
 });
 </script>

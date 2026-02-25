@@ -101,6 +101,29 @@ export function useDropdownActions(state: StateType) {
       });
   };
 
+  const getCategories = () => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get("/dropdown/categories")
+      .then((res) => {
+        state.categoriesResult.value = res.data.data.categories;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
+
   const getProducts= () => {
     const axios = useApi();
     handlerStore.loading = true;
@@ -124,11 +147,14 @@ export function useDropdownActions(state: StateType) {
       });
   };
 
+
+
   return {
     getUnits,
     getPackagings,
     getCompanies,
     getBrands,
+    getCategories,
     getProducts,
   };
 }

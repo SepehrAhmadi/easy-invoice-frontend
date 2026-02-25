@@ -43,6 +43,13 @@ export function useDropdownGetters(state: ReturnType<typeof useDropdownState>) {
       unitAmount: item.unitAmount,
     })),
   );
+  // categories
+  const categoriesOptions = computed(() =>
+    state.categoriesResult.value.map((item: any) => ({
+      value: item.id,
+      text: item.name,
+    })),
+  );
 
   return {
     unitsOptions,
@@ -50,5 +57,6 @@ export function useDropdownGetters(state: ReturnType<typeof useDropdownState>) {
     companiesOptions,
     brandsOptions,
     productsOptions,
+    categoriesOptions,
   };
 }
