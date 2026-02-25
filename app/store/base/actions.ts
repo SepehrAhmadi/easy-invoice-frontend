@@ -243,7 +243,123 @@ export function useBaseActions(state: StateType) {
       });
   };
 
-  // ====== Brand ======
+  // ====== Category ======
+  const getCategories = () => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get("/base/category")
+      .then((res) => {
+        state.categoriesResult.value = res.data.data.categories;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 2000);
+      });
+  };
+
+  const getCategory = (id: string) => {
+    const axios = useApi();
+
+    return axios
+      .get("/base/category/" + id)
+      .then((res) => {
+        state.categoryResult.value = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      });
+  };
+
+  const addCategory = (value: any) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    return axios
+      .post("/base/category", value)
+      .then((res) => {
+        handlerStore.setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
+  const editCategory = (id: string, value: any) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    return axios
+      .put("/base/category/" + id, value)
+      .then((res) => {
+        handlerStore.setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
+  const deleteCategory = (id: string) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    return axios
+      .delete("/base/category/" + id)
+      .then((res) => {
+        handlerStore.setSuccess(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
+  // ====== Product ======
   const getProducts = () => {
     const axios = useApi();
     handlerStore.loading = true;
@@ -371,6 +487,12 @@ export function useBaseActions(state: StateType) {
     addBrand,
     editBrand,
     deleteBrand,
+
+    getCategories,
+    getCategory,
+    addCategory,
+    editCategory,
+    deleteCategory,
 
     getProducts,
     getProduct,

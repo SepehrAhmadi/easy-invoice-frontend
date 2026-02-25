@@ -7,6 +7,9 @@ export function useBaseState() {
   const brandsResult = ref<any[]>([]);
   const brandResult = ref<any>({});
 
+  const categoriesResult = ref<any[]>([]);
+  const categoryResult = ref<any>({});
+
   const productsResult = ref<any[]>([]);
   const productResult = ref<any>({});
 
@@ -15,6 +18,8 @@ export function useBaseState() {
     companyResult,
     brandsResult,
     brandResult,
+    categoriesResult,
+    categoryResult,
     productsResult,
     productResult,
   };

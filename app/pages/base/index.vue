@@ -173,9 +173,10 @@
     <!-- brands and products -->
     <v-container class="tw:md:pe-0! tw:my-5!">
       <v-row class="tw:h-full!">
+        <!-- brands -->
         <v-col
           cols="12"
-          xl="5"
+          lg="6"
           class="tw:w-full! tw:px-2.5! tw:2xl:ps-0! tw:flex"
         >
           <div
@@ -208,9 +209,9 @@
                   </div>
                 </div>
                 <div>
-                  <transition name="fade" @after-leave="onFadeLeave">
+                  <transition name="fade" @after-leave="onBrandFadeLeave">
                     <v-btn
-                      v-if="!showBrandFormExpand && !isAnimating"
+                      v-if="!showBrandFormExpand && !isBrandAnimating"
                       @click="openBrandForm('add')"
                       color="white"
                       rounded="pill"
@@ -228,7 +229,10 @@
                       </div>
                     </v-btn>
                   </transition>
-                  <transition name="expand-btn" @after-leave="onExpandLeave">
+                  <transition
+                    name="expand-btn"
+                    @after-leave="onBrandExpandLeave"
+                  >
                     <div
                       v-if="showBrandFormExpand"
                       class="tw:flex tw:justify-start tw:items-center tw:gap-3"
@@ -335,11 +339,174 @@
             </div>
           </div>
         </v-col>
+        <!-- category -->
         <v-col
           cols="12"
-          xl="7"
+          lg="6"
           class="tw:w-full! tw:px-2.5! tw:2xl:pe-0! tw:flex"
         >
+          <div
+            class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden tw:grow!"
+          >
+            <!-- section header -->
+            <div
+              class="tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6!"
+            >
+              <div
+                class="tw:flex tw:flex-col tw:md:flex-row tw:justify-between tw:items-start tw:md:items-center tw:gap-5 tw:sm:gap-3"
+              >
+                <div>
+                  <div
+                    class="tw:flex tw:justify-start tw:items-center tw:gap-2"
+                  >
+                    <icon-tag
+                      class="tw-text-color-reverse tw:text-[32px]"
+                    />
+                    <div
+                      class="tw-text-color-reverse tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px] tw:text-nowrap"
+                    >
+                      {{ langStore.label.title.manageCategories }}
+                    </div>
+                  </div>
+                  <div
+                    class="tw:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-2! tw:text-nowrap"
+                  >
+                    {{ langStore.label.description.manageCategories }}
+                  </div>
+                </div>
+                <div>
+                  <transition name="fade" @after-leave="onCategoryFadeLeave">
+                    <v-btn
+                      v-if="!showCategoryFormExpand && !isCategoryAnimating"
+                      @click="openCategoryForm('add')"
+                      color="white"
+                      rounded="pill"
+                      class="tw:h-10!"
+                    >
+                      <div
+                        class="tw:flex tw:justify-center tw:items-center tw:gap-2"
+                      >
+                        <icon-plus-circle
+                          class="tw:text-[18px] tw:2xl:text-[18px]"
+                        />
+                        <div class="tw:text-[14px] tw:2xl:text-[15px]">
+                          {{ langStore.label.button.createCategory }}
+                        </div>
+                      </div>
+                    </v-btn>
+                  </transition>
+                  <transition
+                    name="expand-btn"
+                    @after-leave="onCategoryExpandLeave"
+                  >
+                    <div
+                      v-if="showCategoryFormExpand"
+                      class="tw:flex tw:justify-start tw:items-center tw:gap-3"
+                    >
+                      <v-text-field
+                        v-model="categoryForm.name"
+                        type="text"
+                        variant="outlined"
+                        density="compact"
+                        hide-details
+                        class="tw:text-[14px]! tw:w-50! tw:text-white!"
+                        rounded="pill"
+                      >
+                        <template #label>
+                          <span class="tw:text-[12px]">
+                            {{ langStore.label.form.name }}
+                          </span>
+                          <span class="tw:text-red-300 tw:text-[10px]">
+                            ({{ langStore.label.caption.required }})
+                          </span>
+                        </template>
+                      </v-text-field>
+                      <v-btn
+                        @click="submitCategory"
+                        color="white"
+                        class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
+                        icon
+                      >
+                        <icon-check class="tw:text-[25px]" />
+                      </v-btn>
+                      <v-btn
+                        @click="toggleCategory('close')"
+                        color="white"
+                        class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
+                        icon
+                      >
+                        <icon-close class="tw:text-[25px]" />
+                      </v-btn>
+                    </div>
+                  </transition>
+                </div>
+              </div>
+            </div>
+            <!-- list -->
+            <div
+              class="tw:w-full! tw:flex tw:flex-col tw:justify-start tw:items-start tw:py-2! tw:px-4! tw:2xl:px-6! tw:2xl:h-105 tw:overflow-auto"
+            >
+              <div
+                v-for="(item, index) in categories"
+                :key="item.id"
+                class="tw:w-full! tw:flex tw:justify-between tw:items-start tw:my-4!"
+              >
+                <div class="tw:flex tw:items-center tw:gap-3">
+                  <div
+                    class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
+                  >
+                    {{ index + 1 }}
+                  </div>
+                  <div class="tw-text-color tw:text-[17px]">
+                    {{ item.name }}
+                  </div>
+                </div>
+                <div class="tw:flex tw:justify-start tw:items-center tw:gap-1">
+                  <v-tooltip location="top">
+                    <template #activator="{ props }">
+                      <v-btn
+                        @click="openCategoryForm('edit', item.id)"
+                        v-bind="props"
+                        size="x-small"
+                        variant="text"
+                        rounded="pill"
+                        class="tw:w-8! tw:h-8! tw:px-0!"
+                      >
+                        <icon-edit
+                          class="tw-text-color-lighter tw:text-[20px]"
+                        />
+                      </v-btn>
+                    </template>
+                    <span class="tw:text-xs tw:p-2">{{
+                      langStore.label.button.edit
+                    }}</span>
+                  </v-tooltip>
+                  <v-tooltip location="top">
+                    <template #activator="{ props }">
+                      <v-btn
+                        @click="openDeleteModal('category', item.id)"
+                        v-bind="props"
+                        size="x-small"
+                        variant="text"
+                        rounded="pill"
+                        class="tw:w-8! tw:h-8! tw:px-0!"
+                      >
+                        <icon-trash
+                          class="tw-text-color-lighter tw:text-[23px]"
+                        />
+                      </v-btn>
+                    </template>
+                    <span class="tw:text-xs tw:p-2">{{
+                      langStore.label.button.delete
+                    }}</span>
+                  </v-tooltip>
+                </div>
+              </div>
+            </div>
+          </div>
+        </v-col>
+        <!-- products -->
+        <v-col cols="12" class="tw:w-full! tw:px-2.5! tw:2xl:px-0! tw:flex">
           <div
             class="w:overflow-hidden tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:grow!"
           >
@@ -409,7 +576,7 @@
             </div>
             <!-- list -->
             <div
-              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:content-start tw:p-2! tw:my-0! tw:h-105 tw:overflow-auto"
+              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:xl:grid-cols-3 tw:content-start tw:p-2! tw:my-0! tw:h-105 tw:overflow-auto"
             >
               <div
                 v-for="item in filteredProducts"
@@ -974,6 +1141,8 @@ const {
   companyResult: company,
   brandsResult: brands,
   brandResult: brand,
+  categoriesResult: categories,
+  categoryResult: category,
   productsResult: products,
   productResult: product,
 } = storeToRefs(baseStore);
@@ -986,7 +1155,7 @@ watchEffect(() => {
 
 // ======= TS types and interface =======
 type ModalMode = "add" | "edit";
-type DeleteType = "comapny" | "brand" | "product";
+type DeleteType = "comapny" | "brand" | "category" | "product";
 
 enum CompanyType {
   legalEntity = 1,
@@ -999,6 +1168,9 @@ interface CompanyForm {
   phone: number | null;
 }
 interface BrandForm {
+  name: string | null;
+}
+interface CategoryForm {
   name: string | null;
 }
 interface ProductForm {
@@ -1018,10 +1190,10 @@ const deleteType = ref<DeleteType | null>(null);
 const campanyModal = ref<boolean>(false);
 const productModal = ref<boolean>(false);
 const deleteModal = ref<boolean>(false);
-// brand animation
 const showBrandFormExpand = ref(false);
-const showProductFormExpand = ref(false);
-const isAnimating = ref(false);
+const showCategoryFormExpand = ref(false);
+const isBrandAnimating = ref(false);
+const isCategoryAnimating = ref(false);
 // forms
 const companyId = ref<string>("");
 const companyForm = ref<CompanyForm>({
@@ -1032,6 +1204,10 @@ const companyForm = ref<CompanyForm>({
 });
 const brandId = ref<string>("");
 const brandForm = ref<BrandForm>({
+  name: null,
+});
+const categoryId = ref<string>("");
+const categoryForm = ref<CategoryForm>({
   name: null,
 });
 const productId = ref<string>("");
@@ -1114,23 +1290,40 @@ const submitCompany = () => {
   }
 };
 
-// brand form animation
+// form animations
 const toggleBrand = (type: "open" | "close") => {
   if (type === "open") {
-    isAnimating.value = true;
+    isBrandAnimating.value = true;
     showBrandFormExpand.value = false;
   } else if (type === "close") {
-    isAnimating.value = true;
+    isBrandAnimating.value = true;
     showBrandFormExpand.value = false;
     resetFields();
   }
 };
-const onFadeLeave = () => {
-  showBrandFormExpand.value = true;
-  isAnimating.value = false;
+const toggleCategory = (type: "open" | "close") => {
+  if (type === "open") {
+    isCategoryAnimating.value = true;
+    showCategoryFormExpand.value = false;
+  } else if (type === "close") {
+    isCategoryAnimating.value = true;
+    showCategoryFormExpand.value = false;
+    resetFields();
+  }
 };
-const onExpandLeave = () => {
-  isAnimating.value = false;
+const onBrandFadeLeave = () => {
+  showBrandFormExpand.value = true;
+  isBrandAnimating.value = false;
+};
+const onBrandExpandLeave = () => {
+  isBrandAnimating.value = false;
+};
+const onCategoryFadeLeave = () => {
+  showCategoryFormExpand.value = true;
+  isCategoryAnimating.value = false;
+};
+const onCategoryExpandLeave = () => {
+  isCategoryAnimating.value = false;
 };
 
 // brand actions
@@ -1167,8 +1360,41 @@ const submitBrand = () => {
       handlerStore.setError(langStore.alert.error.requiredFields);
     }
   }
+};
 
-  // toggleBrand("close");
+// brand actions
+const loadCategories = async () => {
+  await baseStore.getCategories();
+};
+const openCategoryForm = (mode: ModalMode, id?: string) => {
+  modalMode.value = mode;
+  if (mode === "add") {
+    toggleCategory("open");
+    return;
+  }
+  if (mode === "edit" && id) {
+    categoryId.value = id;
+    baseStore.getCategory(id);
+
+    if (!showCategoryFormExpand.value) {
+      toggleCategory("open");
+    }
+  }
+};
+const submitCategory = () => {
+  if (modalMode.value === "add") {
+    if (categoryForm.value.name) {
+      baseStore.addCategory(categoryForm.value);
+    } else {
+      handlerStore.setError(langStore.alert.error.requiredFields);
+    }
+  } else if (modalMode.value === "edit") {
+    if (categoryForm.value.name) {
+      baseStore.editCategory(categoryId.value, categoryForm.value);
+    } else {
+      handlerStore.setError(langStore.alert.error.requiredFields);
+    }
+  }
 };
 
 // product actions
@@ -1224,6 +1450,9 @@ const openDeleteModal = (type: DeleteType, id: string) => {
   } else if (type === "brand") {
     brandId.value = id;
     deleteModal.value = true;
+  } else if (type === "category") {
+    categoryId.value = id;
+    deleteModal.value = true;
   } else if (type === "product") {
     productId.value = id;
     deleteModal.value = true;
@@ -1234,6 +1463,8 @@ const confirmDelete = () => {
     baseStore.deleteCompany(companyId.value);
   } else if (deleteType.value === "brand") {
     baseStore.deleteBrand(brandId.value);
+  }else if (deleteType.value === "category"){
+    baseStore.deleteCategory(categoryId.value);
   } else if (deleteType.value === "product") {
     baseStore.deleteProduct(productId.value);
   }
@@ -1242,6 +1473,7 @@ const reloadData = async () => {
   loadCompanies();
   loadBrands();
   loadProducts();
+  loadCategories();
 };
 const resetFields = () => {
   companyId.value = "";
@@ -1253,6 +1485,10 @@ const resetFields = () => {
   };
   brandId.value = "";
   brandForm.value = {
+    name: null,
+  };
+  categoryId.value = "";
+  categoryForm.value = {
     name: null,
   };
   productId.value = "";
@@ -1280,6 +1516,9 @@ watch(
       if (showBrandFormExpand.value) {
         toggleBrand("close");
       }
+      if (showCategoryFormExpand.value) {
+        toggleCategory("close");
+      }
       close();
     }
   },
@@ -1294,6 +1533,10 @@ watch(company, (val) => {
 watch(brand, (val) => {
   if (!val) return;
   brandForm.value.name = val.name;
+});
+watch(category, (val) => {
+  if (!val) return;
+  categoryForm.value.name = val.name;
 });
 watch(product, (val) => {
   if (!val) return;

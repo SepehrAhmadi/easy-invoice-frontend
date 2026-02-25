@@ -32,6 +32,7 @@ export const label = (state) => {
         manageBrands: "Manage Brands",
         manageProducts: "Manage Products",
         manageInvocies: "Manage Invoices",
+        manageCategories : "Manage Category",
       },
       header: {
         addCompany: "Add company",
@@ -54,6 +55,7 @@ export const label = (state) => {
         editProfile: "Edit profile",
         createCompany: "Create company",
         createBrand: "Create Brand",
+        createCategory : "Create Category",
         createProduct: "Create Product",
         edit: "Edit",
         delete: "Delete",
@@ -132,6 +134,7 @@ export const label = (state) => {
         manageProducts: "Manage your products in this section",
         deleteConfirm: "Are you sure you want to delete this item?",
         manageInvocies: "Manage your invoices in this section",
+        manageCategories: "Manage your categories in this section",
       },
       caption: {
         detailToLogin: "Insert your detail to login to your account",
@@ -177,6 +180,7 @@ export const label = (state) => {
         manageBrands: "مدیرت برند ها",
         manageProducts: "مدیریت محصولات",
         manageInvocies: "مدیریت فاکتور ها",
+        manageCategories : "مدیریت دسته بندی ها", 
       },
       header: {
         addCompany: "ایجاد شرکت",
@@ -199,6 +203,7 @@ export const label = (state) => {
         editProfile: "ویرایش پروفایل",
         createCompany: "ایجاد شرکت",
         createBrand: "ایجاد برند",
+        createCategory : "ایجاد دسته بندی",
         createProduct: "ایجاد محصول",
         edit: "ویرایش",
         delete: "حذف",
@@ -278,6 +283,7 @@ export const label = (state) => {
         manageProducts: "محصولات خود را در این قسمت مدییت کنید",
         deleteConfirm: "آیا از حذف این مورد اطمینان دارید؟",
         manageInvocies: "فاکتور های خود را در این قسمت مدیریت کنید",
+        manageCategories : "دسته بندی های خود را در این قسمت مدیریت کنید",
       },
       caption: {
         detailToLogin:
