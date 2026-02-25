@@ -33,6 +33,15 @@
   --color-error: #bf092f;
   --color-warning: #ff6500;
   --color-info: #1581bf;
+
+  /* braekpoints */
+  --breakpoint-xs: 30rem;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+  --breakpoint-3xl: 120rem;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));

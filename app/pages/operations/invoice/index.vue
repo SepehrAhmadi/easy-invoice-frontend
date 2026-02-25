@@ -7,15 +7,15 @@
         <v-col cols="12" md="3">
           <div>
             <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
-              <icon-document class="tw-text-color-reverse tw:text-[32px]" />
+              <icon-document class="tw-text-color-reverse header-icon" />
               <div
-                class="tw-text-color-reverse tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px] tw:text-nowrap"
+                class="tw-text-color-reverse header-titlet tw:text-nowrap"
               >
                 {{ langStore.label.title.manageInvocies }}
               </div>
             </div>
             <div
-              class="tw:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-2! tw:text-nowrap"
+              class="tw:text-gray-400 tw:text-justify header-desc tw:mt-2! tw:text-nowrap"
             >
               {{ langStore.label.description.manageInvocies }}
             </div>
@@ -36,7 +36,7 @@
               >
                 <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
                   <icon-plus-circle class="tw:text-[18px] tw:2xl:text-[18px]" />
-                  <div class="tw:text-[14px] tw:2xl:text-[15px]">
+                  <div class="tw:text-[13px] tw:3xl:text-[15px]">
                     {{ langStore.label.button.createProduct }}
                   </div>
                 </div>
@@ -49,7 +49,7 @@
               >
                 <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
                   <icon-filter class="tw:text-[18px] tw:2xl:text-[18px]" />
-                  <div class="tw:text-[14px] tw:2xl:text-[15px]">
+                  <div class="tw:text-[13px] tw:3xl:text-[15px]">
                     {{ langStore.label.button.filter }}
                   </div>
                 </div>
@@ -153,7 +153,7 @@
         <transition name="toggle-slide">
           <v-col cols="12" v-show="showSubmitForm">
             <v-row class="tw:flex tw:items-center!">
-              <v-col cols="12" lg="2">
+              <v-col cols="12" lg="3" 2xl="2">
                 <div class="tw:relative!">
                   <label
                     v-if="invoiceForm.localDate"
@@ -178,20 +178,20 @@
                   />
                 </div>
               </v-col>
-              <v-col cols="12" lg="9">
+              <v-col cols="12" lg="8" 2xl="9">
                 <v-row class="tw:flex tw:items-center!">
                   <v-col cols="12" lg="2">
                     <div
-                      class="tw:flex tw:justify-end tw:items-center tw:gap-2"
+                      class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:text-nowrap"
                     >
                       <icon-building
                         class="tw-text-color-reverse tw:text-[30px]"
                       />
                       <div
-                        class="tw-text-color-reverse tw:text-[16px] tw:lg:text-[18px] tw:2xl:text-[20px]"
+                        class="tw-text-color-reverse tw:text-[16px] tw:lg:text-[16px] tw:3xl:text-[20px]"
                       >
                         {{ langStore.label.form.company }}
-                        <span class="tw:text-red-400 tw:text-[13px]">
+                        <span class="tw:text-red-400 tw:text-[11px] tw:3xl:text-[13px]">
                           ({{ langStore.label.caption.required }})
                         </span>
                       </div>
@@ -221,7 +221,7 @@
                         },
                         1280: {
                           slidesPerView: 3,
-                          spaceBetween: 20,
+                          spaceBetween: 10,
                         },
                         2160: {
                           slidesPerView: 4,
@@ -233,7 +233,7 @@
                       <SwiperSlide v-for="item in companies">
                         <div
                           @click="selectCompany(item.id)"
-                          class="tw:cursor-pointer tw:flex tw:justify-center tw:itemd-center tw:gap-2 tw:text-[15px]! tw:text-gray-300! tw:py-1.75! tw:px-1! tw:border tw:border-gray-400 tw:rounded-full! tw:group tw:transiton tw:duration-200 tw:ease"
+                          class="tw:cursor-pointer tw:flex tw:justify-center tw:itemd-center tw:gap-2 tw:text-[13px] tw:3xl:text-[15px]! tw:text-gray-300! tw:py-2.25! tw:3xl:py-1.75! tw:px-1! tw:border tw:border-gray-400 tw:rounded-full! tw:group tw:transiton tw:duration-200 tw:ease"
                           :class="{
                             'tw:bg-white tw:text-primary-dark!':
                               item.id === companyId,
@@ -242,14 +242,14 @@
                         >
                           <icon-bank
                             v-if="item.type == CompanyType.legalEntity"
-                            class="tw:text-gray-300! tw:text-[20px] tw:transiton tw:duration-200 tw:ease"
+                            class="tw:text-gray-300! tw:text-[18px] tw:3xl:text-[20px] tw:transiton tw:duration-200 tw:ease"
                             :class="{
                               'tw:text-primary-dark!': item.id === companyId,
                             }"
                           />
                           <icon-user
                             v-if="item.type == CompanyType.individual"
-                            class="tw:text-gray-300! tw:text-[20px] tw:transiton tw:duration-200 tw:ease"
+                            class="tw:text-gray-300! tw:text-[18px] tw:3xl:text-[20px] tw:transiton tw:duration-200 tw:ease"
                             :class="{
                               'tw:text-primary-dark!': item.id === companyId,
                             }"
@@ -262,14 +262,14 @@
                 </v-row>
               </v-col>
               <v-col cols="12" lg="1">
-                <div class="tw:flex tw:justify-end tw:items-center tw:gap-4">
+                <div class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:3xl:gap-4">
                   <v-btn
                     @click="submitInvoice"
                     color="white"
                     class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
                     icon
                   >
-                    <icon-check class="tw:text-[25px]" />
+                    <icon-check class="tw:text-[23px] tw:3xl:text-[25px]" />
                   </v-btn>
                   <v-btn
                     @click="showSubmitForm = false"
@@ -277,7 +277,7 @@
                     class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
                     icon
                   >
-                    <icon-close class="tw:text-[25px]" />
+                    <icon-close class="tw:text-[23px] tw:3xl:text-[25px]" />
                   </v-btn>
                 </div>
               </v-col>

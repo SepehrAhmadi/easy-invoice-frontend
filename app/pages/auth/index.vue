@@ -161,7 +161,7 @@
 </template>
 
 <script setup lang="ts">
-import Language from "~/components/appHeader/Language.vue";
+import Language from "~/components/appHeader/language.vue";
 import ThemeSwitcher from "~/components/appHeader/ThemeSwitcher.vue";
 
 import { useLanguageStore } from "~/store/language";

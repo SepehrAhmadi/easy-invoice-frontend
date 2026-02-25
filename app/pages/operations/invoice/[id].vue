@@ -9,14 +9,14 @@
             <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
               <icon-document-add
                 v-if="operationStore.invoiceMode == 'add'"
-                class="tw-text-color-reverse tw:text-[35px]"
+                class="tw-text-color-reverse header-icon"
               />
               <icon-document-edit
                 v-else-if="operationStore.invoiceMode == 'edit'"
-                class="tw-text-color-reverse tw:text-[35px]"
+                class="tw-text-color-reverse header-icon"
               />
               <div
-                class="tw-text-color-reverse tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px] tw:text-nowrap"
+                class="tw-text-color-reverse header-title tw:text-nowrap"
               >
                 {{
                   operationStore.invoiceMode == "add"
@@ -26,14 +26,14 @@
               </div>
             </div>
             <div
-              class="tw:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-2! tw:text-nowrap"
+              class="tw:text-gray-400 tw:text-justify header-desc tw:mt-2! tw:text-nowrap"
             >
               {{ langStore.label.description.manageInvocies }}
             </div>
           </div>
         </v-col>
-        <v-col cols="12" md="9" xl="3" class="tw:hidden tw:2xl:block"></v-col>
-        <v-col cols="12" md="9" xl="6">
+        <v-col cols="12" md="2" xl="3" class="tw:hidden tw:2xl:block"></v-col>
+        <v-col cols="12" md="7" xl="6">
           <div
             class="tw:w-full! tw:flex tw:justify-between tw:md:justify-end tw:items-start tw:md:items-center tw:gap-4!"
           >
@@ -181,7 +181,7 @@
         </v-col>
         <v-col cols="12">
           <v-row class="tw:items-center tw:mt-1!">
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-radio-group
                 v-model="invoiceItemForm.isEdit"
                 inline
@@ -213,7 +213,7 @@
                 </v-radio>
               </v-radio-group>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <div class="tw:relative!">
                 <label
                   v-if="invoiceItemForm.localDate"
@@ -238,7 +238,7 @@
                 />
               </div>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-autocomplete
                 v-model="product"
                 :items="dropdownStore.productsOptions"
@@ -261,7 +261,7 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-autocomplete
                 v-model="invoiceItemForm.categoryId"
                 :items="dropdownStore.categoriesOptions"
@@ -283,7 +283,7 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-autocomplete
                 v-model="invoiceItemForm.brandId"
                 :items="dropdownStore.brandsOptions"
@@ -305,7 +305,7 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-autocomplete
                 v-model="invoiceItemForm.packagingId"
                 :items="dropdownStore.packagingsOptions"
@@ -327,7 +327,7 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-autocomplete
                 v-model="invoiceItemForm.unitId"
                 :items="dropdownStore.unitsOptions"
@@ -349,7 +349,7 @@
                 </template>
               </v-autocomplete>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-text-field
                 v-model="invoiceItemForm.amount"
                 type="number"
@@ -370,7 +370,7 @@
                 </template>
               </v-text-field>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-text-field
                 v-model="invoiceItemForm.unitCount"
                 type="number"
@@ -391,7 +391,7 @@
                 </template>
               </v-text-field>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-text-field
                 v-model="invoiceItemForm.pageCount"
                 type="number"
@@ -413,7 +413,7 @@
                 </template>
               </v-text-field>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-text-field
                 v-model="invoiceItemForm.singlePrice"
                 type="number"
@@ -440,7 +440,7 @@
                 </template>
               </v-text-field>
             </v-col>
-            <v-col cols="12" md="6" lg="2">
+            <v-col cols="12" md="6" lg="3" xl="2">
               <v-text-field
                 v-model="invoiceItemForm.totalPrice"
                 type="number"
@@ -466,8 +466,6 @@
             </v-col>
             <v-col
               cols="12"
-              md="6"
-              lg="2"
               class="tw:flex tw:justify-end tw:items-center tw:gap-3"
             >
               <v-btn

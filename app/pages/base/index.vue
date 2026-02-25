@@ -1,25 +1,25 @@
 <template>
   <div class="tw:flex tw:flex-col tw:min-h-full">
     <!-- companies -->
-    <v-container class="tw:md:pe-0! tw:md:py-0!">
+    <v-container fluid class="tw:md:pe-0! tw:md:py-0!">
       <v-row class="tw:flex tw:justify-center tw:itesm-center">
         <v-col
           cols="12"
           sm="4"
           md="3"
-          class="tw:mb-3! tw:2xl:mb-2 tw:flex! tw:flex-col tw:justify-between tw:bg-primary-dark tw:dark:bg-primary-dark tw:p-6! tw:rounded-4xl"
+          class="tw:3xl:mb-2 tw:flex! tw:flex-col tw:justify-between tw:bg-primary-dark tw:dark:bg-primary-dark tw:p-6! tw:rounded-4xl"
         >
           <div class="tw:flex-1">
             <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
-              <icon-building class="tw-text-color-reverse tw:text-[32px]" />
+              <icon-building class="tw-text-color-reverse header-icon" />
               <div
-                class="tw-text-color-reverse tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px]"
+                class="tw-text-color-reverse header-title"
               >
                 {{ langStore.label.title.manageCompanies }}
               </div>
             </div>
             <div
-              class="tw:text-gray-400 tw:dark:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-3!"
+              class="tw:text-gray-400 tw:dark:text-gray-400 tw:text-justify header-desc tw:mt-3!"
             >
               {{ langStore.label.description.manageCompanies }}
             </div>
@@ -140,7 +140,7 @@
                       <icon-edit
                         class="tw-text-color-lighter tw:text-[15px] tw:me-2!"
                       />
-                      <div class="tw-text-color-lighter tw:text-[12px]">
+                      <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
                         {{ langStore.label.button.edit }}
                       </div>
                     </v-btn>
@@ -154,7 +154,7 @@
                       <icon-trash
                         class="tw-text-color-lighter tw:text-[17px] tw:me-2!"
                       />
-                      <div class="tw-text-color-lighter tw:text-[12px]">
+                      <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
                         {{ langStore.label.button.delete }}
                       </div>
                     </v-btn>
@@ -171,13 +171,13 @@
     </v-container>
 
     <!-- brands and products -->
-    <v-container class="tw:md:pe-0! tw:my-5!">
+    <v-container fluid class="tw:md:pe-0! tw:my-5!">
       <v-row class="tw:h-full!">
         <!-- brands -->
         <v-col
           cols="12"
-          lg="6"
-          class="tw:w-full! tw:px-2.5! tw:2xl:ps-0! tw:flex"
+          2xl="6"
+          class="tw:w-full! tw:px-0!  tw:2xl:ps-0! tw:flex"
         >
           <div
             class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden tw:grow!"
@@ -194,16 +194,16 @@
                     class="tw:flex tw:justify-start tw:items-center tw:gap-2"
                   >
                     <icon-checkmark
-                      class="tw-text-color-reverse tw:text-[32px]"
+                      class="tw-text-color-reverse header-icon"
                     />
                     <div
-                      class="tw-text-color-reverse tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px] tw:text-nowrap"
+                      class="tw-text-color-reverse header-title tw:text-nowrap"
                     >
                       {{ langStore.label.title.manageBrands }}
                     </div>
                   </div>
                   <div
-                    class="tw:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-2! tw:text-nowrap"
+                    class="tw:text-gray-400 tw:text-justify header-desc tw:mt-2! tw:text-nowrap"
                   >
                     {{ langStore.label.description.manageBrands }}
                   </div>
@@ -221,9 +221,9 @@
                         class="tw:flex tw:justify-center tw:items-center tw:gap-2"
                       >
                         <icon-plus-circle
-                          class="tw:text-[18px] tw:2xl:text-[18px]"
+                          class="tw:text-[18px] "
                         />
-                        <div class="tw:text-[14px] tw:2xl:text-[15px]">
+                        <div class="tw:text-[13px] tw:3xl:text-[15px]">
                           {{ langStore.label.button.createBrand }}
                         </div>
                       </div>
@@ -261,7 +261,7 @@
                         class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
                         icon
                       >
-                        <icon-check class="tw:text-[25px]" />
+                        <icon-check class="tw:text-[23px] tw:3xl:text-[25px]" />
                       </v-btn>
                       <v-btn
                         @click="toggleBrand('close')"
@@ -269,7 +269,7 @@
                         class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
                         icon
                       >
-                        <icon-close class="tw:text-[25px]" />
+                        <icon-close class="tw:text-[23px] tw:3xl:text-[25px]" />
                       </v-btn>
                     </div>
                   </transition>
@@ -278,12 +278,12 @@
             </div>
             <!-- list -->
             <div
-              class="tw:w-full! tw:flex tw:flex-col tw:justify-start tw:items-start tw:py-2! tw:px-4! tw:2xl:px-6! tw:2xl:h-105 tw:overflow-auto"
+              class="tw:w-full! tw:flex tw:flex-col tw:justify-start tw:items-start tw:py-2! tw:px-4! tw:2xl:px-6! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
             >
               <div
                 v-for="(item, index) in brands"
                 :key="item.id"
-                class="tw:w-full! tw:flex tw:justify-between tw:items-start tw:my-4!"
+                class="tw:w-full! tw:flex tw:justify-between tw:items-start tw:my-3! tw:3xl:my-4!"
               >
                 <div class="tw:flex tw:items-center tw:gap-3">
                   <div
@@ -291,7 +291,7 @@
                   >
                     {{ index + 1 }}
                   </div>
-                  <div class="tw-text-color tw:text-[17px]">
+                  <div class="tw-text-color tw:text-[16px] tw:3xl:text-[17px]">
                     {{ item.name }}
                   </div>
                 </div>
@@ -342,8 +342,8 @@
         <!-- category -->
         <v-col
           cols="12"
-          lg="6"
-          class="tw:w-full! tw:px-2.5! tw:2xl:pe-0! tw:flex"
+          2xl="6"
+          class="tw:w-full! tw:px-0! tw:2xl:pe-0! tw:flex"
         >
           <div
             class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden tw:grow!"
@@ -360,16 +360,16 @@
                     class="tw:flex tw:justify-start tw:items-center tw:gap-2"
                   >
                     <icon-tag
-                      class="tw-text-color-reverse tw:text-[32px]"
+                      class="tw-text-color-reverse header-icon"
                     />
                     <div
-                      class="tw-text-color-reverse tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px] tw:text-nowrap"
+                      class="tw-text-color-reverse header-title tw:text-nowrap"
                     >
                       {{ langStore.label.title.manageCategories }}
                     </div>
                   </div>
                   <div
-                    class="tw:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-2! tw:text-nowrap"
+                    class="tw:text-gray-400 tw:text-justify header-desc tw:mt-2! tw:text-nowrap"
                   >
                     {{ langStore.label.description.manageCategories }}
                   </div>
@@ -387,9 +387,9 @@
                         class="tw:flex tw:justify-center tw:items-center tw:gap-2"
                       >
                         <icon-plus-circle
-                          class="tw:text-[18px] tw:2xl:text-[18px]"
+                          class="tw:text-[18px] "
                         />
-                        <div class="tw:text-[14px] tw:2xl:text-[15px]">
+                        <div class="tw:text-[13px] tw:3xl:text-[15px]">
                           {{ langStore.label.button.createCategory }}
                         </div>
                       </div>
@@ -427,7 +427,7 @@
                         class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
                         icon
                       >
-                        <icon-check class="tw:text-[25px]" />
+                        <icon-check class="tw:text-[23px] tw:3xl:text-[25px]" />
                       </v-btn>
                       <v-btn
                         @click="toggleCategory('close')"
@@ -435,7 +435,7 @@
                         class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
                         icon
                       >
-                        <icon-close class="tw:text-[25px]" />
+                        <icon-close class="tw:text-[23px] tw:3xl:text-[25px]" />
                       </v-btn>
                     </div>
                   </transition>
@@ -444,12 +444,12 @@
             </div>
             <!-- list -->
             <div
-              class="tw:w-full! tw:flex tw:flex-col tw:justify-start tw:items-start tw:py-2! tw:px-4! tw:2xl:px-6! tw:2xl:h-105 tw:overflow-auto"
+              class="tw:w-full! tw:flex tw:flex-col tw:justify-start tw:items-start tw:py-2! tw:px-4! tw:2xl:px-6! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
             >
               <div
                 v-for="(item, index) in categories"
                 :key="item.id"
-                class="tw:w-full! tw:flex tw:justify-between tw:items-start tw:my-4!"
+                class="tw:w-full! tw:flex tw:justify-between tw:items-start tw:my-3! tw:3xl:my-4!"
               >
                 <div class="tw:flex tw:items-center tw:gap-3">
                   <div
@@ -457,7 +457,7 @@
                   >
                     {{ index + 1 }}
                   </div>
-                  <div class="tw-text-color tw:text-[17px]">
+                  <div class="tw-text-color tw:text-[16px] tw:3xl:text-[17px]">
                     {{ item.name }}
                   </div>
                 </div>
@@ -506,7 +506,7 @@
           </div>
         </v-col>
         <!-- products -->
-        <v-col cols="12" class="tw:w-full! tw:px-2.5! tw:2xl:px-0! tw:flex">
+        <v-col cols="12" class="tw:w-full! tw:px-0! tw:2xl:px-0! tw:flex">
           <div
             class="w:overflow-hidden tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:grow!"
           >
@@ -521,15 +521,15 @@
                   <div
                     class="tw:flex tw:justify-start tw:items-center tw:gap-2"
                   >
-                    <icon-box class="tw-text-color-reverse tw:text-[32px]" />
+                    <icon-box class="tw-text-color-reverse header-icon" />
                     <div
-                      class="tw-text-color-reverse tw:text-[20px] tw:lg:text-[22px] tw:2xl:text-[25px] tw:text-nowrap"
+                      class="tw-text-color-reverse header-title tw:text-nowrap"
                     >
                       {{ langStore.label.title.manageProducts }}
                     </div>
                   </div>
                   <div
-                    class="tw:text-gray-400 tw:text-justify tw:text-[14px]/6 tw:2xl:text-[15px]/5 tw:mt-2! tw:text-nowrap"
+                    class="tw:text-gray-400 tw:text-justify header-desc tw:mt-2! tw:text-nowrap"
                   >
                     {{ langStore.label.description.manageProducts }}
                   </div>
@@ -547,9 +547,9 @@
                       class="tw:flex tw:justify-center tw:items-center tw:gap-2"
                     >
                       <icon-plus-circle
-                        class="tw:text-[18px] tw:2xl:text-[18px]"
+                        class="tw:text-[18px]"
                       />
-                      <div class="tw:text-[14px] tw:2xl:text-[15px]">
+                      <div class="tw:text-[13px] tw:3xl:text-[15px]">
                         {{ langStore.label.button.createProduct }}
                       </div>
                     </div>
@@ -576,7 +576,7 @@
             </div>
             <!-- list -->
             <div
-              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:xl:grid-cols-3 tw:content-start tw:p-2! tw:my-0! tw:h-105 tw:overflow-auto"
+              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:xl:grid-cols-3 tw:content-start tw:p-2! tw:my-0! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
             >
               <div
                 v-for="item in filteredProducts"
@@ -598,7 +598,7 @@
 
                   <div class="tw:w-full! tw:flex tw:flex-col tw:gap-1">
                     <!-- name -->
-                    <div class="tw-text-color tw:font-semibold tw:text-[18px]">
+                    <div class="tw-text-color tw:font-semibold tw:text-[16px] tw:3xl:text-[18px]">
                       {{ item.name }}
                     </div>
                     <!-- brand -->
@@ -663,7 +663,7 @@
                     <icon-edit
                       class="tw-text-color-lighter tw:text-[15px] tw:me-2!"
                     />
-                    <div class="tw-text-color-lighter tw:text-[12px]">
+                    <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
                       {{ langStore.label.button.edit }}
                     </div>
                   </v-btn>
@@ -677,7 +677,7 @@
                     <icon-trash
                       class="tw-text-color-lighter tw:text-[17px] tw:me-2!"
                     />
-                    <div class="tw-text-color-lighter tw:text-[12px]">
+                    <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
                       {{ langStore.label.button.delete }}
                     </div>
                   </v-btn>
@@ -748,7 +748,7 @@
                       class="tw:flex tw:justify-center tw:items-center tw:gap-1"
                     >
                       <!-- <icon-bank class="tw-text-color-lighter tw:text-[17px]" /> -->
-                      <div class="tw-text-color-lighter tw:text-[12px]">
+                      <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
                         {{ langStore.label.form.legalEntity }}
                       </div>
                     </div>
@@ -763,7 +763,7 @@
                       class="tw:flex tw:justify-center tw:items-center tw:gap-1"
                     >
                       <!-- <icon-user class="tw-text-color-lighter tw:text-[17px]" /> -->
-                      <div class="tw-text-color-lighter tw:text-[12px]">
+                      <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
                         {{ langStore.label.form.individual }}
                       </div>
                     </div>

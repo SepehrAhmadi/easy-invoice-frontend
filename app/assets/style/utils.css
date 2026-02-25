@@ -23,6 +23,18 @@
     @apply tw:text-red-900! tw:dark:text-red-300!;
   }
 
+  .header-title { 
+    @apply tw:text-[18px] tw:lg:text-[20px] tw:3xl:text-[25px]
+  }
+
+  .header-desc {
+    @apply tw:text-[14px]/6 tw:3xl:text-[15px]/5
+  }
+
+  .header-icon {
+    @apply tw:text-[30px] tw:3xl:text-[32px]
+  }
+
   .blur-dialog {
     @apply tw:backdrop-blur-[1px]!
   }

@@ -33,7 +33,7 @@
       :temporary="$vuetify.display.smAndDown"
     >
       <div
-        class="tw:flex tw:flex-col tw:justify-start tw:items-start tw:gap-3 tw:m-4! tw:mt-1!"
+        class="tw:flex tw:flex-col tw:justify-start tw:items-start tw:gap-2 tw:m-4! tw:mt-1!"
       >
         <div
           v-for="(item, index) in menuItems"
@@ -52,11 +52,11 @@
             <div class="tw:flex tw:justify-center tw:items-center tw:gap-3">
               <component
                 :is="item.icon"
-                class="tw:text-[25px] tw:text-gray-600! tw:group-hover:text-gray-900! tw:dark:text-gray-300! tw:dark:group-hover:text-gray-200! tw:transition tw:duration-150"
+                class="tw:text-[23px] tw:text-gray-600! tw:group-hover:text-gray-900! tw:dark:text-gray-300! tw:dark:group-hover:text-gray-200! tw:transition tw:duration-150"
               />
               <transition name="slide-text">
                 <div
-                  class="tw:text-gray-600! tw:group-hover:text-gray-900! tw:dark:text-gray-300! tw:dark:group-hover:text-gray-200! tw:transition tw:duration-150 tw:text-[16px] tw:text-nowrap!"
+                  class="tw:text-gray-600! tw:group-hover:text-gray-900! tw:dark:text-gray-300! tw:dark:group-hover:text-gray-200! tw:transition tw:duration-150 tw:text-[15px] tw:text-nowrap!"
                   v-if="!rail"
                 >
                   {{ item.title }}
@@ -130,7 +130,7 @@ import operationsIcon from "~/components/icon/layer.vue";
 import reportsIcon from "~/components/icon/documents.vue";
 
 import { useLanguageStore } from "~/store/language";
-import ThemeSwitcher from "./ThemeSwitcher.vue";
+import ThemeSwitcher from "./themeSwitcher.vue";
 const langStore = useLanguageStore();
 
 const isDesktop = ref(false);
