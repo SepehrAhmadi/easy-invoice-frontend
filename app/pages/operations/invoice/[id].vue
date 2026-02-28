@@ -15,9 +15,7 @@
                 v-else-if="operationStore.invoiceMode == 'edit'"
                 class="tw-text-color-reverse header-icon"
               />
-              <div
-                class="tw-text-color-reverse header-title tw:text-nowrap"
-              >
+              <div class="tw-text-color-reverse header-title tw:text-nowrap">
                 {{
                   operationStore.invoiceMode == "add"
                     ? langStore.label.page.addInvoice
@@ -887,6 +885,7 @@ const getInvoiceItem = (id: string) => {
 };
 const submitInvoiceItem = (mode?: SubmitMode) => {
   if (mode && mode === "add") {
+    console.log("add mode : ", mode);
     if (
       invoiceItemForm.value.localDate &&
       invoiceItemForm.value.productId &&
@@ -904,6 +903,7 @@ const submitInvoiceItem = (mode?: SubmitMode) => {
       handlerStore.setError(langStore.alert.error.requiredFields);
     }
   } else if (!mode || mode === "edit") {
+    console.log("edit mode : ", mode);
     if (
       invoiceItemForm.value.localDate &&
       invoiceItemForm.value.productId &&
@@ -1032,6 +1032,10 @@ watch(invoiceItem, (val) => {
     invoiceItemForm.value.isEdit = !!val.isEdit;
     invoiceItemForm.value.localDate = val.localDate;
     invoiceItemForm.value.productId = val.productId;
+    product.value =
+      dropdownStore.productsOptions.find(
+        (item) => item.value === val.productId,
+      ) || null;
     invoiceItemForm.value.categoryId = val.categoryId;
     invoiceItemForm.value.brandId = val.brandId;
     invoiceItemForm.value.packagingId = val.packagingId;
