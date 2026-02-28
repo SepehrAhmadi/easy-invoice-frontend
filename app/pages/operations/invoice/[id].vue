@@ -476,7 +476,7 @@
                 <icon-refresh class="tw:text-[20px]" />
               </v-btn>
               <v-btn
-                @click="submitInvoiceItem('add')"
+                @click="submitInvoiceItem()"
                 rounded="pill"
                 color="white"
                 class="tw:px-0! tw:py-1! tw:w-30"
@@ -734,6 +734,7 @@ const route = useRoute();
 const showInvoiceFormExpand = ref(false);
 const isAnimating = ref(false);
 // modal
+const submitMode = ref<SubmitMode>("add");
 const deleteModal = ref<boolean>(false);
 // form
 const product = ref<any>(null);
@@ -879,12 +880,16 @@ const submitInvoice = () => {
   }
 };
 const getInvoiceItem = (id: string) => {
+  submitMode.value = "edit";
+  console.log("open mode : " , submitMode.value)
   invoiceItemId.value = id;
 
   operationStore.getInvoiceItem(invoice.value.id, id);
 };
-const submitInvoiceItem = (mode?: SubmitMode) => {
-  if (mode && mode === "add") {
+const submitInvoiceItem = () => {
+  const mode = submitMode.value;
+
+  if (mode === "add") {
     console.log("add mode : ", mode);
     if (
       invoiceItemForm.value.localDate &&
@@ -902,7 +907,7 @@ const submitInvoiceItem = (mode?: SubmitMode) => {
     } else {
       handlerStore.setError(langStore.alert.error.requiredFields);
     }
-  } else if (!mode || mode === "edit") {
+  } else if (mode === "edit") {
     console.log("edit mode : ", mode);
     if (
       invoiceItemForm.value.localDate &&
@@ -995,6 +1000,7 @@ const resetFields = (mode?: "invoiceItemForm" | "invoiceForm") => {
     localDate: null,
     companyId: null,
   };
+  submitMode.value = "add";
 };
 const close = () => {
   deleteModal.value = false;
@@ -1057,7 +1063,7 @@ onMounted(() => {
   dropdownStore.getBrands();
   dropdownStore.getProducts();
   dropdownStore.getCategories();
-  loadInvoice();
+  reloadData()
 });
 </script>
 
