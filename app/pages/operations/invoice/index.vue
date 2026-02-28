@@ -153,7 +153,7 @@
         <transition name="toggle-slide">
           <v-col cols="12" v-show="showSubmitForm">
             <v-row class="tw:flex tw:items-center!">
-              <v-col cols="12" lg="3" 2xl="2">
+              <v-col cols="12" lg="3" xl="2" 2xl="2">
                 <div class="tw:relative!">
                   <label
                     v-if="invoiceForm.localDate"
@@ -178,7 +178,7 @@
                   />
                 </div>
               </v-col>
-              <v-col cols="12" lg="8" 2xl="9">
+              <v-col cols="12" lg="8" xl="9" 2xl="9">
                 <v-row class="tw:flex tw:items-center!">
                   <v-col cols="12" lg="2">
                     <div
