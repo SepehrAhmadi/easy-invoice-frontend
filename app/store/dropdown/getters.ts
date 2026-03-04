@@ -50,6 +50,20 @@ export function useDropdownGetters(state: ReturnType<typeof useDropdownState>) {
       text: item.name,
     })),
   );
+  // companyType
+  const companyTypeOptions = computed(()=> 
+    state.companyTypeResult.value.map((item: any) => ({
+      value: item.id,
+      text: item.name,
+    })),
+  )
+  // payment status
+  const paymentStatusOptions = computed(()=> 
+    state.paymentStatusResult.value.map((item: any) => ({
+      value: item.id,
+      text: item.name,
+    })),
+  )
 
   return {
     unitsOptions,
@@ -58,5 +72,7 @@ export function useDropdownGetters(state: ReturnType<typeof useDropdownState>) {
     brandsOptions,
     productsOptions,
     categoriesOptions,
+    companyTypeOptions,
+    paymentStatusOptions,
   };
 }

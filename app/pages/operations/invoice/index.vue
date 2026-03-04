@@ -8,9 +8,7 @@
           <div>
             <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
               <icon-document class="tw-text-color-reverse header-icon" />
-              <div
-                class="tw-text-color-reverse header-title tw:text-nowrap"
-              >
+              <div class="tw-text-color-reverse header-title tw:text-nowrap">
                 {{ langStore.label.title.manageInvocies }}
               </div>
             </div>
@@ -94,8 +92,8 @@
                   format="jYYYY/jMM/jDD"
                   display-format="jYYYY/jMM/jDD"
                   class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!"
-                  clearable
                   color="#1d202e"
+                  @update:modelValue="loadInvoices"
                 />
               </div>
               <div class="tw:relative!">
@@ -115,9 +113,12 @@
                   class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!"
                   clearable
                   color="#1d202e"
+                  @update:modelValue="loadInvoices"
                 />
               </div>
               <v-autocomplete
+                v-model="filter.paymentStatus"
+                :items="dropdownStore.paymentStatusOptions"
                 item-title="text"
                 item-value="value"
                 variant="outlined"
@@ -125,14 +126,18 @@
                 hide-details
                 class="tw:text-[14px]! tw:text-white!"
                 rounded="pill"
+                clearable
+                @update:modelValue="loadInvoices"
               >
                 <template #label>
                   <span class="tw:text-[12px]">
-                    {{ langStore.label.form.status }}
+                    {{ langStore.label.form.paymentStatus }}
                   </span>
                 </template>
               </v-autocomplete>
               <v-autocomplete
+                v-model="filter.companyType"
+                :items="dropdownStore.companyTypeOptions"
                 item-title="text"
                 item-value="value"
                 variant="outlined"
@@ -140,6 +145,8 @@
                 hide-details
                 class="tw:text-[14px]! tw:text-white!"
                 rounded="pill"
+                clearable
+                @update:modelValue="loadInvoices"
               >
                 <template #label>
                   <span class="tw:text-[12px]">
@@ -191,7 +198,9 @@
                         class="tw-text-color-reverse tw:text-[16px] tw:lg:text-[16px] tw:3xl:text-[20px]"
                       >
                         {{ langStore.label.form.company }}
-                        <span class="tw:text-red-400 tw:text-[11px] tw:3xl:text-[13px]">
+                        <span
+                          class="tw:text-red-400 tw:text-[11px] tw:3xl:text-[13px]"
+                        >
                           ({{ langStore.label.caption.required }})
                         </span>
                       </div>
@@ -262,7 +271,9 @@
                 </v-row>
               </v-col>
               <v-col cols="12" lg="1">
-                <div class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:3xl:gap-4">
+                <div
+                  class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:3xl:gap-4"
+                >
                   <v-btn
                     @click="submitInvoice"
                     color="white"
@@ -584,7 +595,7 @@ type StatusMode = "paid" | "awaitingPayment";
 interface Filter {
   fromDate: string | null;
   toDate: string | null;
-  status: Status | null;
+  paymentStatus: Status | null;
   companyType: CompanyType | null;
 }
 interface InvoiceForm {
@@ -610,7 +621,7 @@ const tableHeader = ref<any>([
     title: langStore.label.table.row,
     key: "row",
     align: "start",
-    sortable : "false",
+    sortable: "false",
   },
   {
     title: langStore.label.table.invoiceNumber,
@@ -652,9 +663,9 @@ const tableHeader = ref<any>([
 // filter
 const showFilter = ref<boolean>(false);
 const filter = ref<Filter>({
-  fromDate: null,
+  fromDate: NowDate,
   toDate: null,
-  status: null,
+  paymentStatus: null,
   companyType: null,
 });
 // form
@@ -683,7 +694,20 @@ const toggleSubmitForm = () => {
   showFilter.value = false;
 };
 const loadInvoices = async () => {
-  await operationStore.getInvoices();
+  let payload = "";
+  if (filter.value.fromDate) {
+    payload += "?fromDate=" + filter.value.fromDate;
+  }
+  if (filter.value.toDate) {
+    payload += "&toDate=" + filter.value.toDate;
+  }
+  if (filter.value.companyType) {
+    payload += "&companyType=" + filter.value.companyType;
+  }
+  if (filter.value.paymentStatus) {
+    payload += "&paymentStatus=" + filter.value.paymentStatus;
+  }
+  await operationStore.getInvoices(payload);
 };
 const selectCompany = (id: string) => {
   companyId.value = id;
@@ -753,6 +777,8 @@ watch(
 // ======= Lifecycle =======
 onMounted(() => {
   dropdownStore.getCompanies();
+  dropdownStore.getCompanyType();
+  dropdownStore.getPaymentStatus();
   reloadData();
 });
 </script>

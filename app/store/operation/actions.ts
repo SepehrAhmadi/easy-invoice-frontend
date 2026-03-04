@@ -10,12 +10,14 @@ export function useOperationActions(state: StateType) {
   const langStore = useLanguageStore();
 
   // ====== Invoice ======
-  const getInvoices = () => {
+  const getInvoices = (value?: any) => {
     const axios = useApi();
     handlerStore.loading = true;
 
+    console.log("filter value : ", value);
+
     return axios
-      .get("/operation/invoice")
+      .get("/operation/invoice" + value)
       .then((res) => {
         state.invoicesResult.value = res.data.data.invoices;
       })
@@ -132,7 +134,7 @@ export function useOperationActions(state: StateType) {
       });
   };
 
-  const changeInvoiceStatus = (id : string ,value: any) => {
+  const changeInvoiceStatus = (id: string, value: any) => {
     const axios = useApi();
     handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;

@@ -55,7 +55,7 @@ export function useDropdownActions(state: StateType) {
       });
   };
 
-  const getCompanies= () => {
+  const getCompanies = () => {
     const axios = useApi();
     handlerStore.loading = true;
 
@@ -78,7 +78,7 @@ export function useDropdownActions(state: StateType) {
       });
   };
 
-  const getBrands= () => {
+  const getBrands = () => {
     const axios = useApi();
     handlerStore.loading = true;
 
@@ -124,7 +124,7 @@ export function useDropdownActions(state: StateType) {
       });
   };
 
-  const getProducts= () => {
+  const getProducts = () => {
     const axios = useApi();
     handlerStore.loading = true;
 
@@ -147,7 +147,51 @@ export function useDropdownActions(state: StateType) {
       });
   };
 
+  const getCompanyType = () => {
+    const axios = useApi();
+    handlerStore.loading = true;
 
+    return axios
+      .get("/dropdown/companyType")
+      .then((res) => {
+        state.companyTypeResult.value = res.data.data.companyType;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
+
+  const getPaymentStatus = () => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get("/dropdown/paymentStatus")
+      .then((res) => {
+        state.paymentStatusResult.value = res.data.data.paymentStatus;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
 
   return {
     getUnits,
@@ -156,5 +200,7 @@ export function useDropdownActions(state: StateType) {
     getBrands,
     getCategories,
     getProducts,
+    getCompanyType,
+    getPaymentStatus,
   };
 }
