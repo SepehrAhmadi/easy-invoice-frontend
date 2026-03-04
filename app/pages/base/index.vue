@@ -12,9 +12,7 @@
           <div class="tw:flex-1">
             <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
               <icon-building class="tw-text-color-reverse header-icon" />
-              <div
-                class="tw-text-color-reverse header-title"
-              >
+              <div class="tw-text-color-reverse header-title">
                 {{ langStore.label.title.manageCompanies }}
               </div>
             </div>
@@ -140,7 +138,9 @@
                       <icon-edit
                         class="tw-text-color-lighter tw:text-[15px] tw:me-2!"
                       />
-                      <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
+                      <div
+                        class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
+                      >
                         {{ langStore.label.button.edit }}
                       </div>
                     </v-btn>
@@ -154,7 +154,9 @@
                       <icon-trash
                         class="tw-text-color-lighter tw:text-[17px] tw:me-2!"
                       />
-                      <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
+                      <div
+                        class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
+                      >
                         {{ langStore.label.button.delete }}
                       </div>
                     </v-btn>
@@ -170,14 +172,15 @@
       </v-row>
     </v-container>
 
-    <!-- brands and products -->
+    <!-- brands and category and products -->
     <v-container fluid class="tw:md:pe-0! tw:my-5!">
       <v-row class="tw:h-full!">
         <!-- brands -->
         <v-col
           cols="12"
-          2xl="6"
-          class="tw:w-full! tw:px-0!  tw:2xl:ps-0! tw:flex"
+          lg="12"
+          xl="6"
+          class="tw:w-full! tw:lg:px-0! tw:2xl:ps-0! tw:2xl:pe-3! tw:flex"
         >
           <div
             class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden tw:grow!"
@@ -193,9 +196,7 @@
                   <div
                     class="tw:flex tw:justify-start tw:items-center tw:gap-2"
                   >
-                    <icon-checkmark
-                      class="tw-text-color-reverse header-icon"
-                    />
+                    <icon-checkmark class="tw-text-color-reverse header-icon" />
                     <div
                       class="tw-text-color-reverse header-title tw:text-nowrap"
                     >
@@ -220,9 +221,7 @@
                       <div
                         class="tw:flex tw:justify-center tw:items-center tw:gap-2"
                       >
-                        <icon-plus-circle
-                          class="tw:text-[18px] "
-                        />
+                        <icon-plus-circle class="tw:text-[18px]" />
                         <div class="tw:text-[13px] tw:3xl:text-[15px]">
                           {{ langStore.label.button.createBrand }}
                         </div>
@@ -342,8 +341,9 @@
         <!-- category -->
         <v-col
           cols="12"
-          2xl="6"
-          class="tw:w-full! tw:px-0! tw:2xl:pe-0! tw:flex"
+          lg="12"
+          xl="6"
+          class="tw:w-full! tw:lg:px-0! tw:2xl:pe-0! tw:2xl:ps-3! tw:flex"
         >
           <div
             class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:overflow-hidden tw:grow!"
@@ -359,9 +359,7 @@
                   <div
                     class="tw:flex tw:justify-start tw:items-center tw:gap-2"
                   >
-                    <icon-tag
-                      class="tw-text-color-reverse header-icon"
-                    />
+                    <icon-tag class="tw-text-color-reverse header-icon" />
                     <div
                       class="tw-text-color-reverse header-title tw:text-nowrap"
                     >
@@ -386,9 +384,7 @@
                       <div
                         class="tw:flex tw:justify-center tw:items-center tw:gap-2"
                       >
-                        <icon-plus-circle
-                          class="tw:text-[18px] "
-                        />
+                        <icon-plus-circle class="tw:text-[18px]" />
                         <div class="tw:text-[13px] tw:3xl:text-[15px]">
                           {{ langStore.label.button.createCategory }}
                         </div>
@@ -546,9 +542,7 @@
                     <div
                       class="tw:flex tw:justify-center tw:items-center tw:gap-2"
                     >
-                      <icon-plus-circle
-                        class="tw:text-[18px]"
-                      />
+                      <icon-plus-circle class="tw:text-[18px]" />
                       <div class="tw:text-[13px] tw:3xl:text-[15px]">
                         {{ langStore.label.button.createProduct }}
                       </div>
@@ -576,7 +570,7 @@
             </div>
             <!-- list -->
             <div
-              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:xl:grid-cols-3 tw:content-start tw:p-2! tw:my-0! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
+              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:3xl:grid-cols-3 tw:content-start tw:p-2! tw:my-0! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
             >
               <div
                 v-for="item in filteredProducts"
@@ -598,7 +592,9 @@
 
                   <div class="tw:w-full! tw:flex tw:flex-col tw:gap-1">
                     <!-- name -->
-                    <div class="tw-text-color tw:font-semibold tw:text-[16px] tw:3xl:text-[18px]">
+                    <div
+                      class="tw-text-color tw:font-semibold tw:text-[16px] tw:3xl:text-[18px]"
+                    >
                       {{ item.name }}
                     </div>
                     <!-- brand -->
@@ -609,7 +605,7 @@
                         class="tw-text-color-lighter tw:text-[18px]"
                       />
                       <span
-                        class="tw:flex tw-text-color-lighter tw:text-[13px]/5"
+                        class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[13px]/5"
                       >
                         {{ langStore.label.table.brand }} :
                         {{ item.brandName }}
@@ -626,7 +622,7 @@
                           class="tw-text-color-lighter tw:text-[18px]"
                         />
                         <span
-                          class="tw:flex tw-text-color-lighter tw:text-[13px]/5"
+                          class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[13px]/5"
                         >
                           {{ langStore.label.table.packaging }} :
                           {{ item.packagingName }}
@@ -639,7 +635,7 @@
                           class="tw-text-color-lighter tw:text-[18px]"
                         />
                         <span
-                          class="tw:flex tw-text-color-lighter tw:text-[13px]/5"
+                          class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[13px]/5"
                         >
                           {{ langStore.label.table.amount }} :
                           {{ item.amount }}
@@ -663,7 +659,9 @@
                     <icon-edit
                       class="tw-text-color-lighter tw:text-[15px] tw:me-2!"
                     />
-                    <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
+                    <div
+                      class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
+                    >
                       {{ langStore.label.button.edit }}
                     </div>
                   </v-btn>
@@ -677,7 +675,9 @@
                     <icon-trash
                       class="tw-text-color-lighter tw:text-[17px] tw:me-2!"
                     />
-                    <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
+                    <div
+                      class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
+                    >
                       {{ langStore.label.button.delete }}
                     </div>
                   </v-btn>
@@ -748,7 +748,9 @@
                       class="tw:flex tw:justify-center tw:items-center tw:gap-1"
                     >
                       <!-- <icon-bank class="tw-text-color-lighter tw:text-[17px]" /> -->
-                      <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
+                      <div
+                        class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
+                      >
                         {{ langStore.label.form.legalEntity }}
                       </div>
                     </div>
@@ -763,7 +765,9 @@
                       class="tw:flex tw:justify-center tw:items-center tw:gap-1"
                     >
                       <!-- <icon-user class="tw-text-color-lighter tw:text-[17px]" /> -->
-                      <div class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]">
+                      <div
+                        class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
+                      >
                         {{ langStore.label.form.individual }}
                       </div>
                     </div>
@@ -1463,7 +1467,7 @@ const confirmDelete = () => {
     baseStore.deleteCompany(companyId.value);
   } else if (deleteType.value === "brand") {
     baseStore.deleteBrand(brandId.value);
-  }else if (deleteType.value === "category"){
+  } else if (deleteType.value === "category") {
     baseStore.deleteCategory(categoryId.value);
   } else if (deleteType.value === "product") {
     baseStore.deleteProduct(productId.value);
