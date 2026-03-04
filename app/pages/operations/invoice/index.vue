@@ -9,7 +9,7 @@
             <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
               <icon-document class="tw-text-color-reverse header-icon" />
               <div
-                class="tw-text-color-reverse header-titlet tw:text-nowrap"
+                class="tw-text-color-reverse header-title tw:text-nowrap"
               >
                 {{ langStore.label.title.manageInvocies }}
               </div>

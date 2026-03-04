@@ -24,7 +24,7 @@
   }
 
   .header-title { 
-    @apply tw:text-[18px] tw:lg:text-[20px] tw:3xl:text-[25px]
+    @apply tw:text-[18px] tw:lg:text-[20px] tw:3xl:text-[23px]!
   }
 
   .header-desc {

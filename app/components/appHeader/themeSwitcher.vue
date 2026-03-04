@@ -11,7 +11,9 @@
       class="tw:w-8! tw:h-8! tw:flex tw:justify-center tw:items-center tw:rounded-full tw:cursor-pointer tw:hover:bg-gray-200 tw:dark:hover:bg-gray-700 tw:transition tw:duration-100"
       :class="{ 'tw:bg-gray-200 tw:dark:bg-gray-700 ': !isDark }"
     >
-      <icon-sun class="tw:w-5! tw:h-5! tw:text-gray-700 tw:dark:text-gray-300" />
+      <icon-sun
+        class="tw:w-5! tw:h-5! tw:text-gray-700 tw:dark:text-gray-300"
+      />
     </div>
 
     <div
@@ -19,7 +21,9 @@
       class="tw:w-8! tw:h-8! tw:flex tw:justify-center tw:items-center tw:rounded-full tw:cursor-pointer tw:hover:bg-gray-200 tw:dark:hover:bg-gray-700 tw:transition tw:duration-100"
       :class="{ 'tw:bg-gray-200 tw:dark:bg-gray-700 ': isDark }"
     >
-      <icon-moon class="tw:w-5! tw:h-5! tw:text-gray-700 tw:dark:text-gray-300" />
+      <icon-moon
+        class="tw:w-5! tw:h-5! tw:text-gray-700 tw:dark:text-gray-300"
+      />
     </div>
   </div>
 </template>
@@ -27,6 +31,9 @@
 <script setup lang="ts">
 import { useTheme } from "vuetify";
 const theme = useTheme();
+
+import { useHandlerStore } from "~/store/handler";
+const handlerStore = useHandlerStore();
 
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
@@ -43,4 +50,11 @@ const toggleTheme = (mode: "light" | "dark") => {
   document.documentElement.classList.toggle("dark", isDark.value);
   theme.global.name.value = isDark.value ? "dark" : "light";
 };
+
+onMounted(() => {
+  handlerStore.theme = localStorage.getItem("theme");
+  isDark.value = localStorage.getItem("theme") === "dark";
+  document.documentElement.classList.toggle("dark", isDark.value);
+  theme.global.name.value = isDark.value ? "dark" : "light";
+});
 </script>
