@@ -354,22 +354,22 @@
                       class="tw:flex tw:justify-center tw:items-center tw:w-37! tw:gap-2 tw:py-0.75! tw:px-3! tw:rounded-full"
                       :class="{
                         'tw:bg-success/10 tw:border tw:border-success/40 tw:text-success tw:dark:text-green-500':
-                          item.status == Status.paid,
+                          item.paymentStatus == Status.paid,
                         'tw:bg-gray-100 tw:dark:bg-gray-800 tw:border tw:border-gray-400 tw:dark:border-gray-500 tw-text-color-lighter':
-                          item.status == Status.awaitingPayment,
+                          item.paymentStatus == Status.awaitingPayment,
                       }"
                     >
                       <icon-check-double
-                        v-if="item.status == Status.paid"
+                        v-if="item.paymentStatus == Status.paid"
                         class="tw:text-[20px]"
                       />
                       <icon-hourglass
-                        v-if="item.status == Status.awaitingPayment"
+                        v-if="item.paymentStatus == Status.awaitingPayment"
                         class="tw:text-[15px]"
                       />
                       <div class="tw:text-[12px]">
                         {{
-                          item.status == Status.paid
+                          item.paymentStatus == Status.paid
                             ? langStore.label.table.paid
                             : langStore.label.table.awaitingPayment
                         }}
@@ -603,7 +603,7 @@ interface InvoiceForm {
   companyId: string | null;
 }
 interface StatusForm {
-  status: Status | null;
+  paymentStatus: Status | null;
 }
 
 // ======= Composables =======
@@ -677,7 +677,7 @@ const invoiceForm = ref<InvoiceForm>({
   companyId: null,
 });
 const statusForm = ref<StatusForm>({
-  status: null,
+  paymentStatus: null,
 });
 // modal
 const deleteModal = ref<boolean>(false);
@@ -727,10 +727,10 @@ const navigateToEdit = (id: string) => {
 };
 const changeStatus = (mode: StatusMode, id: string) => {
   if (mode == "paid") {
-    statusForm.value.status = Status.paid;
+    statusForm.value.paymentStatus = Status.paid;
     operationStore.changeInvoiceStatus(id, statusForm.value);
   } else if (mode == "awaitingPayment") {
-    statusForm.value.status = Status.awaitingPayment;
+    statusForm.value.paymentStatus = Status.awaitingPayment;
     operationStore.changeInvoiceStatus(id, statusForm.value);
   }
 };
