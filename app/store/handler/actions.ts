@@ -23,10 +23,6 @@ export function useHandlerActions(state: StateType) {
   };
 
   // --- helpers ---
-  const setLoadingBtn = (status: boolean) => {
-    state.loadingBtn.value = status;
-  };
-
   const setSuccess = (message: string) => {
     state.checkAlert.value = 1;
     state.successMessage.value = message;
@@ -73,7 +69,6 @@ export function useHandlerActions(state: StateType) {
     setForbidden,
     setRedirect,
     clearFlags,
-    setLoadingBtn,
     setSuccess,
     setError,
     setWarning,

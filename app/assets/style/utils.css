@@ -39,3 +39,7 @@
     @apply tw:backdrop-blur-[1px]!
   }
 }
+
+html[dir="rtl"] .yekan-font {
+  font-family: iranyekan !important;
+}

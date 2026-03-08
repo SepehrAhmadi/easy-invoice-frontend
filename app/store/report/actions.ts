@@ -10,12 +10,12 @@ export function useReportActions(state: StateType) {
   const langStore = useLanguageStore();
 
   // ====== by packaging ======
-  const getPackaging = (filterValue?: any) => {
+  const getPackaging = () => {
     const axios = useApi();
     handlerStore.loading = true;
 
     return axios
-      .get("/report/packaging" + filterValue)
+      .get("/report/packaging")
       .then((res) => {
         state.packagingResult.value = res.data.data;
       })

@@ -33,6 +33,7 @@ export const label = (state) => {
         manageProducts: "Manage Products",
         manageInvocies: "Manage Invoices",
         manageCategories: "Manage Category",
+        reportByPackaging: "Report by packaing",
       },
       header: {
         addCompany: "Add company",
@@ -67,6 +68,7 @@ export const label = (state) => {
         filter: "Filter",
         paid: "Paid",
         awaitingPayment: "Awaiting payment",
+        viewDetail: "View detail",
       },
       form: {
         username: "Username",
@@ -130,6 +132,8 @@ export const label = (state) => {
         edit: "Edit",
         design: "Design",
         paymentStatus: "Payment status",
+        totalPageDesigned: "Total page designed",
+        invoicesCount: "Invoices count",
       },
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
@@ -138,6 +142,7 @@ export const label = (state) => {
         deleteConfirm: "Are you sure you want to delete this item?",
         manageInvocies: "Manage your invoices in this section",
         manageCategories: "Manage your categories in this section",
+        reportByPackaging: "You can see this report base on each packaging ",
       },
       caption: {
         detailToLogin: "Insert your detail to login to your account",
@@ -184,6 +189,7 @@ export const label = (state) => {
         manageProducts: "مدیریت محصولات",
         manageInvocies: "مدیریت فاکتور ها",
         manageCategories: "مدیریت دسته بندی ها",
+        reportByPackaging: "گزارش بر اساس دسته بندی",
       },
       header: {
         addCompany: "ایجاد شرکت",
@@ -218,6 +224,7 @@ export const label = (state) => {
         filter: "فیلتر",
         paid: "پرداخت شده",
         awaitingPayment: "در انتظار پرداخت",
+        viewDetail: "مشاهده جزئیات",
       },
       form: {
         username: "نام کاربری",
@@ -281,6 +288,8 @@ export const label = (state) => {
         edit: "ویرایش",
         design: "طراحی",
         paymentStatus: "وضعیت پرداخت",
+        totalPageDesigned: "مجموع صفحات طراحی شده",
+        invoicesCount: "تعداد فاکتور ها",
       },
       description: {
         manageCompanies:
@@ -290,6 +299,8 @@ export const label = (state) => {
         deleteConfirm: "آیا از حذف این مورد اطمینان دارید؟",
         manageInvocies: "فاکتور های خود را در این قسمت مدیریت کنید",
         manageCategories: "دسته بندی های خود را در این قسمت مدیریت کنید",
+        reportByPackaging:
+          "گزراش مربتط با هر دسته بندی را در این قسمت مشاهده کنید",
       },
       caption: {
         detailToLogin:

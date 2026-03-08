@@ -10,7 +10,7 @@ export function useConfigActions(state: StateType) {
   const handlerStore = useHandlerStore();
   const langStore = useLanguageStore();
 
-  const login = (value: unknown) => {
+  const login = (value: any) => {
     const axios = useApi();
     state.loading.value = true;
     return axios
