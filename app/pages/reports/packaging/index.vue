@@ -1,8 +1,11 @@
-<template>
-  <PageHeader :title="langStore.label.page.reportByPackaging" />
-</template>
+<template></template>
 
 <script setup lang="ts">
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
+const { setPageTitle } = usePageTitle();
+
+watchEffect(() => {
+  setPageTitle(langStore.label.page.reports);
+});
 </script>

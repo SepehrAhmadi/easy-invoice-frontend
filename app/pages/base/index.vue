@@ -244,6 +244,7 @@
                         hide-details
                         class="tw:text-[14px]! tw:w-50! tw:text-white!"
                         rounded="pill"
+                        @keyup.enter="submitBrand"
                       >
                         <template #label>
                           <span class="tw:text-[12px]">
@@ -407,6 +408,7 @@
                         hide-details
                         class="tw:text-[14px]! tw:w-50! tw:text-white!"
                         rounded="pill"
+                        @keyup.enter="submitCategory"
                       >
                         <template #label>
                           <span class="tw:text-[12px]">
@@ -825,6 +827,7 @@
                 hide-spin-buttons
                 class="tw:text-[14px]!"
                 rounded="lg"
+                @keyup.enter="submitCompany"
               >
                 <template #label>
                   <span class="tw:text-[12px]">
@@ -1011,6 +1014,7 @@
                 hide-details
                 class="tw:text-[14px]! centred-input"
                 rounded="lg"
+                @keyup.enter="submitProduct"
               >
                 <template #label>
                   <span class="tw:text-[12px]">

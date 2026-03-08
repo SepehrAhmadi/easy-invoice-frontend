@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  
+</template>
 
 <script setup lang="ts">
 import { useLanguageStore } from "~/store/language";

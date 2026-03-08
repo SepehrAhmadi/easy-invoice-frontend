@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="tw:md:pe-0! tw:md:py-0!">
+    <v-container fluid class="tw:md:pe-0! tw:md:py-0!">
       <v-row
         class="tw-flex! tw:items-center! tw:bg-primary-dark tw:rounded-t-4xl! tw:p-3!"
       >

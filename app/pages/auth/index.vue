@@ -81,6 +81,7 @@
                         hide-details
                         rounded="pill"
                         :type="showPassword ? 'text' : 'password'"
+                        @keyup.enter="login"
                       >
                         <template #label>
                           <span class="tw:text-[14px]">{{
