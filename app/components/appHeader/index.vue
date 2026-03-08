@@ -33,7 +33,7 @@
       :temporary="$vuetify.display.smAndDown"
     >
       <div
-        class="tw:flex tw:flex-col tw:justify-start tw:items-start tw:gap-2 tw:m-4! tw:mt-1!"
+        class="tw:flex tw:flex-col tw:justify-start tw:items-start tw:gap-2 tw:m-4.25! tw:mt-1!"
       >
         <div
           v-for="(item, index) in menuItems"

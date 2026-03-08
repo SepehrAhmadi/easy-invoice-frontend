@@ -14,7 +14,7 @@
     <ThemeSwitcher />
     <v-container>
       <v-row class="tw:flex tw:justify-center tw:items-center">
-        <v-col cols="12" lg="10" xl="8" class="tw:h-140 tw:lg:h-180!">
+        <v-col cols="12" lg="10" xl="8" class="tw:h-140 tw:3xl:h-180!">
           <v-row
             class="tw:h-full! lg:tw:w-full! tw:bg-linear-to-t tw:from-black tw:to-gray-900 tw:dark:from-gray-400 tw:dark:to-white tw:rounded-[40px] lg:tw:rounded-[70px]! tw:overflow-hidden tw:shadow-xl tw:p-0! tw:mx-2!"
           >
@@ -28,15 +28,15 @@
               >
                 <div class="tw:flex tw:justify-between tw:items-center">
                   <div>
-                    <h1 class="tw-main-text-color tw:text-[20px]">
+                    <h1 class="tw-main-text-color tw:text-[16px] tw:3xl:text-[20px] ">
                       EASY INVOCIE
                     </h1>
                   </div>
                   <div
                     class="tw:flex tw:justify-start tw:items-center tw:gap-2 tw:cursor-pointer tw:group"
                   >
-                    <Icon-user-circle class="tw-text-button" />
-                    <div class="tw-text-button">
+                    <Icon-user-circle class="tw-text-button tw:text-[14px] tw:3xl:text-[16px]" />
+                    <div class="tw-text-button tw:text-[14px] tw:3xl:text-[16px]">
                       {{ langStore.label.button.signUp }}
                     </div>
                   </div>
@@ -45,7 +45,7 @@
                   class="tw:flex-1 tw:flex tw:justify-between tw:items-center tw:w-full!"
                 >
                   <div class="tw:w-full!">
-                    <h1 class="tw:text-[40px] tw-main-text-color tw:mb-5!">
+                    <h1 class="tw:text-[30px] tw:3xl:text-[40px] tw-main-text-color tw:mb-5!">
                       {{ langStore.label.title.signIn }}
                     </h1>
                     <div class="tw:flex tw:flex-col tw:gap-6 tw:mb-5!">
@@ -135,19 +135,19 @@
             >
               <!-- circle goes first -->
               <div
-                class="tw:absolute tw:hidden tw:lg:block tw:w-120 tw:h-120 tw:-top-30 tw:right-1/11 -tw:translate-x-1/2 tw:rounded-full tw:border-8 tw:border-primary-dark/60 tw:dark:border-gray-500/20 tw:z-0"
+                class="tw:absolute tw:hidden tw:lg:block tw:w-100 tw:3xl:w-120 tw:h-100 tw:3xl:h-120 tw:-top-30 tw:right-1/13 tw:3xl:right-1/11 -tw:translate-x-1/2 tw:rounded-full tw:border-8 tw:border-primary-dark/60 tw:dark:border-gray-500/20 tw:z-0"
               ></div>
               <div
-                class="tw:absolute tw:hidden tw:lg:block tw:w-120 tw:h-120 tw:-bottom-30 tw:right-1/11 -tw:translate-x-1/2 tw:rounded-full tw:border-8 tw:border-primary-dark/40 tw:dark:border-gray-500/20 tw:z-0"
+                class="tw:absolute tw:hidden tw:lg:block tw:w-100 tw:3xl:w-120 tw:h-100 tw:3xl:h-120 tw:-bottom-30 tw:right-1/13 tw:3xl:right-1/11 -tw:translate-x-1/2 tw:rounded-full tw:border-8 tw:border-primary-dark/40 tw:dark:border-gray-500/20 tw:z-0"
               ></div>
 
               <!-- background + text -->
               <div
                 class="tw:w-full! tw:h-full! tw:text-center background tw:relative tw:z-10"
               >
-                <div class="tw:pt-15! tw:px-5!">
+                <div class="tw:pt-20! tw:px-5!">
                   <h1
-                    class="tw:text-gray-100 tw:dark:text-gray-800 tw:text-[60px]/14"
+                    class="tw:hidden tw:3xl:block tw:text-gray-100 tw:dark:text-gray-800 tw:text-[50px]/14"
                   >
                     {{ langStore.label.slogan.login }}
                   </h1>
@@ -163,7 +163,7 @@
 
 <script setup lang="ts">
 import Language from "~/components/appHeader/language.vue";
-import ThemeSwitcher from "~/components/appHeader/ThemeSwitcher.vue";
+import ThemeSwitcher from "~/components/appHeader/themeSwitcher.vue";
 
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();

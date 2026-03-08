@@ -305,7 +305,7 @@
               :items="invoices"
               hide-default-footer
               fixed-header
-              height="680"
+              height="740"
               class="tw:bg-white! tw:dark:bg-primary-dark!"
             >
               <template #item="{ item, index }">
