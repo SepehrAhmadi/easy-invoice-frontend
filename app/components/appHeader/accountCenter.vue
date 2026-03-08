@@ -27,7 +27,7 @@
           {{ langStore.label.caption.username }} :
         </div>
         <div class="tw:text-[12px] tw:text-gray-700 tw:dark:text-gray-300">
-          FiNiK
+          {{ configStore.loginResult.username }}
         </div>
       </div>
       <div class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group">
@@ -69,6 +69,6 @@ const configStore = useConfigStore();
 
 const logout = () => {
   configStore.logout();
-  console.log("click logout 1")
+  console.log("click logout 1");
 };
 </script>
