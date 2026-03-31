@@ -2,7 +2,7 @@
   <div>
     <v-container fluid class="tw:md:pe-0! tw:md:py-0!">
       <v-row
-        class="tw-flex! tw:items-center! tw:bg-primary-dark tw:rounded-t-4xl! tw:p-3!"
+        class="tw-flex! tw:items-center! tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:rounded-t-4xl! tw:p-3!"
       >
         <v-col cols="12" md="3">
           <div>
@@ -299,7 +299,7 @@
       <!-- table -->
       <v-row class="tw:rounded-b-4xl! tw:p-0!">
         <v-col cols="12" class="tw:p-0!">
-          <v-card class="tw:rounded-b-4xl! tw:shadow-none!">
+          <v-card class="tw:rounded-b-4xl! tw:shadow-none! tw:pt-1!">
             <v-data-table-virtual
               :headers="tableHeader"
               :items="invoices"

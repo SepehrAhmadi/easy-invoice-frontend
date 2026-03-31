@@ -27,7 +27,7 @@
           {{ langStore.label.caption.username }} :
         </div>
         <div class="tw:text-[12px] tw:text-gray-700 tw:dark:text-gray-300">
-          {{ configStore.loginResult.username }}
+          {{ configStore.loginResult.username || langStore.label.caption.username }}
         </div>
       </div>
       <div class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group">

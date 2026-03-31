@@ -2,7 +2,7 @@
   <div>
     <v-container fluid class="tw:md:pe-0! tw:md:py-0!">
       <v-row
-        class="tw-flex! tw:items-center! tw:bg-primary-dark tw:rounded-t-4xl! tw:p-3!"
+        class="tw-flex! tw:items-center! tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:rounded-t-4xl! tw:p-3!"
       >
         <v-col cols="12" lg="6">
           <div>

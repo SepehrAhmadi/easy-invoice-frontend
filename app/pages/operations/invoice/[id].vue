@@ -2,7 +2,7 @@
   <div>
     <v-container class="tw:md:pe-0! tw:md:py-0!">
       <v-row
-        class="tw-flex! tw:items-center! tw:bg-primary-dark tw:rounded-t-4xl! tw:p-3!"
+        class="tw-flex! tw:items-center! tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:rounded-t-4xl! tw:p-3! "
       >
         <v-col cols="12" md="3">
           <div>
@@ -494,7 +494,7 @@
           </v-row>
         </v-col>
       </v-row>
-      <v-row class="tw:rounded-b-4xl! tw:p-0!">
+      <v-row class="tw:rounded-b-4xl! tw:p-0! tw:pt-1!">
         <v-col cols="12" class="tw:p-0!">
           <v-card class="tw:rounded-b-4xl! tw:shadow-none!">
             <v-data-table-virtual
