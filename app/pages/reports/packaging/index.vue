@@ -45,105 +45,110 @@
         </transition>
       </v-row>
       <v-row class="tw:rounded-b-4xl! tw:bg-white tw:dark:bg-primary-dark">
-        <v-col cols="12" v-if="!isDetail" class="tw:p-6!">
-          <div
-            class="tw:grid tw:grid-cols-1 tw:md:grid-cols-6 tw:2xl:grid-cols-4 tw:gap-6"
+        <transition name="slide-up" @after-leave="onTableSlideUpLeave">
+          <v-col
+            cols="12"
+            v-if="!isDetail && !isTableAnimating"
+            class="tw:p-6!"
           >
             <div
-              v-for="item in report"
-              :key="item.packagingId"
-              class="tw:bg-primary-light tw:dark:bg-background-dark tw:p-3! tw:rounded-2xl! tw:w-full"
+              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:3xl:grid-cols-4 tw:gap-6"
             >
               <div
-                class="tw:w-full! tw:flex tw:justify-start tw:items-center tw:gap-2"
+                v-for="item in report"
+                :key="item.packagingId"
+                class="tw:bg-primary-light tw:dark:bg-background-dark tw:p-3! tw:rounded-2xl! tw:w-full"
               >
-                <!-- image type -->
-                <div>
-                  <div
-                    class="tw:bg-primary-dark tw:rounded-full tw:w-25 tw:h-25 tw:flex tw:items-center tw:justify-center"
-                  >
-                    <img
-                      :src="getPackagingIcon(item.packagingType)"
-                      class="tw:w-17 tw:h-17"
-                    />
-                  </div>
-                </div>
                 <div
-                  class="tw:flex tw:flex-col tw:justify-start tw:items-start tw:gap-1.5"
+                  class="tw:w-full! tw:flex tw:justify-start tw:items-center tw:gap-2"
                 >
-                  <div class="tw:w-full! tw:flex tw:flex-col tw:gap-1">
+                  <!-- image type -->
+                  <div>
                     <div
-                      class="tw-text-color tw:font-semibold tw:text-[16px] tw:3xl:text-[19px]"
+                      class="tw:bg-primary-dark tw:rounded-full tw:w-25 tw:h-25 tw:flex tw:items-center tw:justify-center"
                     >
-                      {{ item.packagingName }}
+                      <img
+                        :src="getPackagingIcon(item.packagingType)"
+                        class="tw:w-17 tw:h-17"
+                      />
                     </div>
                   </div>
-                  <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
-                    <icon-document
-                      class="tw-text-color-lighter tw:text-[20px]"
-                    />
-                    <span
-                      class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
-                    >
-                      {{ langStore.label.table.invoicesCount }} :
-                      <span
-                        class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
+                  <div
+                    class="tw:flex tw:flex-col tw:justify-start tw:items-start tw:gap-1.5"
+                  >
+                    <div class="tw:w-full! tw:flex tw:flex-col tw:gap-1">
+                      <div
+                        class="tw-text-color tw:font-semibold tw:text-[16px] tw:3xl:text-[19px]"
                       >
-                        {{ item.count }}
-                      </span>
-                    </span>
-                  </div>
-                  <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
-                    <icon-documents
-                      class="tw-text-color-lighter tw:text-[20px]"
-                    />
-                    <span
-                      class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
-                    >
-                      {{ langStore.label.table.totalPageDesigned }} :
+                        {{ item.packagingName }}
+                      </div>
+                    </div>
+                    <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
+                      <icon-document
+                        class="tw-text-color-lighter tw:text-[20px]"
+                      />
                       <span
-                        class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
+                        class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
                       >
-                        {{ item.totalPage }}
+                        {{ langStore.label.table.invoicesCount }} :
+                        <span
+                          class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
+                        >
+                          {{ item.count }}
+                        </span>
                       </span>
-                    </span>
-                  </div>
-                  <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
-                    <icon-cash class="tw-text-color-lighter tw:text-[20px]" />
-                    <span
-                      class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
-                    >
-                      {{ langStore.label.table.totalPrice }} :
+                    </div>
+                    <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
+                      <icon-documents
+                        class="tw-text-color-lighter tw:text-[20px]"
+                      />
                       <span
-                        class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
+                        class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
                       >
-                        {{ separateNumber(item.totalPrice) }}
+                        {{ langStore.label.table.totalPageDesigned }} :
+                        <span
+                          class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
+                        >
+                          {{ item.totalPage }}
+                        </span>
                       </span>
-                      {{ langStore.label.caption.rial }}
-                    </span>
+                    </div>
+                    <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
+                      <icon-cash class="tw-text-color-lighter tw:text-[20px]" />
+                      <span
+                        class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
+                      >
+                        {{ langStore.label.table.totalPrice }} :
+                        <span
+                          class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
+                        >
+                          {{ separateNumber(item.totalPrice) }}
+                        </span>
+                        {{ langStore.label.caption.rial }}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <!-- get detail action -->
-              <div
-                class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:mt-3!"
-              >
-                <v-btn
-                  @click="getReportDetail(item)"
-                  size=" x-small"
-                  variant="outlined"
-                  rounded="pill"
-                  class="tw:px-0! tw:py-0.75! tw:2xl:py-0.75! tw:w-25"
+                <!-- get detail action -->
+                <div
+                  class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:mt-3!"
                 >
-                  <div
-                    class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
+                  <v-btn
+                    @click="getReportDetail(item)"
+                    size=" x-small"
+                    variant="outlined"
+                    rounded="pill"
+                    class="tw:px-0! tw:py-0.75! tw:2xl:py-0.75! tw:w-25"
                   >
-                    {{ langStore.label.button.viewDetail }}
-                  </div>
-                </v-btn>
+                    <div
+                      class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
+                    >
+                      {{ langStore.label.button.viewDetail }}
+                    </div>
+                  </v-btn>
+                </div>
               </div>
-            </div>
-            <!-- <div v-for="item in report" :key="item.packagingId" class="tw:flex">
+              <!-- <div v-for="item in report" :key="item.packagingId" class="tw:flex">
               <div class="tw:w-[40%]">
                 <div
                   class="tw:bg-primary-dark tw:h-full tw:rounded-s-2xl tw:flex tw:items-center tw:justify-center"
@@ -231,123 +236,139 @@
                 </div>
               </div>
             </div> -->
-          </div>
-        </v-col>
-        <v-col
-          cols="12"
-          class="tw:p-0!"
-          v-if="
-            isDetail &&
-            reportDetail &&
-            reportDetail.items &&
-            reportDetail.items.length > 0
-          "
-        >
-          <v-card class="tw:shadow-none!">
-            <v-data-table-virtual
-              :headers="tableHeader"
-              :items="reportDetail.items"
-              hide-default-footer
-              fixed-header
-              class="tw:bg-white! tw:dark:bg-primary-dark!"
-              height="600"
+            </div>
+          </v-col>
+        </transition>
+        <transition name="slide-down" @after-leave="onTableSlideDownLeave">
+          <v-col cols="12" class="tw:p-0!" v-if="isDetail && showTableExpand">
+            <v-card
+              v-if="
+                reportDetail &&
+                reportDetail.items &&
+                reportDetail.items.length > 0
+              "
+              class="tw:shadow-none!"
             >
-              <template #item="{ item, index }">
-                <tr class="tw:my-2!">
-                  <td>
-                    <div
-                      class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
-                    >
-                      {{ index + 1 }}
-                    </div>
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ item.localDate }}
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{
-                      item.isEdit
-                        ? langStore.label.table.edit
-                        : langStore.label.table.design
-                    }}
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ item.productName }}
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ item.brandName }}
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ item.packagingName }}
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ item.unitName }}
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ item.amount }}
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ item.unitCount }}
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ item.pageCount }}
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ separateNumber(item.singlePrice) }}
-                  </td>
-                  <td class="tw-text-color tw:text-nowrap tw:text-center">
-                    {{ separateNumber(item.totalPrice) }}
-                  </td>
-                </tr>
-              </template>
+              <v-data-table-virtual
+                :headers="tableHeader"
+                :items="reportDetail.items"
+                hide-default-footer
+                fixed-header
+                class="tw:bg-white! tw:dark:bg-primary-dark!"
+                height="600"
+              >
+                <template #item="{ item, index }">
+                  <tr class="tw:my-2!">
+                    <td>
+                      <div
+                        class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
+                      >
+                        {{ index + 1 }}
+                      </div>
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{ item.localDate }}
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{
+                        item.isEdit
+                          ? langStore.label.table.edit
+                          : langStore.label.table.design
+                      }}
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{ item.productName }}
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{ item.brandName }}
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{ item.packagingName }}
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{ item.unitName }}
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{ item.amount }}
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{ item.unitCount }}
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{ item.pageCount }}
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{ separateNumber(item.singlePrice) }}
+                    </td>
+                    <td class="tw-text-color tw:text-nowrap tw:text-center">
+                      {{ separateNumber(item.totalPrice) }}
+                    </td>
+                  </tr>
+                </template>
 
-              <template #no-data>
-                <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
-                  <icon-row-chart
-                    class="tw-text-color-lighter tw:text-[35px]"
-                  />
+                <template #no-data>
                   <div
-                    class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap"
+                    class="tw:flex tw:justify-center tw:items-center tw:gap-2"
                   >
-                    {{ langStore.label.caption.noDataFound }}
+                    <icon-row-chart
+                      class="tw-text-color-lighter tw:text-[35px]"
+                    />
+                    <div
+                      class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap"
+                    >
+                      {{ langStore.label.caption.noDataFound }}
+                    </div>
                   </div>
+                </template>
+              </v-data-table-virtual>
+              <div
+                class="tw:px-6! tw:py-4! tw:flex tw:justify-start tw:items-center tw:gap-3 tw:rounded-b-4xl! tw:bg-white tw:dark:bg-primary-dark tw:border-t tw:border-gray-300"
+              >
+                <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
+                  <icon-documents
+                    class="tw-text-color-lighter tw:text-[20px]"
+                  />
+                  <span
+                    class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
+                  >
+                    {{ langStore.label.table.totalPageDesigned }} :
+                    <span
+                      class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
+                    >
+                      {{ reportDetail.totalPage }}
+                    </span>
+                  </span>
                 </div>
-              </template>
-            </v-data-table-virtual>
-            <div
-              class="tw:px-6! tw:py-4! tw:flex tw:justify-start tw:items-center tw:gap-3 tw:rounded-b-4xl! tw:bg-white tw:dark:bg-primary-dark tw:border-t tw:border-gray-300"
-            >
-              <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
-                <icon-documents class="tw-text-color-lighter tw:text-[20px]" />
-                <span
-                  class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
-                >
-                  {{ langStore.label.table.totalPageDesigned }} :
+                <div class="tw-text-color-lighter tw:text-[15px]">|</div>
+                <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
+                  <icon-cash class="tw-text-color-lighter tw:text-[20px]" />
                   <span
-                    class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
+                    class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
                   >
-                    {{ reportDetail.totalPage }}
+                    {{ langStore.label.table.totalPrice }} :
+                    <span
+                      class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
+                    >
+                      {{ separateNumber(reportDetail.totalPrice) }}
+                    </span>
+                    {{ langStore.label.caption.rial }}
                   </span>
-                </span>
+                </div>
               </div>
-              <div class="tw-text-color-lighter tw:text-[15px]">|</div>
-              <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
-                <icon-cash class="tw-text-color-lighter tw:text-[20px]" />
-                <span
-                  class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
-                >
-                  {{ langStore.label.table.totalPrice }} :
-                  <span
-                    class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
-                  >
-                    {{ separateNumber(reportDetail.totalPrice) }}
-                  </span>
-                  {{ langStore.label.caption.rial }}
-                </span>
+            </v-card>
+            <div
+              v-else-if="reportDetail.items.length == 0"
+              class="tw:flex tw:justify-center tw:items-center tw:gap-2 tw:my-30!"
+            >
+              <icon-row-chart class="tw-text-color-lighter tw:text-[35px]" />
+              <div
+                class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap"
+              >
+                {{ langStore.label.caption.noDataFound }}
               </div>
             </div>
-          </v-card>
-        </v-col>
+          </v-col>
+        </transition>
       </v-row>
     </v-container>
   </div>
@@ -451,6 +472,9 @@ const tableHeader = ref<any>([
     align: "center",
   },
 ]);
+// toggle
+const isTableAnimating = ref(false);
+const showTableExpand = ref(false);
 
 // ======= Functions =======
 // ui fuctions
@@ -467,6 +491,24 @@ const getPackagingIcon = (type: string) => {
     default:
       return bottleIcon;
   }
+};
+
+// form animations
+const toggleTable = (type: "open" | "close") => {
+  if (type === "open") {
+    isTableAnimating.value = true;
+    showTableExpand.value = false;
+  } else if (type === "close") {
+    isTableAnimating.value = true;
+    showTableExpand.value = false;
+  }
+};
+const onTableSlideUpLeave = () => {
+  showTableExpand.value = true;
+  isTableAnimating.value = false;
+};
+const onTableSlideDownLeave = () => {
+  isTableAnimating.value = false;
 };
 
 // packaigng
@@ -495,6 +537,7 @@ const backToReport = () => {
 watch(reportDetail, (val) => {
   if (!val) return;
   isDetail.value = true;
+  toggleTable("open");
 });
 
 // ======= Lifecycle =======
@@ -514,5 +557,55 @@ onMounted(() => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* slide-up */
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.slide-up-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slide-up-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-up-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.slide-up-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+/* slide down */
+.slide-down-enter-from {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+.slide-down-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slide-down-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-down-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slide-down-leave-to {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+.slide-down-leave-active {
+  transition: all 0.3s ease-in;
 }
 </style>
