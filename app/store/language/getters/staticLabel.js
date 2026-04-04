@@ -34,6 +34,8 @@ export const label = (state) => {
         manageInvocies: "Manage Invoices",
         manageCategories: "Manage Category",
         reportByPackaging: "Report by packaing",
+        editProfile: "Edit Profile",
+        changePassword: "Change Password",
       },
       header: {
         addCompany: "Add company",
@@ -69,6 +71,9 @@ export const label = (state) => {
         paid: "Paid",
         awaitingPayment: "Awaiting payment",
         viewDetail: "View detail",
+        chooseAvatar: "Choose Avatar",
+        deleteAvatar: "Delete Avatar",
+        submit : "Submit",
       },
       form: {
         username: "Username",
@@ -103,6 +108,9 @@ export const label = (state) => {
         singlePrice: "Signle Price",
         totalPrice: "Total Price",
         paymentStatus: "Payment status",
+        currentPass: "Current password",
+        newPass: "New Password",
+        confirmPass: "Confirm Password",
       },
       table: {
         individual: "Individual",
@@ -153,6 +161,8 @@ export const label = (state) => {
         loading: "Loading...",
         noDataFound: "No data found",
         rial: "Rial",
+        editProfilePic1: "Pictrue format must be JPEG, PNG or JPG",
+        editProfilePic2: "Choose the squre size",
       },
     };
   } else {
@@ -190,6 +200,8 @@ export const label = (state) => {
         manageInvocies: "مدیریت فاکتور ها",
         manageCategories: "مدیریت دسته بندی ها",
         reportByPackaging: "گزارش بر اساس دسته بندی",
+        editProfile: "ویرایش پروفایل",
+        changePassword: "تغییر کلمه عبور",
       },
       header: {
         addCompany: "ایجاد شرکت",
@@ -225,6 +237,9 @@ export const label = (state) => {
         paid: "پرداخت شده",
         awaitingPayment: "در انتظار پرداخت",
         viewDetail: "مشاهده جزئیات",
+        chooseAvatar: "انتخاب آواتار",
+        deleteAvatar: "حذف آواتار",
+        submit : "تایید",
       },
       form: {
         username: "نام کاربری",
@@ -259,6 +274,9 @@ export const label = (state) => {
         singlePrice: "قیمت  واحد",
         totalPrice: "قیمت کل",
         paymentStatus: "وضعیت پرداخت",
+        currentPass: "کلمه عبور فعلی",
+        newPass: "کلمه عبور جدید",
+        confirmPass: "تایید کلمه عبور",
       },
       table: {
         individual: "حقیقی",
@@ -312,6 +330,8 @@ export const label = (state) => {
         loading: "در حال بارگذاری اطلاعات",
         noDataFound: "داده ای یافت نشد",
         rial: "ریال",
+        editProfilePic1: "فرمت تصویر انتخابی باید JEPG, PNG یا JPG باشد",
+        editProfilePic2: "تصویر مربعی انتخاب کنید",
       },
     };
   }

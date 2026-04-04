@@ -27,10 +27,13 @@
           {{ langStore.label.caption.username }} :
         </div>
         <div class="tw:text-[12px] tw:text-gray-700 tw:dark:text-gray-300">
-          {{ configStore.loginResult.username || langStore.label.caption.username }}
+          {{ configStore.username || langStore.label.caption.username }}
         </div>
       </div>
-      <div class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group">
+      <div
+        @click="drawer = true"
+        class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group"
+      >
         <icon-edit-box
           class="tw:w-4.5 tw:h-4.5 tw:text-gray-700 tw:dark:text-gray-300 tw:group-hover:text-black tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!"
         />
@@ -66,6 +69,8 @@ const langStore = useLanguageStore();
 
 import { useConfigStore } from "~/store/config";
 const configStore = useConfigStore();
+
+const { drawer } = useEditProfile();
 
 const logout = () => {
   configStore.logout();

@@ -1,5 +1,7 @@
 <template>
   <v-layout class="tw:h-screen">
+    <edit-profile/>
+
     <app-header />
 
     <v-main class="tw:h-full">
@@ -18,3 +20,5 @@
     </v-main>
   </v-layout>
 </template>
+
+<script setup lang="ts"></script>
