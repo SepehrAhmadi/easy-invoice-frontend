@@ -20,7 +20,7 @@ export function useConfigActions(state: StateType) {
         state.loginResult.value = res.data;
         if (res.data.accessToken) {
           const token = res.data.accessToken;
-          state.username.value = res.data.username;
+          localStorage.setItem("username", res.data.username);
           useCookie("token").value = token;
           navigateTo("/");
           handlerStore.setSuccess(res.data.message);
@@ -46,7 +46,7 @@ export function useConfigActions(state: StateType) {
       .then(() => {
         if (useCookie("token").value) {
           useCookie("token").value = null;
-          state.username.value = "";
+          localStorage.setItem("username", "");
         }
         navigateTo("/auth");
       })
@@ -62,11 +62,11 @@ export function useConfigActions(state: StateType) {
       });
   };
 
-  const getProfile = (username: string) => {
+  const getProfile = () => {
     const axios = useApi();
 
     return axios
-      .get("/profile/" + username)
+      .get("/profile")
       .then((res) => {
         state.profileResult.value = res.data.data;
       })
@@ -79,13 +79,13 @@ export function useConfigActions(state: StateType) {
       });
   };
 
-  const editProfile = (id: string, value: any) => {
+  const editProfile = (value: any) => {
     const axios = useApi();
     handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;
 
     return axios
-      .put("/profile/" + id, value, {
+      .put("/profile", value, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -108,13 +108,13 @@ export function useConfigActions(state: StateType) {
       });
   };
 
-  const changePassword = (id: string, value: any) => {
+  const changePassword = (value: any) => {
     const axios = useApi();
     handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;
 
     return axios
-      .put("/profile/changePassword/" + id, value)
+      .put("/profile/changePassword" , value)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
         drawer.value = false;
@@ -135,13 +135,13 @@ export function useConfigActions(state: StateType) {
       });
   };
 
-  const deleteAvatar = (id: string) => {
+  const deleteAvatar = () => {
     const axios = useApi();
     handlerStore.loadingBtn = true;
     handlerStore.postCheck = true;
 
     return axios
-      .delete("/profile/deleteAvatar/" + id)
+      .delete("/profile/deleteAvatar")
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })

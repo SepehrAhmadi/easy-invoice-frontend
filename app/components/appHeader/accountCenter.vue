@@ -6,6 +6,13 @@
         v-bind="props"
       >
         <img
+          v-if="profile && profile.avatar"
+          :src="profile.avatar"
+          class="tw:w-full tw:h-full tw:object-cover tw:block"
+          alt="avatar"
+        />
+        <img
+          v-else
           :src="avatar"
           class="tw:w-full tw:h-full tw:object-cover tw:block"
           alt="avatar"
@@ -27,7 +34,8 @@
           {{ langStore.label.caption.username }} :
         </div>
         <div class="tw:text-[12px] tw:text-gray-700 tw:dark:text-gray-300">
-          {{ configStore.username || langStore.label.caption.username }}
+          <span v-if="username && username.length > 0">{{ username }}</span>
+          <span v-else>{{ langStore.label.caption.username }}</span>
         </div>
       </div>
       <div
@@ -69,11 +77,21 @@ const langStore = useLanguageStore();
 
 import { useConfigStore } from "~/store/config";
 const configStore = useConfigStore();
+const { profileResult: profile } = storeToRefs(configStore);
 
 const { drawer } = useEditProfile();
+
+const username = ref<any>("");
 
 const logout = () => {
   configStore.logout();
   console.log("click logout 1");
 };
+
+onMounted(() => {
+  configStore.getProfile()
+  if (localStorage.getItem("username")) {
+    username.value = localStorage.getItem("username");
+  }
+});
 </script>

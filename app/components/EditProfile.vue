@@ -21,7 +21,7 @@
           class="tw:w-25 tw:h-25 tw:flex tw:justify-center tw:items-center tw:bg-white tw:rounded-full"
         >
           <img
-             v-if="profile && profile.avatar"
+            v-if="profile && profile.avatar"
             :src="profile.avatar"
             alt="avatar"
             class="tw:w-22 tw:h-22 tw:rounded-full tw:object-cover"
@@ -99,6 +99,7 @@
           hide-details
           class="tw:text-[14px]! tw:w-full!"
           rounded="pill"
+          @keyup.enter="updateProfile"
         >
           <template #label>
             <span class="tw:text-[12px]">
@@ -189,6 +190,7 @@
           hide-details
           rounded="pill"
           :type="showConfirmPass ? 'text' : 'password'"
+          @keyup.enter="changePassword"
         >
           <template #label>
             <span class="tw:text-[14px]">{{
@@ -243,7 +245,7 @@ const langStore = useLanguageStore();
 
 import { useConfigStore } from "~/store/config";
 const configStore = useConfigStore();
-const { profileResult: profile, username } = storeToRefs(configStore);
+const { profileResult: profile } = storeToRefs(configStore);
 
 // ======= composables =======
 const { drawer } = useEditProfile();
@@ -301,7 +303,7 @@ const updateProfile = () => {
       formData.append("username", profileForm.value.username);
     }
 
-    configStore.editProfile(profile.value.id, formData);
+    configStore.editProfile(formData);
   } else {
     handlerStore.setError(langStore.alert.error.requiredFields);
   }
@@ -314,7 +316,7 @@ const changePassword = () => {
     passwordForm.value.confirmPassword
   ) {
     if (passwordForm.value.newPassword === passwordForm.value.confirmPassword) {
-      configStore.changePassword(profile.value.id, passwordForm.value);
+      configStore.changePassword(passwordForm.value);
     } else {
       handlerStore.setError(langStore.alert.error.passNotMatch);
     }
@@ -324,11 +326,11 @@ const changePassword = () => {
 };
 
 const deleteAvatar = () => {
-  configStore.deleteAvatar(profile.value.id);
+  configStore.deleteAvatar();
 };
 
-const reloadData = (username: string) => {
-  configStore.getProfile(username);
+const reloadData = () => {
+  configStore.getProfile();
 };
 
 // ======= watcher =======
@@ -336,14 +338,14 @@ watch(
   () => handlerStore.postCheck,
   (val, oldVal) => {
     if (oldVal === true && val === false) {
-      reloadData(profileForm.value.username);
+      reloadData();
     }
   },
 );
 watch(
   () => profile.value,
   (val) => {
-    if (val && val.username && val.avatar) {
+    if (val && val.username) {
       profileForm.value.username = val.username;
     }
   },
@@ -353,7 +355,7 @@ watch(
   () => drawer.value,
   (val) => {
     if (val == true) {
-      reloadData(username.value);
+      reloadData();
     }
   },
   { immediate: true },
