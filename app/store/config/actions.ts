@@ -9,6 +9,7 @@ type StateType = ReturnType<typeof useConfigState>;
 export function useConfigActions(state: StateType) {
   const handlerStore = useHandlerStore();
   const langStore = useLanguageStore();
+  const { drawer } = useEditProfile();
 
   const login = (value: any) => {
     const axios = useApi();
@@ -84,7 +85,11 @@ export function useConfigActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .put("/profile/" + id, value)
+      .put("/profile/" + id, value, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -109,7 +114,34 @@ export function useConfigActions(state: StateType) {
     handlerStore.postCheck = true;
 
     return axios
-      .put("/profile/changePassword" + id, value)
+      .put("/profile/changePassword/" + id, value)
+      .then((res) => {
+        handlerStore.setSuccess(res.data.message);
+        drawer.value = false;
+        logout();
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+          handlerStore.loadingBtn = false;
+        }, 500);
+      });
+  };
+
+  const deleteAvatar = (id: string) => {
+    const axios = useApi();
+    handlerStore.loadingBtn = true;
+    handlerStore.postCheck = true;
+
+    return axios
+      .delete("/profile/deleteAvatar/" + id)
       .then((res) => {
         handlerStore.setSuccess(res.data.message);
       })
@@ -135,5 +167,6 @@ export function useConfigActions(state: StateType) {
     getProfile,
     editProfile,
     changePassword,
+    deleteAvatar,
   };
 }

@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
-    width="410"
+    width="380"
     :temporary="true"
     :location="langStore.currentLang === 'fa' ? 'left' : 'right'"
   >
@@ -21,6 +21,13 @@
           class="tw:w-25 tw:h-25 tw:flex tw:justify-center tw:items-center tw:bg-white tw:rounded-full"
         >
           <img
+             v-if="profile && profile.avatar"
+            :src="profile.avatar"
+            alt="avatar"
+            class="tw:w-22 tw:h-22 tw:rounded-full tw:object-cover"
+          />
+          <img
+            v-else
             :src="avatar"
             alt="avatar"
             class="tw:w-22 tw:h-22 tw:rounded-full tw:object-cover"
@@ -55,15 +62,31 @@
               size="35"
               class="tw:shadow-none! tw:flex-1"
               color="primary"
+              @click="triggerFileInput"
+              ;
             >
               <div class="tw:text-[12px]">
                 {{ langStore.label.button.chooseAvatar }}
               </div>
             </v-btn>
-            <v-btn rounded size="35" class="tw:shadow-none!" color="primary">
-              <icon-trash class="tw:text-[26px]" />
+            <v-btn
+              @click="deleteAvatar"
+              rounded
+              size="35"
+              class="tw:shadow-none!"
+              color="primary"
+            >
+              <icon-button-loader v-if="loading" class="tw:text-[26px]!" />
+              <icon-trash v-else class="tw:text-[26px]" />
             </v-btn>
           </div>
+          <input
+            type="file"
+            ref="fileInput"
+            accept="image/*"
+            @change="handleFileSelect"
+            class="tw:hidden"
+          />
         </div>
       </div>
       <!-- username -->
@@ -190,8 +213,14 @@
           </template>
         </v-text-field>
         <div class="tw:flex tw:justify-end">
-          <v-btn rounded class="tw:shadow-none! tw:flex-1" color="primary">
-            <div class="tw:text-[12px]">
+          <v-btn
+            @click="changePassword"
+            rounded
+            class="tw:shadow-none! tw:flex-1"
+            color="primary"
+          >
+            <icon-button-loader v-if="loading" class="tw:text-[26px]!" />
+            <div v-else class="tw:text-[12px]">
               {{ langStore.label.button.submit }}
             </div>
           </v-btn>
@@ -221,8 +250,8 @@ const { drawer } = useEditProfile();
 
 // ======= interface =======
 interface profileForm {
-  avatar: string | null;
-  username: string | null;
+  avatar: File | null;
+  username: string;
 }
 interface passwordForm {
   currentPassword: string | null;
@@ -233,7 +262,7 @@ interface passwordForm {
 // ======= Data =======
 const profileForm = ref({
   avatar: null,
-  username: null,
+  username: "",
 });
 const passwordForm = ref({
   currentPassword: null,
@@ -243,35 +272,88 @@ const passwordForm = ref({
 const showOldPass = ref<Boolean>(false);
 const showNewPass = ref<Boolean>(false);
 const showConfirmPass = ref<Boolean>(false);
+// ref
+const fileInput = ref<HTMLInputElement | null>(null);
 
 // ======= functions =======
+const triggerFileInput = () => {
+  if (fileInput.value) {
+    fileInput.value.click();
+  }
+};
+
+const handleFileSelect = (event: any) => {
+  const files = event.target.files;
+  if (files.length > 0) {
+    profileForm.value.avatar = files[0];
+    updateProfile();
+    event.target.value = null;
+  }
+};
 const updateProfile = () => {
   if (profileForm.value.username) {
-    configStore.editProfile(profile.value.id, profileForm.value);
+    const formData = new FormData();
+
+    if (profileForm.value.avatar) {
+      formData.append("avatar", profileForm.value.avatar);
+    }
+    if (profileForm.value.username) {
+      formData.append("username", profileForm.value.username);
+    }
+
+    configStore.editProfile(profile.value.id, formData);
   } else {
     handlerStore.setError(langStore.alert.error.requiredFields);
   }
 };
 
-const reloadData = () => {
-  configStore.getProfile(username.value);
+const changePassword = () => {
+  if (
+    passwordForm.value.currentPassword &&
+    passwordForm.value.newPassword &&
+    passwordForm.value.confirmPassword
+  ) {
+    if (passwordForm.value.newPassword === passwordForm.value.confirmPassword) {
+      configStore.changePassword(profile.value.id, passwordForm.value);
+    } else {
+      handlerStore.setError(langStore.alert.error.passNotMatch);
+    }
+  } else {
+    handlerStore.setError(langStore.alert.error.requiredFields);
+  }
+};
+
+const deleteAvatar = () => {
+  configStore.deleteAvatar(profile.value.id);
+};
+
+const reloadData = (username: string) => {
+  configStore.getProfile(username);
 };
 
 // ======= watcher =======
 watch(
-  () => drawer.value,
+  () => handlerStore.postCheck,
+  (val, oldVal) => {
+    if (oldVal === true && val === false) {
+      reloadData(profileForm.value.username);
+    }
+  },
+);
+watch(
+  () => profile.value,
   (val) => {
-    if (val == true) {
-      reloadData();
+    if (val && val.username && val.avatar) {
+      profileForm.value.username = val.username;
     }
   },
   { immediate: true },
 );
 watch(
-  () => profile,
+  () => drawer.value,
   (val) => {
-    if (val) {
-      profileForm.value.username = profile.value.username;
+    if (val == true) {
+      reloadData(username.value);
     }
   },
   { immediate: true },

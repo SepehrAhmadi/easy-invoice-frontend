@@ -161,7 +161,7 @@ export const label = (state) => {
         loading: "Loading...",
         noDataFound: "No data found",
         rial: "Rial",
-        editProfilePic1: "Pictrue format must be JPEG, PNG or JPG",
+        editProfilePic1: "Pictrue format must be JPEG or PNG",
         editProfilePic2: "Choose the squre size",
       },
     };
@@ -330,7 +330,7 @@ export const label = (state) => {
         loading: "در حال بارگذاری اطلاعات",
         noDataFound: "داده ای یافت نشد",
         rial: "ریال",
-        editProfilePic1: "فرمت تصویر انتخابی باید JEPG, PNG یا JPG باشد",
+        editProfilePic1: "فرمت تصویر انتخابی باید JEPG یا PNG باشد",
         editProfilePic2: "تصویر مربعی انتخاب کنید",
       },
     };
