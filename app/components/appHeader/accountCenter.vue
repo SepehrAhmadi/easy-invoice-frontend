@@ -89,7 +89,8 @@ const logout = () => {
 };
 
 onMounted(() => {
-  configStore.getProfile()
+  configStore.getProfile
+  ()
   if (localStorage.getItem("username")) {
     username.value = localStorage.getItem("username");
   }

@@ -14,8 +14,6 @@ export function useOperationActions(state: StateType) {
     const axios = useApi();
     handlerStore.loading = true;
 
-    console.log("filter value : ", value);
-
     return axios
       .get("/operation/invoice" + value)
       .then((res) => {
@@ -161,6 +159,29 @@ export function useOperationActions(state: StateType) {
       });
   };
 
+  const printInvoice = (id: string) => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get(`/operation/invoice/${id}/print`)
+      .then((res) => {
+        state.printInvoiceResult.value = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
+
   // ====== Invoice ======
   const getInvoiceItems = (invoiceId: string) => {
     const axios = useApi();
@@ -291,6 +312,7 @@ export function useOperationActions(state: StateType) {
     editInvoice,
     deleteInvoice,
     changeInvoiceStatus,
+    printInvoice,
 
     getInvoiceItems,
     getInvoiceItem,

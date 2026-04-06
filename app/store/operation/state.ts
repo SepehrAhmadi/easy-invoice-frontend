@@ -3,6 +3,7 @@ import { ref } from "vue";
 export function useOperationState() {
   const invoicesResult = ref<any[]>([]);
   const invoiceResult = ref<any>({});
+  const printInvoiceResult = ref<any>([]);
   const invoiceMode = ref<"add" | "edit" | null>(null);
 
   const invoiceItemsResult = ref<any[]>([]);
@@ -11,6 +12,7 @@ export function useOperationState() {
   return {
     invoicesResult,
     invoiceResult,
+    printInvoiceResult,
     invoiceMode,
 
     invoiceItemsResult,

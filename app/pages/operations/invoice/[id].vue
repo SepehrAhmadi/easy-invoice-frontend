@@ -2,7 +2,7 @@
   <div>
     <v-container class="tw:md:pe-0! tw:md:py-0!">
       <v-row
-        class="tw-flex! tw:items-center! tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:rounded-t-4xl! tw:p-3! "
+        class="tw-flex! tw:items-center! tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:rounded-t-4xl! tw:p-3!"
       >
         <v-col cols="12" md="3">
           <div>
@@ -525,6 +525,9 @@
                     }}
                   </td>
                   <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.categoryName }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
                     {{ item.productName }}
                   </td>
                   <td class="tw-text-color tw:text-nowrap tw:text-center">
@@ -778,6 +781,12 @@ const tableHeader = ref<any>([
     sortable: false,
   },
   {
+    title: langStore.label.table.categoty,
+    key: "categotyName",
+    align: "center",
+    sortable: false,
+  },
+  {
     title: langStore.label.table.product,
     key: "productName",
     align: "center",
@@ -881,7 +890,7 @@ const submitInvoice = () => {
 };
 const getInvoiceItem = (id: string) => {
   submitMode.value = "edit";
-  console.log("open mode : " , submitMode.value)
+  console.log("open mode : ", submitMode.value);
   invoiceItemId.value = id;
 
   operationStore.getInvoiceItem(invoice.value.id, id);
@@ -1063,7 +1072,7 @@ onMounted(() => {
   dropdownStore.getBrands();
   dropdownStore.getProducts();
   dropdownStore.getCategories();
-  reloadData()
+  reloadData();
 });
 </script>
 

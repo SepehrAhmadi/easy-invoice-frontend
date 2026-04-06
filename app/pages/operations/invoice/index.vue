@@ -399,6 +399,25 @@
                           langStore.label.button.edit
                         }}</span>
                       </v-tooltip>
+                      <v-tooltip location="top">
+                        <template #activator="{ props }">
+                          <v-btn
+                            @click="printInvoice(item.id)"
+                            v-bind="props"
+                            size="x-small"
+                            variant="text"
+                            rounded="pill"
+                            class="tw:w-8! tw:h-8! tw:px-0!"
+                          >
+                            <icon-print
+                              class="tw-text-color-lighter tw:text-[23px]"
+                            />
+                          </v-btn>
+                        </template>
+                        <span class="tw:text-xs tw:p-2">{{
+                          langStore.label.button.print
+                        }}</span>
+                      </v-tooltip>
                       <v-menu>
                         <template #activator="{ props: menuProps }">
                           <v-tooltip location="top">
@@ -724,6 +743,9 @@ const submitInvoice = () => {
 const navigateToEdit = (id: string) => {
   navigateTo({ name: "operations-invoice-id", params: { id: id } });
   operationStore.invoiceMode = "edit";
+};
+const printInvoice = (id: string) => {
+  navigateTo({ name: "operations-invoice-print-id", params: { id: id } });
 };
 const changeStatus = (mode: StatusMode, id: string) => {
   if (mode == "paid") {

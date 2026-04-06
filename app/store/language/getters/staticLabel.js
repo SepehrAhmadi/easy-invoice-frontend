@@ -73,7 +73,8 @@ export const label = (state) => {
         viewDetail: "View detail",
         chooseAvatar: "Choose Avatar",
         deleteAvatar: "Delete Avatar",
-        submit : "Submit",
+        submit: "Submit",
+        print: "Print",
       },
       form: {
         username: "Username",
@@ -142,6 +143,7 @@ export const label = (state) => {
         paymentStatus: "Payment status",
         totalPageDesigned: "Total page designed",
         invoicesCount: "Invoices count",
+        categoty: "category",
       },
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
@@ -239,7 +241,8 @@ export const label = (state) => {
         viewDetail: "مشاهده جزئیات",
         chooseAvatar: "انتخاب آواتار",
         deleteAvatar: "حذف آواتار",
-        submit : "تایید",
+        submit: "تایید",
+        print: "چاپ",
       },
       form: {
         username: "نام کاربری",
@@ -308,6 +311,7 @@ export const label = (state) => {
         paymentStatus: "وضعیت پرداخت",
         totalPageDesigned: "مجموع صفحات طراحی شده",
         invoicesCount: "تعداد فاکتور ها",
+        categoty: "دسته بندی",
       },
       description: {
         manageCompanies:
