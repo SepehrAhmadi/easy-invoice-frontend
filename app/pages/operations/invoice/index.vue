@@ -376,6 +376,9 @@
                       </div>
                     </div>
                   </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ separateNumber(item.totalPrice) }}
+                  </td>
                   <td>
                     <div
                       class="tw:flex tw:justify-center tw:items-center tw:gap-1"
@@ -630,6 +633,7 @@ const { setPageTitle } = usePageTitle();
 watchEffect(() => {
   setPageTitle(langStore.label.page.invoices);
 });
+const { separateNumber } = useSeparator();
 
 // ======= Data =======
 // slider keys
@@ -665,10 +669,15 @@ const tableHeader = ref<any>([
     align: "center",
     sortable: false,
   },
-
   {
     title: langStore.label.table.status,
     key: "status",
+    align: "center",
+    sortable: false,
+  },
+  {
+    title: langStore.label.table.totalPrice,
+    key: "totalPrice",
     align: "center",
     sortable: false,
   },

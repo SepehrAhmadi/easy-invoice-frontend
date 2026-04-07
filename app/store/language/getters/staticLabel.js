@@ -13,6 +13,7 @@ export const label = (state) => {
         reportByPackaging: "Report by packaging",
         addInvoice: "Add invoice",
         editInvoice: "Edit invoice",
+        printInvoice: "Print invoice",
       },
       menu: {
         dashboard: "Dashboard",
@@ -36,6 +37,8 @@ export const label = (state) => {
         reportByPackaging: "Report by packaing",
         editProfile: "Edit Profile",
         changePassword: "Change Password",
+        printInvoice: "Print invoice",
+        invoiceDetail: "Invoice detail",
       },
       header: {
         addCompany: "Add company",
@@ -112,6 +115,8 @@ export const label = (state) => {
         currentPass: "Current password",
         newPass: "New Password",
         confirmPass: "Confirm Password",
+        invoiceNubmer: "Invoice Number",
+        invoiceDate: "Invoice Date",
       },
       table: {
         individual: "Individual",
@@ -144,6 +149,9 @@ export const label = (state) => {
         totalPageDesigned: "Total page designed",
         invoicesCount: "Invoices count",
         categoty: "category",
+        invoiceNubmer: "Invoice Number",
+        invoiceDate: "Invoice Date",
+        count: "Count",
       },
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
@@ -153,6 +161,8 @@ export const label = (state) => {
         manageInvocies: "Manage your invoices in this section",
         manageCategories: "Manage your categories in this section",
         reportByPackaging: "You can see this report base on each packaging ",
+        printInvoice: "You can see your invoice detail and print invoice",
+        invoiceDetail: "You can see you invoice detail",
       },
       caption: {
         detailToLogin: "Insert your detail to login to your account",
@@ -181,6 +191,7 @@ export const label = (state) => {
         reportByPackaging: "گزارش بر اساس بسته بندی",
         addInvoice: "ثبت فاکتور",
         editInvoice: "ویرایش فاکتور",
+        printInvoice: "چاپ فاکتور",
       },
       menu: {
         dashboard: "داشبورد",
@@ -204,6 +215,8 @@ export const label = (state) => {
         reportByPackaging: "گزارش بر اساس دسته بندی",
         editProfile: "ویرایش پروفایل",
         changePassword: "تغییر کلمه عبور",
+        printInvoice: "چاپ فاکتور",
+        invoiceDetail: "جزئیات فاکتور",
       },
       header: {
         addCompany: "ایجاد شرکت",
@@ -280,6 +293,8 @@ export const label = (state) => {
         currentPass: "کلمه عبور فعلی",
         newPass: "کلمه عبور جدید",
         confirmPass: "تایید کلمه عبور",
+        invoiceNubmer: "شماره فاکتور",
+        invoiceDate: "تاریخ فاکتور",
       },
       table: {
         individual: "حقیقی",
@@ -312,6 +327,9 @@ export const label = (state) => {
         totalPageDesigned: "مجموع صفحات طراحی شده",
         invoicesCount: "تعداد فاکتور ها",
         categoty: "دسته بندی",
+        invoiceNubmer: "شماره فاکتور",
+        invoiceDate: "تاریخ فاکتور",
+        count: "تعداد",
       },
       description: {
         manageCompanies:
@@ -323,6 +341,8 @@ export const label = (state) => {
         manageCategories: "دسته بندی های خود را در این قسمت مدیریت کنید",
         reportByPackaging:
           "گزراش مربتط با هر دسته بندی را در این قسمت مشاهده کنید",
+        printInvoice: "در این بخش فاکتور خود را مشاهده و چاپ کنید",
+        invoiceDetail: "جزئیات فامتور خود را در این قسمت مشاهده کنید",
       },
       caption: {
         detailToLogin:

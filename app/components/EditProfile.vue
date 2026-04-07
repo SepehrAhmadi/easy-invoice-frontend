@@ -243,9 +243,9 @@ const { loadingBtn: loading } = storeToRefs(handlerStore);
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
 
-import { useConfigStore } from "~/store/config";
-const configStore = useConfigStore();
-const { profileResult: profile } = storeToRefs(configStore);
+import { useUtilStore } from "~/store/util";
+const utilStore = useUtilStore();
+const { profileResult: profile } = storeToRefs(utilStore);
 
 // ======= composables =======
 const { drawer } = useEditProfile();
@@ -303,7 +303,7 @@ const updateProfile = () => {
       formData.append("username", profileForm.value.username);
     }
 
-    configStore.editProfile(formData);
+    utilStore.editProfile(formData);
   } else {
     handlerStore.setError(langStore.alert.error.requiredFields);
   }
@@ -316,7 +316,7 @@ const changePassword = () => {
     passwordForm.value.confirmPassword
   ) {
     if (passwordForm.value.newPassword === passwordForm.value.confirmPassword) {
-      configStore.changePassword(passwordForm.value);
+      utilStore.changePassword(passwordForm.value);
     } else {
       handlerStore.setError(langStore.alert.error.passNotMatch);
     }
@@ -326,11 +326,11 @@ const changePassword = () => {
 };
 
 const deleteAvatar = () => {
-  configStore.deleteAvatar();
+  utilStore.deleteAvatar();
 };
 
 const reloadData = () => {
-  configStore.getProfile();
+  utilStore.getProfile();
 };
 
 // ======= watcher =======
