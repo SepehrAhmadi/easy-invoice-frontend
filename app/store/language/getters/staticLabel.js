@@ -37,8 +37,14 @@ export const label = (state) => {
         reportByPackaging: "Report by packaing",
         editProfile: "Edit Profile",
         changePassword: "Change Password",
-        printInvoice: "Print invoice",
-        invoiceDetail: "Invoice detail",
+        printInvoice: "Print Invoice",
+        invoiceDetail: "Invoice Detail",
+        invoiceTotalPrice: "Invoice Total price",
+        awaitingPayment: "Awaiting Payment",
+        paid: "Paid",
+        invoiceAmountsByCompany: "Invoice Amounts by Company",
+        invoicesStatus: "Invoices Status",
+        recordedInvoices : "Recorded Invoices"
       },
       header: {
         addCompany: "Add company",
@@ -78,6 +84,7 @@ export const label = (state) => {
         deleteAvatar: "Delete Avatar",
         submit: "Submit",
         print: "Print",
+        seeReport: "See Repport",
       },
       form: {
         username: "Username",
@@ -175,6 +182,7 @@ export const label = (state) => {
         rial: "Rial",
         editProfilePic1: "Pictrue format must be JPEG or PNG",
         editProfilePic2: "Choose the squre size",
+        invoice: "invoice",
       },
     };
   } else {
@@ -217,6 +225,12 @@ export const label = (state) => {
         changePassword: "تغییر کلمه عبور",
         printInvoice: "چاپ فاکتور",
         invoiceDetail: "جزئیات فاکتور",
+        invoiceTotalPrice: "مجموع مبالغ فاکتور ها",
+        awaitingPayment: "در اتظار پرداخت",
+        paid: "پرداخت شده",
+        invoiceAmountsByCompany: "مبالغ فاکتورها بر اساس شرکت",
+        invoicesStatus: "وضعیت فاکتورها",
+        recordedInvoices : "فاکتور های ثبت شده",
       },
       header: {
         addCompany: "ایجاد شرکت",
@@ -256,6 +270,7 @@ export const label = (state) => {
         deleteAvatar: "حذف آواتار",
         submit: "تایید",
         print: "چاپ",
+        seeReport: "مشاهده گزارش",
       },
       form: {
         username: "نام کاربری",
@@ -356,6 +371,7 @@ export const label = (state) => {
         rial: "ریال",
         editProfilePic1: "فرمت تصویر انتخابی باید JEPG یا PNG باشد",
         editProfilePic2: "تصویر مربعی انتخاب کنید",
+        invoice: "فاکتور",
       },
     };
   }

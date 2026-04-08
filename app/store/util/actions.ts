@@ -15,6 +15,7 @@ export function useUtilActions(state: StateType) {
 
   const getDashboard = () => {
     const axios = useApi();
+    handlerStore.loading = true;
 
     return axios
       .get("/dashboard")
@@ -27,6 +28,11 @@ export function useUtilActions(state: StateType) {
         const message =
           err.response?.data?.message || langStore.alert.error.serverError;
         handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 2000);
       });
   };
 
