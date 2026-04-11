@@ -44,7 +44,7 @@ export const label = (state) => {
         paid: "Paid",
         invoiceAmountsByCompany: "Invoice Amounts by Company",
         invoicesStatus: "Invoices Status",
-        recordedInvoices : "Recorded Invoices"
+        recordedInvoices: "Recorded Invoices",
       },
       header: {
         addCompany: "Add company",
@@ -159,6 +159,8 @@ export const label = (state) => {
         invoiceNubmer: "Invoice Number",
         invoiceDate: "Invoice Date",
         count: "Count",
+        description: "Description",
+        price: "Price",
       },
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
@@ -230,7 +232,7 @@ export const label = (state) => {
         paid: "پرداخت شده",
         invoiceAmountsByCompany: "مبالغ فاکتورها بر اساس شرکت",
         invoicesStatus: "وضعیت فاکتورها",
-        recordedInvoices : "فاکتور های ثبت شده",
+        recordedInvoices: "فاکتور های ثبت شده",
       },
       header: {
         addCompany: "ایجاد شرکت",
@@ -310,6 +312,7 @@ export const label = (state) => {
         confirmPass: "تایید کلمه عبور",
         invoiceNubmer: "شماره فاکتور",
         invoiceDate: "تاریخ فاکتور",
+        price: "مبلغ",
       },
       table: {
         individual: "حقیقی",
@@ -345,6 +348,8 @@ export const label = (state) => {
         invoiceNubmer: "شماره فاکتور",
         invoiceDate: "تاریخ فاکتور",
         count: "تعداد",
+        description: "توضیحات",
+        price: "مبلغ",
       },
       description: {
         manageCompanies:

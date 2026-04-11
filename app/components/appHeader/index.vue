@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="header-sidebar">
     <v-app-bar app color="transparetn" class="tw:px-4.5!">
       <div class="tw:flex tw:justify-between tw:items-center tw:w-full">
         <div>
