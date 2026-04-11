@@ -462,9 +462,29 @@
                 </template>
               </v-text-field>
             </v-col>
+            <v-col cols="12" md="6" lg="9" xl="10">
+              <v-text-field
+                v-model="invoiceItemForm.description"
+                type="text"
+                variant="outlined"
+                density="compact"
+                hide-details
+                hide-spin-buttons
+                class="tw:text-[14px]! tw:text-white!"
+                rounded="pill"
+              >
+                <template #label>
+                  <span class="tw:text-[12px]">
+                    {{ langStore.label.form.description }}
+                  </span>
+                </template>
+              </v-text-field>
+            </v-col>
             <v-col
               cols="12"
-              class="tw:flex tw:justify-end tw:items-center tw:gap-3"
+              lg="3"
+              xl="2"
+              class="tw:flex tw:justify-end tw:xl:justify-center tw:items-center tw:gap-3"
             >
               <v-btn
                 @click="resetFields('invoiceItemForm')"
@@ -553,6 +573,9 @@
                   </td>
                   <td class="tw-text-color tw:text-nowrap tw:text-center">
                     {{ separateNumber(item.totalPrice) }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.description }}
                   </td>
                   <td>
                     <div
@@ -716,6 +739,7 @@ interface InvoiceItemForm {
   pageCount: number | null;
   singlePrice: number | null;
   totalPrice: number | null;
+  description : string | null;
 }
 
 // ======= Composables =======
@@ -759,6 +783,7 @@ const invoiceItemForm = ref<InvoiceItemForm>({
   pageCount: 1,
   singlePrice: null,
   totalPrice: null,
+  description : null,
 });
 // table
 const tableHeader = ref<any>([
@@ -833,6 +858,11 @@ const tableHeader = ref<any>([
   {
     title: langStore.label.table.totalPrice,
     key: "totalPrice",
+    align: "center",
+  },
+  {
+    title: langStore.label.table.description,
+    key: "description",
     align: "center",
   },
   {
@@ -977,6 +1007,7 @@ const resetFields = (mode?: "invoiceItemForm" | "invoiceForm") => {
       pageCount: 1,
       singlePrice: null,
       totalPrice: null,
+      description : null,
     };
 
     return;
@@ -1004,6 +1035,7 @@ const resetFields = (mode?: "invoiceItemForm" | "invoiceForm") => {
     pageCount: 1,
     singlePrice: null,
     totalPrice: null,
+    description : null
   };
   invoiceForm.value = {
     localDate: null,

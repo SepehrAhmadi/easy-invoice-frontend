@@ -244,7 +244,7 @@
                       <th
                         class="printk-size-body tw:w-[26%] tw:border-b tw:py-1! tw-text-color tw:text-[14px] tw:text-nowrap!"
                       >
-                        {{ langStore.label.table.description }}
+                        {{ item.description }}
                       </th>
                     </tr>
                   </tbody>

@@ -124,6 +124,7 @@ export const label = (state) => {
         confirmPass: "Confirm Password",
         invoiceNubmer: "Invoice Number",
         invoiceDate: "Invoice Date",
+        description: "Description",
       },
       table: {
         individual: "Individual",
@@ -313,6 +314,7 @@ export const label = (state) => {
         invoiceNubmer: "شماره فاکتور",
         invoiceDate: "تاریخ فاکتور",
         price: "مبلغ",
+        description: "توضیحات",
       },
       table: {
         individual: "حقیقی",

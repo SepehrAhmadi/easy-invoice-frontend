@@ -157,6 +157,9 @@ html {
   display: block !important;
 }
 
+.v-data-table__td.v-data-table__th.v-data-table__th--sticky {
+  white-space: nowrap !important;
+}
 .centred-input input {
   text-align: center !important;
 }

@@ -58,7 +58,7 @@
     <div
       class="print-area tw:w-full! tw:h-full! tw:overflow-x-auto tw:xl:overflow-hidden tw:relative tw:rounded-b-4xl! tw:bg-white tw:dark:bg-primary-dark"
       :class="{ 'tw:overflow-auto!': scale > 1 }"
-      style="padding: 20px;"
+      style="padding: 20px"
     >
       <div
         class="inner-content-wrapper tw:h-full! tw:transition-transform tw:duration-200 tw:ease-in"
