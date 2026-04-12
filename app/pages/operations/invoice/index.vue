@@ -55,6 +55,7 @@
             </v-col>
             <v-col cols="12" md="6">
               <v-text-field
+                v-model="search"
                 type="text"
                 variant="solo"
                 density="compact"
@@ -302,7 +303,7 @@
           <v-card class="tw:rounded-b-4xl! tw:shadow-none! tw:pt-1!">
             <v-data-table-virtual
               :headers="tableHeader"
-              :items="invoices"
+              :items="filteredInvoices"
               hide-default-footer
               fixed-header
               height="740"
@@ -690,6 +691,7 @@ const tableHeader = ref<any>([
 ]);
 // filter
 const showFilter = ref<boolean>(false);
+const search = ref<string>("");
 const filter = ref<Filter>({
   fromDate: NowDate,
   toDate: null,
@@ -709,6 +711,21 @@ const statusForm = ref<StatusForm>({
 });
 // modal
 const deleteModal = ref<boolean>(false);
+
+// ======= Computeds =======
+const filteredInvoices = computed(() => {
+  if (!search.value) return invoices.value;
+
+  const term = search.value.toLowerCase();
+
+  return invoices.value.filter((item) => {
+    return (
+      item.companyName?.toLowerCase().includes(term) ||
+      item.invoiceNumber?.toString().toLowerCase().includes(term) ||
+      item.totalPrice?.toString().toLowerCase().includes(term)
+    );
+  });
+});
 
 // ======= Functions =======
 // filter
