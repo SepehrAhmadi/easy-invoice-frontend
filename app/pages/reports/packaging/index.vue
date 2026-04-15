@@ -11,6 +11,10 @@
               <div class="tw-text-color-reverse header-title tw:text-nowrap">
                 {{ langStore.label.title.reportByPackaging }}
               </div>
+              <div class="tw-text-color-reverse tw:mx-1!" v-if="packagingName">|</div>
+              <div class="tw-text-color-reverse tw:text-[16px] tw:lg:text-[18px] tw:3xl:text-[20px]! tw:text-nowrap">
+                {{ packagingName }}
+              </div>
             </div>
             <div
               class="tw:text-gray-400 tw:text-justify header-desc tw:mt-2! tw:text-nowrap"
@@ -19,150 +23,31 @@
             </div>
           </div>
         </v-col>
-        <transition name="fade">
-          <v-col
-            cols="12"
-            lg="6"
-            v-if="isDetail"
-            class="tw:flex tw:justify-end tw:items-center"
-          >
-            <div
-              @click="backToReport"
-              class="tw:flex tw:justify-center tw:items-center tw:gap-1 tw:py-1! tw:px-4! tw:border tw:border-white tw:rounded-full tw:w-35 tw:group tw:cursor-pointer tw:hover:opacity-95 tw:transition tw:duration-200"
-            >
-              <img
-                :src="getPackagingIcon(packagingType)"
-                class="tw:w-8 tw:h-8"
-              />
-              <div class="tw:text-white tw:text-[16px] tw:3xl:text-[16px]">
-                {{ packagingName }}
-              </div>
-              <icon-arrow-left
-                class="tw:text-[20px]! tw:ms-1! tw:text-white! tw:group-hover:-translate-x-1.5 tw:transition tw:duration-200"
-              />
-            </div>
-          </v-col>
-        </transition>
       </v-row>
       <v-row class="tw:rounded-b-4xl! tw:bg-white tw:dark:bg-primary-dark">
-        <transition name="slide-up" @after-leave="onTableSlideUpLeave">
-          <v-col
-            cols="12"
-            v-if="!isDetail && !isTableAnimating"
-            class="tw:p-6!"
+        <v-col cols="12" class="tw:p-6!">
+          <div
+            class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:3xl:grid-cols-4 tw:gap-6"
           >
             <div
-              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:3xl:grid-cols-4 tw:gap-6"
+              v-for="item in report"
+              :key="item.packagingId"
+              class="tw:bg-primary-light tw:dark:bg-background-dark tw:p-3! tw:rounded-2xl! tw:w-full"
             >
               <div
-                v-for="item in report"
-                :key="item.packagingId"
-                class="tw:bg-primary-light tw:dark:bg-background-dark tw:p-3! tw:rounded-2xl! tw:w-full"
+                class="tw:w-full! tw:flex tw:justify-start tw:items-center tw:gap-2"
               >
-                <div
-                  class="tw:w-full! tw:flex tw:justify-start tw:items-center tw:gap-2"
-                >
-                  <!-- image type -->
-                  <div>
-                    <div
-                      class="tw:bg-primary-dark tw:rounded-full tw:w-25 tw:h-25 tw:flex tw:items-center tw:justify-center"
-                    >
-                      <img
-                        :src="getPackagingIcon(item.packagingType)"
-                        class="tw:w-17 tw:h-17"
-                      />
-                    </div>
-                  </div>
+                <!-- image type -->
+                <div>
                   <div
-                    class="tw:flex tw:flex-col tw:justify-start tw:items-start tw:gap-1.5"
+                    class="tw:bg-primary-dark tw:rounded-full tw:w-25 tw:h-25 tw:flex tw:items-center tw:justify-center"
                   >
-                    <div class="tw:w-full! tw:flex tw:flex-col tw:gap-1">
-                      <div
-                        class="tw-text-color tw:font-semibold tw:text-[16px] tw:3xl:text-[19px]"
-                      >
-                        {{ item.packagingName }}
-                      </div>
-                    </div>
-                    <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
-                      <icon-document
-                        class="tw-text-color-lighter tw:text-[20px]"
-                      />
-                      <span
-                        class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
-                      >
-                        {{ langStore.label.table.invoicesCount }} :
-                        <span
-                          class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
-                        >
-                          {{ item.count }}
-                        </span>
-                      </span>
-                    </div>
-                    <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
-                      <icon-documents
-                        class="tw-text-color-lighter tw:text-[20px]"
-                      />
-                      <span
-                        class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
-                      >
-                        {{ langStore.label.table.totalPageDesigned }} :
-                        <span
-                          class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
-                        >
-                          {{ item.totalPage }}
-                        </span>
-                      </span>
-                    </div>
-                    <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
-                      <icon-cash class="tw-text-color-lighter tw:text-[20px]" />
-                      <span
-                        class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
-                      >
-                        {{ langStore.label.table.totalPrice }} :
-                        <span
-                          class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
-                        >
-                          {{ separateNumber(item.totalPrice) }}
-                        </span>
-                        {{ langStore.label.caption.rial }}
-                      </span>
-                    </div>
+                    <img
+                      :src="getPackagingIcon(item.packagingType)"
+                      class="tw:w-17 tw:h-17"
+                    />
                   </div>
                 </div>
-                <!-- get detail action -->
-                <div
-                  class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:mt-3!"
-                >
-                  <v-btn
-                    @click="getReportDetail(item)"
-                    size=" x-small"
-                    variant="outlined"
-                    rounded="pill"
-                    class="tw:px-0! tw:py-0.75! tw:2xl:py-0.75! tw:w-25"
-                  >
-                    <div
-                      class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
-                    >
-                      {{ langStore.label.button.viewDetail }}
-                    </div>
-                  </v-btn>
-                </div>
-              </div>
-              <!-- <div v-for="item in report" :key="item.packagingId" class="tw:flex">
-              <div class="tw:w-[40%]">
-                <div
-                  class="tw:bg-primary-dark tw:h-full tw:rounded-s-2xl tw:flex tw:items-center tw:justify-center"
-                >
-                  <img
-                    :src="getPackagingIcon(item.packagingType)"
-                    class="tw:w-18 tw:h-18 tw:aspect-square!"
-                  />
-                </div>
-              </div>
-
-              <div
-                class="tw:bg-primary-light tw:dark:bg-background-dark tw:p-3! tw:rounded-e-2xl tw:w-full"
-              >
                 <div
                   class="tw:flex tw:flex-col tw:justify-start tw:items-start tw:gap-1.5"
                 >
@@ -218,147 +103,115 @@
                     </span>
                   </div>
                 </div>
-                <div
-                  class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:mt-3!"
-                >
-                  <v-btn
-                    size=" x-small"
-                    variant="outlined"
-                    rounded="pill"
-                    class="tw:px-0! tw:py-0.75! tw:2xl:py-0.75! tw:w-25"
-                  >
-                    <div
-                      class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
-                    >
-                      {{ langStore.label.button.viewDetail }}
-                    </div>
-                  </v-btn>
-                </div>
               </div>
-            </div> -->
-            </div>
-          </v-col>
-        </transition>
-        <transition name="slide-down" @after-leave="onTableSlideDownLeave">
-          <v-col cols="12" class="tw:p-0!" v-if="isDetail && showTableExpand">
-            <v-card
-              v-if="
-                reportDetail &&
-                reportDetail.items &&
-                reportDetail.items.length > 0
-              "
-              class="tw:shadow-none!"
-            >
-              <v-data-table-virtual
-                :headers="tableHeader"
-                :items="reportDetail.items"
-                hide-default-footer
-                fixed-header
-                class="tw:bg-white! tw:dark:bg-primary-dark!"
-                height="600"
-              >
-                <template #item="{ item, index }">
-                  <tr class="tw:my-2!">
-                    <td>
-                      <div
-                        class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
-                      >
-                        {{ index + 1 }}
-                      </div>
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{ item.localDate }}
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{
-                        item.isEdit
-                          ? langStore.label.table.edit
-                          : langStore.label.table.design
-                      }}
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{ item.productName }}
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{ item.brandName }}
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{ item.packagingName }}
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{ item.unitName }}
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{ item.amount }}
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{ item.unitCount }}
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{ item.pageCount }}
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{ separateNumber(item.singlePrice) }}
-                    </td>
-                    <td class="tw-text-color tw:text-nowrap tw:text-center">
-                      {{ separateNumber(item.totalPrice) }}
-                    </td>
-                  </tr>
-                </template>
-
-                <template #no-data>
-                  <div
-                    class="tw:flex tw:justify-center tw:items-center tw:gap-2"
-                  >
-                    <icon-row-chart
-                      class="tw-text-color-lighter tw:text-[35px]"
-                    />
-                    <div
-                      class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap"
-                    >
-                      {{ langStore.label.caption.noDataFound }}
-                    </div>
-                  </div>
-                </template>
-              </v-data-table-virtual>
+              <!-- get detail action -->
               <div
-                class="tw:px-6! tw:py-4! tw:flex tw:justify-start tw:items-center tw:gap-3 tw:rounded-b-4xl! tw:bg-white tw:dark:bg-primary-dark tw:border-t tw:border-gray-300"
+                class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:mt-3!"
               >
-                <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
-                  <icon-documents
-                    class="tw-text-color-lighter tw:text-[20px]"
-                  />
-                  <span
-                    class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
+                <v-btn
+                  @click="getReportDetail(item)"
+                  size=" x-small"
+                  variant="outlined"
+                  rounded="pill"
+                  class="tw:px-0! tw:py-0.75! tw:2xl:py-0.75! tw:w-25"
+                >
+                  <div
+                    class="tw-text-color-lighter tw:text-[11px] tw:3xl:text-[12px]"
                   >
-                    {{ langStore.label.table.totalPageDesigned }} :
-                    <span
-                      class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
-                    >
-                      {{ reportDetail.totalPage }}
-                    </span>
-                  </span>
-                </div>
-                <div class="tw-text-color-lighter tw:text-[15px]">|</div>
-                <div class="tw:flex tw:justify-start tw:items-end tw:gap-1">
-                  <icon-cash class="tw-text-color-lighter tw:text-[20px]" />
-                  <span
-                    class="tw:flex tw-text-color-lighter tw:text-[12px]/5 tw:3xl:text-[14px]/5"
-                  >
-                    {{ langStore.label.table.totalPrice }} :
-                    <span
-                      class="tw:font-semibold! yekan-font tw:text-[13px]/5 tw:3xl:text-[16px]/5 tw:mx-1!"
-                    >
-                      {{ separateNumber(reportDetail.totalPrice) }}
-                    </span>
-                    {{ langStore.label.caption.rial }}
-                  </span>
-                </div>
+                    {{ langStore.label.button.viewDetail }}
+                  </div>
+                </v-btn>
               </div>
-            </v-card>
+            </div>
+          </div>
+        </v-col>
+
+        <v-col cols="12" class="tw:p-6! tw:pt-0!">
+          <v-card
+            v-if="
+              reportDetail &&
+              reportDetail.items &&
+              reportDetail.items.length > 0
+            "
+            class="tw:shadow-none! tw:bg-transparent!"
+          >
+            <v-data-table-virtual
+              :headers="tableHeader"
+              :items="reportDetail?.items as any[]"
+              hide-default-footer
+              fixed-header
+              class="tw:bg-primary-light! tw:dark:bg-background-dark! tw:rounded-2xl!"
+              height="500"
+            >
+              <template #item="{ item, index }">
+                <tr class="tw:my-2!">
+                  <td>
+                    <div
+                      class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
+                    >
+                      {{ index + 1 }}
+                    </div>
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.localDate }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{
+                      item.isEdit
+                        ? langStore.label.table.edit
+                        : langStore.label.table.design
+                    }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.productName }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.brandName }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.packagingName }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.unitName }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.amount }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.unitCount }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ item.pageCount }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ separateNumber(item.singlePrice) }}
+                  </td>
+                  <td class="tw-text-color tw:text-nowrap tw:text-center">
+                    {{ separateNumber(item.totalPrice) }}
+                  </td>
+                </tr>
+              </template>
+
+              <template #no-data>
+                <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
+                  <icon-row-chart
+                    class="tw-text-color-lighter tw:text-[35px]"
+                  />
+                  <div
+                    class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap"
+                  >
+                    {{ langStore.label.caption.noDataFound }}
+                  </div>
+                </div>
+              </template>
+            </v-data-table-virtual>
+          </v-card>
+          <v-card
+            v-else
+            class="tw:rounded-2xl! tw:bg-primary-light! tw:dark:bg-background-dark! tw:p-6 tw:h-[500px]!"
+          >
             <div
-              v-else-if="reportDetail.items.length == 0"
-              class="tw:flex tw:justify-center tw:items-center tw:gap-2 tw:my-30!"
+              class="tw:h-full! tw:flex tw:justify-center tw:items-center tw:gap-2"
             >
               <icon-row-chart class="tw-text-color-lighter tw:text-[35px]" />
               <div
@@ -367,8 +220,8 @@
                 {{ langStore.label.caption.noDataFound }}
               </div>
             </div>
-          </v-col>
-        </transition>
+          </v-card>
+        </v-col>
       </v-row>
     </v-container>
   </div>

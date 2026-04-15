@@ -10,10 +10,11 @@ export const label = (state) => {
         brands: "Brands",
         products: "Products",
         invoices: "Invoices",
-        reportByPackaging: "Report by packaging",
-        addInvoice: "Add invoice",
-        editInvoice: "Edit invoice",
-        printInvoice: "Print invoice",
+        reportByPackaging: "Report By Packaging",
+        addInvoice: "Add Invoice",
+        editInvoice: "Edit Invoice",
+        printInvoice: "Print Invoice",
+        reportByCompany: "Report By Company",
       },
       menu: {
         dashboard: "Dashboard",
@@ -24,7 +25,8 @@ export const label = (state) => {
         brands: "Brands",
         products: "Products",
         invoices: "Invoices",
-        reportByPackaging: "Report by packaging",
+        reportByPackaging: "Report By Packaging",
+        reportByCompany: "Report By Company",
       },
       title: {
         wellcomeBack: "Wellcome Back",
@@ -45,6 +47,8 @@ export const label = (state) => {
         invoiceAmountsByCompany: "Invoice Amounts by Company",
         invoicesStatus: "Invoices Status",
         recordedInvoices: "Recorded Invoices",
+        companiesList: "Companies List",
+        reportByCompany: "Report By Company",
       },
       header: {
         addCompany: "Add company",
@@ -85,6 +89,7 @@ export const label = (state) => {
         submit: "Submit",
         print: "Print",
         seeReport: "See Repport",
+        backToInvoice: "Back To Invoice",
       },
       form: {
         username: "Username",
@@ -170,9 +175,11 @@ export const label = (state) => {
         deleteConfirm: "Are you sure you want to delete this item?",
         manageInvocies: "Manage your invoices in this section",
         manageCategories: "Manage your categories in this section",
-        reportByPackaging: "You can see this report base on each packaging ",
+        reportByPackaging: "You can see this report base on each packaging",
         printInvoice: "You can see your invoice detail and print invoice",
         invoiceDetail: "You can see you invoice detail",
+        companiesList: "View its details by selecting the desired company",
+        reportByCompany: "You can see this report base on each company",
       },
       caption: {
         detailToLogin: "Insert your detail to login to your account",
@@ -203,6 +210,7 @@ export const label = (state) => {
         addInvoice: "ثبت فاکتور",
         editInvoice: "ویرایش فاکتور",
         printInvoice: "چاپ فاکتور",
+        reportByCompany: "گزارش بر اساس شرکت",
       },
       menu: {
         dashboard: "داشبورد",
@@ -214,6 +222,7 @@ export const label = (state) => {
         products: "محصولات",
         invoices: "فاکتور ها",
         reportByPackaging: "گزارش بر اساس بسته بندی",
+        reportByCompany: "گزارش بر اساس شرکت",
       },
       title: {
         wellcomeBack: "خوش آمدید",
@@ -234,6 +243,8 @@ export const label = (state) => {
         invoiceAmountsByCompany: "مبالغ فاکتورها بر اساس شرکت",
         invoicesStatus: "وضعیت فاکتورها",
         recordedInvoices: "فاکتور های ثبت شده",
+        companiesList: "لیست شرکت ها",
+        reportByCompany: "گزارش بر اساس شرکت",
       },
       header: {
         addCompany: "ایجاد شرکت",
@@ -274,6 +285,7 @@ export const label = (state) => {
         submit: "تایید",
         print: "چاپ",
         seeReport: "مشاهده گزارش",
+        backToInvoice: "بارگشت به فاکتور",
       },
       form: {
         username: "نام کاربری",
@@ -365,6 +377,8 @@ export const label = (state) => {
           "گزراش مربتط با هر دسته بندی را در این قسمت مشاهده کنید",
         printInvoice: "در این بخش فاکتور خود را مشاهده و چاپ کنید",
         invoiceDetail: "جزئیات فامتور خود را در این قسمت مشاهده کنید",
+        companiesList: "با انتخاب شرکت مورد نظر جزئیات آن را مشاهده کنید",
+        reportByCompany: "گزراش مربتط با هر شرکت را در این قسمت مشاهده کنید",
       },
       caption: {
         detailToLogin:

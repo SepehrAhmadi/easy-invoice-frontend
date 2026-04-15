@@ -310,7 +310,7 @@
               class="tw:bg-white! tw:dark:bg-primary-dark!"
             >
               <template #item="{ item, index }">
-                <tr class="tw:my-2!">
+                <tr class="tw:my-2!"> 
                   <td>
                     <div
                       class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"

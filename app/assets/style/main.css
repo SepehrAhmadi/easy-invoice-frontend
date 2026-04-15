@@ -142,7 +142,7 @@ html {
 .v-data-table__td.v-data-table__th {
   background-color: var(--color-white) !important;
 }
-.dark .v-data-table__td.v-data-table__th {
+.dark .dark-table .v-data-table__td.v-data-table__th {
   background-color: var(--color-primary-dark) !important;
 }
 

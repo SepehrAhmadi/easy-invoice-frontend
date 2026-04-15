@@ -1,6 +1,6 @@
 <template>
   <v-layout class="tw:h-screen">
-    <edit-profile/>
+    <edit-profile />
 
     <app-header />
 
@@ -10,7 +10,7 @@
       </div>
 
       <div
-        class="tw:h-full tw:overflow-y-auto tw:overflow-x-hidden custom-scroll tw:py-6!"
+        class="tw:h-full tw:overflow-y-auto tw:overflow-x-hidden custom-scroll tw:py-4! tw:3xl:py-6!"
       >
         <!-- Page Content -->
         <div class="tw:md:me-8! tw:relative">

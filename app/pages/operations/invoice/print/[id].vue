@@ -181,7 +181,9 @@
               <div class="tw:mt-3!">
                 <table style="width: 100%">
                   <thead class="tw:border-x tw:border-t">
-                    <tr class="tw:w-full tw:bg-gray-100!">
+                    <tr
+                      class="tw:w-full tw:bg-gray-100! tw:dark:bg-transparent!"
+                    >
                       <th
                         class="print-size-heading tw:w-[5%] tw:border-e tw:py-1! tw-text-color tw:text-[14px] tw:text-nowrap!"
                       >
@@ -215,11 +217,11 @@
                     </tr>
                   </thead>
                   <tbody class="tw:border">
-                    <tr v-for="(item, index) in printResult.invoiceItems">
+                    <tr v-for="(item, index) in normalizedPrintResult">
                       <th
                         class="printk-size-body tw:w-[5%] tw:border-e tw:border-b tw:py-1! tw-text-color tw:text-[14px] tw:text-nowrap!"
                       >
-                        {{ index + 1 }}
+                        {{ (index as number) + 1 }}
                       </th>
                       <th
                         class="printk-size-body tw:w-[40%] tw:border-e tw:border-b tw:py-1! tw-text-color tw:text-[14px] tw:text-nowrap!"
@@ -253,7 +255,7 @@
 
               <!-- total price -->
               <div
-                class="tw:w-full tw:flex tw:bg-gray-100! tw:border tw:border-t-0"
+                class="tw:w-full tw:flex tw:bg-gray-100! tw:dark:bg-transparent! tw:border tw:border-t-0"
               >
                 <div
                   class="print-size-footer tw:flex tw:justify-start tw:items-center tw:gap-1 tw:w-[62%] tw:text-[15px] tw:text-nowrap! tw:font-semibold tw:py-2!"
@@ -299,6 +301,17 @@ const { separateNumber } = useSeparator();
 
 // ====== Router & Route ======
 const route = useRoute();
+
+// ======= Computeds =======
+const normalizedPrintResult = computed(() => {
+  const items = printResult.value.invoiceItems || [];
+  console.log("print items : ", items);
+  const emptyCount = Math.max(0, 10 - items.length);
+
+  const emptyRows = Array.from({ length: emptyCount }, () => ({}));
+
+  return [...items, ...emptyRows];
+});
 
 // ===== Lifecycle =====
 onMounted(() => {

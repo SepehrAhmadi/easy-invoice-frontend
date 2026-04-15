@@ -195,6 +195,11 @@ const menuItems = computed(() => [
         title: langStore.label.menu.reportByPackaging,
         routeName: "reports-packaging",
       },
+      {
+        id: "reportByCompany",
+        title: langStore.label.menu.reportByCompany,
+        routeName: "reports-company",
+      },
     ],
   },
 ]);

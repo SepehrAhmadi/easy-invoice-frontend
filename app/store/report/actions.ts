@@ -50,8 +50,82 @@ export function useReportActions(state: StateType) {
       });
   };
 
+  // ====== by companies ======
+  const getCompanies = () => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get("/report/company")
+      .then((res) => {
+        state.companiesResult.value = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
+
+  const getInvoices = (id: string) => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get("/report/company/invoices/" + id)
+      .then((res) => {
+        state.invoicesResult.value = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
+
+  const getInvoiceItems = (id: string) => {
+    const axios = useApi();
+    handlerStore.loading = true;
+
+    return axios
+      .get("/report/company/invoiceItems/" + id)
+      .then((res) => {
+        state.invoiceItemsResult.value = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.loading = false;
+        }, 500);
+      });
+  };
+
   return {
     getPackaging,
     getPackagingDetail,
+
+    getCompanies,
+    getInvoices,
+    getInvoiceItems,
   };
 }
