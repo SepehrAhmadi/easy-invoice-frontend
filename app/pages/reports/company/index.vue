@@ -190,7 +190,7 @@
             <!-- information -->
             <div>
               <div
-                class="tw:inline-flex tw:items-center tw:gap-1 tw:py-0.5! tw:px-3! tw:bg-primary-light tw:dark:bg-primary-dark tw:rounded-full">
+                class="tw:inline-flex tw:items-center tw:gap-1 tw:py-0.5! tw:px-3! tw:bg-white tw:dark:bg-primary-dark tw:rounded-full">
                 <icon-bank v-if="item.companyType == CompanyType.legalEntity"
                   class="tw-text-color-lighter tw:text-[17px]" />
                 <icon-user v-if="item.companyType == CompanyType.individual"
@@ -323,171 +323,177 @@
     <div class="companies-pagination-swiper tw:flex tw:justify-center tw:translate-y-3 tw:items-center"></div>
   </v-col>
   <v-col cols="12" class="tw:p-0! tw:pt-5!">
-    <v-card v-if="showInvoicesTabel && invoices && invoices.length > 0" class="tw:shadow-none! tw:bg-transparent!">
-      <v-data-table-virtual :headers="invoicesTableHeader" :items="invoices" hide-default-footer fixed-header
-        height="430" class="tw:bg-primary-light! tw:dark:bg-background-dark! tw:rounded-4xl!">
-        <template #item="{ item, index }">
-          <tr class="tw:my-2!">
-            <td>
-              <div
-                class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-background-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center">
-                {{ index + 1 }}
-              </div>
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.invoiceNumber }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.localDate }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.companyName }}
-            </td>
-            <td class="tw:w-auto!">
-              <div class="tw:flex tw:justify-center">
+    <transition name="fade">
+      <v-card v-if="showInvoicesTabel && invoices && invoices.length > 0" class="tw:shadow-none! tw:bg-transparent!">
+        <v-data-table-virtual :headers="invoicesTableHeader" :items="invoices" hide-default-footer fixed-header
+          height="430" class="tw:bg-primary-light! tw:dark:bg-background-dark! tw:rounded-4xl!">
+          <template #item="{ item, index }">
+            <tr class="tw:my-2!">
+              <td>
                 <div
-                  class="tw:flex tw:justify-center tw:w-28.75! tw:gap-2 tw:py-0.75! tw:px-3! tw:border tw:border-gray-400 tw:dark:border-gray-500 tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-full">
-                  <icon-bank v-if="item.companyType == CompanyType.legalEntity"
-                    class="tw-text-color-lighter tw:text-[17px]" />
-                  <icon-user v-if="item.companyType == CompanyType.individual"
-                    class="tw-text-color-lighter tw:text-[17px]" />
-                  <div class="tw-text-color-lighter tw:text-[12px]">
+                  class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-background-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center">
+                  {{ index + 1 }}
+                </div>
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.invoiceNumber }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.localDate }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.companyName }}
+              </td>
+              <td class="tw:w-auto!">
+                <div class="tw:flex tw:justify-center">
+                  <div
+                    class="tw:flex tw:justify-center tw:w-28.75! tw:gap-2 tw:py-0.75! tw:px-3! tw:border tw:border-gray-400 tw:dark:border-gray-500 tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-full">
+                    <icon-bank v-if="item.companyType == CompanyType.legalEntity"
+                      class="tw-text-color-lighter tw:text-[17px]" />
+                    <icon-user v-if="item.companyType == CompanyType.individual"
+                      class="tw-text-color-lighter tw:text-[17px]" />
+                    <div class="tw-text-color-lighter tw:text-[12px]">
+                      {{
+                        item.companyType == CompanyType.legalEntity
+                          ? langStore.label.table.legalEntity
+                          : langStore.label.table.individual
+                      }}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="tw:flex tw:justify-center tw:items-center">
+                <div
+                  class="tw:flex tw:justify-center tw:items-center tw:w-37! tw:gap-2 tw:py-0.75! tw:px-3! tw:rounded-full"
+                  :class="{
+                    'tw:bg-success/10 tw:border tw:border-success/40 tw:text-success tw:dark:text-green-500':
+                      item.paymentStatus == Status.paid,
+                    'tw:bg-gray-100 tw:dark:bg-gray-800 tw:border tw:border-gray-400 tw:dark:border-gray-500 tw-text-color-lighter':
+                      item.paymentStatus == Status.awaitingPayment,
+                  }">
+                  <icon-check-double v-if="item.paymentStatus == Status.paid" class="tw:text-[20px]" />
+                  <icon-hourglass v-if="item.paymentStatus == Status.awaitingPayment" class="tw:text-[15px]" />
+                  <div class="tw:text-[12px]">
                     {{
-                      item.companyType == CompanyType.legalEntity
-                        ? langStore.label.table.legalEntity
-                        : langStore.label.table.individual
+                      item.paymentStatus == Status.paid
+                        ? langStore.label.table.paid
+                        : langStore.label.table.awaitingPayment
                     }}
                   </div>
                 </div>
-              </div>
-            </td>
-            <td class="tw:flex tw:justify-center tw:items-center">
-              <div
-                class="tw:flex tw:justify-center tw:items-center tw:w-37! tw:gap-2 tw:py-0.75! tw:px-3! tw:rounded-full"
-                :class="{
-                  'tw:bg-success/10 tw:border tw:border-success/40 tw:text-success tw:dark:text-green-500':
-                    item.paymentStatus == Status.paid,
-                  'tw:bg-gray-100 tw:dark:bg-gray-800 tw:border tw:border-gray-400 tw:dark:border-gray-500 tw-text-color-lighter':
-                    item.paymentStatus == Status.awaitingPayment,
-                }">
-                <icon-check-double v-if="item.paymentStatus == Status.paid" class="tw:text-[20px]" />
-                <icon-hourglass v-if="item.paymentStatus == Status.awaitingPayment" class="tw:text-[15px]" />
-                <div class="tw:text-[12px]">
-                  {{
-                    item.paymentStatus == Status.paid
-                      ? langStore.label.table.paid
-                      : langStore.label.table.awaitingPayment
-                  }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ separateNumber(item.totalPrice) }}
+              </td>
+              <td>
+                <div class="tw:flex tw:justify-center tw:items-center">
+                  <v-tooltip location="top">
+                    <template #activator="{ props }">
+                      <v-btn @click="loadInvoiceItems(item)" v-bind="props" size="x-small" variant="text" rounded="pill"
+                        class="tw:w-8! tw:h-8! tw:px-0!">
+                        <icon-list class="tw-text-color-lighter tw:text-[23px]" />
+                      </v-btn>
+                    </template>
+                    <span class="tw:text-xs tw:p-2">{{
+                      langStore.label.button.viewDetail
+                    }}</span>
+                  </v-tooltip>
                 </div>
-              </div>
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ separateNumber(item.totalPrice) }}
-            </td>
-            <td>
-              <div class="tw:flex tw:justify-center tw:items-center">
-                <v-tooltip location="top">
-                  <template #activator="{ props }">
-                    <v-btn @click="loadInvoiceItems(item)" v-bind="props" size="x-small" variant="text" rounded="pill"
-                      class="tw:w-8! tw:h-8! tw:px-0!">
-                      <icon-list class="tw-text-color-lighter tw:text-[23px]" />
-                    </v-btn>
-                  </template>
-                  <span class="tw:text-xs tw:p-2">{{
-                    langStore.label.button.viewDetail
-                  }}</span>
-                </v-tooltip>
-              </div>
-            </td>
-          </tr>
-        </template>
+              </td>
+            </tr>
+          </template>
 
-        <template #no-data>
-          <div class="tw:h-full! tw:flex tw:justify-center tw:items-center tw:gap-2">
-            <icon-row-chart class="tw-text-color-lighter tw:text-[35px]" />
-            <div class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap">
-              {{ langStore.label.caption.noDataFound }}
-            </div>
-          </div>
-        </template>
-      </v-data-table-virtual>
-    </v-card>
-    <v-card v-if="showInvoiceItemsTabel && invoiceItems.length > 0" class="tw:rounded-4xl! tw:shadow-none!">
-      <v-data-table-virtual :headers="invoiceItemsTableHeader" :items="invoiceItems" hide-default-footer fixed-header
-        class="tw:bg-primary-light! tw:dark:bg-background-dark! tw:rounded-4xl!" height="430">
-        <template #item="{ item, index }">
-          <tr class="tw:my-2!">
-            <td>
-              <div
-                class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center">
-                {{ index + 1 }}
+          <template #no-data>
+            <div class="tw:h-full! tw:flex tw:justify-center tw:items-center tw:gap-2">
+              <icon-row-chart class="tw-text-color-lighter tw:text-[35px]" />
+              <div class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap">
+                {{ langStore.label.caption.noDataFound }}
               </div>
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.localDate }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{
-                item.isEdit
-                  ? langStore.label.table.edit
-                  : langStore.label.table.design
-              }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.categoryName }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.productName }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.brandName }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.packagingName }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.unitName }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.amount }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.unitCount }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.pageCount }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ separateNumber(item.singlePrice) }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ separateNumber(item.totalPrice) }}
-            </td>
-            <td class="tw-text-color tw:text-nowrap tw:text-center">
-              {{ item.description }}
-            </td>
-          </tr>
-        </template>
-
-        <template #no-data>
-          <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
-            <icon-row-chart class="tw-text-color-lighter tw:text-[35px]" />
-            <div class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap">
-              {{ langStore.label.caption.noDataFound }}
             </div>
+          </template>
+        </v-data-table-virtual>
+      </v-card>
+    </transition>
+    <transition name="fade">
+      <v-card v-if="showInvoiceItemsTabel && invoiceItems.length > 0" class="tw:rounded-4xl! tw:shadow-none!">
+        <v-data-table-virtual :headers="invoiceItemsTableHeader" :items="invoiceItems" hide-default-footer fixed-header
+          class="tw:bg-primary-light! tw:dark:bg-background-dark! tw:rounded-4xl!" height="430">
+          <template #item="{ item, index }">
+            <tr class="tw:my-2!">
+              <td>
+                <div
+                  class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center">
+                  {{ index + 1 }}
+                </div>
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.localDate }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{
+                  item.isEdit
+                    ? langStore.label.table.edit
+                    : langStore.label.table.design
+                }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.categoryName }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.productName }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.brandName }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.packagingName }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.unitName }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.amount }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.unitCount }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.pageCount }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ separateNumber(item.singlePrice) }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ separateNumber(item.totalPrice) }}
+              </td>
+              <td class="tw-text-color tw:text-nowrap tw:text-center">
+                {{ item.description }}
+              </td>
+            </tr>
+          </template>
+
+          <template #no-data>
+            <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
+              <icon-row-chart class="tw-text-color-lighter tw:text-[35px]" />
+              <div class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap">
+                {{ langStore.label.caption.noDataFound }}
+              </div>
+            </div>
+          </template>
+        </v-data-table-virtual>
+      </v-card>
+    </transition>
+    <transition name="fade">
+      <v-card v-if="!showInvoicesTabel && !showInvoiceItemsTabel"
+        class="tw:rounded-2xl! tw:bg-primary-light! tw:dark:bg-background-dark! tw:p-6 tw:h-[430px]!">
+        <div class="tw:h-full! tw:flex tw:justify-center tw:items-center tw:gap-2">
+          <icon-row-chart class="tw-text-color-lighter tw:text-[35px]" />
+          <div class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap">
+            {{ langStore.label.caption.noDataFound }}
           </div>
-        </template>
-      </v-data-table-virtual>
-    </v-card>
-    <v-card v-if="!showInvoicesTabel && !showInvoiceItemsTabel"
-      class="tw:rounded-2xl! tw:bg-primary-light! tw:dark:bg-background-dark! tw:p-6 tw:h-[430px]!">
-      <div class="tw:h-full! tw:flex tw:justify-center tw:items-center tw:gap-2">
-        <icon-row-chart class="tw-text-color-lighter tw:text-[35px]" />
-        <div class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap">
-          {{ langStore.label.caption.noDataFound }}
         </div>
-      </div>
-    </v-card>
+      </v-card>
+    </transition>
   </v-col>
   </v-row>
   </v-container>
@@ -539,12 +545,12 @@ const companiesSliderKey = ref<number>(1);
 // table
 const showInvoicesTabel = ref<boolean>(false)
 const showInvoiceItemsTabel = ref<boolean>(false)
-const invoicesTableHeader = ref<any>([
+const invoicesTableHeader = computed(() => [
   {
     title: langStore.label.table.row,
     key: "row",
     align: "start",
-    sortable: "false",
+    sortable: false,
   },
   {
     title: langStore.label.table.invoiceNumber,
@@ -587,9 +593,9 @@ const invoicesTableHeader = ref<any>([
     align: "center",
     sortable: false,
   },
-]);
+] as const);
 
-const invoiceItemsTableHeader = ref<any>([
+const invoiceItemsTableHeader = computed(() => [
   {
     title: langStore.label.table.row,
     key: "row",
@@ -668,7 +674,7 @@ const invoiceItemsTableHeader = ref<any>([
     key: "description",
     align: "center",
   },
-]);
+] as const);
 
 // ====== Functions ======
 const loadReport = () => {

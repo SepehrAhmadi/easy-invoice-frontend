@@ -256,7 +256,7 @@ const isDetail = ref<boolean>(false);
 const packagingType = ref<string>("");
 const packagingName = ref<string>("");
 // table
-const tableHeader = ref<any>([
+const tableHeader = computed(() => [
   {
     title: langStore.label.table.row,
     key: "row",
@@ -324,7 +324,7 @@ const tableHeader = ref<any>([
     key: "totalPrice",
     align: "center",
   },
-]);
+] as const);
 // toggle
 const isTableAnimating = ref(false);
 const showTableExpand = ref(false);

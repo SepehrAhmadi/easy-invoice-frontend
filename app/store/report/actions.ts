@@ -76,7 +76,6 @@ export function useReportActions(state: StateType) {
 
   const getInvoices = (id: string) => {
     const axios = useApi();
-    handlerStore.loading = true;
 
     return axios
       .get("/report/company/invoices/" + id)
@@ -89,17 +88,11 @@ export function useReportActions(state: StateType) {
         const message =
           err.response?.data?.message || langStore.alert.error.serverError;
         handlerStore.setError(message);
-      })
-      .finally(() => {
-        setTimeout(() => {
-          handlerStore.loading = false;
-        }, 500);
       });
   };
 
   const getInvoiceItems = (id: string) => {
     const axios = useApi();
-    handlerStore.loading = true;
 
     return axios
       .get("/report/company/invoiceItems/" + id)
@@ -112,11 +105,6 @@ export function useReportActions(state: StateType) {
         const message =
           err.response?.data?.message || langStore.alert.error.serverError;
         handlerStore.setError(message);
-      })
-      .finally(() => {
-        setTimeout(() => {
-          handlerStore.loading = false;
-        }, 500);
       });
   };
 
