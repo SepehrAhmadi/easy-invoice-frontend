@@ -193,7 +193,7 @@
       <v-row class="tw:rounded-b-4xl! tw:p-0!">
         <v-col cols="12" class="tw:p-0!">
           <v-card class="tw:rounded-b-4xl! tw:shadow-none! tw:pt-1!">
-            <v-data-table-virtual :headers="tableHeader" :items="filteredInvoices" hide-default-footer fixed-header
+            <v-data-table-virtual :headers="tableHeader" :items="filteredInvoices" hide-default-footer
               height="740" class="tw:bg-white! tw:dark:bg-primary-dark!">
               <template #item="{ item, index }">
                 <tr class="tw:my-2!">

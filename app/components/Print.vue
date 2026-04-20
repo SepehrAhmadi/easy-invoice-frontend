@@ -1,11 +1,9 @@
 <template>
   <div class="print-component tw:3xl:h-[755px]">
     <div
-      class="print-component-header tw:bg-primary-dark tw:rounded-t-4xl! tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6!"
-    >
+      class="print-component-header tw:bg-primary-dark tw:rounded-t-4xl! tw:border-b tw:border-gray-300 tw:dark:bg-primary-dark tw:p-4! tw:2xl:px-6!">
       <div
-        class="tw:flex tw:flex-col tw:md:flex-row tw:justify-between tw:items-start tw:md:items-center tw:gap-5 tw:sm:gap-3"
-      >
+        class="tw:flex tw:flex-col tw:md:flex-row tw:justify-between tw:items-start tw:md:items-center tw:gap-5 tw:sm:gap-3">
         <div>
           <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
             <icon-print class="tw-text-color-reverse header-icon" />
@@ -13,37 +11,18 @@
               {{ langStore.label.title.printInvoice }}
             </div>
           </div>
-          <div
-            class="tw:text-gray-400 tw:text-justify header-desc tw:mt-2! tw:text-nowrap"
-          >
+          <div class="tw:text-gray-400 tw:text-justify header-desc tw:mt-2! tw:text-nowrap">
             {{ langStore.label.description.printInvoice }}
           </div>
         </div>
-        <div
-          class="tw:flex tw:justify-center tw:items-center tw:gap-2 tw:mb-2!"
-        >
-          <v-btn
-            @click="zoomIn"
-            color="white"
-            class="tw:rounded-full! tw:w-9! tw:h-9! tw:min-w-0! tw:p-0!"
-            icon
-          >
+        <div class="tw:flex tw:justify-center tw:items-center tw:gap-2 tw:mb-2!">
+          <v-btn @click="zoomIn" color="white" class="tw:rounded-full! tw:w-9! tw:h-9! tw:min-w-0! tw:p-0!" icon>
             <icon-zoom-in class="tw:text-[23px] tw:3xl:text-[25px]" />
           </v-btn>
-          <v-btn
-            @click="zoomOut"
-            color="white"
-            class="tw:rounded-full! tw:w-9! tw:h-9! tw:min-w-0! tw:p-0!"
-            icon
-          >
+          <v-btn @click="zoomOut" color="white" class="tw:rounded-full! tw:w-9! tw:h-9! tw:min-w-0! tw:p-0!" icon>
             <icon-zoom-out class="tw:text-[23px] tw:3xl:text-[25px]" />
           </v-btn>
-          <v-btn
-            @click="triggerPrint"
-            color="white"
-            rounded="pill"
-            class="tw:h-9!"
-          >
+          <v-btn @click="triggerPrint" color="white" rounded="pill" class="tw:h-9!">
             <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
               <icon-print class="tw:text-[22px]" />
               <div class="tw:text-[13px] tw:3xl:text-[15px]">
@@ -57,13 +36,11 @@
 
     <div
       class="print-area tw:w-full! tw:h-full! tw:overflow-x-auto tw:xl:overflow-hidden tw:relative tw:rounded-b-4xl! tw:bg-white tw:dark:bg-primary-dark"
-      :class="{ 'tw:overflow-auto!': scale > 1 }"
-      style="padding: 20px"
-    >
+      :class="{ 'tw:overflow-auto!': scale > 1 }" style="padding: 20px;">
       <div
-        class="inner-content-wrapper tw:h-full! tw:transition-transform tw:duration-200 tw:ease-in"
-        :style="{ transform: `scale(${scale})` }"
-      >
+        class="inner-content-wrapper tw:h-full! tw:transition-transform tw:duration-200 tw:ease-in tw:overflow-x-auto"
+        :class="langStore.currentLang === 'fa' ? 'tw:origin-top-right' : 'tw:origin-top-left'"
+        :style="{ transform: `scale(${scale})` }">
         <slot></slot>
       </div>
     </div>
@@ -86,7 +63,6 @@ const zoomOut = () => {
 };
 
 const triggerPrint = () => {
-  scale.value = 1;
   window.print();
 };
 </script>
@@ -108,34 +84,52 @@ const triggerPrint = () => {
   .print-size-title {
     font-size: 15px !important;
   }
-  .print-size-title > span {
+
+  .print-size-title>span {
     font-size: 13px !important;
   }
 
   .print-size-text {
     font-size: 10px !important;
   }
-  .print-size-text > svg {
+
+  .print-size-text>svg {
     font-size: 15px !important;
   }
-  .print-size-text > span {
+
+  .print-size-text>span {
     font-size: 12px !important;
   }
 
   .print-size-heading {
     font-size: 10px !important;
+    padding-inline: 0px !important;
   }
 
-  .printk-size-body {
+  .print-size-body {
     font-size: 10px !important;
+    padding-inline: 0px !important;
   }
 
   .print-size-footer {
     font-size: 11px !important;
   }
 
-  .print-size-footer > .caption {
+  .print-size-footer>.caption {
     font-size: 10px !important;
+  }
+
+  .table-footer>.price-by-word {
+    width: 63% !important;
+  }
+
+  .table-footer>.total-price {
+    width: 12.1% !important;
+  }
+
+  .table-footer>.blank-space {
+    display: block;
+    width: 26% !important;
   }
 
   /* header and sidebar */
@@ -149,6 +143,9 @@ const triggerPrint = () => {
 
   .invoice-print-structure {
     padding: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: start !important;
   }
 
   /* reset default vuetify padding */
@@ -160,6 +157,7 @@ const triggerPrint = () => {
   .print-area * {
     visibility: visible !important;
   }
+
   .print-area {
     position: absolute;
     display: flex !important;

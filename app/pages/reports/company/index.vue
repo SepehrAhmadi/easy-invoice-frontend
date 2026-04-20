@@ -325,7 +325,7 @@
   </v-col>
   <v-col cols="12" class="tw:p-0! tw:pt-5!">
     <v-card v-if="showInvoicesTabel && invoices && invoices.length > 0" class="tw:shadow-none! tw:bg-transparent!">
-      <v-data-table-virtual :headers="invoicesTableHeader" :items="invoices" hide-default-footer fixed-header
+      <v-data-table-virtual :headers="invoicesTableHeader" :items="invoices" hide-default-footer
         height="430" class="tw:bg-primary-light! tw:dark:bg-background-dark! tw:rounded-4xl!">
         <template #item="{ item, index }">
           <tr class="tw:my-2!">
@@ -414,7 +414,7 @@
       </v-data-table-virtual>
     </v-card>
     <v-card v-if="showInvoiceItemsTabel && invoiceItems.length > 0" class="tw:rounded-4xl! tw:shadow-none!">
-      <v-data-table-virtual :headers="invoiceItemsTableHeader" :items="invoiceItems" hide-default-footer fixed-header
+      <v-data-table-virtual :headers="invoiceItemsTableHeader" :items="invoiceItems" hide-default-footer
         class="tw:bg-primary-light! tw:dark:bg-background-dark! tw:rounded-4xl!" height="430">
         <template #item="{ item, index }">
           <tr class="tw:my-2!">

@@ -139,7 +139,6 @@
               :headers="tableHeader"
               :items="reportDetail?.items as any[]"
               hide-default-footer
-              fixed-header
               class="tw:bg-primary-light! tw:dark:bg-background-dark! tw:rounded-2xl!"
               height="500"
             >
