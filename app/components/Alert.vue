@@ -59,7 +59,7 @@ const config = computed(() => {
     },
     2: {
       type: "error",
-      timeout: 5000,
+      timeout: 500000,
       color: "#AA2B1D",
       message: handlerStore.errorMessage,
     },
@@ -102,7 +102,7 @@ watch(
 <style scoped>
 :deep(.v-overlay__content.v-snackbar__wrapper) {
   border-radius: 10px !important;
-  backdrop-filter: blur(7px) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 :deep(.v-snackbar__content) {

@@ -4,7 +4,7 @@
       <div class="tw:flex tw:justify-between tw:items-center tw:w-full">
         <div>
           <button icon variant="text" @click="handleSidebar"
-            class="tw:bg-black! tw:hover:bg-black/80! tw:dark:bg-primary-dark! tw:dark:hover:bg-primary-dark/80! tw:group tw:p-2! tw:rounded-full">
+            class="tw:bg-primary-dark! tw:hover:bg-primary-dark!/80!  tw:group tw:p-2! tw:rounded-full">
             <icon-more-vertical v-if="rail" class="tw:text-[25px] tw:text-white" />
             <icon-menu v-else class="tw:text-[25px] tw:text-white" />
           </button>
