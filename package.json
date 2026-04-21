@@ -13,6 +13,7 @@
     "@mdi/font": "^7.4.47",
     "@pinia/nuxt": "^0.11.3",
     "@tailwindcss/vite": "^4.1.18",
+    "@vueuse/nuxt": "^14.2.1",
     "axios": "^1.13.4",
     "jalali-moment": "^3.3.11",
     "nuxt": "^4.3.0",

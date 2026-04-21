@@ -22,7 +22,7 @@ export default defineNuxtConfig({
       },
     },
   },
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "@vueuse/nuxt"],
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "layout", mode: "out-in" },

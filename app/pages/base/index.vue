@@ -30,23 +30,23 @@
             el: '.companies-pagination-swiper',
             clickable: false,
           }" :breakpoints="{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-              },
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 15,
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-            }" :key="companiesSliderKey" class="tw:items-stretch!">
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 15,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+          }" :key="companiesSliderKey" class="tw:items-stretch!">
             <SwiperSlide v-for="item in companies" class="tw:h-auto!">
               <div class="tw:h-auto tw:flex">
                 <div
@@ -1146,7 +1146,6 @@ watch(
   () => langStore.currentLang,
   () => {
     companiesSliderKey.value += 1;
-    tableKey.value += 1;
   },
 );
 

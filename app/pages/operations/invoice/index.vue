@@ -2,7 +2,8 @@
   <div>
     <v-container fluid class="tw:md:pe-0! tw:md:py-0!">
       <v-row
-        class="tw-flex! tw:items-center! tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:rounded-t-4xl! tw:p-3!">
+        class="tw-flex! tw:items-center! tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:rounded-t-4xl! tw:p-3!"
+      >
         <v-col cols="12" md="3">
           <div>
             <div class="tw:flex tw:justify-start tw:items-center tw:gap-2">
@@ -11,15 +12,26 @@
                 {{ langStore.label.title.manageInvocies }}
               </div>
             </div>
-            <div class="tw:text-gray-400 tw:text-justify header-desc tw:mt-2! tw:text-nowrap">
+            <div
+              class="tw:text-gray-400 tw:text-justify header-desc tw:mt-2! tw:text-nowrap"
+            >
               {{ langStore.label.description.manageInvocies }}
             </div>
           </div>
         </v-col>
         <v-col cols="12" md="9">
           <v-row>
-            <v-col cols="12" md="6" class="tw:flex tw:md:justify-end tw:items-center tw:gap-4">
-              <v-btn @click="toggleSubmitForm" color="white" rounded="pill" class="tw:h-10!">
+            <v-col
+              cols="12"
+              md="6"
+              class="tw:flex tw:md:justify-end tw:items-center tw:gap-4"
+            >
+              <v-btn
+                @click="toggleSubmitForm"
+                color="white"
+                rounded="pill"
+                class="tw:h-10!"
+              >
                 <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
                   <icon-plus-circle class="tw:text-[18px] tw:2xl:text-[18px]" />
                   <div class="tw:text-[13px] tw:3xl:text-[15px]">
@@ -27,7 +39,12 @@
                   </div>
                 </div>
               </v-btn>
-              <v-btn @click="toggleFilter" color="white" rounded="pill" class="tw:h-10!">
+              <v-btn
+                @click="toggleFilter"
+                color="white"
+                rounded="pill"
+                class="tw:h-10!"
+              >
                 <div class="tw:flex tw:justify-center tw:items-center tw:gap-2">
                   <icon-filter class="tw:text-[18px] tw:2xl:text-[18px]" />
                   <div class="tw:text-[13px] tw:3xl:text-[15px]">
@@ -37,8 +54,17 @@
               </v-btn>
             </v-col>
             <v-col cols="12" md="6">
-              <v-text-field v-model="search" type="text" variant="solo" density="compact" hide-details
-                class="tw:text-[14px]!" bg-color="white" rounded="pill" :placeholder="langStore.label.form.search">
+              <v-text-field
+                v-model="search"
+                type="text"
+                variant="solo"
+                density="compact"
+                hide-details
+                class="tw:text-[14px]!"
+                bg-color="white"
+                rounded="pill"
+                :placeholder="langStore.label.form.search"
+              >
                 <template #append-inner>
                   <icon-magnify class="tw-text-color tw:text-[25px] tw:me-1!" />
                 </template>
@@ -49,37 +75,80 @@
         <!-- filter -->
         <transition name="toggle-slide">
           <v-col cols="12" v-show="showFilter">
-            <div class="default-scroll tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:lg:grid-cols-4 tw:gap-6">
+            <div
+              class="default-scroll tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:lg:grid-cols-4 tw:gap-6"
+            >
               <div class="tw:relative!">
-                <label v-if="filter.fromDate" for="formDate"
-                  class="tw:text-[11px] tw:absolute! tw:bg-primary-dark! tw:start-10 tw:-top-1.75 tw:z-10! tw-text-color-reverse">{{
-                    langStore.label.form.fromDate }}</label>
-                <date-picker v-model="filter.fromDate" id="formDate" simple :placeholder="langStore.label.form.fromDate"
-                  format="jYYYY/jMM/jDD" display-format="jYYYY/jMM/jDD"
-                  class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!" color="#1d202e"
-                  @update:modelValue="loadInvoices" />
+                <label
+                  v-if="filter.fromDate"
+                  for="formDate"
+                  class="tw:text-[11px] tw:absolute! tw:bg-primary-dark! tw:start-10 tw:-top-1.75 tw:z-10! tw-text-color-reverse"
+                  >{{ langStore.label.form.fromDate }}</label
+                >
+                <date-picker
+                  v-model="filter.fromDate"
+                  id="formDate"
+                  simple
+                  :placeholder="langStore.label.form.fromDate"
+                  format="jYYYY/jMM/jDD"
+                  display-format="jYYYY/jMM/jDD"
+                  class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!"
+                  color="#1d202e"
+                  @update:modelValue="loadInvoices"
+                />
               </div>
               <div class="tw:relative!">
-                <label v-if="filter.toDate" for="toDate"
-                  class="tw:text-[11px] tw:absolute! tw:bg-primary-dark! tw:start-10 tw:-top-1.75 tw:z-10! tw-text-color-reverse">{{
-                    langStore.label.form.toDate }}</label>
-                <date-picker v-model="filter.toDate" id="toDate" simple :placeholder="langStore.label.form.toDate"
-                  format="jYYYY/jMM/jDD" display-format="jYYYY/jMM/jDD"
-                  class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!" clearable color="#1d202e"
-                  @update:modelValue="loadInvoices" />
+                <label
+                  v-if="filter.toDate"
+                  for="toDate"
+                  class="tw:text-[11px] tw:absolute! tw:bg-primary-dark! tw:start-10 tw:-top-1.75 tw:z-10! tw-text-color-reverse"
+                  >{{ langStore.label.form.toDate }}</label
+                >
+                <date-picker
+                  v-model="filter.toDate"
+                  id="toDate"
+                  simple
+                  :placeholder="langStore.label.form.toDate"
+                  format="jYYYY/jMM/jDD"
+                  display-format="jYYYY/jMM/jDD"
+                  class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!"
+                  clearable
+                  color="#1d202e"
+                  @update:modelValue="loadInvoices"
+                />
               </div>
-              <v-autocomplete v-model="filter.paymentStatus" :items="dropdownStore.paymentStatusOptions"
-                item-title="text" item-value="value" variant="outlined" density="compact" hide-details
-                class="tw:text-[14px]! tw:text-white!" rounded="pill" clearable @update:modelValue="loadInvoices">
+              <v-autocomplete
+                v-model="filter.paymentStatus"
+                :items="dropdownStore.paymentStatusOptions"
+                item-title="text"
+                item-value="value"
+                variant="outlined"
+                density="compact"
+                hide-details
+                class="tw:text-[14px]! tw:text-white!"
+                rounded="pill"
+                clearable
+                @update:modelValue="loadInvoices"
+              >
                 <template #label>
                   <span class="tw:text-[12px]">
                     {{ langStore.label.form.paymentStatus }}
                   </span>
                 </template>
               </v-autocomplete>
-              <v-autocomplete v-model="filter.companyType" :items="dropdownStore.companyTypeOptions" item-title="text"
-                item-value="value" variant="outlined" density="compact" hide-details
-                class="tw:text-[14px]! tw:text-white!" rounded="pill" clearable @update:modelValue="loadInvoices">
+              <v-autocomplete
+                v-model="filter.companyType"
+                :items="dropdownStore.companyTypeOptions"
+                item-title="text"
+                item-value="value"
+                variant="outlined"
+                density="compact"
+                hide-details
+                class="tw:text-[14px]! tw:text-white!"
+                rounded="pill"
+                clearable
+                @update:modelValue="loadInvoices"
+              >
                 <template #label>
                   <span class="tw:text-[12px]">
                     {{ langStore.label.form.companyType }}
@@ -94,39 +163,60 @@
             <v-row class="tw:flex tw:items-center!">
               <v-col cols="12" lg="3" xl="2" 2xl="2">
                 <div class="tw:relative!">
-                  <label v-if="invoiceForm.localDate" for="date"
-                    class="tw:text-[11px] tw:absolute! tw:bg-primary-dark! tw:start-10 tw:-top-1.75 tw:z-10! tw-text-color-reverse">
+                  <label
+                    v-if="invoiceForm.localDate"
+                    for="date"
+                    class="tw:text-[11px] tw:absolute! tw:bg-primary-dark! tw:start-10 tw:-top-1.75 tw:z-10! tw-text-color-reverse"
+                  >
                     {{ langStore.label.form.date }}
                     <span class="tw:text-red-400 tw:text-[10px]">
                       ({{ langStore.label.caption.required }})
                     </span>
                   </label>
-                  <date-picker v-model="invoiceForm.localDate" id="date" simple
+                  <date-picker
+                    v-model="invoiceForm.localDate"
+                    id="date"
+                    simple
                     :placeholder="`${langStore.label.form.date} (${langStore.label.caption.required})`"
-                    format="jYYYY/jMM/jDD" display-format="jYYYY/jMM/jDD"
-                    class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!" clearable
-                    color="#1d202e" />
+                    format="jYYYY/jMM/jDD"
+                    display-format="jYYYY/jMM/jDD"
+                    class="default-scroll tw:text-gray-300! tw:text-[14px]! tw:text-center!"
+                    clearable
+                    color="#1d202e"
+                  />
                 </div>
               </v-col>
               <v-col cols="12" lg="8" xl="9" 2xl="9">
                 <v-row class="tw:flex tw:items-center!">
-                  <v-col cols="12" lg="2">
-                    <div class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:text-nowrap">
-                      <icon-building class="tw-text-color-reverse tw:text-[30px]" />
-                      <div class="tw-text-color-reverse tw:text-[16px] tw:lg:text-[16px] tw:3xl:text-[20px]">
+                  <v-col cols="12" lg="3" xl="2">
+                    <div
+                      class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:text-nowrap"
+                    >
+                      <icon-building
+                        class="tw-text-color-reverse tw:text-[30px]"
+                      />
+                      <div
+                        class="tw-text-color-reverse tw:text-[16px] tw:lg:text-[16px] tw:3xl:text-[20px]"
+                      >
                         {{ langStore.label.form.company }}
-                        <span class="tw:text-red-400 tw:text-[11px] tw:3xl:text-[13px]">
+                        <span
+                          class="tw:text-red-400 tw:text-[11px] tw:3xl:text-[13px]"
+                        >
                           ({{ langStore.label.caption.required }})
                         </span>
                       </div>
                     </div>
                   </v-col>
-                  <v-col cols="12" lg="10">
-                    <Swiper class="tw:w-full!" :modules="[Navigation, Pagination]" :slides-per-view="'auto'"
+                  <v-col cols="12" lg="8" xl="10">
+                    <Swiper
+                      class="tw:w-full!"
+                      :modules="[Navigation, Pagination]"
+                      :slides-per-view="'auto'"
                       :pagination="{
                         el: '.company-pagination-swiper',
                         clickable: false,
-                      }" :breakpoints="{
+                      }"
+                      :breakpoints="{
                         320: {
                           slidesPerView: 1,
                           spaceBetween: 10,
@@ -139,33 +229,37 @@
                           slidesPerView: 2,
                           spaceBetween: 20,
                         },
-                        1280: {
+                        1920: {
                           slidesPerView: 3,
-                          spaceBetween: 10,
-                        },
-                        2160: {
-                          slidesPerView: 4,
                           spaceBetween: 20,
                         },
-                      }" :key="invoicesSliderKey">
+                      }"
+                      :key="invoicesSliderKey"
+                    >
                       <SwiperSlide v-for="item in companies">
-                        <div @click="selectCompany(item.id)"
+                        <div
+                          @click="selectCompany(item.id)"
                           class="tw:cursor-pointer tw:flex tw:justify-center tw:itemd-center tw:gap-2 tw:text-[13px] tw:3xl:text-[15px]! tw:text-gray-300! tw:py-2.25! tw:3xl:py-1.75! tw:px-1! tw:border tw:border-gray-400 tw:rounded-full! tw:group tw:transiton tw:duration-200 tw:ease"
                           :class="{
                             'tw:bg-white tw:text-primary-dark!':
                               item.id === companyId,
                             'tw:hover:bg-gray-800!': item.id !== companyId,
-                          }">
-                          <icon-bank v-if="item.type == CompanyType.legalEntity"
+                          }"
+                        >
+                          <icon-bank
+                            v-if="item.type == CompanyType.legalEntity"
                             class="tw:text-gray-300! tw:text-[18px] tw:3xl:text-[20px] tw:transiton tw:duration-200 tw:ease"
                             :class="{
                               'tw:text-primary-dark!': item.id === companyId,
-                            }" />
-                          <icon-user v-if="item.type == CompanyType.individual"
+                            }"
+                          />
+                          <icon-user
+                            v-if="item.type == CompanyType.individual"
                             class="tw:text-gray-300! tw:text-[18px] tw:3xl:text-[20px] tw:transiton tw:duration-200 tw:ease"
                             :class="{
                               'tw:text-primary-dark!': item.id === companyId,
-                            }" />
+                            }"
+                          />
                           {{ item.name }}
                         </div>
                       </SwiperSlide>
@@ -173,14 +267,24 @@
                   </v-col>
                 </v-row>
               </v-col>
-              <v-col cols="12" lg="1">
-                <div class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:3xl:gap-4">
-                  <v-btn @click="submitInvoice" color="white"
-                    class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!" icon>
+              <v-col cols="12" lg="1" xl="1">
+                <div
+                  class="tw:flex tw:justify-end tw:items-center tw:gap-2 tw:3xl:gap-4"
+                >
+                  <v-btn
+                    @click="submitInvoice"
+                    color="white"
+                    class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
+                    icon
+                  >
                     <icon-check class="tw:text-[23px] tw:3xl:text-[25px]" />
                   </v-btn>
-                  <v-btn @click="showSubmitForm = false" color="white"
-                    class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!" icon>
+                  <v-btn
+                    @click="showSubmitForm = false"
+                    color="white"
+                    class="tw:rounded-full! tw:w-9.5! tw:h-9.5! tw:min-w-0! tw:p-0!"
+                    icon
+                  >
                     <icon-close class="tw:text-[23px] tw:3xl:text-[25px]" />
                   </v-btn>
                 </div>
@@ -193,13 +297,19 @@
       <v-row class="tw:rounded-b-4xl! tw:p-0!">
         <v-col cols="12" class="tw:p-0!">
           <v-card class="tw:rounded-b-4xl! tw:shadow-none! tw:pt-1!">
-            <v-data-table-virtual :headers="tableHeader" :items="filteredInvoices" hide-default-footer
-              height="740" class="tw:bg-white! tw:dark:bg-primary-dark!">
+            <v-data-table-virtual
+              :headers="tableHeader"
+              :items="filteredInvoices"
+              hide-default-footer
+              :height="tableHeight"
+              class="tw:bg-white! tw:dark:bg-primary-dark!"
+            >
               <template #item="{ item, index }">
                 <tr class="tw:my-2!">
                   <td>
                     <div
-                      class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center">
+                      class="tw:bg-primary-dark tw:dark:bg-primary-light tw:text-primary-light tw:dark:text-primary-dark tw-text-[16px] tw:w-7 tw:h-7 tw:rounded-full tw:flex tw:justify-center tw:items-center"
+                    >
                       {{ index + 1 }}
                     </div>
                   </td>
@@ -215,11 +325,16 @@
                   <td class="tw:w-auto!">
                     <div class="tw:flex tw:justify-center">
                       <div
-                        class="tw:flex tw:justify-center tw:w-28.75! tw:gap-2 tw:py-0.75! tw:px-3! tw:border tw:border-gray-400 tw:dark:border-gray-500 tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-full">
-                        <icon-bank v-if="item.companyType == CompanyType.legalEntity"
-                          class="tw-text-color-lighter tw:text-[17px]" />
-                        <icon-user v-if="item.companyType == CompanyType.individual"
-                          class="tw-text-color-lighter tw:text-[17px]" />
+                        class="tw:flex tw:justify-center tw:w-28.75! tw:gap-2 tw:py-0.75! tw:px-3! tw:border tw:border-gray-400 tw:dark:border-gray-500 tw:bg-primary-light tw:dark:bg-background-dark tw:rounded-full"
+                      >
+                        <icon-bank
+                          v-if="item.companyType == CompanyType.legalEntity"
+                          class="tw-text-color-lighter tw:text-[17px]"
+                        />
+                        <icon-user
+                          v-if="item.companyType == CompanyType.individual"
+                          class="tw-text-color-lighter tw:text-[17px]"
+                        />
                         <div class="tw-text-color-lighter tw:text-[12px]">
                           {{
                             item.companyType == CompanyType.legalEntity
@@ -238,9 +353,16 @@
                           item.paymentStatus == Status.paid,
                         'tw:bg-gray-100 tw:dark:bg-gray-800 tw:border tw:border-gray-400 tw:dark:border-gray-500 tw-text-color-lighter':
                           item.paymentStatus == Status.awaitingPayment,
-                      }">
-                      <icon-check-double v-if="item.paymentStatus == Status.paid" class="tw:text-[20px]" />
-                      <icon-hourglass v-if="item.paymentStatus == Status.awaitingPayment" class="tw:text-[15px]" />
+                      }"
+                    >
+                      <icon-check-double
+                        v-if="item.paymentStatus == Status.paid"
+                        class="tw:text-[20px]"
+                      />
+                      <icon-hourglass
+                        v-if="item.paymentStatus == Status.awaitingPayment"
+                        class="tw:text-[15px]"
+                      />
                       <div class="tw:text-[12px]">
                         {{
                           item.paymentStatus == Status.paid
@@ -254,12 +376,22 @@
                     {{ separateNumber(item.totalPrice) }}
                   </td>
                   <td>
-                    <div class="tw:flex tw:justify-center tw:items-center tw:gap-1">
+                    <div
+                      class="tw:flex tw:justify-center tw:items-center tw:gap-1"
+                    >
                       <v-tooltip location="top">
                         <template #activator="{ props }">
-                          <v-btn @click="navigateToEdit(item.id)" v-bind="props" size="x-small" variant="text"
-                            rounded="pill" class="tw:w-8! tw:h-8! tw:px-0!">
-                            <icon-edit-box class="tw-text-color-lighter tw:text-[23px]" />
+                          <v-btn
+                            @click="navigateToEdit(item.id)"
+                            v-bind="props"
+                            size="x-small"
+                            variant="text"
+                            rounded="pill"
+                            class="tw:w-8! tw:h-8! tw:px-0!"
+                          >
+                            <icon-edit-box
+                              class="tw-text-color-lighter tw:text-[23px]"
+                            />
                           </v-btn>
                         </template>
                         <span class="tw:text-xs tw:p-2">{{
@@ -268,9 +400,17 @@
                       </v-tooltip>
                       <v-tooltip location="top">
                         <template #activator="{ props }">
-                          <v-btn @click="printInvoice(item.id)" v-bind="props" size="x-small" variant="text"
-                            rounded="pill" class="tw:w-8! tw:h-8! tw:px-0!">
-                            <icon-print class="tw-text-color-lighter tw:text-[23px]" />
+                          <v-btn
+                            @click="printInvoice(item.id)"
+                            v-bind="props"
+                            size="x-small"
+                            variant="text"
+                            rounded="pill"
+                            class="tw:w-8! tw:h-8! tw:px-0!"
+                          >
+                            <icon-print
+                              class="tw-text-color-lighter tw:text-[23px]"
+                            />
                           </v-btn>
                         </template>
                         <span class="tw:text-xs tw:p-2">{{
@@ -281,9 +421,16 @@
                         <template #activator="{ props: menuProps }">
                           <v-tooltip location="top">
                             <template #activator="{ props: tooltipProps }">
-                              <v-btn v-bind="{ ...menuProps, ...tooltipProps }" size="x-small" variant="text"
-                                rounded="pill" class="tw:w-8! tw:h-8! tw:px-0!">
-                                <icon-sync class="tw-text-color-lighter tw:text-[23px]" />
+                              <v-btn
+                                v-bind="{ ...menuProps, ...tooltipProps }"
+                                size="x-small"
+                                variant="text"
+                                rounded="pill"
+                                class="tw:w-8! tw:h-8! tw:px-0!"
+                              >
+                                <icon-sync
+                                  class="tw-text-color-lighter tw:text-[23px]"
+                                />
                               </v-btn>
                             </template>
                             <span class="tw:text-xs tw:p-2">
@@ -292,25 +439,38 @@
                           </v-tooltip>
                         </template>
                         <div
-                          class="tw:bg-primary-dark! tw:dark:bg-background-dark tw:rounded-lg tw:min-w-37 tw:overflow-hidden tw:py-1!">
-                          <div @click="changeStatus('paid', item.id)"
-                            class="tw:cursor-pointer tw:border tw:border-gray-600 tw:dark:border-gray-700">
-                            <div class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group">
+                          class="tw:bg-primary-dark! tw:dark:bg-background-dark tw:rounded-lg tw:min-w-37 tw:overflow-hidden tw:py-1!"
+                        >
+                          <div
+                            @click="changeStatus('paid', item.id)"
+                            class="tw:cursor-pointer tw:border tw:border-gray-600 tw:dark:border-gray-700"
+                          >
+                            <div
+                              class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group"
+                            >
                               <icon-check-double
-                                class="tw:w-5 tw:h-5 tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!" />
+                                class="tw:w-5 tw:h-5 tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!"
+                              />
                               <div
-                                class="tw:text-[12px] tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!">
+                                class="tw:text-[12px] tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!"
+                              >
                                 {{ langStore.label.button.paid }}
                               </div>
                             </div>
                           </div>
-                          <div @click="changeStatus('awaitingPayment', item.id)"
-                            class="tw:cursor-pointer tw:border tw:border-gray-600 tw:dark:border-gray-700">
-                            <div class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group">
+                          <div
+                            @click="changeStatus('awaitingPayment', item.id)"
+                            class="tw:cursor-pointer tw:border tw:border-gray-600 tw:dark:border-gray-700"
+                          >
+                            <div
+                              class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group"
+                            >
                               <icon-hourglass
-                                class="tw:w-4.5 tw:h-4.5 tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!" />
+                                class="tw:w-4.5 tw:h-4.5 tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!"
+                              />
                               <div
-                                class="tw:text-[12px] tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!">
+                                class="tw:text-[12px] tw:text-gray-200 tw:dark:text-gray-300 tw:group-hover:text-gray-100 tw:dark:group-hover:text-gray-200 tw:transition tw:duration-100 tw:cursor-pointer tw:me-1!"
+                              >
                                 {{ langStore.label.button.awaitingPayment }}
                               </div>
                             </div>
@@ -320,9 +480,17 @@
 
                       <v-tooltip location="top">
                         <template #activator="{ props }">
-                          <v-btn @click="openDeleteModal(item.id)" v-bind="props" size="x-small" variant="text"
-                            rounded="pill" class="tw:w-8! tw:h-8! tw:px-0!">
-                            <icon-trash class="tw-text-color-lighter tw:text-[23px]" />
+                          <v-btn
+                            @click="openDeleteModal(item.id)"
+                            v-bind="props"
+                            size="x-small"
+                            variant="text"
+                            rounded="pill"
+                            class="tw:w-8! tw:h-8! tw:px-0!"
+                          >
+                            <icon-trash
+                              class="tw-text-color-lighter tw:text-[23px]"
+                            />
                           </v-btn>
                         </template>
                         <span class="tw:text-xs tw:p-2">{{
@@ -335,9 +503,15 @@
               </template>
 
               <template #no-data>
-                <div class="tw:h-full! tw:flex tw:justify-center tw:items-center tw:gap-2">
-                  <icon-row-chart class="tw-text-color-lighter tw:text-[35px]" />
-                  <div class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap">
+                <div
+                  class="tw:h-full! tw:flex tw:justify-center tw:items-center tw:gap-2"
+                >
+                  <icon-row-chart
+                    class="tw-text-color-lighter tw:text-[35px]"
+                  />
+                  <div
+                    class="tw-text-color-lighter tw:text-[14px] tw:lg:text-[16px] tw:2xl:text-[18px] tw:text-nowrap"
+                  >
                     {{ langStore.label.caption.noDataFound }}
                   </div>
                 </div>
@@ -361,15 +535,29 @@
           </v-row>
         </v-card-text>
         <v-card-actions class="tw:px-4!">
-          <div class="tw:w-full tw:flex tw:justify-end tw:items-center tw:gap-1">
-            <v-btn @click="close" variant="plain" rounded="lg" class="tw-text-color py-0">
+          <div
+            class="tw:w-full tw:flex tw:justify-end tw:items-center tw:gap-1"
+          >
+            <v-btn
+              @click="close"
+              variant="plain"
+              rounded="lg"
+              class="tw-text-color py-0"
+            >
               <div class="tw:text-[12px]">
                 {{ langStore.label.button.cancel }}
               </div>
             </v-btn>
-            <v-btn @click="confirmDelete" size="" rounded="lg"
-              class="tw:border! tw:bg-error/15! tw:text-error! tw:border-error! tw:px-0! tw:py-1! tw:w-20">
-              <icon-button-loader v-if="loading" class="tw:text-[20px]! tw:me-2!" />
+            <v-btn
+              @click="confirmDelete"
+              size=""
+              rounded="lg"
+              class="tw:border! tw:bg-error/15! tw:text-error! tw:border-error! tw:px-0! tw:py-1! tw:w-20"
+            >
+              <icon-button-loader
+                v-if="loading"
+                class="tw:text-[20px]! tw:me-2!"
+              />
               <icon-check-double v-else class="tw:text-[20px] tw:me-2!" />
               <div class="tw:text-[12px]">
                 {{ langStore.label.button.delete }}
@@ -411,6 +599,14 @@ const { invoicesResult: invoices, invoiceResult: invoice } =
 import moment from "jalali-moment";
 const NowDate = moment().locale("fa").format("jYYYY/jMM/jDD");
 
+// ======= Composables =======
+const { setPageTitle } = usePageTitle();
+watchEffect(() => {
+  setPageTitle(langStore.label.page.invoices);
+});
+const { separateNumber } = useSeparator();
+const { width } = useWindowSize();
+
 // ======= enum & TS types and interface =======
 enum CompanyType {
   legalEntity = 1,
@@ -436,67 +632,63 @@ interface StatusForm {
   paymentStatus: Status | null;
 }
 
-// ======= Composables =======
-const { setPageTitle } = usePageTitle();
-watchEffect(() => {
-  setPageTitle(langStore.label.page.invoices);
-});
-const { separateNumber } = useSeparator();
-
 // ======= Data =======
 // keys
 const invoicesSliderKey = ref<number>(1);
 // table
-const tableHeader = computed(() => [
-  {
-    title: langStore.label.table.row,
-    key: "row",
-    align: "start",
-    sortable: false,
-  },
-  {
-    title: langStore.label.table.invoiceNumber,
-    key: "invoiceNumber",
-    align: "center",
-    sortable: true,
-  },
-  {
-    title: langStore.label.table.date,
-    key: "localDate",
-    align: "center",
-    sortable: false,
-  },
-  {
-    title: langStore.label.table.company,
-    key: "companyName",
-    align: "center",
-    sortable: false,
-  },
-  {
-    title: langStore.label.table.companyType,
-    key: "companyType",
-    align: "center",
-    sortable: false,
-  },
-  {
-    title: langStore.label.table.status,
-    key: "status",
-    align: "center",
-    sortable: false,
-  },
-  {
-    title: langStore.label.table.totalPrice,
-    key: "totalPrice",
-    align: "center",
-    sortable: false,
-  },
-  {
-    title: langStore.label.table.actions,
-    key: "actions",
-    align: "center",
-    sortable: false,
-  },
-] as const);
+const tableHeader = computed(
+  () =>
+    [
+      {
+        title: langStore.label.table.row,
+        key: "row",
+        align: "start",
+        sortable: false,
+      },
+      {
+        title: langStore.label.table.invoiceNumber,
+        key: "invoiceNumber",
+        align: "center",
+        sortable: true,
+      },
+      {
+        title: langStore.label.table.date,
+        key: "localDate",
+        align: "center",
+        sortable: false,
+      },
+      {
+        title: langStore.label.table.company,
+        key: "companyName",
+        align: "center",
+        sortable: false,
+      },
+      {
+        title: langStore.label.table.companyType,
+        key: "companyType",
+        align: "center",
+        sortable: false,
+      },
+      {
+        title: langStore.label.table.status,
+        key: "status",
+        align: "center",
+        sortable: false,
+      },
+      {
+        title: langStore.label.table.totalPrice,
+        key: "totalPrice",
+        align: "center",
+        sortable: false,
+      },
+      {
+        title: langStore.label.table.actions,
+        key: "actions",
+        align: "center",
+        sortable: false,
+      },
+    ] as const,
+);
 // filter
 const showFilter = ref<boolean>(false);
 const search = ref<string>("");
@@ -533,6 +725,11 @@ const filteredInvoices = computed(() => {
       item.totalPrice?.toString().toLowerCase().includes(term)
     );
   });
+});
+const tableHeight = computed(() => {
+  if (width.value < 768) return 500;
+  if (width.value < 1920) return 440;
+  return 740;
 });
 
 // ======= Functions =======
