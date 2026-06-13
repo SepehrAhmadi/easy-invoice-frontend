@@ -2,6 +2,7 @@
   <div>
     <v-container fluid class="tw:md:pe-0! tw:md:py-0!">
       <v-row
+        ref="headerSectionRef"
         class="tw-flex! tw:items-center! tw:bg-primary-dark tw:border-b tw:border-gray-300 tw:rounded-t-4xl! tw:p-3!"
       >
         <v-col cols="12" md="3">
@@ -296,7 +297,8 @@
       <!-- table -->
       <v-row class="tw:rounded-b-4xl! tw:p-0!">
         <v-col cols="12" class="tw:p-0!">
-          <v-card class="tw:rounded-b-4xl! tw:shadow-none! tw:pt-1!">
+          <div ref="tableContainerRef">
+            <v-card class="tw:rounded-b-4xl! tw:shadow-none! tw:pt-1!">
             <v-data-table-virtual
               :headers="tableHeader"
               :items="filteredInvoices"
@@ -517,7 +519,8 @@
                 </div>
               </template>
             </v-data-table-virtual>
-          </v-card>
+            </v-card>
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -605,7 +608,7 @@ watchEffect(() => {
   setPageTitle(langStore.label.page.invoices);
 });
 const { separateNumber } = useSeparator();
-const { width } = useWindowSize();
+const { height: windowHeight } = useWindowSize();
 
 // ======= enum & TS types and interface =======
 enum CompanyType {
@@ -711,6 +714,12 @@ const statusForm = ref<StatusForm>({
 });
 // modal
 const deleteModal = ref<boolean>(false);
+// dynamic table height
+const headerSectionRef = ref<HTMLElement | null>(null);
+const tableContainerRef = ref<HTMLElement | null>(null);
+const tableHeight = ref(400);
+const TABLE_BOTTOM_GAP = 16;
+const TOGGLE_TRANSITION_MS = 300;
 
 // ======= Computeds =======
 const filteredInvoices = computed(() => {
@@ -726,10 +735,19 @@ const filteredInvoices = computed(() => {
     );
   });
 });
-const tableHeight = computed(() => {
-  if (width.value < 768) return 500;
-  if (width.value < 1920) return 440;
-  return 740;
+function updateTableHeight() {
+  const el = tableContainerRef.value;
+  if (!el) return;
+
+  const { top } = el.getBoundingClientRect();
+  tableHeight.value = Math.max(200, window.innerHeight - top - TABLE_BOTTOM_GAP);
+}
+
+useResizeObserver(headerSectionRef, () => nextTick(updateTableHeight));
+watch(windowHeight, updateTableHeight);
+watch([showFilter, showSubmitForm], () => {
+  nextTick(updateTableHeight);
+  setTimeout(updateTableHeight, TOGGLE_TRANSITION_MS);
 });
 
 // ======= Functions =======
@@ -833,6 +851,7 @@ onMounted(() => {
   dropdownStore.getCompanyType();
   dropdownStore.getPaymentStatus();
   reloadData();
+  nextTick(updateTableHeight);
 });
 </script>
 
