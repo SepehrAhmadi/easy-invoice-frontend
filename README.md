@@ -1,75 +1,66 @@
-# Nuxt Minimal Starter
+# Easy Invoice Frontend
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Web client for the Easy Invoice system — manage invoices, view dashboards, and run reports.
+
+Built with [Nuxt 4](https://nuxt.com), Vue 3, Vuetify, Tailwind CSS, and Pinia.
+
+## Requirements
+
+- Node.js 18+
+- npm
 
 ## Setup
 
-Make sure to install dependencies:
+1. Install dependencies:
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+2. Copy the example env file and set your API URLs:
 
 ```bash
-# npm
+cp example.env .env
+```
+
+Edit `.env`:
+
+```env
+NUXT_PUBLIC_BASE_URL=http://localhost:3000/
+NUXT_PUBLIC_API_URL=http://localhost:8000/
+```
+
+## Development
+
+Start the dev server at [http://localhost:3000](http://localhost:3000):
+
+```bash
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
 
-Build the application for production:
+Build for production:
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+Preview the production build locally:
 
 ```bash
-# npm
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Project structure
+
+```
+app/
+├── components/   # UI components and icons
+├── composables/  # Shared Vue composables
+├── layouts/      # Page layouts
+├── middleware/   # Route middleware (auth)
+├── pages/        # Application routes
+├── plugins/      # Nuxt plugins (axios, vuetify, etc.)
+└── store/        # Pinia stores
+```
