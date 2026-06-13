@@ -394,6 +394,7 @@ watch(reportDetail, (val) => {
 
 // ======= Lifecycle =======
 onMounted(() => {
+  reportStore.packagingDetailResult = null;
   loadReport();
 });
 </script>
