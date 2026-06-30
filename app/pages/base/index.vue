@@ -511,7 +511,7 @@
         <!-- products -->
         <v-col
           cols="12"
-          class="tw:w-full! tw:px-0.3.5! tw:2xl:px-0! tw:flex tw:mx-0.75!"
+          class="tw:w-full! tw:lg:px-0! tw:2xl:pe-0!  tw:flex"
         >
           <div
             class="w:overflow-hidden tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:grow!"
