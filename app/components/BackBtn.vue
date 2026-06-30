@@ -10,6 +10,7 @@
     </div>
     <icon-arrow-left
       class="tw:text-[20px]! tw:ms-1! tw:group-hover:-translate-x-1.5 tw:transition tw:duration-200"
+      :class="langStore.currentLang == 'en'  ? 'tw:rotate-180' : ''"
     />
   </v-btn>
 </template>

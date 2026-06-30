@@ -283,7 +283,7 @@
             </div>
             <!-- list -->
             <div
-              class="tw:w-full! tw:flex tw:flex-col tw:justify-start tw:items-start tw:py-2! tw:px-4! tw:2xl:px-6! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
+              class="tw:h-[300px] md:tw:h-auto tw:w-full! tw:flex tw:flex-col tw:justify-start tw:items-start tw:py-2! tw:px-4! tw:2xl:px-6! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
             >
               <div
                 v-for="(item, index) in brands"
@@ -447,7 +447,7 @@
             </div>
             <!-- list -->
             <div
-              class="tw:w-full! tw:flex tw:flex-col tw:justify-start tw:items-start tw:py-2! tw:px-4! tw:2xl:px-6! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
+              class="tw:h-[300px] md:tw:h-auto  tw:w-full! tw:flex tw:flex-col tw:justify-start tw:items-start tw:py-2! tw:px-4! tw:2xl:px-6! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
             >
               <div
                 v-for="(item, index) in categories"
@@ -511,7 +511,7 @@
         <!-- products -->
         <v-col
           cols="12"
-          class="tw:w-full! tw:px-0.3.5! tw:2xl:px-0! tw:flex tw:mx-0.75!"
+          class="tw:w-full! tw:lg:px-0! tw:2xl:pe-0!  tw:flex"
         >
           <div
             class="w:overflow-hidden tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:grow!"
@@ -580,7 +580,7 @@
             </div>
             <!-- list -->
             <div
-              class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:3xl:grid-cols-3 tw:content-start tw:p-2! tw:my-0! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
+              class="tw:h-[550px] md:tw:h-auto  tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:3xl:grid-cols-3 tw:content-start tw:p-2! tw:my-0! tw:lg:h-86 tw:3xl:h-105 tw:overflow-auto"
             >
               <div
                 v-for="item in filteredProducts"
