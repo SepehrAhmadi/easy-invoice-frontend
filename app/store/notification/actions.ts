@@ -17,7 +17,7 @@ export function useNotificationActions(state: stateType) {
     return axios
       .get("/notification")
       .then((res) => {
-        state.notificationResult.value = res.data.data;
+        state.notificationResult.value = res.data.data.notifications;
       })
       .catch((err) => {
         console.log(err);
@@ -42,7 +42,10 @@ export function useNotificationActions(state: stateType) {
     $socket.off("notification");
 
     $socket.on("notification", (notification) => {
-      state.notificationResult.value.unshift(notification);
+      console.log("New notification received:", notification);
+      if (Array.isArray(state.notificationResult.value)) {
+        state.notificationResult.value.unshift(notification);
+      }
     });
 
     $socket.on("connect", () => {

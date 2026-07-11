@@ -15,7 +15,7 @@
                 <div
                     v-for="(
                         notification, index
-                    ) in notifications.notifications.slice(0, 3)"
+                    ) in notifications.slice(0, 3)"
                     :key="index"
                     class="tw:p-2!"
                 >
@@ -93,7 +93,7 @@ import { useNotificationStore } from "~/store/notification";
 const notificationStore = useNotificationStore();
 const { notificationResult: notifications } = storeToRefs(notificationStore);
 
-onMounted(() => {
-    notificationStore.getNotifications();
+onMounted(async () => {
+    await notificationStore.getNotifications();
 });
 </script>

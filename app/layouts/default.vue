@@ -25,7 +25,7 @@
 import { useNotificationStore } from "~/store/notification";
 const notificationStore = useNotificationStore();
 
-onMounted(() => {
-    notificationStore.connectNotification();
+onMounted(async () => {
+    await notificationStore.connectNotification();
 });
 </script>
