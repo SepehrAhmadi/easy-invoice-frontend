@@ -15,7 +15,7 @@ export function useNotificationActions(state: stateType) {
     handlerStore.loading = true;
 
     return axios
-      .get("/notifications")
+      .get("/notification")
       .then((res) => {
         state.notificationResult.value = res.data.data;
       })
@@ -56,5 +56,6 @@ export function useNotificationActions(state: stateType) {
 
   return {
     getNotifications,
+    connectNotification
   };
 }
