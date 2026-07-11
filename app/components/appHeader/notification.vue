@@ -15,7 +15,7 @@
                 <div
                     v-for="(
                         notification, index
-                    ) in notifications.notifications.slice(0, 3)"
+                    ) in notifications.slice(0, 3)"
                     :key="index"
                     class="tw:p-2!"
                 >
@@ -27,15 +27,15 @@
                         >
                             <icon-plus
                                 v-if="notification.action === 'add'"
-                                class="tw:w-4 tw:h-4 tw:text-primary-dark tw:dark:primary-light"
+                                class="tw:w-4 tw:h-4 tw:text-primary-dark tw:dark:text-primary-light tw:dark:primary-light"
                             />
                             <icon-edit
                                 v-else-if="notification.action === 'update'"
-                                class="tw:w-3.75 tw:h-3.75 tw:text-primary-dark tw:dark:primary-light"
+                                class="tw:w-3.75 tw:h-3.75 tw:text-primary-dark tw:dark:text-primary-light tw:dark:primary-light"
                             />
                             <icon-trash
                                 v-else-if="notification.action === 'delete'"
-                                class="tw:w-3.75 tw:h-3.75 tw:text-primary-dark tw:dark:primary-light"
+                                class="tw:w-4 tw:h-4 tw:text-primary-dark tw:dark:text-primary-light tw:dark:primary-light"
                             />
                             <div
                                 class="tw:text-[12px] tw:font-semibold tw:text-gray-700 tw:dark:text-gray-300 tw:text-justify"
