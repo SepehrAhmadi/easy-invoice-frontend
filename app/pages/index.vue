@@ -79,7 +79,7 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="12" md="8" xl="9" class="tw:md:py-0!">
+        <v-col cols="12" md="8" xl="9" class="tw:md:py-0! tw:lg:pe-0!">
           <div
             class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-4xl tw:grow! tw:w-full! tw:overflow-hidden"
           >
@@ -307,7 +307,7 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="12" md="4" xl="3" class="tw:md:py-0!">
+        <v-col cols="12" md="4" xl="3" class="tw:md:py-0! tw:lg:pe-0!">
           <div
             class="tw:bg-primary-dark tw:rounded-4xl tw:flex tw:flex-col tw:justify-between tw:items-center tw:p-6!"
           >

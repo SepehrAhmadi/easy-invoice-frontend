@@ -90,6 +90,7 @@ export const label = (state) => {
         print: "Print",
         seeReport: "See Repport",
         backToInvoice: "Back To Invoice",
+        showNotification: "Show Notification",
       },
       form: {
         username: "Username",
@@ -286,6 +287,7 @@ export const label = (state) => {
         print: "چاپ",
         seeReport: "مشاهده گزارش",
         backToInvoice: "بارگشت به فاکتور",
+        showNotification: "مشاهده اعلان ها",
       },
       form: {
         username: "نام کاربری",
