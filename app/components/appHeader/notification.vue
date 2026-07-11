@@ -13,16 +13,29 @@
         >
             <div class="tw:flex tw:flex-col tw:gap-2">
                 <div
-                    v-for="(notification, index) in notifications.notifications.slice(0,3)"
+                    v-for="(
+                        notification, index
+                    ) in notifications.notifications.slice(0, 3)"
                     :key="index"
                     class="tw:p-2!"
                 >
-                    <div class="tw:flex tw:justify-between tw:items-center tw:gap-5">
+                    <div
+                        class="tw:flex tw:justify-between tw:items-center tw:gap-7"
+                    >
                         <div
                             class="tw:flex tw:justify-start tw:items-center tw:gap-2"
                         >
-                            <icon-circle
-                                class="tw:w-2.25 tw:h-2.25 tw:text-cyan-500 tw:dark:text-cyan-300"
+                            <icon-plus
+                                v-if="notification.action === 'add'"
+                                class="tw:w-4 tw:h-4 tw:text-primary-dark tw:dark:primary-light"
+                            />
+                            <icon-edit
+                                v-else-if="notification.action === 'update'"
+                                class="tw:w-3.75 tw:h-3.75 tw:text-primary-dark tw:dark:primary-light"
+                            />
+                            <icon-trash
+                                v-else-if="notification.action === 'delete'"
+                                class="tw:w-3.75 tw:h-3.75 tw:text-primary-dark tw:dark:primary-light"
                             />
                             <div
                                 class="tw:text-[12px] tw:font-semibold tw:text-gray-700 tw:dark:text-gray-300 tw:text-justify"
@@ -38,18 +51,18 @@
                             class="tw:flex tw:justify-start tw:items-center tw:gap-2"
                         >
                             <div
-                                class="tw:text-[12px] tw:text-gray-700 tw:dark:text-gray-300 tw:text-justify"
+                                class="tw:text-[12px] tw:text-gray-500 tw:dark:text-gray-300 tw:text-justify"
                             >
                                 {{
                                     langStore.currentLang == "en"
-                                        ? notification.createdData
-                                        : notification.createdData
+                                        ? notification.date
+                                        : notification.localDate
                                 }}
                             </div>
                         </div>
                     </div>
                     <div
-                        class="tw:text-[11px] tw:font-semibold tw:text-gray-700 tw:dark:text-gray-300 tw:text-justify tw:pt-1.5!"
+                        class="tw:text-[11px] tw:font-semibold tw:text-gray-700 tw:dark:text-gray-300 tw:text-justify tw:pt-2!"
                     >
                         {{
                             langStore.currentLang == "en"
@@ -59,8 +72,12 @@
                     </div>
                 </div>
             </div>
-            <div class="tw:flex tw:justify-center tw:items-center tw:gap-2 tw:py-2!">
-                <button class="tw:text-primary-light! tw:dark:text-primary-dark! tw:text-[12px]! tw:bg-primary-dark!  tw:dark:bg-primary-light! tw:rounded-full tw:p-1! tw:px-3!">
+            <div
+                class="tw:flex tw:justify-center tw:items-center tw:gap-2 tw:py-3!"
+            >
+                <button
+                    class="tw:text-primary-light! tw:dark:text-primary-dark! tw:text-[12px]! tw:bg-primary-dark! tw:dark:bg-primary-light! tw:rounded-full tw:p-1! tw:px-3!"
+                >
                     {{ langStore.label.button.showNotification }}
                 </button>
             </div>
