@@ -179,12 +179,26 @@ html {
   padding-block: 4px !important;
   text-align: center !important;
   transform: translateY(2px) !important;
-  padding-inline-end: 45px !important;
+  /*padding-inline-end: 45px !important;*/
 }
 
 html[dir="rtl"] .vpd-input-group input {
   font-family: iranyekan !important;
 }
+
+/*html[dir="rtl"] .vpd-input-group input {
+    transform: translateX(20px) !important;
+}
+html[dir="rtl"] .vpd-input-group input::placeholder {
+    transform: translateX(-10px) !important;
+}
+
+html[dir="ltr"] .vpd-input-group input {
+    transform: translateX(-37px) !important;
+}
+html[dir="ltr"] .vpd-input-group input::placeholder {
+    transform: translateX(30px) !important;
+}*/
 
 .vpd-input-group input::placeholder {
   font-size: 12px !important;
@@ -195,7 +209,7 @@ html[dir="rtl"] .vpd-input-group input {
 
 .vpd-icon-btn {
   background-color: transparent !important;
-  padding-inline-start: 15px !important;
+  /*padding-inline-start: 15px !important;*/
 }
 
 .vpd-icon-btn svg {

@@ -14,7 +14,7 @@
             <div class="tw:flex tw:flex-col tw:gap-2">
                 <div
                     v-for="(notification, index) in notifications.slice(0, 3)"
-                    :key="index"
+                    :key="index"    
                     class="tw:p-2!"
                 >
                     <div
@@ -75,7 +75,7 @@
             >
                 <button
                     @click.stop="openDrawer"
-                    class="tw:text-primary-light! tw:dark:text-primary-dark! tw:text-[12px]! tw:bg-primary-dark! tw:dark:bg-primary-light! tw:rounded-full tw:p-1! tw:px-3!"
+                    class="tw:text-primary-light! tw:dark:text-primary-dark! tw:text-[12px]! tw:bg-primary-dark! tw:dark:bg-primary-light! tw:hover:bg-primary-dark/90! tw:dark:hover:bg-primary-light/90! tw:transition tw:duration-150 tw:rounded-full tw:p-1! tw:px-3!"
                 >
                     {{ langStore.label.button.showNotification }}
                 </button>
