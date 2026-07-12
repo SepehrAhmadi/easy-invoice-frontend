@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
+    v-model="editProfileDrawer"
     width="380"
     :temporary="true"
     :location="langStore.currentLang === 'fa' ? 'left' : 'right'"
@@ -235,7 +235,7 @@
 <script setup lang="ts">
 import avatar from "~/assets/image/default-avatar.png";
 
-// store
+// ======= store =======
 import { useHandlerStore } from "~/store/handler";
 const handlerStore = useHandlerStore();
 const { loadingBtn: loading } = storeToRefs(handlerStore);
@@ -248,7 +248,7 @@ const utilStore = useUtilStore();
 const { profileResult: profile } = storeToRefs(utilStore);
 
 // ======= composables =======
-const { drawer } = useEditProfile();
+const { editProfileDrawer } = useEditProfile();
 
 // ======= interface =======
 interface profileForm {
@@ -352,7 +352,7 @@ watch(
   { immediate: true },
 );
 watch(
-  () => drawer.value,
+  () => editProfileDrawer.value,
   (val) => {
     if (val == true) {
       reloadData();

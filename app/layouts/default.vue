@@ -1,6 +1,7 @@
 <template>
     <v-layout class="tw:h-screen">
         <edit-profile />
+        <notification />
 
         <app-header />
 

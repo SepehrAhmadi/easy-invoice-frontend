@@ -1,5 +1,5 @@
 <template>
-    <v-menu class="tw:relative tw:z-9999!">
+    <v-menu v-model="menu" class="tw:relative tw:z-9999!">
         <template v-slot:activator="{ props }">
             <div
                 class="tw:w-10 tw:h-10 tw:flex tw:justify-center tw:items-center tw:bg-white tw:dark:bg-gray-800 tw:border-3 tw:border-white tw:dark:border-gray-800 tw:rounded-full tw:overflow-hidden tw:hover:bg-gray-50 tw:hover:border-gray-50 tw:dark:hover:border-gray-800 tw:dark:hover:bg-primary-dark tw:transition tw:duration-200 tw:cursor-pointer"
@@ -13,9 +13,7 @@
         >
             <div class="tw:flex tw:flex-col tw:gap-2">
                 <div
-                    v-for="(
-                        notification, index
-                    ) in notifications.slice(0, 3)"
+                    v-for="(notification, index) in notifications.slice(0, 3)"
                     :key="index"
                     class="tw:p-2!"
                 >
@@ -76,6 +74,7 @@
                 class="tw:flex tw:justify-center tw:items-center tw:gap-2 tw:py-3!"
             >
                 <button
+                    @click.stop="openDrawer"
                     class="tw:text-primary-light! tw:dark:text-primary-dark! tw:text-[12px]! tw:bg-primary-dark! tw:dark:bg-primary-light! tw:rounded-full tw:p-1! tw:px-3!"
                 >
                     {{ langStore.label.button.showNotification }}
@@ -86,6 +85,7 @@
 </template>
 
 <script setup lang="ts">
+// ======= store =======
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
 
@@ -96,4 +96,15 @@ const { notificationResult: notifications } = storeToRefs(notificationStore);
 onMounted(() => {
     notificationStore.getNotifications();
 });
+
+// ======= composables ========
+const { notificationDrawer } = useNotification();
+
+// ======= menu state ========
+const menu = ref(false);
+
+const openDrawer = () => {
+    menu.value = false;
+    notificationDrawer.value = true;
+};
 </script>

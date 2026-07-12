@@ -1,3 +1,5 @@
+import { nodeOps } from "vue";
+
 export const label = (state) => {
   if (state.currentLang === "en") {
     return {
@@ -49,6 +51,7 @@ export const label = (state) => {
         recordedInvoices: "Recorded Invoices",
         companiesList: "Companies List",
         reportByCompany: "Report By Company",
+        notifications: "Notifications",
       },
       header: {
         addCompany: "Add company",
@@ -181,6 +184,7 @@ export const label = (state) => {
         invoiceDetail: "You can see you invoice detail",
         companiesList: "View its details by selecting the desired company",
         reportByCompany: "You can see this report base on each company",
+        notification: "You can see your notifications in this section",
       },
       caption: {
         detailToLogin: "Insert your detail to login to your account",
@@ -246,6 +250,7 @@ export const label = (state) => {
         recordedInvoices: "فاکتور های ثبت شده",
         companiesList: "لیست شرکت ها",
         reportByCompany: "گزارش بر اساس شرکت",
+        notifications: "اعلان ها",
       },
       header: {
         addCompany: "ایجاد شرکت",
@@ -381,6 +386,7 @@ export const label = (state) => {
         invoiceDetail: "جزئیات فامتور خود را در این قسمت مشاهده کنید",
         companiesList: "با انتخاب شرکت مورد نظر جزئیات آن را مشاهده کنید",
         reportByCompany: "گزراش مربتط با هر شرکت را در این قسمت مشاهده کنید",
+        notification: "اعلان های خود را در این قسمت مشاهده کنید",
       },
       caption: {
         detailToLogin:

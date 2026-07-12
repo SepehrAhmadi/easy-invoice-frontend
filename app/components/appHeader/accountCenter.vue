@@ -39,7 +39,7 @@
         </div>
       </div>
       <div
-        @click="drawer = true"
+        @click="editProfileDrawer = true"
         class="tw:flex tw:justify-start tw:items-center tw:p-2! tw:group"
       >
         <icon-edit-box
@@ -76,16 +76,17 @@ import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
 
 import { useConfigStore } from "~/store/config";
+import Edit from "../icon/edit.vue";
 const configStore = useConfigStore();
 const { profileResult: profile } = storeToRefs(configStore);
 
-const { drawer } = useEditProfile();
+// composables
+const { editProfileDrawer } = useEditProfile();
 
 const username = ref<any>("");
 
 const logout = () => {
   configStore.logout();
-  console.log("click logout 1");
 };
 
 onMounted(() => {
