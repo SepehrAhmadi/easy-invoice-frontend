@@ -137,6 +137,10 @@
                                 v-else-if="notification.action === 'delete'"
                                 class="tw:text-[17px] tw-text-color-reverse tw:dark:primary-light"
                             />
+                            <icon-refresh
+                                v-else-if="notification.action === 'change_status'"
+                                class="tw:text-[17px] tw-text-color-reverse tw:dark:primary-light"
+                            />
                             <div
                                 class="tw:text-[13px] tw:font-semibold tw-text-color-reverse tw:text-justify"
                             >
