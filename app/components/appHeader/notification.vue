@@ -35,7 +35,7 @@
                                 v-else-if="notification.action === 'delete'"
                                 class="tw:w-4 tw:h-4 tw:text-primary-dark tw:dark:text-primary-light tw:dark:primary-light"
                             />
-                            <icon-refresh
+                            <icon-info-circle
                                 v-else-if="notification.action === 'change_status'"
                                 class="tw:w-4 tw:h-4 tw:text-primary-dark tw:dark:text-primary-light tw:dark:primary-light"
                             />
