@@ -1,7 +1,7 @@
 <template>
     <v-navigation-drawer
         v-model="notificationDrawer"
-        width="430"
+        width="500"
         :temporary="true"
         :location="langStore.currentLang === 'fa' ? 'left' : 'right'"
     >
@@ -99,10 +99,10 @@
                                 class="tw:flex tw:justify-start tw:items-center tw:gap-1"
                             >
                                 <icon-user
-                                    class="tw-text-color-reverse tw:text-[20px]! tw:text-center!"
+                                    class="tw-text-color-reverse tw:text-[19px]! tw:md:text-[20px]! tw:text-center!"
                                 />
                                 <span
-                                    class="tw-text-color-reverse tw:text-[16px]! tw:text-center!"
+                                    class="tw-text-color-reverse tw:text-[15px] tw:md:text-[16px]! tw:text-center!"
                                     >{{ notification.username }}</span
                                 >
                             </div>
@@ -110,10 +110,10 @@
                                 class="tw:flex tw:justify-end tw:items-center tw:gap-1"
                             >
                                 <icon-date
-                                    class="tw-text-color-reverse tw:text-[16px]! tw:text-center!"
+                                    class="tw-text-color-reverse tw:text-[18px]! tw:md:text-[19px]! tw:text-center!"
                                 />
                                 <span
-                                    class="tw-text-color-reverse tw:text-[13px]! tw:text-center!"
+                                    class="tw-text-color-reverse tw:text-[12px]! tw:md:text-[13px]! tw:text-center!"
                                     >{{
                                         langStore.currentLang === "en"
                                             ? notification.date
@@ -127,22 +127,22 @@
                         >
                             <icon-plus
                                 v-if="notification.action === 'add'"
-                                class="tw:text-[18px] tw-text-color-reverse tw:dark:primary-light"
+                                class="tw:text-[17px]! tw:md:text-[19px]! tw-text-color-reverse tw:dark:primary-light"
                             />
                             <icon-edit
                                 v-else-if="notification.action === 'update'"
-                                class="tw:text-[17px] tw-text-color-reverse tw:dark:primary-light"
+                                class="tw:text-[16px]! tw:md:text-[17px]! tw-text-color-reverse tw:dark:primary-light"
                             />
                             <icon-trash
                                 v-else-if="notification.action === 'delete'"
-                                class="tw:text-[17px] tw-text-color-reverse tw:dark:primary-light"
+                                class="tw:text-[16px]! tw:md:text-[17px]! tw-text-color-reverse tw:dark:primary-light"
                             />
                             <icon-info-circle
                                 v-else-if="notification.action === 'change_status'"
-                                class="tw:text-[17px] tw-text-color-reverse tw:dark:primary-light"
+                                class="tw:text-[16px]! tw:md:text-[17px]! tw-text-color-reverse tw:dark:primary-light"
                             />
                             <div
-                                class="tw:text-[13px] tw:font-semibold tw-text-color-reverse tw:text-justify"
+                                class="tw:text-[12px]! tw:md:text-[13px]! tw:font-semibold tw-text-color-reverse tw:text-justify"
                             >
                                 {{
                                     langStore.currentLang == "en"
@@ -156,7 +156,7 @@
                         class="tw:flex tw:flex-col tw:justify-start tw:items-start tw:gap-1 tw:bg-white tw:dark:bg-background-dark tw:p-4! tw:rounded-b-2xl!"
                     >
                         <div
-                            class="tw:text-[14px] tw:font-semibold tw:text-primary-dark tw:dark:text-primary-light tw:text-justify"
+                            class="tw:text-[13px] tw:md:text-[14px]! tw:font-semibold tw:text-primary-dark tw:dark:text-primary-light tw:text-justify"
                         >
                             {{
                                 langStore.currentLang == "en"
