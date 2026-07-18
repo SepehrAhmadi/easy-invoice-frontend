@@ -10,14 +10,14 @@ export function useNotificationActions(state: stateType) {
   const langStore = useLanguageStore();
 
   // ====== get notifications ======
-  const getNotifications = () => {
+  const getNotifications = async () => {
     const axios = useApi();
-    handlerStore.loading = true;
 
     return axios
       .get("/notification")
       .then((res) => {
         state.notificationResult.value = res.data.data.notifications;
+        state.unreadCount.value = res.data.data.unreadCount;
       })
       .catch((err) => {
         console.log(err);
@@ -25,9 +25,6 @@ export function useNotificationActions(state: stateType) {
         const message =
           err.response?.data?.message || langStore.alert.error.serverError;
         handlerStore.setError(message);
-      })
-      .finally(() => {
-        handlerStore.loading = false;
       });
   };
 
@@ -43,7 +40,9 @@ export function useNotificationActions(state: stateType) {
 
     $socket.on("notification", (notification) => {
       if (Array.isArray(state.notificationResult.value)) {
+        console.log("notification :", notification);
         state.notificationResult.value.unshift(notification);
+        state.unreadCount.value += 1;
       }
     });
 
@@ -56,8 +55,27 @@ export function useNotificationActions(state: stateType) {
     });
   };
 
+  // ====== read notification ======
+  const readNotification = async (id: string) => {
+    const axios = useApi();
+
+    return axios
+      .post(`/notification/${id}/read`)
+      .then(() => {
+        state.unreadCount.value -= 1;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      });
+  };
+
   return {
     getNotifications,
-    connectNotification
+    connectNotification,
+    readNotification,
   };
 }
