@@ -10,11 +10,11 @@ export function useNotificationActions(state: stateType) {
   const langStore = useLanguageStore();
 
   // ====== get notifications ======
-  const getNotifications = async () => {
+  const getNotifications = async (filter = "") => {
     const axios = useApi();
 
     return axios
-      .get("/notification")
+      .get("/notification" + filter)
       .then((res) => {
         state.notificationResult.value = res.data.data.notifications;
         state.unreadCount.value = res.data.data.unreadCount;

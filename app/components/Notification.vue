@@ -209,7 +209,7 @@ const loadNotifications = () => {
     if (filter.value.toDate) {
         payload += "&toDate=" + filter.value.toDate;
     }
-    notificationStore.getNotifications();
+    notificationStore.getNotifications(payload);
 };
 
 // ======= lifecycle =======

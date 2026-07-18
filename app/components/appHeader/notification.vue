@@ -15,10 +15,7 @@
             >
                 <div class="tw:flex tw:flex-col tw:gap-2">
                     <div
-                        v-for="(notification, index) in notifications.slice(
-                            0,
-                            3,
-                        )"
+                        v-for="(notification, index) in notifications"
                         :key="index"
                         class="tw:p-2!"
                     >
@@ -155,38 +152,41 @@ const notificationStore = useNotificationStore();
 const { notificationResult: notifications, unreadCount } =
     storeToRefs(notificationStore);
 
-onMounted(() => {
-    notificationStore.getNotifications();
-});
-
 // ======= composables ========
 const { notificationDrawer } = useNotification();
 
 // ======= data ========
 const menu = ref(false);
+const pageSize = ref<number>(1);
+const limit = ref<number>(3);
 
 // ======= methods=======
+const loadNotifications = async () => {
+  let payload = "?page=" + pageSize.value + "&pageSize=" + limit.value;
+  await notificationStore.getNotifications(payload);
+};
+
+const openDrawer = () => {
+    menu.value = false;
+    notificationDrawer.value = true;
+};
+
 const readNotifications = () => {
-    notifications.value.slice(0, 3).map(async (notification) => {
+    notifications.value.map(async (notification) => {
         if (notification.isRead) return;
         console.log("read notification : ", notification);
         await notificationStore.readNotification(notification.id);
     });
 };
 
-const refreshNotifications = () => {
-    notificationStore.getNotifications();
-};
-
 // ======= watcher =======
 watch(menu, (isOpen) => {
-    if (!isOpen) {
-        refreshNotifications();
+  if (!isOpen) {
+      loadNotifications();
     }
 });
 
-const openDrawer = () => {
-    menu.value = false;
-    notificationDrawer.value = true;
-};
+onMounted(() => {
+  loadNotifications();
+});
 </script>
