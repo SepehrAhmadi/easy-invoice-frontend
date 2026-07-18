@@ -9,7 +9,6 @@
             <!-- notifications title -->
             <div class="tw:flex tw:flex-col tw:gap-1">
                 <div class="tw:flex tw:justify-between tw:items-start">
-
                     <div
                         class="tw:flex tw:justify-start tw:items-center tw:gap-1"
                     >
@@ -138,7 +137,9 @@
                                 class="tw:text-[16px]! tw:md:text-[17px]! tw-text-color-reverse tw:dark:primary-light"
                             />
                             <icon-info-circle
-                                v-else-if="notification.action === 'change_status'"
+                                v-else-if="
+                                    notification.action === 'change_status'
+                                "
                                 class="tw:text-[16px]! tw:md:text-[17px]! tw-text-color-reverse tw:dark:primary-light"
                             />
                             <div
@@ -192,12 +193,16 @@ const { notificationDrawer } = useNotification();
 interface Filter {
     fromDate: string | null;
     toDate: string | null;
+    page: number | null;
+    pageSize: number | null;
 }
 
 // ======= Data =======
 const filter = ref<Filter>({
     fromDate: NowDate,
     toDate: null,
+    page: 1,
+    pageSize: 10,
 });
 
 // ======= methods =======
@@ -209,12 +214,19 @@ const loadNotifications = () => {
     if (filter.value.toDate) {
         payload += "&toDate=" + filter.value.toDate;
     }
+    if (filter.value.page) {
+        payload += "&page=" + filter.value.page;
+    }
+    if (filter.value.pageSize) {
+        payload += "&pageSize=" + filter.value.pageSize;
+    }
     notificationStore.getNotifications(payload);
 };
 
 // ======= lifecycle =======
 onMounted(() => {
-    notificationStore.getNotifications();
+    console.log("notification drawer")
+    loadNotifications();
 });
 </script>
 

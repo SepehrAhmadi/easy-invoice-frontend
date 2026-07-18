@@ -15,7 +15,7 @@
             >
                 <div class="tw:flex tw:flex-col tw:gap-2">
                     <div
-                        v-for="(notification, index) in notifications"
+                        v-for="(notification, index) in notifications.slice(0,3)"
                         :key="index"
                         class="tw:p-2!"
                     >
@@ -157,18 +157,19 @@ const { notificationDrawer } = useNotification();
 
 // ======= data ========
 const menu = ref(false);
-const pageSize = ref<number>(1);
-const limit = ref<number>(3);
+const page = ref<number>(1);
+const pageSize = ref<number>(3);
 
 // ======= methods=======
 const loadNotifications = async () => {
-  let payload = "?page=" + pageSize.value + "&pageSize=" + limit.value;
-  await notificationStore.getNotifications(payload);
+    let payload = "?page=" + page.value + "&pageSize=" + pageSize.value;
+    await notificationStore.getNotifications(payload);
 };
 
 const openDrawer = () => {
-    menu.value = false;
-    notificationDrawer.value = true;
+  menu.value = false;
+  notificationDrawer.value = true;
+  notificationStore.showList = true;
 };
 
 const readNotifications = () => {
@@ -181,12 +182,12 @@ const readNotifications = () => {
 
 // ======= watcher =======
 watch(menu, (isOpen) => {
-  if (!isOpen) {
-      loadNotifications();
+    if (!isOpen) {
+        loadNotifications();
     }
 });
 
 onMounted(() => {
-  loadNotifications();
+    loadNotifications();
 });
 </script>

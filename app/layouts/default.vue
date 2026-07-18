@@ -1,7 +1,8 @@
 <template>
     <v-layout class="tw:h-screen">
         <edit-profile />
-        <notification />
+        
+        <notification v-if="notificationStore.showList"/>
 
         <app-header />
 
