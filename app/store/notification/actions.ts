@@ -17,7 +17,24 @@ export function useNotificationActions(state: stateType) {
       .get("/notification" + filter)
       .then((res) => {
         state.notificationResult.value = res.data.data.notifications;
-        state.unreadCount.value = res.data.data.unreadCount;
+      })
+      .catch((err) => {
+        console.log(err);
+
+        const message =
+          err.response?.data?.message || langStore.alert.error.serverError;
+        handlerStore.setError(message);
+      });
+  };
+
+  // ====== get unread count ======
+  const getUnreadCount = async () => {
+    const axios = useApi();
+
+    return axios
+      .get("/notification/unreadCount")
+      .then((res) => {
+        state.unreadCount.value = res.data.unreadCount;
       })
       .catch((err) => {
         console.log(err);
@@ -77,5 +94,6 @@ export function useNotificationActions(state: stateType) {
     getNotifications,
     connectNotification,
     readNotification,
+    getUnreadCount,
   };
 }

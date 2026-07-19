@@ -3,7 +3,6 @@
         <v-menu v-model="menu" class="tw:relative tw:z-9999!">
             <template v-slot:activator="{ props }">
                 <div
-                    @click="readNotifications"
                     class="tw:w-10 tw:h-10 tw:flex tw:justify-center tw:items-center tw:bg-white tw:dark:bg-gray-800 tw:border-3 tw:border-white tw:dark:border-gray-800 tw:rounded-full tw:overflow-hidden tw:hover:bg-gray-50 tw:hover:border-gray-50 tw:dark:hover:border-gray-800 tw:dark:hover:bg-primary-dark tw:transition tw:duration-200 tw:cursor-pointer"
                     v-bind="props"
                 >
@@ -15,7 +14,10 @@
             >
                 <div class="tw:flex tw:flex-col tw:gap-2">
                     <div
-                        v-for="(notification, index) in notifications.slice(0,3)"
+                        v-for="(notification, index) in notifications.slice(
+                            0,
+                            3,
+                        )"
                         :key="index"
                         class="tw:p-2!"
                     >
@@ -125,7 +127,7 @@
                     class="tw:flex tw:justify-center tw:items-center tw:gap-2 tw:py-3!"
                 >
                     <button
-                        @click.stop="openDrawer"
+                        @click.stop=""
                         class="tw:text-primary-light! tw:dark:text-primary-dark! tw:text-[12px]! tw:bg-primary-dark! tw:dark:bg-primary-light! tw:hover:bg-primary-dark/90! tw:dark:hover:bg-primary-light/90! tw:transition tw:duration-150 tw:rounded-full tw:p-1! tw:px-3!"
                     >
                         {{ langStore.label.button.showNotification }}
@@ -149,13 +151,13 @@ const langStore = useLanguageStore();
 
 import { useNotificationStore } from "~/store/notification";
 const notificationStore = useNotificationStore();
-const { notificationResult: notifications, unreadCount } =
-    storeToRefs(notificationStore);
+const { notificationResult, unreadCount } = storeToRefs(notificationStore);
 
 // ======= composables ========
 const { notificationDrawer } = useNotification();
 
 // ======= data ========
+const notifications = ref<any[]>([]);
 const menu = ref(false);
 const page = ref<number>(1);
 const pageSize = ref<number>(3);
@@ -166,28 +168,37 @@ const loadNotifications = async () => {
     await notificationStore.getNotifications(payload);
 };
 
-const openDrawer = () => {
-  menu.value = false;
-  notificationDrawer.value = true;
-  notificationStore.showList = true;
+const loadUnreadCount = async () => {
+    await notificationStore.getUnreadCount();
 };
 
-const readNotifications = () => {
-    notifications.value.map(async (notification) => {
-        if (notification.isRead) return;
-        console.log("read notification : ", notification);
-        await notificationStore.readNotification(notification.id);
-    });
+const readNotifications =  () => {
+    const visibleNotifications = notifications.value.slice(0, 3);
+
+    for (const notification of visibleNotifications) {
+        if (notification.isRead === false) {
+            notificationStore.readNotification(notification.id);
+        }
+    }
 };
 
 // ======= watcher =======
-watch(menu, (isOpen) => {
-    if (!isOpen) {
+watch(notificationResult, (newValue) => {
+    if (!newValue || newValue.length === 0) return;
+
+    notifications.value = [...newValue];
+});
+watch(menu, async (isOpen) => {
+  if (isOpen) {
+        readNotifications();
+    } else {
         loadNotifications();
+        loadUnreadCount();
     }
 });
 
 onMounted(() => {
+    loadUnreadCount();
     loadNotifications();
 });
 </script>
