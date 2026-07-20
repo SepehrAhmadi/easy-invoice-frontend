@@ -17,6 +17,7 @@ export const label = (state) => {
         editInvoice: "Edit Invoice",
         printInvoice: "Print Invoice",
         reportByCompany: "Report By Company",
+        notifications: "Notifications",
       },
       menu: {
         dashboard: "Dashboard",
@@ -94,6 +95,8 @@ export const label = (state) => {
         seeReport: "See Repport",
         backToInvoice: "Back To Invoice",
         showNotification: "Show Notification",
+        readAll: "Read All",
+        markAsRead: "Mark as read",
       },
       form: {
         username: "Username",
@@ -171,6 +174,16 @@ export const label = (state) => {
         count: "Count",
         description: "Description",
         price: "Price",
+        username: "Username",
+        title: "Title",
+        message: "Message",
+        read: "Read",
+        unread: "Unread",
+        isRead: "Status",
+        add: "Add",
+        update: "Update",
+        delete: "Delete",
+        changeStatus: "Change status",
       },
       description: {
         manageCompanies: "Manage the companies you use when creating invoices",
@@ -216,6 +229,7 @@ export const label = (state) => {
         editInvoice: "ویرایش فاکتور",
         printInvoice: "چاپ فاکتور",
         reportByCompany: "گزارش بر اساس شرکت",
+        notifications: "اعلان ها",
       },
       menu: {
         dashboard: "داشبورد",
@@ -293,6 +307,8 @@ export const label = (state) => {
         seeReport: "مشاهده گزارش",
         backToInvoice: "بارگشت به فاکتور",
         showNotification: "مشاهده اعلان ها",
+        readAll: "خواندن همه",
+        markAsRead: "خواندن",
       },
       form: {
         username: "نام کاربری",
@@ -371,6 +387,16 @@ export const label = (state) => {
         count: "تعداد",
         description: "توضیحات",
         price: "مبلغ",
+        username: "نام کاربری",
+        title: "عنوان",
+        message: "پیام",
+        read: "خوانده شده",
+        unread: "خوانده نشده",
+        isRead: "وضعیت",
+        add: "افزودن",
+        update: "ویرایش",
+        delete: "حذف",
+        changeStatus: "تغییر وضعیت",
       },
       description: {
         manageCompanies:

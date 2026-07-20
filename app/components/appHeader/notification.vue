@@ -127,7 +127,7 @@
                     class="tw:flex tw:justify-center tw:items-center tw:gap-2 tw:py-3!"
                 >
                     <button
-                        @click.stop=""
+                        @click.stop="navigateTo('/notification')"
                         class="tw:text-primary-light! tw:dark:text-primary-dark! tw:text-[12px]! tw:bg-primary-dark! tw:dark:bg-primary-light! tw:hover:bg-primary-dark/90! tw:dark:hover:bg-primary-light/90! tw:transition tw:duration-150 tw:rounded-full tw:p-1! tw:px-3!"
                     >
                         {{ langStore.label.button.showNotification }}
@@ -151,21 +151,16 @@ const langStore = useLanguageStore();
 
 import { useNotificationStore } from "~/store/notification";
 const notificationStore = useNotificationStore();
-const { notificationResult, unreadCount } = storeToRefs(notificationStore);
-
-// ======= composables ========
-const { notificationDrawer } = useNotification();
+const { widgetNotificationsResult : notifications, unreadCount } = storeToRefs(notificationStore);
 
 // ======= data ========
-const notifications = ref<any[]>([]);
 const menu = ref(false);
 const page = ref<number>(1);
 const pageSize = ref<number>(3);
 
 // ======= methods=======
 const loadNotifications = async () => {
-    let payload = "?page=" + page.value + "&pageSize=" + pageSize.value;
-    await notificationStore.getNotifications(payload);
+    await notificationStore.getWidgetNotifications();
 };
 
 const loadUnreadCount = async () => {
@@ -182,12 +177,7 @@ const readNotifications =  () => {
     }
 };
 
-// ======= watcher =======
-watch(notificationResult, (newValue) => {
-    if (!newValue || newValue.length === 0) return;
-
-    notifications.value = [...newValue];
-});
+// ======= watcher ======
 watch(menu, async (isOpen) => {
   if (isOpen) {
         readNotifications();
