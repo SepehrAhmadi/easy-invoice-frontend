@@ -10,7 +10,7 @@
                 </div>
             </template>
             <div
-                class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-lg tw:min-w-40 tw:max-w-80 tw:overflow-hidden tw:mt-3! tw:border tw:border-gray-200 tw:dark:border-gray-700"
+                class="tw:bg-white tw:dark:bg-primary-dark tw:rounded-lg tw:min-w-60 tw:max-w-80 tw:overflow-hidden tw:mt-3! tw:border tw:border-gray-200 tw:dark:border-gray-700"
             >
                 <div class="tw:flex tw:flex-col tw:gap-2">
                     <div
@@ -22,56 +22,101 @@
                         class="tw:p-2!"
                     >
                         <div
-                            class="tw:flex tw:justify-between tw:items-center tw:gap-7"
+                            class="tw:flex tw:justify-between tw:items-center tw:gap-4"
                         >
-                            <div
-                                class="tw:flex tw:justify-start tw:items-center tw:gap-2"
-                            >
-                                <icon-plus
-                                    v-if="notification.action === 'add'"
-                                    class="tw:w-4 tw:h-4"
-                                    :class="{
-                                        'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
-                                            notification.isRead,
-                                        'tw:text-primary-dark tw:dark:text-primary-light':
-                                            !notification.isRead,
-                                    }"
-                                />
+                            <div>
+                                <div
+                                    class="tw:flex tw:justify-between tw:items-center tw:gap-7"
+                                >
+                                    <div
+                                        class="tw:flex tw:justify-start tw:items-center tw:gap-2"
+                                    >
+                                        <icon-plus
+                                            v-if="notification.action === 'add'"
+                                            class="tw:w-4 tw:h-4"
+                                            :class="{
+                                                'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
+                                                    notification.isRead,
+                                                'tw:text-primary-dark tw:dark:text-primary-light':
+                                                    !notification.isRead,
+                                            }"
+                                        />
 
-                                <icon-edit
-                                    v-else-if="notification.action === 'update'"
-                                    class="tw:w-3.75 tw:h-3.75"
-                                    :class="{
-                                        'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
-                                            notification.isRead,
-                                        'tw:text-primary-dark tw:dark:text-primary-light':
-                                            !notification.isRead,
-                                    }"
-                                />
-                                <icon-trash
-                                    v-else-if="notification.action === 'delete'"
-                                    class="tw:w-4 tw:h-4"
-                                    :class="{
-                                        'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
-                                            notification.isRead,
-                                        'tw:text-primary-dark tw:dark:text-primary-light':
-                                            !notification.isRead,
-                                    }"
-                                />
-                                <icon-info-circle
-                                    v-else-if="
-                                        notification.action === 'change_status'
-                                    "
-                                    class="tw:w-4 tw:h-4"
-                                    :class="{
-                                        'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
-                                            notification.isRead,
-                                        'tw:text-primary-dark tw:dark:text-primary-light':
-                                            !notification.isRead,
-                                    }"
-                                />
+                                        <icon-edit
+                                            v-else-if="
+                                                notification.action === 'update'
+                                            "
+                                            class="tw:w-3.75 tw:h-3.75"
+                                            :class="{
+                                                'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
+                                                    notification.isRead,
+                                                'tw:text-primary-dark tw:dark:text-primary-light':
+                                                    !notification.isRead,
+                                            }"
+                                        />
+                                        <icon-trash
+                                            v-else-if="
+                                                notification.action === 'delete'
+                                            "
+                                            class="tw:w-4 tw:h-4"
+                                            :class="{
+                                                'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
+                                                    notification.isRead,
+                                                'tw:text-primary-dark tw:dark:text-primary-light':
+                                                    !notification.isRead,
+                                            }"
+                                        />
+                                        <icon-info-circle
+                                            v-else-if="
+                                                notification.action ===
+                                                'change_status'
+                                            "
+                                            class="tw:w-4 tw:h-4"
+                                            :class="{
+                                                'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
+                                                    notification.isRead,
+                                                'tw:text-primary-dark tw:dark:text-primary-light':
+                                                    !notification.isRead,
+                                            }"
+                                        />
+                                        <div
+                                            class="tw:text-[12px] tw:font-semibold tw:text-justify"
+                                            :class="{
+                                                'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
+                                                    notification.isRead,
+                                                'tw:text-primary-dark tw:dark:text-primary-light':
+                                                    !notification.isRead,
+                                            }"
+                                        >
+                                            {{
+                                                langStore.currentLang == "en"
+                                                    ? notification.enTitle
+                                                    : notification.faTitle
+                                            }}
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="tw:flex tw:justify-start tw:items-center tw:gap-2"
+                                    >
+                                        <div
+                                            class="tw:text-[12px] tw:text-justify"
+                                            :class="{
+                                                'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
+                                                    notification.isRead,
+                                                'tw:text-primary-dark tw:dark:text-primary-light':
+                                                    !notification.isRead,
+                                            }"
+                                        >
+                                            {{
+                                                langStore.currentLang == "en"
+                                                    ? notification.date
+                                                    : notification.localDate
+                                            }}
+                                        </div>
+                                    </div>
+                                </div>
                                 <div
-                                    class="tw:text-[12px] tw:font-semibold tw:text-justify"
+                                    class="tw:text-[11px] tw:font-semibold tw:text-justify tw:pt-2!"
                                     :class="{
                                         'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
                                             notification.isRead,
@@ -81,45 +126,34 @@
                                 >
                                     {{
                                         langStore.currentLang == "en"
-                                            ? notification.enTitle
-                                            : notification.faTitle
+                                            ? notification.enMessage
+                                            : notification.faMessage
                                     }}
                                 </div>
                             </div>
-                            <div
-                                class="tw:flex tw:justify-start tw:items-center tw:gap-2"
-                            >
-                                <div
-                                    class="tw:text-[12px] tw:text-justify"
+                            <div>
+                                <icon-check-double
+                                    v-if="notification.isRead === true"
+                                    class="tw:text-[20px]"
                                     :class="{
                                         'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
                                             notification.isRead,
                                         'tw:text-primary-dark tw:dark:text-primary-light':
                                             !notification.isRead,
                                     }"
-                                >
-                                    {{
-                                        langStore.currentLang == "en"
-                                            ? notification.date
-                                            : notification.localDate
-                                    }}
-                                </div>
+                                />
+                                <button v-else @click.stop="readNotifications(notification.id)">
+                                    <icon-circle-outline
+                                        class="tw:text-[16px] tw:me-px"
+                                        :class="{
+                                            'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
+                                                notification.isRead,
+                                            'tw:text-primary-dark tw:dark:text-primary-light':
+                                                !notification.isRead,
+                                        }"
+                                    />
+                                </button>
                             </div>
-                        </div>
-                        <div
-                            class="tw:text-[11px] tw:font-semibold tw:text-justify tw:pt-2!"
-                            :class="{
-                                'tw:text-primary-dark/60 tw:dark:text-primary-light/60':
-                                    notification.isRead,
-                                'tw:text-primary-dark tw:dark:text-primary-light':
-                                    !notification.isRead,
-                            }"
-                        >
-                            {{
-                                langStore.currentLang == "en"
-                                    ? notification.enMessage
-                                    : notification.faMessage
-                            }}
                         </div>
                     </div>
                 </div>
@@ -149,9 +183,13 @@
 import { useLanguageStore } from "~/store/language";
 const langStore = useLanguageStore();
 
+import { useHandlerStore } from "~/store/handler";
+const handlerStore = useHandlerStore();
+
 import { useNotificationStore } from "~/store/notification";
 const notificationStore = useNotificationStore();
-const { widgetNotificationsResult : notifications, unreadCount } = storeToRefs(notificationStore);
+const { widgetNotificationsResult: notifications, unreadCount } =
+    storeToRefs(notificationStore);
 
 // ======= data ========
 const menu = ref(false);
@@ -167,25 +205,20 @@ const loadUnreadCount = async () => {
     await notificationStore.getUnreadCount();
 };
 
-const readNotifications =  () => {
-    const visibleNotifications = notifications.value.slice(0, 3);
-
-    for (const notification of visibleNotifications) {
-        if (notification.isRead === false) {
-            notificationStore.readNotification(notification.id);
-        }
-    }
+const readNotifications = (id: string) => {
+    notificationStore.readNotification(id);
 };
 
-// ======= watcher ======
-watch(menu, async (isOpen) => {
-  if (isOpen) {
-        readNotifications();
-    } else {
-        loadNotifications();
-        loadUnreadCount();
+// ======= watcher =======
+watch(
+  () => handlerStore.postCheck,
+  (val, oldVal) => {
+    if (oldVal === true && val === false) {
+      loadNotifications();
+      loadUnreadCount();
     }
-});
+  },
+);
 
 onMounted(() => {
     loadUnreadCount();

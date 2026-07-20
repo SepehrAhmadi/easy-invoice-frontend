@@ -66,6 +66,7 @@ export function useNotificationActions(state: stateType) {
   // ====== read notification ======
   const readNotification = async (id: string) => {
     const axios = useApi();
+    handlerStore.postCheck = true;
 
     return axios
       .post(`/notification/${id}/read`)
@@ -78,6 +79,11 @@ export function useNotificationActions(state: stateType) {
         const message =
           err.response?.data?.message || langStore.alert.error.serverError;
         handlerStore.setError(message);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          handlerStore.postCheck = false;
+        }, 500);
       });
   };
 
