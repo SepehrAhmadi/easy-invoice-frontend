@@ -142,7 +142,12 @@
                                             !notification.isRead,
                                     }"
                                 />
-                                <button v-else @click.stop="readNotifications(notification.id)">
+                                <button
+                                    v-else
+                                    @click.stop="
+                                        readNotifications(notification.id)
+                                    "
+                                >
                                     <icon-circle-outline
                                         class="tw:text-[16px] tw:me-px"
                                         :class="{
@@ -158,14 +163,25 @@
                     </div>
                 </div>
                 <div
-                    class="tw:flex tw:justify-center tw:items-center tw:gap-2 tw:py-3!"
+                    class="tw:flex tw:w-full tw:justify-center tw:items-center tw:gap-3 tw:py-3! tw:px-2!"
                 >
-                    <button
-                        @click.stop="navigateTo('/notification')"
-                        class="tw:text-primary-light! tw:dark:text-primary-dark! tw:text-[12px]! tw:bg-primary-dark! tw:dark:bg-primary-light! tw:hover:bg-primary-dark/90! tw:dark:hover:bg-primary-light/90! tw:transition tw:duration-150 tw:rounded-full tw:p-1! tw:px-3!"
-                    >
-                        {{ langStore.label.button.showNotification }}
-                    </button>
+                    <div class="tw:flex-1">
+                        <button
+                            @click.stop="navigateToNotification"
+                            class="tw:w-full tw:text-primary-light! tw:dark:text-primary-dark! tw:text-[12px]! tw:border! tw:border-primary-dark! tw:bg-primary-dark! tw:dark:bg-primary-light! tw:hover:bg-primary-dark/90! tw:dark:hover:bg-primary-light/90! tw:transition tw:duration-150 tw:rounded-full tw:p-1! tw:px-3!"
+                        >
+                            {{ langStore.label.button.showNotification }}
+                        </button>
+                    </div>
+
+                    <div class="tw:flex-1">
+                        <button
+                            @click.stop="readAllNotifications"
+                            class="tw:w-full tw:text-primary-dark! tw:dark:text-primary-light! tw:text-[12px]! tw:bg-transparent! tw:border! tw:border-primary-dark/60! tw:dark:border-primary-light! tw:hover:bg-primary-dark/10! tw:dark:hover:bg-primary-light/10! tw:transition tw:duration-150 tw:rounded-full tw:p-1! tw:px-3!"
+                        >
+                            {{ langStore.label.button.readAll }}
+                        </button>
+                    </div>
                 </div>
             </div>
         </v-menu>
@@ -187,6 +203,7 @@ import { useHandlerStore } from "~/store/handler";
 const handlerStore = useHandlerStore();
 
 import { useNotificationStore } from "~/store/notification";
+import { ReadableStreamDefaultController } from "node:stream/web";
 const notificationStore = useNotificationStore();
 const { widgetNotificationsResult: notifications, unreadCount } =
     storeToRefs(notificationStore);
@@ -209,15 +226,30 @@ const readNotifications = (id: string) => {
     notificationStore.readNotification(id);
 };
 
+const readAllNotifications = () => {
+    const visibleNotifications = notifications.value.slice(0, 3);
+
+    for (const notification of visibleNotifications) {
+        if (notification.isRead === false) {
+            notificationStore.readNotification(notification.id);
+        }
+    }
+};
+
+const navigateToNotification = () => {
+    navigateTo("/notification");
+    menu.value = false;
+};
+
 // ======= watcher =======
 watch(
-  () => handlerStore.postCheck,
-  (val, oldVal) => {
-    if (oldVal === true && val === false) {
-      loadNotifications();
-      loadUnreadCount();
-    }
-  },
+    () => handlerStore.postCheck,
+    (val, oldVal) => {
+        if (oldVal === true && val === false) {
+            loadNotifications();
+            loadUnreadCount();
+        }
+    },
 );
 
 onMounted(() => {
