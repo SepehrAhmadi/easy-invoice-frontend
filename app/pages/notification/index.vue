@@ -114,6 +114,7 @@
                                         </td>
                                         <td
                                             class="tw-text-color tw:text-nowrap tw:text-center"
+                                            :class="{ 'tw:font-semibold': !item.isRead }"
                                         >
                                             {{
                                                 langStore.currentLang == "en"
@@ -123,6 +124,7 @@
                                         </td>
                                         <td
                                             class="tw-text-color tw:text-nowrap tw:text-center"
+                                            :class="{ 'tw:font-semibold': !item.isRead }"
                                         >
                                             {{ item.username || "—" }}
                                         </td>
@@ -145,6 +147,7 @@
                                                         />
                                                         <span
                                                             class="tw-text-color tw:text-center tw:text-nowrap"
+                                                            :class="{ 'tw:font-semibold': !item.isRead }"
                                                         >
                                                             {{
                                                                 langStore.currentLang ==
@@ -166,6 +169,7 @@
                                                         />
                                                         <span
                                                             class="tw-text-color tw:text-center tw:text-nowrap"
+                                                            :class="{ 'tw:font-semibold': !item.isRead }"
                                                         >
                                                             {{
                                                                 langStore.currentLang ==
@@ -187,6 +191,7 @@
                                                         />
                                                         <span
                                                             class="tw-text-color tw:text-center tw:text-nowrap"
+                                                            :class="{ 'tw:font-semibold': !item.isRead }"
                                                         >
                                                             {{
                                                                 langStore.currentLang ==
@@ -208,6 +213,7 @@
                                                         />
                                                         <span
                                                             class="tw-text-color tw:text-center tw:text-nowrap"
+                                                            :class="{ 'tw:font-semibold': !item.isRead }"
                                                         >
                                                             {{
                                                                 langStore.currentLang ==
@@ -222,6 +228,7 @@
                                         </td>
                                         <td
                                             class="tw-text-color tw:text-center tw:text-nowrap"
+                                            :class="{ 'tw:font-semibold': !item.isRead }"
                                         >
                                             {{
                                                 langStore.currentLang == "en"
@@ -299,7 +306,7 @@
                                                                     class="tw:text-[23px]"
                                                                     :class="
                                                                         item.isRead
-                                                                            ? 'tw:text-gray-800 tw:dark:text-gray-600'
+                                                                            ? 'tw:text-gray-800 tw:dark:text-gray-100'
                                                                             : 'tw-text-color-lighter'
                                                                     "
                                                                 />

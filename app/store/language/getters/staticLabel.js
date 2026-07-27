@@ -18,6 +18,7 @@ export const label = (state) => {
         printInvoice: "Print Invoice",
         reportByCompany: "Report By Company",
         notifications: "Notifications",
+        authorization : "Authorization",
       },
       menu: {
         dashboard: "Dashboard",
@@ -230,6 +231,7 @@ export const label = (state) => {
         printInvoice: "چاپ فاکتور",
         reportByCompany: "گزارش بر اساس شرکت",
         notifications: "اعلان ها",
+        authorization : "ورود / ثبت نام",
       },
       menu: {
         dashboard: "داشبورد",

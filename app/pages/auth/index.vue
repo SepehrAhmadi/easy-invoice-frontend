@@ -178,6 +178,11 @@ definePageMeta({
   layout: "auth",
 });
 
+const { setPageTitle } = usePageTitle();
+watchEffect(() => {
+  setPageTitle(langStore.label.page.authorization);
+});
+
 const showPassword = ref<Boolean>(false);
 
 const loginForm = ref({
