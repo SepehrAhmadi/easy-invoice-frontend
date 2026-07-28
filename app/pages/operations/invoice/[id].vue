@@ -662,12 +662,12 @@
                                     <td
                                         class="tw-text-color tw:text-nowrap tw:text-center"
                                     >
-                                        {{ item.unitName }}
+                                        {{ item.amount }}
                                     </td>
                                     <td
                                         class="tw-text-color tw:text-nowrap tw:text-center"
                                     >
-                                        {{ item.amount }}
+                                        {{ item.unitName }}
                                     </td>
                                     <td
                                         class="tw-text-color tw:text-nowrap tw:text-center"
