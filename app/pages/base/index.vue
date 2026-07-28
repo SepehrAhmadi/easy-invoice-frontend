@@ -1136,6 +1136,7 @@ import bucketIcon from "~/assets/image/icon/bucket.png";
 import catalogueIcon from "~/assets/image/icon/catalogue.png";
 import headerIcon from "~/assets/image/icon/header.png";
 
+
 // swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
