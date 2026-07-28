@@ -594,7 +594,13 @@
                   <div
                     class="tw:bg-primary-dark tw:rounded-full tw:w-20 tw:h-16 tw:flex tw:items-center tw:justify-center"
                   >
+                    <component
+                      v-if="isPackagingComponentIcon(item.packagingType)"
+                      :is="getPackagingIcon(item.packagingType)"
+                      class="tw:text-[48px] tw-text-color-reverse"
+                    />
                     <img
+                      v-else
                       :src="getPackagingIcon(item.packagingType)"
                       class="tw:w-12 tw:h-12"
                     />
@@ -1131,6 +1137,10 @@ import bottleIcon from "~/assets/image/icon/bottle.png";
 import bagIcon from "~/assets/image/icon/bag.png";
 import boxIcon from "~/assets/image/icon/box.png";
 import sprayIcon from "~/assets/image/icon/spray.png";
+import IconSlider from "~/components/icon/slider.vue";
+import IconBucket from "~/components/icon/bucket.vue";
+import IconMultiDocument from "~/components/icon/multiDocument.vue";
+import IconHeader from "~/components/icon/header.vue";
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -1247,6 +1257,10 @@ const filteredProducts = computed(() => {
 
 // ======= Functions =======
 // ui fuctions
+const packagingComponentTypes = ["banner", "bucket", "catalogue", "header"];
+const isPackagingComponentIcon = (type: string) =>
+  packagingComponentTypes.includes(type);
+
 const getPackagingIcon = (type: string) => {
   switch (type) {
     case "bottle":
@@ -1257,6 +1271,14 @@ const getPackagingIcon = (type: string) => {
       return boxIcon;
     case "spray":
       return sprayIcon;
+    case "banner":
+      return IconSlider;
+    case "bucket":
+      return IconBucket;
+    case "catalogue":
+      return IconMultiDocument;
+    case "header":
+      return IconHeader;
     default:
       return bottleIcon;
   }
