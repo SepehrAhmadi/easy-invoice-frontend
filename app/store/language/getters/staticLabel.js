@@ -231,7 +231,7 @@ export const label = (state) => {
         printInvoice: "چاپ فاکتور",
         reportByCompany: "گزارش بر اساس شرکت",
         notifications: "اعلان ها",
-        authorization : "ورود / ثبت نام",
+        authorization: "ورود / ثبت نام",
       },
       menu: {
         dashboard: "داشبورد",
