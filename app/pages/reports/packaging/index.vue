@@ -233,6 +233,10 @@ import bottleIcon from "~/assets/image/icon/bottle.png";
 import bagIcon from "~/assets/image/icon/bag.png";
 import boxIcon from "~/assets/image/icon/box.png";
 import sprayIcon from "~/assets/image/icon/spray.png";
+import bannerIcon from "~/assets/image/icon/banner.png";
+import bucketIcon from "~/assets/image/icon/bucket.png";
+import catalogueIcon from "~/assets/image/icon/catalogue.png";
+import headerIcon from "~/assets/image/icon/header.png";
 
 // stores
 import { useLanguageStore } from "~/store/language";
@@ -340,6 +344,14 @@ const getPackagingIcon = (type: string) => {
       return boxIcon;
     case "spray":
       return sprayIcon;
+    case "banner":
+      return bannerIcon;
+    case "bucket":
+      return bucketIcon;
+    case "catalogue":
+      return catalogueIcon;
+    case "header":
+      return headerIcon;
     default:
       return bottleIcon;
   }
