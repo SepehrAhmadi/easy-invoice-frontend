@@ -351,7 +351,7 @@ const getPackagingIcon = (type: string) => {
       return bucketIcon;
     case "catalogue":
       return catalogueIcon;
-    case "header":
+    case "paper":
       return headerIcon;
     default:
       return bottleIcon;
