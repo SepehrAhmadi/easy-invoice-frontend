@@ -1009,15 +1009,15 @@ const tableHeader = computed(
                 sortable: false,
             },
             {
+                title: langStore.label.table.amount,
+                key: "amount",
+                align: "center",
+            },
+            {
                 title: langStore.label.table.unit,
                 key: "unitName",
                 align: "center",
                 sortable: false,
-            },
-            {
-                title: langStore.label.table.amount,
-                key: "amount",
-                align: "center",
             },
             {
                 title: langStore.label.table.unitCount,
